@@ -1,0 +1,16 @@
+#theme: readthedocs
+site_name: obestwalter
+
+pages:
+  - Home: index.md
+
+repo_url: https://github.com/obestwalter/mau-mau
+
+strict: False
+
+markdown_extensions:
+  - toc:
+    permalink: ¶
+
+remote_branch: master
+remote_name: source
