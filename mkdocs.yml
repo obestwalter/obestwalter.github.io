@@ -4,7 +4,7 @@ site_name: obestwalter
 pages:
   - Home: index.md
 
-repo_url: https://github.com/obestwalter/mau-mau
+repo_url: https://github.com/obestwalter
 
 strict: False
 
