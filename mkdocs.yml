@@ -1,5 +1,6 @@
 #theme: readthedocs
 site_name: obestwalter
+theme_dir: theme
 
 pages:
   - Home: index.md
@@ -13,4 +14,4 @@ markdown_extensions:
       permalink: ¶
 
 remote_branch: master
-remote_name: source
+remote_name: master
