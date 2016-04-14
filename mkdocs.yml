@@ -10,7 +10,7 @@ strict: False
 
 markdown_extensions:
   - toc:
-    permalink: ¶
+      permalink: ¶
 
 remote_branch: master
 remote_name: source
