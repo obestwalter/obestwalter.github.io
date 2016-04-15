@@ -5,7 +5,7 @@ theme_dir: theme
 pages:
   - Home: index.md
 
-repo_url: https://github.com/obestwalter
+repo_url: https://github.com/obestwalter/obestwalter.github.io
 
 strict: False
 
