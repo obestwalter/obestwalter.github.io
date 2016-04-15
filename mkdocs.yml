@@ -1,7 +1,6 @@
 pages:
   - Home: index.md
 
-include_404: True
 site_favicon: favicon.ico
 markdown_extensions:
   - smarty
