@@ -34,3 +34,5 @@ I you want to connect like a real grown-up, try these:
 
 * [xing](https://www.xing.com/profile/Oliver_Bestwalter)
 * [linkedin](https://www.linkedin.com/in/oliver-bestwalter-a8781a19)
+
+I also happen to have email which is easy to guess now you are here.
