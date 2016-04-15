@@ -1,6 +1,6 @@
 # Oliver Bestwalter - Personal Home Page
 
-![me](me.jpg)
+![picture of a very young me standing on an empty field](me.jpg)
 
 ## FAQ
 
