@@ -10,8 +10,10 @@ repo_url: https://github.com/obestwalter/obestwalter.github.io
 strict: False
 
 markdown_extensions:
+  - smarty
   - toc:
-      permalink: ¶
+      anchorlink: True
+      permalink: True
 
 remote_branch: master
 remote_name: master
