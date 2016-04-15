@@ -10,7 +10,7 @@ A: Since I learned a bit of HTML in the 90s to make a home page for a friend, I 
 
 <hr>
 
-Q: So you know all this fancy stuff. Good for you. But why doesn't it look fancy then? Did you channel your past self from the 90s that just learned a bit of HTML to "design" this?
+Q: So you know all this fancy stuff. Good for you. But why doesn't it look fancy then? Did you channel your past self from the last century that just learned a bit of HTML to "design" this?
 
 A: I happen to like the last century. Get off my lawn.
 
