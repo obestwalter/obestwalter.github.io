@@ -23,18 +23,6 @@
     {% endfor -%}
 </ul>
 
-<!--
-{% if repo_url -%}
-{% if repo_name == 'GitHub' -%}
-<a href="{{ repo_url }}"> Edit on GitHub</a>
-{% elif repo_name == 'Bitbucket' -%}
-<a href="{{ repo_url }}"> Edit on BitBucket</a>
-{% else -%}
-<a href="{{ repo_url }}"> Edit in Repository</a>
-{% endif -%}
-{% endif -%}
--->
-
 {% if next_page or previous_page -%}
 <div>
     {% if previous_page -%}
