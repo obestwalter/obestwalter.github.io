@@ -18,13 +18,19 @@ A: I happen to like the last century. Get off my lawn.
 
 Q: Ok, I'll go. Just one more question. Will there be any ... content?
 
-A: Do you really need more content? Isn't there enough already? Who is supposed to read all this? I think the world has more than enough content, so I rather keep it nice and empty here. But I left a bit of clutter on other peoples home pages already ...
+A: Do you really need more content? Isn't there enough already? Who is supposed to read all this? I think the world has more than enough content, so I rather keep it nice and empty here. I recently started leaving a bit of clutter on other peoples home pages ...
 
 * [github](https://github.com/obestwalter)
 * [Stack Overflow](http://stackoverflow.com/users/2626627/oliver-bestwalter)
-* [twitter](https://twitter.com/obestwalter)
-* [xing](https://www.xing.com/profile/Oliver_Bestwalter)
-* [linkedin](https://www.linkedin.com/in/oliver-bestwalter-a8781a19)
 * [soundcloud](https://soundcloud.com/oliver-bestwalter)
 
 I'll let you know if I come up with something else.
+
+## Contact me
+
+If you have more questions, [just tweet](https://twitter.com/obestwalter).
+
+I you want to connect like a real grown-up, try these:
+
+* [xing](https://www.xing.com/profile/Oliver_Bestwalter)
+* [linkedin](https://www.linkedin.com/in/oliver-bestwalter-a8781a19)
