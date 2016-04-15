@@ -3,6 +3,6 @@ body {
 }
 
 .active a {
-    color: red;
+    color: orangered;
     font-weight: bold;
 }
