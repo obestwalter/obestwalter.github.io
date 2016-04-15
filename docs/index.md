@@ -18,7 +18,7 @@ A: I happen to like the last century. Get off my lawn.
 
 Q: Ok, I'll go. Just one more question. Will there be any ... content?
 
-A: Do you really need more content? Isn't there enough already? Who is supposed to read all this? I think the world has more than enough content, so I rather keep it nice and empty here. I recently started leaving a bit of clutter on other peoples home pages ...
+A: Do you really need more content? Isn't there enough already? Who is supposed to read all this? I think the world has more than enough content, so I rather keep it nice and empty here. I recently started leaving a bit of clutter on other peoples home pages though ...
 
 * [github](https://github.com/obestwalter)
 * [Stack Overflow](http://stackoverflow.com/users/2626627/oliver-bestwalter)
