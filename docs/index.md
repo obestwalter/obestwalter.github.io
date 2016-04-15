@@ -6,7 +6,7 @@
 
 Q: Why did you create a personal homepage in 2016? That's so 90s of you! Is that even allowed?
 
-A: Since I learned a bit of HTML in the 90s to make a home page for a friend, I always thought that I could also make one for myself soon. Booom! Only a few decades later I finally did it. Technology has advanced though and made everything much easier. So today -- instead of using HTML -- I use Markdown, Python, YAML and CSS ... and HTML ... with Jinja2 templating. Much simpler than in the 90s. Yay, progress!
+A: Since I learned a bit of HTML in the 90s to make a home page for a friend, I always thought that I could also make one for myself soon. Booom! Only a few decades later I finally did it. Technology has advanced though and made everything much easier. So today -- instead of using HTML -- I use Python, Markdown, YAML and CSS ... and HTML ... with Jinja2 templating. Much simpler than in the 90s. Yay, progress!
 
 <hr>
 
