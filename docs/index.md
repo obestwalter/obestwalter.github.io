@@ -21,7 +21,7 @@ Q: Ok, I'll go. Just one more question. Will there be any ... content?
 A: Do you really need more content? Isn't there enough already? Who is supposed to read all this? I think the world has more than enough content, so I rather keep it nice and empty here. I recently started leaving a bit of content on other peoples home pages though ...
 
 * [github](https://github.com/obestwalter)
-* [Stack Overflow](http://stackoverflow.com/users/2626627/oliver-bestwalter)
+* [so](http://stackoverflow.com/users/2626627/oliver-bestwalter)
 * [soundcloud](https://soundcloud.com/oliver-bestwalter)
 
 I'll let you know if I come up with something else.
