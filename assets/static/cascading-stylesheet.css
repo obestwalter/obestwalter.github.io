@@ -1,25 +1,31 @@
+html {
+    background: #232223;
+    color: #BBE599;
+    margin: 0px;
+}
+
 body {
     font-family: 'Arvo', sans-serif;
-    margin: 50px 25px;
+    margin: 10px 5px;
 }
 
 a {
-    color: #2a99b6;
+    color: #112e4c;
 }
 
 a:hover {
-    color: #33bbdf;
+    color: #12466b;
 }
 
 header, footer, div.page {
     width: 760px;
     margin: 0 auto;
-    background: #daeef3;
+    background: #BF5700;
     padding: 20px 30px;
 }
 
 header h1 {
-    color: #169bbd;
+    color: #BBE599;
     margin: 0;
     font-weight: normal;
     font-size: 42px;
@@ -38,5 +44,13 @@ header nav ul li {
 }
 
 div.page {
-    background: #f1fbfe;
+    background: #424242;
+}
+
+div.page a {
+    color: #BF5700;
+}
+
+div.page a:hover {
+    color: #e95b00;
 }
