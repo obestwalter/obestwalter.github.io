@@ -2,5 +2,4 @@
 name = obestwalter
 
 [servers.production]
-target = ghpages://obestwalter/obestwalter.github.io?cname=oliver.bestwalter.de
-
+target = ghpages://obestwalter/obestwalter.github.io
