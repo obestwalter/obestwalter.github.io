@@ -1,9 +1,17 @@
 title: Projects
+
 ---
+
 body:
 
-This is a list of the projects:
+### Projects I contribute to
 
-* Project 1
-* Project 2
-* Project 3
+* [tox](https://tox.readthedocs.io) - testing out of the box in Python
+* [pytest](http://doc.pytest.org) - my favorite testing framework
+* [pyenv-installer](https://github.com/yyuu/pyenv-installer) - the installer for the great [pyenv](https://github.com/yyuu/pyenv) tool
+
+### My Projects
+
+* [mau-mau](http://oliver.bestwalter.de/mau-mau) - a complete project that can be used to learn about Python and it's ecosystem
+* [codecats-cv](http://oliver.bestwalter.de/codecats-cv) - another project used for teaching "full stack" Python (with Falk Heger)
+* [pet](http://oliver.bestwalter.de/pet) - a chaotic collection of writings and learning tools waiting to be organized
