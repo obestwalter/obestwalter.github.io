@@ -1,6 +1,5 @@
 [project]
-name = obestwalter
-url_style = absolute
+name = blog
 
 [servers.production]
 target = ghpages://obestwalter/blog
