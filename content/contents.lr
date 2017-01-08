@@ -1,11 +1,11 @@
-_model: startpage
+_model: home
 
 ---
-
-title: obestwalter
+title: Home
 
 ---
-
 body:
 
-This is my virtual home.
+### Welcome to my still pretty rudimentary home
+
+They said I should blog, so this is going to be mainly a blog.
