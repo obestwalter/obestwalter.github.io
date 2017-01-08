@@ -6,5 +6,7 @@
     {% for child in this.pagination.items %}
         {{ render_blog_post(child, from_index=true) }}
     {% endfor %}
-    {{ render_pagination(this.pagination) }}
+    {% if pagination.has_prev or pagination.has_next %}
+        {{ render_pagination(this.pagination) }}
+    {% endif %}
 {% endblock %}
