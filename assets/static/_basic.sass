@@ -1,5 +1,82 @@
-$primary-color: #333
+$thunder: #232223
+$outerSpace: #333638
+$roseOfSharon: #BF5700
+$chaletGreen: #466536
+$grannySmithApple: #BBE599
+
+html
+  background: $thunder
+  margin: 0px
+  font-size: 1.1em
 
 body
-  font: 100% $font-stack
-  color: $primary-color
+  font-family: 'Arvo', serif
+  margin: 1em 0.5em
+
+h1, h2, h3, h4, h5, h6
+  font-family: 'Molengo', sans-serif
+
+ul
+  list-style-type: square
+
+a
+  text-decoration: none
+
+header, article, footer
+  background: $roseOfSharon
+  color: $grannySmithApple
+  margin: 0 auto
+  padding: 1em 1em
+  width: 42em
+
+header
+  padding-top: 13px
+  padding-bottom: 0px
+
+  h1
+    text-align: right
+    padding: 0px 0px
+    margin: 0
+    font-weight: normal
+    font-size: 42px
+
+  a
+    text-align: left
+    padding: 23px 5px
+    color: $outerSpace
+
+  a:hover
+    color: #333638
+
+  nav ul
+    list-style: none
+    margin: 0
+    padding: 0
+
+  nav ul li
+    display: inline
+    margin: 0 8px 0 0
+    padding: 0
+
+
+article
+  background: $outerSpace
+
+  a
+    color: $roseOfSharon
+
+  a:hover
+    color: lighten($roseOfSharon, 33%)
+
+footer
+  text-align: right
+
+  a
+    color: $grannySmithApple
+    font-size: 0.8em
+
+  a:hover
+    color: $thunder
+
+  span
+    font-size: 0.8em
