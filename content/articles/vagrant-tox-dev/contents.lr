@@ -8,11 +8,6 @@ content:
 
 -1-456789-2-456789-3-456789-4-456789-5-456789-6-456789-7-456789
 
-```python
-def bla(a, b):
-    print("Hello World!")
-```
-
 ```ruby
 require 'tmpdir'
 
