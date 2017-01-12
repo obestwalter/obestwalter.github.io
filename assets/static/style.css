@@ -1,0 +1,62 @@
+/*
+Error: Invalid property: "font-family:" (no value).
+        on line 22 of style.sass
+
+17:     text-align: right
+18:   .summary
+19:     font-size: 120%
+20:   .content
+21:     pre
+22:       font-family:
+23:       font-size: 100%
+24:   .highlight
+25:     border: 1px solid $grannySmithApple
+26:     padding-left: 0.6em
+
+Backtrace:
+style.sass:22
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:733:in `parse_property'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:692:in `parse_property_or_rule'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:658:in `parse_line'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:536:in `build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:555:in `block in append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:545:in `block in build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:538:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:538:in `build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:555:in `block in append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:545:in `block in build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:538:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:538:in `build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:555:in `block in append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:545:in `block in build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:538:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:538:in `build_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:555:in `block in append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `append_children'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:409:in `_to_tree'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `each'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/plugin.rb:82:in `update_stylesheets'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:52:in `parse'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:19:in `parse!'
+/home/oliver/.gem/ruby/2.3.0/gems/sass-3.4.23/bin/sass:13:in `<top (required)>'
+/home/oliver/.gem/ruby/2.3.0/bin/sass:22:in `load'
+/home/oliver/.gem/ruby/2.3.0/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid property: \"font-family:\" (no value).\A         on line 22 of style.sass\A \A 17:     text-align: right\A 18:   .summary\A 19:     font-size: 120%\A 20:   .content\A 21:     pre\A 22:       font-family:\A 23:       font-size: 100%\A 24:   .highlight\A 25:     border: 1px solid $grannySmithApple\A 26:     padding-left: 0.6em"; }
