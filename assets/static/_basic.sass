@@ -1,13 +1,13 @@
 $thunder: #232223
 $outerSpace: #333638
-$roseOfSharon: #BF5700
 $chaletGreen: #466536
+$roseOfSharon: #BF5700
 $grannySmithApple: #BBE599
 
 html
   background: $thunder
-  margin: 0
   font-size: 1.1em
+  margin: 0
 
 body
   font-family: 'Arvo', serif
@@ -30,53 +30,41 @@ header, article, footer
   width: 42em
 
 header
-  padding-top: 0.5em
   padding-bottom: 0
-
-  h1
-    text-align: right
-    padding: 0
-    margin: 0
-    font-weight: normal
-    font-size: 2.5em
-
+  padding-top: 0.5em
   a
-    text-align: left
+    color: $outerSpace
     padding: 1.5em 0.3em
-    color: $outerSpace
-
-  a:hover
-    color: $outerSpace
-
-  nav ul
-    list-style: none
+    text-align: left
+    &:hover
+      color: lighten($outerSpace, 33%)
+  h1
+    font-size: 2.5em
+    font-weight: normal
     margin: 0
     padding: 0
-
-  nav ul li
-    display: inline
-    margin: 0 0.5em 0 0
-    padding: 0
-
+    text-align: right
+  nav
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        display: inline
+        margin: 0 0.5em 0 0
+        padding: 0
 
 article
-  background: $outerSpace
-
   a
     color: $roseOfSharon
-
-  a:hover
-    color: lighten($roseOfSharon, 33%)
+    &:hover
+      color: lighten($roseOfSharon, 33%)
+  background: $outerSpace
 
 footer
   text-align: right
-
   a
     color: $grannySmithApple
-    font-size: 0.8em
-
-  a:hover
-    color: $thunder
-
-  span
+    &:hover
+      color: $thunder
     font-size: 0.8em
