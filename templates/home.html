@@ -3,7 +3,7 @@
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
     <h2>{{ this.title }}</h2>
-    {{ this.body }}
+    {{ this.content }}
 
     <h2>My articles so far ...</h2>
     {% for post in site.query('/blog').order_by('-lastModified') %}

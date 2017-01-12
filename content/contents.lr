@@ -4,7 +4,7 @@ _model: home
 title: Home
 
 ---
-body:
+content:
 
 ### Welcome to my still pretty rudimentary home
 
