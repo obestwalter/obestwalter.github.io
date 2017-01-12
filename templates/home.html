@@ -1,13 +1,12 @@
 {% extends "layout.html" %}
+{% from "macros/article.html" import render_summary %}
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
     <h2>{{ this.title }}</h2>
     {{ this.body }}
 
-    <h2>My blog posts so far ...</h2>
-    <ul>
-        {% for post in site.query('/blog').order_by('-pub_date') %}
-            <li><a href="{{ post|url }}">{{ post.title }} ({{ post.pub_date }})</a></li>
-        {% endfor %}
-    </ul>
+    <h2>My articles so far ...</h2>
+    {% for post in site.query('/blog').order_by('-lastModified') %}
+        {{ render_summary(post) }}
+    {% endfor %}
 {% endblock %}

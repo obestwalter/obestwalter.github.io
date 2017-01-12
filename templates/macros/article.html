@@ -1,0 +1,36 @@
+{% macro render_article_info(a) %}
+    <div class="info">
+        [
+        {% if a.lastModified %}
+            <span title="last update. first published: {{ a.publishedOn|dateformat }}">
+            {{ a.lastModified|dateformat }}
+            </span>
+        {% else %}
+            <span title="date published">
+            {{ a.lastModified|dateformat }}
+            </span>
+        {% endif %}
+        ]
+    </div>
+{% endmacro %}
+
+{% macro render_summary(a) %}
+    <div class="summary">
+        <h2>{{ a.title }}</h2>
+        {{ a.summary }}
+        {{ render_article_info(a) }}
+        <hr>
+    </div>
+{% endmacro %}
+
+{% macro render_article(a, from_index=false) %}
+    <div class="content">
+        {% if from_index %}
+            <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
+        {% else %}
+            <h2>{{ a.title }}</h2>
+        {% endif %}
+        {{ render_article_info(a) }}
+        {{ a.body }}
+    </div>
+{% endmacro %}

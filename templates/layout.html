@@ -1,18 +1,20 @@
 <!doctype html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ '/static/cascading-stylesheet.css'|asseturl }}">
-    <link href="https://fonts.googleapis.com/css?family=Arvo|Roboto" rel="stylesheet">
-    <title>{% block title %}Blog{% endblock %} — obestwalter</title>
+    <link rel="stylesheet" href="{{ '/static/style.css'|asseturl }}">
+    <title>{% block title %}Home{% endblock %} — obestwalter</title>
 </head>
 <body>
 <header>
     <h1>obestwalter</h1>
     <nav>
-        <ul class="nav navbar-nav">
+        <ul>
             <li{% if this._path == '/' %} class="active"{% endif %}><a
                     href="{{ '/'|url }}">Home</a></li>
-            {% for href, title in [ ['/blog', 'Blog'], ['/projects', 'Projects'], ['/about', 'About']] %}
+            {% for href, title in [
+                    ['/projects', 'Projects'],
+                    ['/articles', 'Articles'],
+                    ['/about', 'About']] %}
                 <li{% if this.is_child_of(href) %} class="active"{% endif %}><a
                     href="{{ href|url }}">{{ title }}</a></li>
             {% endfor %}
@@ -20,11 +22,16 @@
     </nav>
 </header>
 
-<div class="page">
+<article>
     {% block body %}{% endblock %}
-</div>
+</article>
 
 <footer>
-    &copy; Copyright 2017 by Oliver Bestwalter.
+    <span>&copy; Oliver Bestwalter</span>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+       title="licensed under a Creative Commons Attribution 4.0 International License"
+       target="_blank">
+        (CC-A-4.0)
+    </a>
 </footer>
 </body>
