@@ -1,16 +1,24 @@
-title: Executable Howtos
+title: Tox development environment: executable HOWTO
+
 ---
 publishedOn: 2017-01-13
+
 ---
 lastModified: 2017-01-14
+
 ---
 summary: This is the summary of the article
+
 ---
 content:
 
 > A HOWTO is usually a step-by-step guide that describe, in detail, how to perform a specific task.
 
-![Do not disturb](do_not_disturb.jpg)
+I followed my fair share of HOWTOs over the years and have learned that you have to take them with a grain of salt. They usually don't age well and often leave out important steps that the author considered self explanatory because at the time of writing she already had a much deeper understanding of the subject than the average recipient of the HOWTO.
+
+Now I am starting to blog and the first thing I wanted to write was a HOWTO - I resisted the urge and instead made that HOWTO executable and contributed it to the project. How cool is that?
+
+<!-- ![Do not disturb](do_not_disturb.jpg) -->
 
 ```ruby
 require 'tmpdir'

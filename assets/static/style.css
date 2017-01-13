@@ -42,7 +42,7 @@ html {
 
 body {
   font-family: "Arvo", serif;
-  font-size: 1em;
+  font-size: 1.3em;
   margin: 1em 0.5em; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -59,7 +59,7 @@ header, article, footer {
   color: #BBE599;
   margin: 0 auto;
   padding: 1em 1em;
-  width: 42em; }
+  width: 45em; }
 
 header {
   padding-bottom: 0;
@@ -115,7 +115,9 @@ article .info {
 article .summary {
   font-size: 120%; }
 article .content {
-  font-size: 90%; }
+  font-size: 90%;
+  word-spacing: 0.2em;
+  line-height: 1.5; }
   article .content blockquote {
     border-left: 0.5em solid #BF5700;
     padding-left: 0.5em; }
