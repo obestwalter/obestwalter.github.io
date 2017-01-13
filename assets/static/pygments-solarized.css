@@ -18,7 +18,7 @@ blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
 cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
 green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 */
-.highlight { background-color: #002b36 }
+.hll { background-color: #002b36 }
 .c { color: #586e75; font-style: italic } /* Comment */
 .err { color: #dc322f } /* Error */
 .g { color: #839496 } /* Generic */

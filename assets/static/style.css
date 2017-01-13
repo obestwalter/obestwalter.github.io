@@ -114,10 +114,13 @@ article .info {
   text-align: right; }
 article .summary {
   font-size: 120%; }
-article .content pre {
-  font-family: "Share Tech Mono";
+article .content {
   font-size: 90%; }
+  article .content pre {
+    font-family: "Share Tech Mono";
+    font-size: 95%; }
 article .highlight {
+  background-color: #232223;
   border: 1px solid #BBE599;
   padding-left: 0.6em; }
 

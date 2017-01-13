@@ -2,7 +2,7 @@
     <div class="info">
         [
         {% if a.lastModified %}
-            <span title="last update. first published: {{ a.publishedOn|dateformat }}">
+            <span title="Updated. First published: {{ a.publishedOn|dateformat }}">
             {{ a.lastModified|dateformat }}
             </span>
         {% else %}
@@ -15,22 +15,18 @@
 {% endmacro %}
 
 {% macro render_summary(a) %}
+    <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
+    {{ render_article_info(a) }}
     <div class="summary">
-        <h2>{{ a.title }}</h2>
         {{ a.summary }}
-        {{ render_article_info(a) }}
         <hr>
     </div>
 {% endmacro %}
 
 {% macro render_article(a, from_index=false) %}
+    <h2>{{ a.title }}</h2>
+    {{ render_article_info(a) }}
     <div class="content">
-        {% if from_index %}
-            <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
-        {% else %}
-            <h2>{{ a.title }}</h2>
-        {% endif %}
-        {{ render_article_info(a) }}
         {{ a.content }}
     </div>
 {% endmacro %}
