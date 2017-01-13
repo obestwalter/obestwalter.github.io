@@ -116,12 +116,23 @@ article .summary {
   font-size: 120%; }
 article .content {
   font-size: 90%; }
+  article .content blockquote {
+    border-left: 0.5em solid #BF5700;
+    padding-left: 0.5em; }
+  article .content img {
+    border: solid 1px #232223;
+    -moz-box-shadow: 5px 5px 10px #232223;
+    -webkit-box-shadow: 5px 5px 10px #232223;
+    box-shadow: 5px 5px 5px #232223; }
   article .content pre {
     font-family: "Share Tech Mono";
     font-size: 95%; }
 article .highlight {
+  border: solid 1px #232223;
+  -moz-box-shadow: 5px 5px 10px #232223;
+  -webkit-box-shadow: 5px 5px 10px #232223;
+  box-shadow: 5px 5px 5px #232223;
   background-color: #232223;
-  border: 1px solid #BBE599;
   padding-left: 0.6em; }
 
 /*# sourceMappingURL=style.css.map */

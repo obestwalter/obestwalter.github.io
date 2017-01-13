@@ -1,17 +1,16 @@
-title: Hello
+title: Executable Howtos
 ---
 publishedOn: 2017-01-13
 ---
 lastModified: 2017-01-14
 ---
-summary:
-
-This is the summary of the article
-
+summary: This is the summary of the article
 ---
 content:
 
--1-456789-2-456789-3-456789-4-456789-5-456789-6-456789-7-456789
+> A HOWTO is usually a step-by-step guide that describe, in detail, how to perform a specific task.
+
+![Do not disturb](do_not_disturb.jpg)
 
 ```ruby
 require 'tmpdir'

@@ -1,6 +1,12 @@
 @import _fonts.scss
 @import _basic.sass
 
+@mixin shadowed ($horizontal: 5px, $vertical: 5px, $blur: 10px, $color: $thunder)
+  border: solid 1px $color
+  -moz-box-shadow: $horizontal $vertical $blur $color
+  -webkit-box-shadow: $horizontal $vertical $blur $color
+  box-shadow: $horizontal $horizontal $vertical $color
+
 header
   .active
     background: $outerSpace
@@ -19,10 +25,15 @@ article
     font-size: 120%
   .content
     font-size: 90%
+    blockquote
+      border-left: 0.5em solid $roseOfSharon
+      padding-left: 0.5em
+    img
+      @include shadowed
     pre
       font-family: "Share Tech Mono"
       font-size: 95%
   .highlight
-    background-color: #232223
-    border: 1px solid $grannySmithApple
+    @include shadowed
+    background-color: $thunder
     padding-left: 0.6em
