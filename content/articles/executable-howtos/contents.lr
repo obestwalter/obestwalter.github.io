@@ -7,10 +7,13 @@ publishedOn: 2017-01-13
 lastModified: 2017-01-14
 
 ---
-tags: python, tox, howto
+tags:
+
+python
+tox
+howto
 
 ---
-
 summary: This is the summary of the article
 
 ---

@@ -6,16 +6,16 @@
     {{ this.content }}
 
     <h2>My articles so far ...</h2>
-    {% for post in site.query('/blog').order_by('-lastModified') %}
+    {% for post in site.query('/articles').order_by('-lastModified') %}
         {{ render_summary(post) }}
     {% endfor %}
 
-    <h2>Tags</h2>
     {% if this.tags %}
+        <h2>Tags</h2>
         <ul>
             {% for t in this.tags -%}
                 <li>
-                    <a href="{{ ('/blog@tag/' ~ t.lower())|url }}">
+                    <a href="{{ ('/articles@tag/' ~ t.lower())|url }}">
                         All posts tagged {{ t }}
                     </a>
                 </li>
