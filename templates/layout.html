@@ -16,19 +16,10 @@
                 <a href="{{ '/'|url }}">Home</a>
             </li>
             {% for id, item in bag('menu').items() %}
-                <li {% if this.is_child_of(item.path) %}
-                    class="active"{% endif %}>
+                <li {% if this.is_child_of(item.path) %} class="active"{% endif %}>
                     <a href="{{ item.path|url }}">{{ item.label }}</a>
                 </li>
             {% endfor %}
-{##}
-{#            {% for href, title in [#}
-{#                    ['/projects', 'Projects'],#}
-{#                    ['/articles', 'Articles'],#}
-{#                    ['/about', 'About']] %}#}
-{#                <li{% if this.is_child_of(href) %} class="active"{% endif %}><a#}
-{#                    href="{{ href|url }}">{{ title }}</a></li>#}
-{#            {% endfor %}#}
         </ul>
     </nav>
 </header>
@@ -40,9 +31,8 @@
 <footer>
     <a href="/about">&copy; Oliver Bestwalter</a>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
-       title="licensed under a Creative Commons Attribution 4.0 International License"
-       target="_blank">
-        (CC-A-4.0)
+       title="licensed under a Creative Commons Attribution 4.0 International License">
+        (CC BY 4.0)
     </a>
 </footer>
 </body>

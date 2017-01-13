@@ -9,4 +9,17 @@
     {% for post in site.query('/blog').order_by('-lastModified') %}
         {{ render_summary(post) }}
     {% endfor %}
+
+    <h2>Tags</h2>
+    {% if this.tags %}
+        <ul>
+            {% for t in this.tags -%}
+                <li>
+                    <a href="{{ ('/blog@tag/' ~ t.lower())|url }}">
+                        All posts tagged {{ t }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

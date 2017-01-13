@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% from "macros/blog.html" import render_summary %}
+{% block title %}obestwalter | {{ this.tag|title }}{% endblock %}
+{% block content %}
+    <h2>Tag: {{ this.tag|title }}</h2>
+    <ul>
+        {% for item in this.items -%}
+            <li>{{ render_summary(item) }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,4 +1,4 @@
-title: Tox development environment: executable HOWTO
+title: A portable tox development environment
 
 ---
 publishedOn: 2017-01-13
@@ -7,6 +7,10 @@ publishedOn: 2017-01-13
 lastModified: 2017-01-14
 
 ---
+tags: python, tox, howto
+
+---
+
 summary: This is the summary of the article
 
 ---
