@@ -28,12 +28,12 @@ Tox supports a lot of Python versions and it can get a bit tedious to get that a
 * cd into your tox clone
 
 ```bash
-vagrant up  # This will take a while the first time
+vagrant up
 vagrant ssh
 tox
 ```
 
-If you only want a subset of interpreters installed:
+This will create the virtual machine including all interpreters that tox supports. If you only want to create the machine with only a subsuet of interpreters installed:
 
 ```bash
 ALL_VERSIONS="3.6.0 2.7.13" vagrant up
