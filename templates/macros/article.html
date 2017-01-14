@@ -1,22 +1,19 @@
-{% macro render_article_info(a) %}
+{% macro render_article_info(a, withUpdate=True) %}
     <div class="info">
-        [
-        {% if a.lastModified %}
-            <span title="Updated. First published: {{ a.publishedOn|dateformat }}">
-            {{ a.lastModified|dateformat }}
-            </span>
-        {% else %}
-            <span title="date published">
-            {{ a.lastModified|dateformat }}
-            </span>
-        {% endif %}
-        ]
+        {# todo: tags#}
+        <span class="date" title="{{ title }}">
+            [ {{ a.publishedOn|dateformat }}
+            {% if withUpdate and a.lastModified %}
+                (updated: {{ a.lastModified|dateformat }})
+            {% endif %}
+            ]
+        </span>
     </div>
 {% endmacro %}
 
 {% macro render_summary(a) %}
     <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
-    {{ render_article_info(a) }}
+    {{ render_article_info(a, withUpdate=False) }}
     <div class="summary">
         {{ a.summary }}
         <hr>
