@@ -10,7 +10,7 @@ lastModified: 2017-01-14
 tags:
 
 python
-tox
+tox-dev
 howto
 ---
 summary: This is the summary of the article
@@ -18,67 +18,25 @@ summary: This is the summary of the article
 ---
 content:
 
-> A HOWTO is usually a step-by-step guide that describe, in detail, how to perform a specific task.
+Tox supports a lot of Python versions and it can get a bit tedious to get that all set up, so I created a Vagrantfile that does that for you and contributed it to the project. That's how fantastic I am.
 
-I followed my fair share of HOWTOs over the years and have learned that you have to take them with a grain of salt. They usually don't age well and often leave out important steps that the author considered self explanatory because at the time of writing she already had a much deeper understanding of the subject than the average recipient of the HOWTO.
+### All you have to do ...
 
-Now I am starting to blog and the first thing I wanted to write was a HOWTO - I resisted the urge and instead made that HOWTO executable and contributed it to the project. How cool is that?
+* Install [VirtualBox](https://www.virtualbox.org/)
+* Install [Vagrant](https://www.vagrantup.com/)
+* Clone [tox](https://github.com/tox-dev/tox)
+* cd into your tox clone
 
-<!-- ![Do not disturb](do_not_disturb.jpg) -->
+```bash
+vagrant up  # This will take a while the first time
+vagrant ssh
+tox
+```
 
-```ruby
-require 'tmpdir'
+If you only want a subset of interpreters installed:
 
-ALL_VERSIONS = "3.6.0 3.5.2 3.4.5 3.3.6 2.7.13 2.6.9 pypy2-5.6.0"
-VERSIONS = ENV["TOX_PYENV_VERSIONS"] || ALL_VERSIONS
-ALT_TMP_DIR = File.join(ENV["TMPDIR"] || Dir.tmpdir(), "tox-vagrant")
-VAGRANT_TMP_DIR_DST = "/home/vagrant/tmp"
-
-Vagrant.configure("2") do |config|
-    config.vm.box = "ogarcia/archlinux-x64"
-    config.vm.provider "virtualbox" do |vb|
-        vb.memory = "2048"
-    end
-
-    # Install build dependencies needed to compile Python interpreters
-    config.vm.provision "shell",
-        name: "install build dependencies",
-        inline: 'pacman --noconfirm -S base-devel openssl zlib git xz'
-
-    # Map a tmp dir from host (not enough space in guest)
-    # If this is to slow: add an extra vdi or use different box
-    Dir.mkdir(ALT_TMP_DIR) unless File.exists?(ALT_TMP_DIR)
-    config.vm.synced_folder ALT_TMP_DIR, "/vagrant/home/tmp"
-
-    # Install pyenv, all needed interpreters and activate them
-    installPyenvScript = <<-HEREDOC
-        export TMPDIR="#{VAGRANT_TMP_DIR_DST}"
-        curl pyenv.run | sh
-        export PATH="$HOME/.pyenv/bin:$PATH"
-        eval "$(pyenv init -)"
-        for version in #{VERSIONS}; do
-            pyenv install -s $version
-        done
-        pyenv global #{VERSIONS}
-        pip install -U tox
-    HEREDOC
-    config.vm.provision "shell",
-        name: "install pyenv",
-        inline: installPyenvScript,
-        privileged: false
-
-    # Add pyenv to interactive shell and use tmp with more space
-    prepareEnvironmentScript = <<-HEREDOC
-        sed -i '$ a\\export PATH="$HOME/.pyenv/bin:$PATH"' .bashrc
-        sed -i '$ a\\eval "$(pyenv init -)"' .bashrc
-        sed -i '$ a\\export TMPDIR="#{VAGRANT_TMP_DIR_DST}"' .bashrc
-        sed -i '$ a\\cd /vagrant' .bashrc
-        sed -i '$ a\\echo "HINT: just run: tox"' .bashrc
-        sed -i '$ a\\echo "NOTE: you may add --skip-missing-interpreters"' .bashrc
-    HEREDOC
-    config.vm.provision "shell",
-        name: "prepare environment",
-        inline: prepareEnvironmentScript,
-        privileged: false
-end
+```bash
+ALL_VERSIONS="3.6.0 2.7.13" vagrant up
+vagrant ssh
+tox --skip-missing-interpreters
 ```

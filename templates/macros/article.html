@@ -1,6 +1,9 @@
 {% macro render_article_info(a, withUpdate=True) %}
     <div class="info">
-        {# todo: tags#}
+        {% set pipe = joiner("|") %}
+        {% for tag in a.tags %}
+            <span class="tag">{{ tag }}</span>
+        {% endfor %}
         <span class="date" title="{{ title }}">
             [ {{ a.publishedOn|dateformat }}
             {% if withUpdate and a.lastModified %}
