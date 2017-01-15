@@ -42,7 +42,7 @@ html {
 
 body {
   font-family: "Arvo", serif;
-  font-size: 1.3em;
+  font-size: 1em;
   margin: 1em auto; }
 
 a {
@@ -53,6 +53,10 @@ h1, h2, h3, h4, h5, h6 {
 
 hr {
   border: 1px solid #466536; }
+
+p {
+  margin: 1em 0;
+  padding: 0; }
 
 ul {
   list-style-type: square; }
@@ -111,18 +115,7 @@ header .active {
     header .active a:hover {
       color: #ffad68; }
 
-article .info {
-  color: #466536;
-  font-size: 70%;
-  text-align: right; }
-  article .info .tag {
-    background-color: #232223;
-    margin-right: 0.3em;
-    padding: 0.2em; }
-article .summary {
-  font-size: 120%; }
 article .content {
-  font-size: 90%;
   word-spacing: 0.2em;
   line-height: 1.5; }
   article .content blockquote {
@@ -143,5 +136,21 @@ article .highlight {
   box-shadow: 5px 5px 5px #232223;
   background-color: #232223;
   padding-left: 0.6em; }
+article .info {
+  color: #466536;
+  font-size: 70%;
+  text-align: right; }
+  article .info .tag {
+    color: #333638;
+    background-color: #BF5700;
+    margin-right: 0.3em;
+    padding: 0px 5px; }
+article .summary {
+  color: #d6efc2;
+  font-style: italic;
+  margin: 0 2em; }
+  article .summary:first-letter {
+    font-size: 170%;
+    font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */

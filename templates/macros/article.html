@@ -30,6 +30,9 @@
 {% macro render_article(a, from_index=false) %}
     <h2>{{ a.title }}</h2>
     {{ render_article_info(a) }}
+    <div class="summary">
+        {{ a.summary }}
+    </div>
     <div class="content">
         {{ a.content }}
     </div>

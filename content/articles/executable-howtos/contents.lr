@@ -13,12 +13,16 @@ python
 tox-dev
 howto
 ---
-summary: This is the summary of the article
+summary:
+
+Tox supports many versions of Python and it can get a bit tedious to get that all set up, so I created a Vagrantfile that does that for you and contributed it to the project. That's how fantastic I am.
 
 ---
 content:
 
-Tox supports a lot of Python versions and it can get a bit tedious to get that all set up, so I created a Vagrantfile that does that for you and contributed it to the project. That's how fantastic I am.
+### How it works
+
+Vagrant is a wrapper about container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, shared folders and provisioning. This way you can bootstrap a working development environment with a single command (`vagrant up`). The `Vagrantfile` in the
 
 ### All you have to do ...
 
@@ -33,10 +37,11 @@ vagrant ssh
 tox
 ```
 
-This will create the virtual machine including all interpreters that tox supports. If you only want to create the machine with only a subsuet of interpreters installed:
+This will create the virtual machine including all interpreters that tox supports. If you only want to create the machine with only a subset of interpreters installed:
 
 ```bash
 ALL_VERSIONS="3.6.0 2.7.13" vagrant up
 vagrant ssh
 tox --skip-missing-interpreters
 ```
+
