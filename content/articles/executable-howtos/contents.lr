@@ -15,33 +15,27 @@ howto
 ---
 summary:
 
-Tox supports many versions of Python and it can get a bit tedious to get that all set up, so I created a Vagrantfile that does that for you and contributed it to the project. That's how fantastic I am.
+Tox supports many versions of Python and it can get a bit tedious to get that all set up, so I created a `Vagrantfile` that does that for you and contributed it to the project. That's how fantastic I am.
 
 ---
 content:
 
 ### How it works
 
-Vagrant is a wrapper about container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, shared folders and provisioning. This way you can bootstrap a working development environment with a single command (`vagrant up`). The `Vagrantfile` in the
+Vagrant is a command line wrapper around container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, sharing and provisioning. This way you can bootstrap a working development environment with a simple `vagrant up` in the project directory. On invocation everything is set up and the project is mapped into the virtual machine. You can make adjustments in the project and test them inside vagrant without having to make changes to you system.
+
+If you want to see exactly what is going on, have a look at the [`Vagrantfile`](**TODO**) in the root of the project. It's written in simple ruby with a little bash sprinkled in.
 
 ### All you have to do ...
 
-* Install [VirtualBox](https://www.virtualbox.org/)
-* Install [Vagrant](https://www.vagrantup.com/)
-* Clone [tox](https://github.com/tox-dev/tox)
-* cd into your tox clone
+Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/), clone the [tox](https://github.com/tox-dev/tox) code and cd into the clone.
 
 ```bash
-vagrant up
-vagrant ssh
-tox
+<you@your-machine> /in/your/tox/clone$ vagrant up
+<you@your-machine> /in/your/tox/clone$ vagrant ssh
+[vagrant@arch vagrant]$ tox
 ```
 
-This will create the virtual machine including all interpreters that tox supports. If you only want to create the machine with only a subset of interpreters installed:
+This will create the virtual machine including all interpreters that tox supports. If you want to create the machine with only a subset of interpreters installed, you can call something like `ALL_VERSIONS="3.6.0 2.7.13" vagrant up` with only the interpreters you are interested in. To avoid errors due to missing interpreters you can call `tox --skip-missing-interpreters`
 
-```bash
-ALL_VERSIONS="3.6.0 2.7.13" vagrant up
-vagrant ssh
-tox --skip-missing-interpreters
-```
 

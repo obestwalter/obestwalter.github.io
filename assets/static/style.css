@@ -121,6 +121,10 @@ article .content {
   article .content blockquote {
     border-left: 0.5em solid #BF5700;
     padding-left: 0.5em; }
+  article .content code {
+    background-color: #232223;
+    font-family: "Arvo", serif;
+    padding: 0.1em 0.2em; }
   article .content img {
     border: solid 1px #232223;
     -moz-box-shadow: 5px 5px 10px #232223;
