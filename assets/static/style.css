@@ -123,7 +123,7 @@ article .content {
     padding-left: 0.5em; }
   article .content code {
     background-color: #232223;
-    font-family: "Arvo", serif;
+    font-family: "Share Tech Mono", serif;
     padding: 0.1em 0.2em; }
   article .content img {
     border: solid 1px #232223;
@@ -131,13 +131,14 @@ article .content {
     -webkit-box-shadow: 5px 5px 10px #232223;
     box-shadow: 5px 5px 5px #232223; }
   article .content pre {
-    font-family: "Share Tech Mono";
+    border: solid 1px #232223;
+    -moz-box-shadow: 5px 5px 10px #232223;
+    -webkit-box-shadow: 5px 5px 10px #232223;
+    box-shadow: 5px 5px 5px #232223;
+    background-color: #232223;
+    font-family: "Share Tech Mono", serif;
     font-size: 95%; }
 article .highlight {
-  border: solid 1px #232223;
-  -moz-box-shadow: 5px 5px 10px #232223;
-  -webkit-box-shadow: 5px 5px 10px #232223;
-  box-shadow: 5px 5px 5px #232223;
   background-color: #232223;
   padding-left: 0.6em; }
 article .info {

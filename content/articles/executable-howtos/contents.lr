@@ -22,20 +22,33 @@ content:
 
 ### How it works
 
-Vagrant is a command line wrapper around container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, sharing and provisioning. This way you can bootstrap a working development environment with a simple `vagrant up` in the project directory. On invocation everything is set up and the project is mapped into the virtual machine. You can make adjustments in the project and test them inside vagrant without having to make changes to you system.
+Vagrant is a command line wrapper around container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, sharing and provisioning. This way you can bootstrap a working development environment with a simple `vagrant up` in the project directory. On invocation everything is set up and the project folder is mapped into the virtual machine (by default to `/vagrant`). You can make adjustments in the project and test them inside vagrant without having to make changes to your system.
+
+The interpreters are installed via [pyenv](https://github.com/yyuu/pyenv). This does not have to interest you, if you just want to use the development environment, but if you are interested in having a lot of interpreters directly on your system, this is highly recommended (works on Mac and Linux).
 
 If you want to see exactly what is going on, have a look at the [`Vagrantfile`](**TODO**) in the root of the project. It's written in simple ruby with a little bash sprinkled in.
 
 ### All you have to do ...
 
-Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/), clone the [tox](https://github.com/tox-dev/tox) code and cd into the clone.
-
-```bash
-<you@your-machine> /in/your/tox/clone$ vagrant up
-<you@your-machine> /in/your/tox/clone$ vagrant ssh
-[vagrant@arch vagrant]$ tox
-```
+Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/), clone the [tox](https://github.com/tox-dev/tox) code and cd into the clone. With `vagrant up` the magic is done and then you can enter the machine with `vagrant ssh`. The machine is set up to cd into the mapped project folder, so all you have to then is to invoke `tox`.
 
 This will create the virtual machine including all interpreters that tox supports. If you want to create the machine with only a subset of interpreters installed, you can call something like `ALL_VERSIONS="3.6.0 2.7.13" vagrant up` with only the interpreters you are interested in. To avoid errors due to missing interpreters you can call `tox --skip-missing-interpreters`
 
+### Problems I encountered
 
+* tmp path to small -> redirect to tmp path on host
+
+#### ImportMismatchError on host
+
+    Traceback (most recent call last):
+      File "[...]/_pytest/config.py", line 362, in _importconftest
+        mod = conftestpath.pyimport()
+      File "[...]/py/_path/local.py", line 680, in pyimport
+        raise self.ImportMismatchError(modname, modfile, self)
+    ImportMismatchError: ('conftest', '/vagrant/tests/conftest.py', \
+        local('[...]/tox/tests/conftest.py'))
+    ERROR: could not load [...]/tox/tests/conftest.py
+    
+    ERROR: InvocationError: '[...]/.tox/py27/bin/py.test --timeout=180 tests'
+
+This can be solved by removing all *.pyc files in the project that were created in vagrant. This should not crash pytest in my opinion though.
