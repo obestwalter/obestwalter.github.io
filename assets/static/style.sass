@@ -1,6 +1,10 @@
 @import _fonts.scss
 @import _basic.sass
 
+//for debugging layout
+//div
+//  border: 1px dotted $roseOfSharon
+
 @mixin shadowed ($horizontal: 5px, $vertical: 5px, $blur: 10px, $color: $thunder)
   border: solid 1px $color
   -moz-box-shadow: $horizontal $vertical $blur $color
@@ -15,9 +19,6 @@ header
       color: $roseOfSharon
       &:hover
         color: lighten($roseOfSharon, 33%)
-
-//div
-//  border: 1px dotted $roseOfSharon
 
 article
   .content
