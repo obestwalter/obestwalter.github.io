@@ -2,7 +2,16 @@
 
 ## Acknowledgements
 
-[100% Wordpress-free](https://getlektor.com) and served via [Github Pages](https://pages.github.com/).
+Created with[Lektor](https://getlektor.com) and served via [Github Pages](https://pages.github.com/).
+
+### Other tools I used to create this website
+
+* [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts)
+* [name that color](http://chir.ag/projects/name-that-color)
+* [interactive CSS tools](http://www.cssmatic.com)
+* [color blender](http://meyerweb.com/eric/tools/color-blend)
+* [pygments, pygmentize](http://pygments.org/)
+* [mkdocs](http://www.mkdocs.org) (not for this site but for documentation of my projects)
 
 ## Legalese
 
