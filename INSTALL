@@ -3,3 +3,5 @@ Atm it's still safer to use the weirdo 2.7 installation instead of installing it
     mkvirtualenv 2.7.11 lektor
     curl -sf https://www.getlektor.com/install.sh | sh
     pip install -e .
+
+The inbuilt pygments plugin has a bug (creates wrong classname 'highlight' instead of 'hll'). I use my own stylesheet with adapted classname atm. Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
