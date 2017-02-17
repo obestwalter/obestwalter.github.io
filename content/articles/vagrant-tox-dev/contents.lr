@@ -1,0 +1,54 @@
+_hidden: True
+
+---
+title: Easing testing and development with Vagrant
+
+---
+publishedOn: 2017-01-13
+
+---
+lastModified: 2017-01-14
+
+---
+tags:
+
+python
+tox-dev
+howto
+
+---
+summary:
+
+Tox runs on Linux, Os X and Linux and supports many versions of Python. It can get a bit tedious to get that all set up for testing, so I built some vagrant boxes and a `Vagrantfile` with portable dev/test environments for Linux and Windows.
+
+---
+content:
+
+### How it works
+
+Vagrant is a command line wrapper around container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, sharing and provisioning. This way you can bootstrap a working test/development environment with a simple `vagrant up` in the project directory. On invocation everything is set up and the project folder is mapped into the virtual machine (by default to `/vagrant` ond Linux and `C:\\vagrant` on Windows). You can hack on the project and test your changes inside vagrant without having to make changes to your host system.
+
+The setup for tox-dev contains two boxes - both based on VirtualBox. One is an [Arch Linux](https://www.archlinux.org/) with the interpreters being installed via [pyenv](https://github.com/yyuu/pyenv). The other one is a Windows2012R2 with a time limited evaluation license.
+
+If you want to see exactly what is going on, have a look at the [`Vagrantfile`](**TODO**) in the root of the project. It's written in simple ruby with a little bash sprinkled in for provisioning.
+
+### What you have to do
+
+#### Prerequisites
+
+Install [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/), clone the [tox](https://github.com/tox-dev/tox) code and cd into the clone.
+
+#### Warning
+
+**Remove the complete `.tox` folder and delete all `.pyc` files when switching between operating systems to avoid weird errors.**
+
+Reason: the way the machine is set up at the moment is that the `.tox` directory will be in your project folder. This means that you will get an `ImportMismatchError` if you do not tidy up the `.pyc` files when switching between running tests on the host and on the guest. This can be changed as soon as [Issue 20](https://github.com/tox-dev/tox/issues/20) is resolved.
+
+This also means that you cannot yet run the tests in parallel on both boxes.
+
+#### Running the tests
+
+**on Linux:** `vagrant up linux` starts the linux box. You can enter it with `vagrant ssh linux`. The box is set up to cd into the mapped project folder, so all you have to do is to invoke `tox`.
+
+**FIXME** py26 gets stuck
+**on Windows**: `vagrant up win` starts the Windows box. It starts in graphical mode as getting the command line access to work was still quite buggy when I last tried about a year ago. It might be better today, maybe I try again soon. As for now, login as user "Administrator" with password "vagrant" and open `cmd.exe`, cd into `C:\vagrant` and run `tox`.

@@ -1,0 +1,22 @@
+_hidden: True
+
+---
+title: Release management with devpi and tox
+
+---
+publishedOn: 2017-01-23
+
+---
+tags:
+
+python
+tox-dev
+howto
+
+---
+summary:
+
+I am maintainer of tox and I make releases of tox with devpi and tox
+
+---
+content:
