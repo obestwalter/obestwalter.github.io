@@ -1,20 +1,27 @@
 import os
 from string import Template
+from datetime import datetime
 
-from pathtools import path
+from lektor.utils import slugify
 
 HERE = os.path.dirname(__file__)
 CONTENT_PATH = os.path.join(HERE, '..', 'content')
 BLUEPRINTS_PATH = os.path.join(HERE, 'blueprints')
 TYPE_DST_MAP = {
     'art': os.path.join(CONTENT_PATH, 'articles'),
-    'pro': os.path.join(CONTENT_PATH, 'projects'),
-    'log': os.path.join(CONTENT_PATH, 'log'),
+    'dia': os.path.join(CONTENT_PATH, 'diary'),
 }
 
 
-def main(what):
-    dstPath = TYPE_DST_MAP[what]
+def main(what, title):
+    with open(os.path.join(BLUEPRINTS_PATH, "%s.lr" % what)) as f:
+        content = f.read()
+    rep = dict(title=title, date=datetime.now().strftime("%Y-%m-%d"))
+    content = Template(content).substitute(rep)
+    dst = os.path.join(TYPE_DST_MAP[what], slugify(title), "contents.lr")
+    with open(dst, "w") as f:
+        f.write(content)
+
 
 if __name__ == '__main__':
-    main('art')
+    main('art', "My super title")
