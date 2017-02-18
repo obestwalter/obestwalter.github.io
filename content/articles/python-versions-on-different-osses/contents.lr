@@ -49,7 +49,7 @@ Python2.7 is installed already.
 
 `brew install python3` installs the latest version of python which is 3.6 at them moment
 
-The missing interpreters can be installed via [homebrew](http://brew.sh/) with the [obestwalter/python tap](https://github.com/obestwalter/homebrew-python). You also need to install the [Xcode command line tools](https://developer.apple.com/library/content/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_) via `xcode-select`.
+The missing interpreters can be installed via [homebrew](http://brew.sh/) with the [derekkwok/python tap](https://github.com/derekkwok/homebrew-python). You also need to install the [Xcode command line tools](https://developer.apple.com/library/content/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-DOWNLOADING_COMMAND_LINE_TOOLS_IS_NOT_AVAILABLE_IN_XCODE_FOR_OS_X_10_9__HOW_CAN_I_INSTALL_THEM_ON_MY_MACHINE_) via `xcode-select`.
 
     $ xcode-select --install  # behold the license agreement pop up!
     $ brew update
