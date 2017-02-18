@@ -9,9 +9,9 @@
         {% endif %}
         <span class="date" title="{{ title }}">
             [
-            {{ a.publishedOn|dateformat }}
-            {% if withUpdate and a.lastModified %}
-                (updated: {{ a.lastModified|dateformat }})
+            {{ a.crtime|dateformat }}
+            {% if withUpdate and a.mtime %}
+                (updated: {{ a.mtime|dateformat }})
             {% endif %}
             ]
         </span>

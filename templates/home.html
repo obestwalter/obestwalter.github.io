@@ -6,7 +6,7 @@
     {{ this.content }}
 
     <h2>My articles so far ...</h2>
-    {% for post in site.query('/articles').order_by('-lastModified') %}
+    {% for post in site.query('/articles').order_by('-mtime') %}
         {{ render_summary(post) }}
     {% endfor %}
 
