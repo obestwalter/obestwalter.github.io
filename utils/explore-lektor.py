@@ -4,7 +4,7 @@ from lektor.project import Project
 
 
 def queries(pad):
-    q = Query('/articles', pad).order_by('-lastModified')
+    q = Query('/articles', pad).order_by('-mtime')
     for e in q:
         print(e)
 

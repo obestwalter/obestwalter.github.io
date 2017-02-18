@@ -8,7 +8,8 @@ setup(
     packages=['utils'],
     entry_points={
       'console_scripts': [
-          'new = new:main'
+          'draft = workflow:draft',
+          'publish = workflow:publish',
       ]
     },
 )
