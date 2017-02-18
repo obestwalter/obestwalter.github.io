@@ -10,7 +10,7 @@
         <span class="date" title="{{ title }}">
             [
             {{ a.crtime|dateformat }}
-            {% if withUpdate and a.mtime %}
+            {% if withUpdate and a.mtime != a.crtime %}
                 (updated: {{ a.mtime|dateformat }})
             {% endif %}
             ]
