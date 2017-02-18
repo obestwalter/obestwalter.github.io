@@ -50,6 +50,6 @@ def publish(path):
     name = os.path.splitext(os.path.basename(path))[0]
     kind, name = name.split('-', 1)
     dst = os.path.join(KIND_DST_MAP[kind], name, "contents.lr")
-    os.makedirs(os.path.dirname(dst))
+    os.mkdir(os.path.dirname(dst))
     with open(dst, "w") as f:
         f.write(content)
