@@ -13,6 +13,7 @@ import os
 from datetime import datetime
 from string import Template
 
+import sys
 from lektor.utils import slugify
 
 _HERE = os.path.dirname(__file__)
@@ -30,26 +31,29 @@ KIND_DST_MAP = {
 }
 
 
-def draft(kind, title):
+def draft():
+    kind, title = sys.argv[1:3]
     assert kind in KINDS, kind
-    with open(os.path.join(BLUEPRINTS_PATH, "%s.md" % kind)) as f:
+    with open(os.path.join(BLUEPRINTS_PATH, '%s.md' % kind)) as f:
         content = f.read()
     rep = dict(title=title)
     content = Template(content).safe_substitute(rep)
-    dst = os.path.join(DRAFTS_PATH, "%s-%s.md" % (kind, slugify(title)))
+    dst = os.path.join(DRAFTS_PATH, '%s-%s.md' % (kind, slugify(title)))
     assert not os.path.exists(dst), dst
-    with open(dst, "w") as f:
+    with open(dst, 'w') as f:
         f.write(content)
 
 
-def publish(path):
+def publish():
+    path = sys.argv[1]
     with open(os.path.join(PROJECT_PATH, path)) as f:
         content = f.read()
-    rep = dict(date=datetime.now().strftime("%Y-%m-%d"))
+    rep = dict(date=datetime.now().strftime('%Y-%m-%d'))
     content = Template(content).safe_substitute(rep)
     name = os.path.splitext(os.path.basename(path))[0]
     kind, name = name.split('-', 1)
-    dst = os.path.join(KIND_DST_MAP[kind], name, "contents.lr")
+    dst = os.path.join(KIND_DST_MAP[kind], name, 'contents.lr')
     os.mkdir(os.path.dirname(dst))
-    with open(dst, "w") as f:
+    with open(dst, 'w') as f:
         f.write(content)
+    os.remove(path)
