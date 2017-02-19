@@ -1,13 +1,22 @@
 {% extends "layout.html" %}
-{% from "macros/content.html" import render_summary %}
+{% from "macros/content.html" import render_diary_summary, render_article_summary %}
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
     <h2>{{ this.title }}</h2>
     {{ this.content }}
 
+    <h2>Latest diary entries</h2>
+    {% for post in site.query('/diary').order_by('-mtime') %}
+        {{ render_diary_summary(post) }}
+    {% else %}
+        Zilch. Nada. Niente. Maybe later.
+    {% endfor %}
+
     <h2>My articles so far ...</h2>
     {% for post in site.query('/articles').order_by('-mtime') %}
-        {{ render_summary(post) }}
+        {{ render_article_summary(post) }}
+    {% else %}
+        Zilch. Nada. Niente. Maybe later.
     {% endfor %}
 
     {% if this.tags %}

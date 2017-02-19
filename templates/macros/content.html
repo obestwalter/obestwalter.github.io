@@ -14,7 +14,7 @@
     </div>
 {% endmacro %}
 
-{% macro render_summary(a) %}
+{% macro render_article_summary(a) %}
     <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
     {{ render_info(a, withUpdate=False) }}
     <div class="summary">
@@ -23,8 +23,16 @@
     <hr>
 {% endmacro %}
 
+{% macro render_diary_summary(a) %}
+    <h3>[ {{ a.crtime|dateformat }} ] <a href="/diary#{{ a._slug }}">{{ a.title }}</a></h3>
+    <div class="summary">
+        {{ a.summary }}
+    </div>
+    <hr>
+{% endmacro %}
+
 {% macro render_content(a, withUpdate=True) %}
-    <h2>{{ a.title }}</h2>
+    <h3 id="{{ a._slug }}">{{ a.title }}</h3>
     {{ render_info(a, withUpdate=withUpdate) }}
     {% if a.summary %}
         <div class="summary">
