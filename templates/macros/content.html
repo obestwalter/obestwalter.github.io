@@ -1,4 +1,4 @@
-{% macro render_article_info(a, withUpdate=True) %}
+{% macro render_info(a, withUpdate=True) %}
     <div class="info">
         {% if a.tags is defined %}
             [
@@ -20,19 +20,21 @@
 
 {% macro render_summary(a) %}
     <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
-    {{ render_article_info(a, withUpdate=False) }}
+    {{ render_info(a, withUpdate=False) }}
     <div class="summary">
         {{ a.summary }}
     </div>
     <hr>
 {% endmacro %}
 
-{% macro render_article(a, from_index=false) %}
+{% macro render_content(a, withUpdate=True) %}
     <h2>{{ a.title }}</h2>
-    {{ render_article_info(a) }}
-    <div class="summary">
-        {{ a.summary }}
-    </div>
+    {{ render_info(a, withUpdate=withUpdate) }}
+    {% if a.summary %}
+        <div class="summary">
+            {{ a.summary }}
+        </div>
+    {% endif %}
     <div class="content">
         {{ a.content }}
     </div>
