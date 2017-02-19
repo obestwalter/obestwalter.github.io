@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% from "macros/content.html" import render_summary %}
 {% from "macros/pagination.html" import render_pagination %}
-{% block title %}{{ this.title }}{% endblock %}
+{% block title %}Articles{% endblock %}
 {% block body %}
     {% for child in this.pagination.items %}
         {{ render_summary(child) }}

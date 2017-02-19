@@ -95,9 +95,9 @@ header {
 article {
   background: #333638; }
   article a {
-    color: #BF5700; }
+    color: #ffad68; }
     article a:hover {
-      color: #ffad68; }
+      color: #BF5700; }
 
 footer {
   text-align: right; }
