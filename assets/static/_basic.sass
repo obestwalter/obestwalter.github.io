@@ -1,7 +1,8 @@
 $thunder: #232223
 $outerSpace: #333638
-$chaletGreen: #466536
+//$chaletGreen: #466536
 $roseOfSharon: #BF5700
+$koromiko: #FFAD68
 $grannySmithApple: #BBE599
 
 html
@@ -20,7 +21,7 @@ h1, h2, h3, h4, h5, h6
   font-family: 'Molengo', sans-serif
 
 hr
-  border: 1px solid $chaletGreen
+  border: 1px solid $roseOfSharon
 
 p
   margin: 1em 0
@@ -44,13 +45,19 @@ header
     padding: 0 0.3em 0 0.3em
     text-align: left
     &:hover
-      color: lighten($outerSpace, 33%)
+      color: $grannySmithApple
   h1
     font-size: 200%
     font-weight: normal
     margin: 0
     padding: 0
     text-align: right
+    a
+      margin: 0
+      padding: 0
+      color: $grannySmithApple
+      &:hover
+        color: lighten($grannySmithApple, 10%)
   nav
     ul
       list-style: none
@@ -63,7 +70,7 @@ header
 
 article
   a
-    color: lighten($roseOfSharon, 33%)
+    color: $koromiko
     &:hover
       color: $roseOfSharon
   background: $outerSpace

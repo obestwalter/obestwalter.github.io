@@ -1,19 +1,15 @@
 {% macro render_info(a, withUpdate=True) %}
     <div class="info">
         {% if a.tags is defined %}
-            [
             {% for tag in a.tags %}
                 <span class="tag">{{ tag }}</span>
             {% endfor %}
-            ]
         {% endif %}
-        <span class="date" title="{{ title }}">
-            [
-            {{ a.crtime|dateformat }}
+        <span class="date">
+            [ {{ a.crtime|dateformat }}
             {% if withUpdate and a.mtime != a.crtime %}
                 (updated: {{ a.mtime|dateformat }})
-            {% endif %}
-            ]
+            {% endif %} ]
         </span>
     </div>
 {% endmacro %}

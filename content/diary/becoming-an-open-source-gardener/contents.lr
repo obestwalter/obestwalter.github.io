@@ -1,16 +1,19 @@
 title: Becoming an Open Source Gardener
 ---
+mtime: 2017-02-19
+---
 crtime: 2017-02-19
 ---
 tags:
 
 tox-dev
+maintenance
 python
 oss
 ---
 content:
 
-In the summer of 2016 I took part in the first dedicated [python testing sprint](http://blog.pytest.org/2016/pytest-development-sprint/) together with about 25 humans from all over the planet. We had a great time together with engaging discussions, technical talks, and lots of hacking.
+In the summer of 2016 I took part in the first dedicated [Python testing sprint](http://blog.pytest.org/2016/pytest-development-sprint/) together with about 25 humans from all over the planet. We had a great time together with engaging discussions, technical talks, and lots of hacking.
 
 I was interested in getting into tox and helped to prepare the next release by reviewing pull requests and going through the issues. I also did some [conceptual work](https://github.com/tox-dev/tox/blob/master/doc/drafts/extend-envs-and-packagebuilds.md) with [nicoddemus](https://github.com/nicoddemus) and [Stephan Obermann](https://www.linkedin.com/in/stephan-obermann-49346a125/).
 
@@ -18,7 +21,7 @@ In my work on pytest I had the honour of [dropping the dot](https://twitter.com/
 
 After the sprint I did not have much spare time to get more involved, which bugged me, so I started to sound out the option of integrating this into my work at [Avira](https://avira.com). As pytest/tox/devpi is something we heavily rely on, I was able to secure the support of my team and management to spend 20% of my time on tox development starting in 2017.
 
-I am grateful that Avira is aware of the importance of Open Source and gives me the chance to contribute regularly as part of my work. I'd like to thank [Rainer Haußmann](https://www.linkedin.com/in/rainerhaussmann), [Martin Held](https://de.linkedin.com/in/martin-held-b287823), [Andreas Flach](https://de.linkedin.com/in/andreas-flach-33446a6) and [Gitte Klitgaard](https://www.linkedin.com/in/gitteklitgaard) for their support in getting this on the road.
+I am grateful that Avira is aware of the importance of open source and gives me the chance to contribute regularly as part of my work. I'd like to thank [Rainer Haußmann](https://www.linkedin.com/in/rainerhaussmann), [Martin Held](https://de.linkedin.com/in/martin-held-b287823), [Andreas Flach](https://de.linkedin.com/in/andreas-flach-33446a6) and [Gitte Klitgaard](https://www.linkedin.com/in/gitteklitgaard) for their support in getting this on the road.
 
 To get started I ...
 
@@ -26,6 +29,4 @@ To get started I ...
 * labelled all open issues
 * identified invalid/fixed/duplicate issues (~60 out of ~180 issues were closed as a result)
 
-I think these kinds of activities are just as important as contributing code to keep a project healthy and I will concentrate on this field of work for the time being.
-
-BTW: AFAICT Steve Klabnik coined the term [Open Source Gardener](http://words.steveklabnik.com/how-to-be-an-open-source-gardener).
+These and similar activities around open source projects where coined as [open source gardening](http://words.steveklabnik.com/how-to-be-an-open-source-gardener) by Steve Klabnik. I think they are just as important as contributing code to keep a project healthy and I will concentrate on this field of work for the time being.
