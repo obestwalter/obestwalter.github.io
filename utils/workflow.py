@@ -10,6 +10,7 @@ creates a prepared md file with all the necessary settings to work on.
 will make the necessary adjustments and publish it in the contents.
 """
 import os
+import subprocess
 from datetime import datetime
 from string import Template
 
@@ -57,3 +58,9 @@ def publish():
     with open(dst, 'w') as f:
         f.write(content)
     os.remove(path)
+
+
+def deploy():
+    # print(subprocess.check_output(["lektor",  "clean", "--yes"]))
+    print(subprocess.check_output(["lektor", "build"]))
+    print(subprocess.check_output(["lektor", "deploy"]))

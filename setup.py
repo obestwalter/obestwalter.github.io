@@ -7,9 +7,10 @@ setup(
     url='http://oliver.bestwalter.de',
     packages=['utils'],
     entry_points={
-      'console_scripts': [
-          'draft = utils.workflow:draft',
-          'publish = utils.workflow:publish',
-      ]
+        'console_scripts': [
+            'draft = utils.workflow:draft',
+            'publish = utils.workflow:publish',
+            'deploy = utils.workflow:deploy',
+        ]
     },
 )
