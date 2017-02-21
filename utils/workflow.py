@@ -1,5 +1,5 @@
 """
-Helpers for my workflow.
+Helpers for my evolving workflow.
 
     draft art "My super article"
 
@@ -8,13 +8,19 @@ creates a prepared md file with all the necessary settings to work on.
     publish drafts/art-my-super-article.md
 
 will make the necessary adjustments and publish it in the contents.
+
+    deploy [clean]
+
+will create a [clean] build and push it online.
 """
+from __future__ import print_function
+
 import os
 import subprocess
+import sys
 from datetime import datetime
 from string import Template
 
-import sys
 from lektor.utils import slugify
 
 _HERE = os.path.dirname(__file__)
@@ -61,6 +67,8 @@ def publish():
 
 
 def deploy():
-    # print(subprocess.check_output(["lektor",  "clean", "--yes"]))
-    print(subprocess.check_output(["lektor", "build"]))
-    print(subprocess.check_output(["lektor", "deploy"]))
+    if len(sys.argv) > 2 and sys.argv[2] == 'clean':
+        print(subprocess.check_output(['lektor',  'clean', '--yes']))
+    else:
+        print(subprocess.check_output(['lektor', 'build']))
+    print(subprocess.check_output(['lektor', 'deploy']))
