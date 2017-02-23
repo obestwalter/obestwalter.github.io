@@ -1,24 +1,47 @@
+// This is only partially adapted for webpack 2
+// ExtractTextPlugin is still playing up
+// better wait till 2 release has settled
+
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+// var loaders = [
+//   {
+//     loader: 'css-loader',
+//     options: {
+//       modules: true
+//     }
+//   },
+//   {
+//     loader: 'postcss-loader'
+//   },
+//   {
+//     loader: 'sass-loader'
+//   }
+// ]
+
+ExtractTextPlugin.extract({
+  fallbackLoader: 'style-loader',
+  loader: loaders,
+})
 
 var options = {
   entry: {
     'app': './js/main.js',
-    'styles': './sass/style.sass'
+    'styles': './scss/main.scss'
   },
   output: {
-    path: path.dirname(__dirname) + '/assets/static/packed',
+    path: path.dirname(__dirname) + '/assets/static/gen',
     filename: '[name].js'
   },
   devtool: '#cheap-module-source-map',
   resolve: {
-    modulesDirectories: ['node_modules'],
+    modules: ['node_modules'],
     extensions: ['', '.js']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -26,10 +49,6 @@ var options = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
-      },
-      {
-        test: /\.sass$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
       },
       {
@@ -50,5 +69,7 @@ var options = {
     new webpack.optimize.DedupePlugin()
   ]
 };
+
+
 
 module.exports = options;
