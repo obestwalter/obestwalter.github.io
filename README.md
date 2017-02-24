@@ -1,11 +1,25 @@
 # [My personal homepage](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
 
+## Installation
+
+Atm it's still safer to use the weirdo 2.7 installation instead of installing it with pip in Python3 (had weird problems and as I am new to lektor I go for the recommended way until I know my way around).
+
+    mkvirtualenv 2.7.11 lektor
+    curl -sf https://www.getlektor.com/install.sh | sh
+    pip install -e .
+
+The inbuilt pygments plugin has a bug (creates wrong class name 'highlight' instead of 'hll'). I use my own stylesheet with adapted class name atm. Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
+
+## Development
+
+Plugin development:
+
+    LEKTOR_DEV=1 lektor server
+
 ## Acknowledgements
 
-Created with[Lektor](https://getlektor.com) and served via [Github Pages](https://pages.github.com/).
-
-### Other tools I used to create this website
-
+* created with[Lektor](https://getlektor.com)
+* served via [Github Pages](https://pages.github.com/)
 * [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts) (TTF versions need to be downloaded extra from somewhere else though :()
 * [name that color](http://chir.ag/projects/name-that-color)
 * [interactive CSS tools](http://www.cssmatic.com)
