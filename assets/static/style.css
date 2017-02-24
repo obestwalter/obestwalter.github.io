@@ -61,6 +61,10 @@ p {
 ul {
   list-style-type: square; }
 
+em {
+  font-style: normal;
+  font-weight: bold; }
+
 header, main, footer {
   margin: 0 auto;
   padding: 1em 1em;
@@ -183,12 +187,13 @@ main {
 
 footer {
   background: #BF5700;
-  color: #BBE599;
-  text-align: right; }
-  footer a {
-    color: #BBE599;
-    font-size: 70%; }
-    footer a:hover {
-      color: #232223; }
+  color: #BBE599; }
+  footer .content {
+    font-size: 70%;
+    text-align: right; }
+    footer .content a {
+      color: #BBE599; }
+      footer .content a:hover {
+        color: #232223; }
 
 /*# sourceMappingURL=style.css.map */

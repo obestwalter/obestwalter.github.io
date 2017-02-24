@@ -35,6 +35,9 @@ p
   padding: 0
 ul
   list-style-type: square
+em
+  font-style: normal
+  font-weight: bold
 header, main, footer
   margin: 0 auto
   padding: 1em 1em
@@ -161,9 +164,10 @@ main
 footer
   background: $roseOfSharon
   color: $grannySmithApple
-  text-align: right
-  a
-    color: $grannySmithApple
+  .content
     font-size: 70%
-    &:hover
-      color: $thunder
+    text-align: right
+    a
+      color: $grannySmithApple
+      &:hover
+        color: $thunder
