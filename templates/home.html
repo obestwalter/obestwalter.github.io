@@ -1,26 +1,10 @@
-{% extends "layout.html" %}
+{% extends "_base.html" %}
 {% from "macros/content.html" import render_diary_summary, render_article_summary %}
-{% block title %}{{ this.title }}{% endblock %}
+
+{% block title %}Home{% endblock %}
 {% block body %}
-    <h2>{{ this.title }}</h2>
-    {{ this.content }}
-
-    <h2>Latest diary entries</h2>
-    {% for post in site.query('/diary').order_by('-mtime') %}
-        {{ render_diary_summary(post) }}
-    {% else %}
-        Zilch. Nada. Niente. Maybe later.
-    {% endfor %}
-
-    <h2>My articles so far ...</h2>
-    {% for post in site.query('/articles').order_by('-mtime') %}
-        {{ render_article_summary(post) }}
-    {% else %}
-        Zilch. Nada. Niente. Maybe later.
-    {% endfor %}
-
     {% if this.tags %}
-        <h2>Tags</h2>
+        <div class="category">Tags</div>
         <ul>
             {% for t in this.tags -%}
                 <li>
@@ -31,4 +15,9 @@
             {% endfor %}
         </ul>
     {% endif %}
+
+    <div class="category">Articles</div>
+    {% for post in site.query('/articles').order_by('-mtime') %}
+        {{ render_article_summary(post) }}
+    {% endfor %}
 {% endblock %}

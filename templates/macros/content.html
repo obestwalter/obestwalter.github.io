@@ -1,39 +1,33 @@
-{% macro render_info(a, withUpdate=True) %}
+{% macro render_info(a) %}
     <div class="info">
         {% if a.tags is defined %}
             {% for tag in a.tags %}
                 <span class="tag">{{ tag }}</span>
             {% endfor %}
         {% endif %}
-        <span class="date">
-            [ {{ a.crtime|dateformat }}
-            {% if withUpdate and a.mtime != a.crtime %}
-                (updated: {{ a.mtime|dateformat }})
-            {% endif %} ]
+        <span class="date" title="published: {{ a.crtime|dateformat }}">
+            [last update: {{ a.mtime|dateformat }}]
         </span>
     </div>
 {% endmacro %}
 
 {% macro render_article_summary(a) %}
-    <h2><a href="{{ a|url }}">{{ a.title }}</a></h2>
-    {{ render_info(a, withUpdate=False) }}
+    <div class="title"><a href="{{ a|url }}">{{ a.title }}</a></div>
+    {{ render_info(a) }}
     <div class="summary">
-        {{ a.summary }}
+        {% if a.summary %}
+            {{ a.summary }}
+        {% else %}
+            {{ a.content|excerpt }}
+        {% endif %}
+        <div class="more"><a href="{{ a|url }}">[read more]</a></div>
     </div>
     <hr>
 {% endmacro %}
 
-{% macro render_diary_summary(a) %}
-    <h3>[ {{ a.crtime|dateformat }} ] <a href="/diary#{{ a._slug }}">{{ a.title }}</a></h3>
-    <div class="summary">
-        {{ a.summary }}
-    </div>
-    <hr>
-{% endmacro %}
-
-{% macro render_content(a, withUpdate=True) %}
-    <h3 id="{{ a._slug }}">{{ a.title }}</h3>
-    {{ render_info(a, withUpdate=withUpdate) }}
+{% macro render_content(a) %}
+    <div class="title" id="{{ a._slug }}">{{ a.title }}</div>
+    {{ render_info(a) }}
     {% if a.summary %}
         <div class="summary">
             {{ a.summary }}

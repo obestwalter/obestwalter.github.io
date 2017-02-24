@@ -1,5 +1,6 @@
-{% extends "layout.html" %}
+{% extends "_base.html" %}
 {% from "macros/content.html" import render_content %}
+
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
     {{ render_content(this) }}

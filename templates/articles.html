@@ -1,6 +1,7 @@
-{% extends "layout.html" %}
+{% extends "_base.html" %}
 {% from "macros/content.html" import render_article_summary %}
 {% from "macros/pagination.html" import render_pagination %}
+
 {% block title %}Articles{% endblock %}
 {% block body %}
     {% for child in this.pagination.items %}

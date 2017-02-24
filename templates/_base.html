@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ '/static/pygments-solarized.css'|asseturl }}">
     <link rel="stylesheet" href="{{ '/static/style.css'|asseturl }}">
-    <title>{% block title %}Home{% endblock %} — obestwalter</title>
+    <title>{% block title %}{{ this.title }}{% endblock %} — obestwalter</title>
 </head>
 <body>
 <header>
-    <h1><a href="/">obestwalter</a></h1>
+    <div class="title"><a href="/">obestwalter</a></div>
     <nav>
         <ul>
             <li{% if this._path == '/' %} class="active"{% endif %}>
@@ -24,9 +24,7 @@
     </nav>
 </header>
 
-<article>
-    {% block body %}{% endblock %}
-</article>
+<main>{% block body %}{% endblock %}</main>
 
 <footer>
     <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
