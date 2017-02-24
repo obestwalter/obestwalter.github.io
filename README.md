@@ -20,7 +20,7 @@ Plugin development:
 
 ## Acknowledgements
 
-* created with[Lektor](https://getlektor.com)
+* created with [Lektor](https://getlektor.com)
 * served via [Github Pages](https://pages.github.com/)
 * [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts) (TTF versions need to be downloaded extra from somewhere else though :()
 * [name that color](http://chir.ag/projects/name-that-color)
