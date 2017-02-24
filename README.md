@@ -6,7 +6,7 @@ Created with[Lektor](https://getlektor.com) and served via [Github Pages](https:
 
 ### Other tools I used to create this website
 
-* [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts)
+* [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts) (TTF versions need to be downloaded extra from somewhere else though :()
 * [name that color](http://chir.ag/projects/name-that-color)
 * [interactive CSS tools](http://www.cssmatic.com)
 * [color blender](http://meyerweb.com/eric/tools/color-blend)
