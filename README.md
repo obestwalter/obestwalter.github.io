@@ -10,8 +10,6 @@ Use the officially recommended (but very unusual) Python2.7 installation:
 
 Hopefully installing lektor with pip and Python3 is possible soonish. Then lektor would just be a dependency of this project and I can write my helper scripts in Python3.
 
-The inbuilt pygments plugin has a bug (creates wrong class name 'highlight' instead of 'hll'). I use my own stylesheet with adapted class name atm. Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
-
 ## Workflow
 
 ### Create/publish/deploy content
@@ -33,6 +31,20 @@ will create a \[clean\] build and push it online.
 ### Run local server
 
 Calling `server` runs `lektor server` configured as I like it.
+
+## Remarks
+
+### Generate CSS from SASS
+
+I use the file watcher feature in PyCharm to automate that for me without having to much fuzz. Could write a little lektor plugin, when I get a round to it.
+
+![file watcher settings](assets/img/sass-file-watcher.png)
+
+### Pygments bug
+
+The inbuilt pygments plugin has a bug (creates wrong class name 'highlight' instead of 'hll'). For now I use my own stylesheet with adapted class name.
+
+Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
 
 ## Acknowledgements
 
