@@ -68,7 +68,7 @@ em {
 
 header, main, footer {
   margin: 0 auto;
-  padding: 0;
+  padding: 1em 1em;
   width: 100%; }
 
 header {
