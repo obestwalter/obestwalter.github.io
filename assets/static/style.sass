@@ -21,6 +21,7 @@ html
   background: $thunder
   margin: 0
 body
+  background: $roseOfSharon
   font-family: 'Arvo', serif
   font-size: 1.0em
   margin: 1em auto
@@ -38,15 +39,21 @@ ul
 em
   font-style: normal
   font-weight: bold
+
 header, main, footer
   margin: 0 auto
-  padding: 1em 1em
-  width: 45em
+  padding: 0
+  width: 100%
+
+//@media only screen and (min-device-width: 900px)
+//  header, main, footer
+//    margin: 0 auto
+//    padding: 1em 1em
+//    width: 900px
 
 // ############################################################################
 
 header
-  background: $roseOfSharon
   padding-bottom: 0
   padding-top: 0.5em
   a
@@ -93,16 +100,6 @@ main
     color: $koromiko
     &:hover
       color: $roseOfSharon
-
-  .category
-    font-size: 160%
-    color: $thunder
-    &:first-letter
-      font-size: 170%
-  .title
-    font-family: 'Molengo', sans-serif
-    font-size: 150%
-    font-weight: bold
   h1
     font-size: 140%
   h2
@@ -116,6 +113,16 @@ main
   h6
     font-size: 105%
     font-weight: normal
+
+  .category
+    font-size: 160%
+    color: $thunder
+    &:first-letter
+      font-size: 170%
+  .title
+    font-family: 'Molengo', sans-serif
+    font-size: 150%
+    font-weight: bold
   .summary
     &:first-letter
       font-size: 170%
@@ -162,9 +169,9 @@ main
 // ############################################################################
 
 footer
-  background: $roseOfSharon
   color: $grannySmithApple
   .content
+    padding: 0 1em 1em 0
     font-size: 70%
     text-align: right
     a

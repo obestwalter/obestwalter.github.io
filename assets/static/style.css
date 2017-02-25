@@ -41,6 +41,7 @@ html {
   margin: 0; }
 
 body {
+  background: #BF5700;
   font-family: "Arvo", serif;
   font-size: 1em;
   margin: 1em auto; }
@@ -67,11 +68,10 @@ em {
 
 header, main, footer {
   margin: 0 auto;
-  padding: 1em 1em;
-  width: 45em; }
+  padding: 0;
+  width: 100%; }
 
 header {
-  background: #BF5700;
   padding-bottom: 0;
   padding-top: 0.5em; }
   header a {
@@ -115,15 +115,6 @@ main {
     color: #FFAD68; }
     main a:hover {
       color: #BF5700; }
-  main .category {
-    font-size: 160%;
-    color: #232223; }
-    main .category:first-letter {
-      font-size: 170%; }
-  main .title {
-    font-family: "Molengo", sans-serif;
-    font-size: 150%;
-    font-weight: bold; }
   main h1 {
     font-size: 140%; }
   main h2 {
@@ -137,6 +128,15 @@ main {
   main h6 {
     font-size: 105%;
     font-weight: normal; }
+  main .category {
+    font-size: 160%;
+    color: #232223; }
+    main .category:first-letter {
+      font-size: 170%; }
+  main .title {
+    font-family: "Molengo", sans-serif;
+    font-size: 150%;
+    font-weight: bold; }
   main .summary {
     color: #d6efc2;
     font-style: italic;
@@ -186,9 +186,9 @@ main {
     text-decoration: line-through; }
 
 footer {
-  background: #BF5700;
   color: #BBE599; }
   footer .content {
+    padding: 0 1em 1em 0;
     font-size: 70%;
     text-align: right; }
     footer .content a {
