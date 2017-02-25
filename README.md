@@ -8,7 +8,7 @@ Use the officially recommended (but very unusual) Python2.7 installation:
     curl -sf https://www.getlektor.com/install.sh | sh
     pip install -e .
 
-Hopefully installing lektor with pip and Python3 is possible soonish. Then lektor would just be a dependency of this project.
+Hopefully installing lektor with pip and Python3 is possible soonish. Then lektor would just be a dependency of this project and I can write my helper scripts in Python3.
 
 The inbuilt pygments plugin has a bug (creates wrong class name 'highlight' instead of 'hll'). I use my own stylesheet with adapted class name atm. Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
 
