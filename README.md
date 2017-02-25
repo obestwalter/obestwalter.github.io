@@ -4,7 +4,7 @@
 
 Use the officially recommended (but very unusual) Python2.7 installation:
 
-    mkvirtualenv 2.7.11 lektor
+    pyenv virtualenv 2.7.11 lektor
     curl -sf https://www.getlektor.com/install.sh | sh
     pip install -e .
 
