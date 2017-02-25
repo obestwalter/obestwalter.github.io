@@ -13,4 +13,5 @@ setup(
             'deploy = utils.workflow:deploy',
         ]
     },
+    scripts=['server']
 )
