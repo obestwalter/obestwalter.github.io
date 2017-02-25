@@ -1,18 +1,3 @@
-"""
-Helpers for my evolving workflow.
-
-    draft [art] "My super article"
-
-creates a prepared md file with all the necessary settings to work on.
-
-    publish drafts/my-super-article.md
-
-will make the necessary adjustments and publish it in the contents.
-
-    deploy [clean]
-
-will create a [clean] build and push it online.
-"""
 from __future__ import print_function
 
 import os
