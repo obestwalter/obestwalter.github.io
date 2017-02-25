@@ -1,0 +1,39 @@
+@import "values"
+
+header
+  padding-bottom: 0
+  padding-top: 0.5em
+  a
+    color: $outerSpace
+    padding: 0 0.3em 0 0.3em
+    text-align: left
+    &:hover
+      color: $grannySmithApple
+  nav
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        display: inline
+        margin: 0 0.5em 0 0
+        padding: 0
+  .active
+    background: $outerSpace
+    a
+      padding: 0.1em 0.4em
+      color: $roseOfSharon
+      &:hover
+        color: $koromiko
+  .title
+    font-size: 200%
+    font-weight: normal
+    margin: 0
+    padding: 0
+    text-align: right
+    a
+      margin: 0
+      padding: 0
+      color: $grannySmithApple
+      &:hover
+        color: lighten($grannySmithApple, 10%)

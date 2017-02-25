@@ -1,0 +1,7 @@
+@import "values"
+
+=raise($horizontal: 5px, $vertical: 5px, $blur: 10px, $color: $thunder)
+  border: solid 1px $color
+  -moz-box-shadow: $horizontal $vertical $blur $color
+  -webkit-box-shadow: $horizontal $vertical $blur $color
+  box-shadow: $horizontal $horizontal $vertical $color
