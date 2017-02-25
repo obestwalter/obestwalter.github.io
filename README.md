@@ -12,11 +12,27 @@ Hopefully installing lektor with pip and Python3 is possible soonish.
 
 The inbuilt pygments plugin has a bug (creates wrong class name 'highlight' instead of 'hll'). I use my own stylesheet with adapted class name atm. Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
 
-## Development
+## Workflow
 
-Plugin development:
+### Create/publish/deploy content
 
-    LEKTOR_DEV=1 lektor server
+Helpers for my evolving workflow.
+
+    draft [art] "My super article"
+
+creates a prepared Markdown file with all the necessary settings to work on.
+
+    publish drafts/my-super-article.md
+
+will make the necessary adjustments and publish it.
+
+    deploy [clean]
+
+will create a \[clean\] build and push it online.
+
+### Run local server
+
+Calling `server` runs `lektor server` configured as I like it.
 
 ## Acknowledgements
 
