@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-LEKTOR_DEV=1 lektor server -h 0.0.0.0 -p 8080

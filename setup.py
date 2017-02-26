@@ -11,6 +11,7 @@ setup(
             'draft = utils.workflow:draft',
             'publish = utils.workflow:publish',
             'deploy = utils.workflow:deploy',
+            'serve = utils.workflow:serve',
         ]
     },
     scripts=['server']
