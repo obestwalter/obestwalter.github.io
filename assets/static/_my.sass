@@ -1,0 +1,131 @@
+@import "base/colors"
+@import "base/fonts"
+@import "base/hover"
+//@import "base/media-queries"
+@import "base/mixins"
+@import "base/variables"
+
+html
+  background: $mineShaft
+body
+  font-family: 'Arvo', serif
+a
+  text-decoration: none
+hr
+  border: 1px solid $buddhaGold
+ul
+  list-style-type: square
+
+//header
+//  background: $roseOfSharon
+//  padding-bottom: 0
+//  padding-top: 0.5em
+//  a
+//    color: $outerSpace
+//    padding: 0 0.3em 0 0.3em
+//    text-align: left
+//    &:hover
+//      color: $celadon
+//  nav
+//    ul
+//      list-style: none
+//      margin: 0
+//      padding: 0
+//      li
+//        display: inline
+//        margin: 0 0.5em 0 0
+//        padding: 0
+//  .active
+//    background: $outerSpace
+//    a
+//      padding: 0.1em 0.4em
+//      color: $roseOfSharon
+//      &:hover
+//        color: $koromiko
+//  .site-name
+//    font-size: 200%
+//    font-weight: normal
+//    margin: 0
+//    padding: 0
+//    text-align: right
+//    a
+//      margin: 0
+//      padding: 0
+//      color: $celadon
+//      &:hover
+//        color: lighten($celadon, 10%)
+
+
+main
+  $bg: $tundora
+  $fg: $celadon
+  $link: $buddhaGold
+  background: $bg
+  color: $fg
+  a
+    color: $link
+    &:hover
+      color: hover($bg, $link)
+  .category
+    font-size: 160%
+    color: $thunder
+    &:first-letter
+      font-size: 170%
+  .title
+    font-family: 'Molengo', sans-serif
+    font-size: 150%
+    font-weight: bold
+  .summary
+    &:first-letter
+      font-size: 170%
+      font-weight: bold
+    color: lighten($celadon, 10%)
+    font-style: italic
+    margin: 0 2em
+  .content
+    word-spacing: 0.2em
+    line-height: 1.5
+    margin: 1em
+    blockquote
+      border-left: 0.5em solid $roseOfSharon
+      padding-left: 0.5em
+    code
+      background-color: $thunder
+      font-family: "Share Tech Mono", sans-serif
+      padding: 0.1em 0.2em
+    img
+      +raise
+    pre
+      +raise
+      background-color: $thunder
+      font-family: "Share Tech Mono", sans-serif
+      font-size: 95%
+  .highlight
+    background-color: $thunder
+    padding-left: 0.6em
+  .info
+    font-size: 70%
+    text-align: right
+    .tag
+      background-color: $koromiko
+      color: $outerSpace
+      margin-right: 0.3em
+      padding: 0px 5px 1px 5px
+    .date
+      color: $koromiko
+  .more
+    text-align: right
+  .pagination
+    .disabled
+      text-decoration: line-through
+
+
+//footer
+//  text-align: right
+//  p
+//    color: $celadon
+//    font-size: 70%
+//    a
+//      color: $celadon
+//      &:hover
+//        color: $buddhaGold
