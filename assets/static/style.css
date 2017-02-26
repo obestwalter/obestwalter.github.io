@@ -460,42 +460,242 @@ template {
 [hidden] {
   display: none; }
 
+/*SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      sRGB        HSB
+ *--------- ------- ---- -------  ----------- ---------- ----------- -----------
+ *base03    #002b36  8/4 brblack  234 #1c1c1c 15 -12 -12   0  43  54 193 100  21
+ *base02    #073642  0/4 black    235 #262626 20 -12 -12   7  54  66 192  90  26
+ *base01    #586e75 10/7 brgreen  240 #4e4e4e 45 -07 -07  88 110 117 194  25  46
+ *base00    #657b83 11/7 bryellow 241 #585858 50 -07 -07 101 123 131 195  23  51
+ *base0     #839496 12/6 brblue   244 #808080 60 -06 -03 131 148 150 186  13  59
+ *base1     #93a1a1 14/4 brcyan   245 #8a8a8a 65 -05 -02 147 161 161 180   9  63
+ *base2     #eee8d5  7/7 white    254 #d7d7af 92 -00  10 238 232 213  44  11  93
+ *base3     #fdf6e3 15/7 brwhite  230 #ffffd7 97  00  10 253 246 227  44  10  99
+ *yellow    #b58900  3/3 yellow   136 #af8700 60  10  65 181 137   0  45 100  71
+ *orange    #cb4b16  9/3 brred    166 #d75f00 50  50  55 203  75  22  18  89  80
+ *red       #dc322f  1/1 red      160 #d70000 50  65  45 220  50  47   1  79  86
+ *magenta   #d33682  5/5 magenta  125 #af005f 50  65 -05 211  54 130 331  74  83
+ *violet    #6c71c4 13/5 brmagenta 61 #5f5faf 50  15 -45 108 113 196 237  45  77
+ *blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
+ *cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
+ *green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60 */
+.hll {
+  background-color: #002b36; }
+
+.c {
+  color: #586e75;
+  font-style: italic; }
+
+/* Comment */
+.err {
+  color: #dc322f; }
+
+/* Error */
+.g {
+  color: #839496; }
+
+/* Generic */
+.k {
+  color: #859900; }
+
+/* Keyword */
+.l {
+  color: #839496; }
+
+/* Literal */
+.n {
+  color: #93a1a1; }
+
+/* Name */
+.o, .x, .p {
+  color: #839496; }
+
+/* Operator */
+/* Other */
+/* Punctuation */
+.ch, .cm, .cp, .cpf, .c1, .cs {
+  color: #586e75;
+  font-style: italic; }
+
+/* Comment.Hashbang */
+/* Comment.Multiline */
+/* Comment.Preproc */
+/* Comment.PreprocFile */
+/* Comment.Single */
+/* Comment.Special */
+.gd, .ge, .gr, .gh, .gi, .go, .gp, .gs, .gu, .gt {
+  color: #839496; }
+
+/* Generic.Deleted */
+/* Generic.Emph */
+/* Generic.Error */
+/* Generic.Heading */
+/* Generic.Inserted */
+/* Generic.Output */
+/* Generic.Prompt */
+/* Generic.Strong */
+/* Generic.Subheading */
+/* Generic.Traceback */
+.kc, .kd {
+  color: #859900; }
+
+/* Keyword.Constant */
+/* Keyword.Declaration */
+.kn, .kp {
+  color: #cb4b16; }
+
+/* Keyword.Namespace */
+/* Keyword.Pseudo */
+.kr, .kt {
+  color: #859900; }
+
+/* Keyword.Reserved */
+/* Keyword.Type */
+.ld {
+  color: #839496; }
+
+/* Literal.Date */
+.m, .s {
+  color: #2aa198; }
+
+/* Literal.Number */
+/* Literal.String */
+.na {
+  color: #839496; }
+
+/* Name.Attribute */
+.nb, .nc {
+  color: #268bd2; }
+
+/* Name.Builtin */
+/* Name.Class */
+.no {
+  color: #b58900; }
+
+/* Name.Constant */
+.nd, .ni, .ne {
+  color: #cb4b16; }
+
+/* Name.Decorator */
+/* Name.Entity */
+/* Name.Exception */
+.nf {
+  color: #268bd2; }
+
+/* Name.Function */
+.nl {
+  color: #839496; }
+
+/* Name.Label */
+.nn {
+  color: #b58900; }
+
+/* Name.Namespace */
+.nx {
+  color: #839496; }
+
+/* Name.Other */
+.py {
+  color: #268bd2; }
+
+/* Name.Property */
+.nt {
+  color: #859900; }
+
+/* Name.Tag */
+.nv {
+  color: #cb4b16; }
+
+/* Name.Variable */
+.ow {
+  color: #859900; }
+
+/* Operator.Word */
+.w {
+  color: #002b36; }
+
+/* Text.Whitespace */
+.mb, .mf, .mh, .mi, .mo, .sb, .sc, .sd, .s2 {
+  color: #2aa198; }
+
+/* Literal.Number.Bin */
+/* Literal.Number.Float */
+/* Literal.Number.Hex */
+/* Literal.Number.Integer */
+/* Literal.Number.Oct */
+/* Literal.String.Backtick */
+/* Literal.String.Char */
+/* Literal.String.Doc */
+/* Literal.String.Double */
+.se {
+  color: #cb4b16; }
+
+/* Literal.String.Escape */
+.sh {
+  color: #2aa198; }
+
+/* Literal.String.Heredoc */
+.si {
+  color: #cb4b16; }
+
+/* Literal.String.Interpol */
+.sx, .sr, .s1, .ss {
+  color: #2aa198; }
+
+/* Literal.String.Other */
+/* Literal.String.Regex */
+/* Literal.String.Single */
+/* Literal.String.Symbol */
+.bp {
+  color: #268bd2;
+  font-weight: bold; }
+
+/* Name.Builtin.Pseudo */
+.vc, .vg, .vi {
+  color: #268bd2; }
+
+/* Name.Variable.Class */
+/* Name.Variable.Global */
+/* Name.Variable.Instance */
+.il {
+  color: #2aa198; }
+
+/* Literal.Number.Integer.Long */
 @font-face {
   font-family: "Share Tech Mono";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/share-tech-mono-v6-latin-regular.eot");
-  src: local("Share Tech Mono"), local("ShareTechMono-Regular"), url("../fonts/share-tech-mono-v6-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/share-tech-mono-v6-latin-regular.woff2") format("woff2"), url("../fonts/share-tech-mono-v6-latin-regular.woff") format("woff"), url("../fonts/Share-TechMono.ttf") format("truetype"), url("../fonts/share-tech-mono-v6-latin-regular.svg#ShareTechMono") format("svg"); }
+  src: url("fonts/share-tech-mono-v6-latin-regular.eot");
+  src: local("Share Tech Mono"), local("ShareTechMono-Regular"), url("fonts/share-tech-mono-v6-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/share-tech-mono-v6-latin-regular.woff2") format("woff2"), url("fonts/share-tech-mono-v6-latin-regular.woff") format("woff"), url("fonts/Share-TechMono.ttf") format("truetype"), url("fonts/share-tech-mono-v6-latin-regular.svg#ShareTechMono") format("svg"); }
 @font-face {
   font-family: "Arvo";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/arvo-v9-latin-regular.eot");
-  src: local("Arvo"), url("../fonts/arvo-v9-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/arvo-v9-latin-regular.woff2") format("woff2"), url("../fonts/arvo-v9-latin-regular.woff") format("woff"), url("../fonts/Arvo-Regular.ttf") format("truetype"), url("../fonts/arvo-v9-latin-regular.svg#Arvo") format("svg"); }
+  src: url("fonts/arvo-v9-latin-regular.eot");
+  src: local("Arvo"), url("fonts/arvo-v9-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-regular.woff2") format("woff2"), url("fonts/arvo-v9-latin-regular.woff") format("woff"), url("fonts/Arvo-Regular.ttf") format("truetype"), url("fonts/arvo-v9-latin-regular.svg#Arvo") format("svg"); }
 @font-face {
   font-family: "Arvo";
   font-style: italic;
   font-weight: 400;
-  src: url("../fonts/arvo-v9-latin-italic.eot");
-  src: local("Arvo Italic"), local("Arvo-Italic"), url("../fonts/arvo-v9-latin-italic.eot?#iefix") format("embedded-opentype"), url("../fonts/arvo-v9-latin-italic.woff2") format("woff2"), url("../fonts/arvo-v9-latin-italic.woff") format("woff"), url("../fonts/Arvo-Italic.ttf") format("truetype"), url("../fonts/arvo-v9-latin-italic.svg#Arvo") format("svg"); }
+  src: url("fonts/arvo-v9-latin-italic.eot");
+  src: local("Arvo Italic"), local("Arvo-Italic"), url("fonts/arvo-v9-latin-italic.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-italic.woff2") format("woff2"), url("fonts/arvo-v9-latin-italic.woff") format("woff"), url("fonts/Arvo-Italic.ttf") format("truetype"), url("fonts/arvo-v9-latin-italic.svg#Arvo") format("svg"); }
 @font-face {
   font-family: "Arvo";
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/arvo-v9-latin-700.eot");
-  src: local("Arvo Bold"), local("Arvo-Bold"), url("../fonts/arvo-v9-latin-700.eot?#iefix") format("embedded-opentype"), url("../fonts/arvo-v9-latin-700.woff2") format("woff2"), url("../fonts/arvo-v9-latin-700.woff") format("woff"), url("../fonts/Arvo-Bold.ttf") format("truetype"), url("../fonts/arvo-v9-latin-700.svg#Arvo") format("svg"); }
+  src: url("fonts/arvo-v9-latin-700.eot");
+  src: local("Arvo Bold"), local("Arvo-Bold"), url("fonts/arvo-v9-latin-700.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-700.woff2") format("woff2"), url("fonts/arvo-v9-latin-700.woff") format("woff"), url("fonts/Arvo-Bold.ttf") format("truetype"), url("fonts/arvo-v9-latin-700.svg#Arvo") format("svg"); }
 @font-face {
   font-family: "Arvo";
   font-style: italic;
   font-weight: 700;
-  src: url("../fonts/arvo-v9-latin-700italic.eot");
-  src: local("Arvo Bold Italic"), local("Arvo-BoldItalic"), url("../fonts/arvo-v9-latin-700italic.eot?#iefix") format("embedded-opentype"), url("../fonts/arvo-v9-latin-700italic.woff2") format("woff2"), url("../fonts/arvo-v9-latin-700italic.woff") format("woff"), url("../fonts/Arvo-BoldItalic.ttf") format("truetype"), url("../fonts/arvo-v9-latin-700italic.svg#Arvo") format("svg"); }
+  src: url("fonts/arvo-v9-latin-700italic.eot");
+  src: local("Arvo Bold Italic"), local("Arvo-BoldItalic"), url("fonts/arvo-v9-latin-700italic.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-700italic.woff2") format("woff2"), url("fonts/arvo-v9-latin-700italic.woff") format("woff"), url("fonts/Arvo-BoldItalic.ttf") format("truetype"), url("fonts/arvo-v9-latin-700italic.svg#Arvo") format("svg"); }
 @font-face {
   font-family: "Molengo";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/molengo-v7-latin-regular.eot");
-  src: local("Molengo"), local("Molengo-Regular"), url("../fonts/molengo-v7-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/molengo-v7-latin-regular.woff2") format("woff2"), url("../fonts/molengo-v7-latin-regular.woff") format("woff"), url("../fonts/Molengo-Regular.ttf") format("truetype"), url("../fonts/molengo-v7-latin-regular.svg#Molengo") format("svg"); }
+  src: url("fonts/molengo-v7-latin-regular.eot");
+  src: local("Molengo"), local("Molengo-Regular"), url("fonts/molengo-v7-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/molengo-v7-latin-regular.woff2") format("woff2"), url("fonts/molengo-v7-latin-regular.woff") format("woff"), url("fonts/Molengo-Regular.ttf") format("truetype"), url("fonts/molengo-v7-latin-regular.svg#Molengo") format("svg"); }
 html {
   background: #282828; }
 
