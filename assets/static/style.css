@@ -706,18 +706,56 @@ a {
   text-decoration: none; }
 
 hr {
-  border: 1px solid #CC9905; }
+  border: 1px solid #BF5700; }
 
 ul {
   list-style-type: square; }
+
+header {
+  background: #BF5700;
+  padding-bottom: 0;
+  padding-top: 0.5em; }
+  header a {
+    color: #BBE5A9;
+    padding: 0 0.3em 0 0.3em;
+    text-align: left; }
+    header a:hover {
+      color: #f9fdf7; }
+  header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    header nav ul li {
+      display: inline;
+      margin: 0 0.5em 0 0;
+      padding: 0; }
+  header .active {
+    background: #404040; }
+    header .active a {
+      padding: 0.1em 0.4em;
+      color: #BBE5A9; }
+      header .active a:hover {
+        color: #f9fdf7; }
+  header .site-name {
+    font-size: 200%;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    text-align: right; }
+    header .site-name a {
+      margin: 0;
+      padding: 0;
+      color: #BBE5A9; }
+      header .site-name a:hover {
+        color: #f9fdf7; }
 
 main {
   background: #404040;
   color: #BBE5A9; }
   main a {
-    color: #CC9905; }
+    color: #BF5700; }
     main a:hover {
-      color: #faca3d; }
+      color: #ff8926; }
   main .category {
     font-size: 160%;
     color: #282828; }
@@ -735,7 +773,7 @@ main {
     line-height: 1.5;
     margin: 1em; }
     main .content blockquote {
-      border-left: 0.5em solid #CC9905;
+      border-left: 0.5em solid #BF5700;
       padding-left: 0.5em; }
     main .content code {
       background-color: #282828;
@@ -761,12 +799,12 @@ main {
     font-size: 70%;
     text-align: right; }
     main .info .tag {
-      background-color: #CC9905;
+      background-color: #BF5700;
       color: #404040;
       margin-right: 0.3em;
       padding: 0px 5px 1px 5px; }
     main .info .date {
-      color: #CC9905; }
+      color: #BF5700; }
   main .more {
     text-align: right; }
   main .pagination .disabled {
@@ -775,11 +813,11 @@ main {
 footer {
   text-align: right; }
   footer p {
-    color: #CC9905;
+    color: #BF5700;
     font-size: 70%; }
     footer p a {
-      color: #CC9905; }
+      color: #BF5700; }
       footer p a:hover {
-        color: #553f02; }
+        color: #592900; }
 
 /*# sourceMappingURL=style.css.map */

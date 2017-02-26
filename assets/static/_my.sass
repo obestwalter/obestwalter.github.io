@@ -11,54 +11,58 @@ body
 a
   text-decoration: none
 hr
-  border: 1px solid $buddhaGold
+  border: 1px solid $roseOfSharon
 ul
   list-style-type: square
 
-//header
-//  background: $roseOfSharon
-//  padding-bottom: 0
-//  padding-top: 0.5em
-//  a
-//    color: $outerSpace
-//    padding: 0 0.3em 0 0.3em
-//    text-align: left
-//    &:hover
-//      color: $celadon
-//  nav
-//    ul
-//      list-style: none
-//      margin: 0
-//      padding: 0
-//      li
-//        display: inline
-//        margin: 0 0.5em 0 0
-//        padding: 0
-//  .active
-//    background: $outerSpace
-//    a
-//      padding: 0.1em 0.4em
-//      color: $roseOfSharon
-//      &:hover
-//        color: $koromiko
-//  .site-name
-//    font-size: 200%
-//    font-weight: normal
-//    margin: 0
-//    padding: 0
-//    text-align: right
-//    a
-//      margin: 0
-//      padding: 0
-//      color: $celadon
-//      &:hover
-//        color: lighten($celadon, 10%)
+header
+  $darkBg: $tundora
+  $bg: $roseOfSharon
+  $fg: $celadon
+  background: $bg
+  padding-bottom: 0
+  padding-top: 0.5em
+  a
+    color: $celadon
+    padding: 0 0.3em 0 0.3em
+    text-align: left
+    &:hover
+      color: hover($bg, $fg)
+  nav
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        display: inline
+        margin: 0 0.5em 0 0
+        padding: 0
+  .active
+    background: $darkBg
+    a
+      padding: 0.1em 0.4em
+      color: $fg
+      &:hover
+        color: hover($darkBg, $fg)
+  .site-name
+    font-size: 200%
+    font-weight: normal
+    margin: 0
+    padding: 0
+    text-align: right
+    a
+      margin: 0
+      padding: 0
+      color: $fg
+      &:hover
+        color: hover($bg, $fg)
 
 
 main
+  $darkBg: $mineShaft
   $bg: $tundora
   $fg: $celadon
-  $hl: $buddhaGold
+  $hl: $roseOfSharon
   background: $bg
   color: $fg
   a
@@ -67,7 +71,7 @@ main
       color: hover($bg, $hl)
   .category
     font-size: 160%
-    color: $mineShaft
+    color: $darkBg
     &:first-letter
       font-size: 170%
   .summary
@@ -82,21 +86,21 @@ main
     line-height: 1.5
     margin: 1em
     blockquote
-      border-left: 0.5em solid $buddhaGold
+      border-left: 0.5em solid $roseOfSharon
       padding-left: 0.5em
     code
-      background-color: $mineShaft
+      background-color: $darkBg
       font-family: $codeFont
       padding: 0.1em 0.2em
     img
       +raise
     pre
       +raise
-      background-color: $mineShaft
+      background-color: $darkBg
       font-family: $codeFont
       font-size: 95%
   .highlight
-    background-color: $mineShaft
+    background-color: $darkBg
     padding-left: 0.6em
   .info
     font-size: 70%
@@ -117,13 +121,13 @@ main
 
 footer
   $bg: $celadon
-  $fg: $buddhaGold
-  $hl: $buddhaGold
+  $fg: $roseOfSharon
+  $hl: $roseOfSharon
   text-align: right
   p
     color: $fg
     font-size: 70%
     a
-      color: $buddhaGold
+      color: $roseOfSharon
       &:hover
         color: hover($bg, $fg)
