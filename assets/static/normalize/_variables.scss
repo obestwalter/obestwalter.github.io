@@ -1,9 +1,3 @@
-//
-// Variables
-//
-// If you have an initialization partial (or equivalent), you should move these
-// lines to that file. NOTE: Edit the lines to remove "!default".
-
 // The font size set on the root html element.
 $base-font-size: 16px !default;
 
@@ -18,7 +12,7 @@ $base-unit: 'em' !default;
 $base-font-family: sans-serif !default;
 
 // The font sizes for h1-h6.
-$h1-font-size: 2    * $base-font-size !default;
+$h1-font-size: 4    * $base-font-size !default;
 $h2-font-size: 1.5  * $base-font-size !default;
 $h3-font-size: 1.17 * $base-font-size !default;
 $h4-font-size: 1    * $base-font-size !default;
@@ -34,3 +28,4 @@ $indent-amount: 40px !default;
 // However, changing any of the variables above will cause
 // $normalize-vertical-rhythm to be automatically set to true.
 $normalize-vertical-rhythm: false !default;
+

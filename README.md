@@ -10,12 +10,6 @@ Use the officially recommended (but very unusual) Python2.7 installation:
 
 Hopefully installing lektor with pip and Python3 is possible soonish. Then lektor would just be a dependency of this project and I can write my helper scripts in Python3.
 
-### Sass
-
-`gem install sass`
-
-To watch and compile use `transpile` command that is installed with this project
-
 ## Workflow
 
 ### Create/publish/deploy content
@@ -40,11 +34,11 @@ Calling `server` runs `lektor server` configured as I like it.
 
 ## Remarks
 
-### Generate CSS from SASS
+### SASS
 
-I use the file watcher feature in PyCharm to automate that for me without having to much fuzz. Could write a little lektor plugin, when I get a round to it.
+`gem install sass`
 
-![file watcher settings](assets/img/sass-file-watcher.png)
+To watch and compile use `transpile` command that is installed with this project
 
 ### Pygments bug
 
