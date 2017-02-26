@@ -2,13 +2,13 @@
 
 ## Installation
 
-Use the officially recommended (but very unusual) Python2.7 installation:
+Use the officially recommended way is weird and the way lektor deals with plugins is extra weird. I work around that by working with a master checkout of lektor next to my website and with the plugins in my package folder.
+
+It does not support Python3 yet either so I do:
 
     pyenv virtualenv 2.7.11 lektor
-    curl -sf https://www.getlektor.com/install.sh | sh
+    pip install -e ../lektor
     pip install -e .
-
-Hopefully installing lektor with pip and Python3 is possible soonish. Then lektor would just be a dependency of this project and I can write my helper scripts in Python3.
 
 ## Workflow
 
@@ -29,6 +29,7 @@ will make the necessary adjustments and publish it.
 will create a \[clean\] build and push it online.
 
 ### Run local server
+
 
 Run `utils/serve.py` from inside PyCharm
 
