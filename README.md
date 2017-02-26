@@ -30,7 +30,7 @@ will create a \[clean\] build and push it online.
 
 ### Run local server
 
-Calling `server` runs `lektor server` configured as I like it.
+Run `utils/serve.py` from inside PyCharm
 
 ## Remarks
 

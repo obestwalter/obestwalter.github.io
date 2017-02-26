@@ -21,14 +21,14 @@ def main():
     print(' * Output path: %s' % outputPath)
     run_server(
         ('0.0.0.0', '8080'),
+        ctx.get_env(),
+        outputPath,
         verbosity=0,  # 0 -4
         lektor_dev=False,
         browse=True,
         prune=True,
-        output_path=outputPath,
         extra_flags=None,  # from plugins - e.g. webpack
         ui_lang=ctx.ui_lang,
-        env=ctx.get_env()
     )
 
 if __name__ == '__main__':
