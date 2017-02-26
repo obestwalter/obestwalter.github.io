@@ -10,6 +10,12 @@ Use the officially recommended (but very unusual) Python2.7 installation:
 
 Hopefully installing lektor with pip and Python3 is possible soonish. Then lektor would just be a dependency of this project and I can write my helper scripts in Python3.
 
+### Sass
+
+`gem install sass`
+
+To watch and compile use `transpile` command that is installed with this project
+
 ## Workflow
 
 ### Create/publish/deploy content

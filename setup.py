@@ -14,5 +14,5 @@ setup(
             'serve = utils.workflow:serve',
         ]
     },
-    scripts=['server']
+    scripts=['transpile']
 )
