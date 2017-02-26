@@ -42,35 +42,35 @@ section {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
-  font-size: 4em;
-  line-height: 1.125em;
+  font-size: 1.7em;
+  line-height: 1.76471em;
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  margin: 0.375em 0; }
+  margin: 0.88235em 0; }
 
 h2 {
+  font-size: 1.6em;
+  line-height: 1.875em;
+  margin: 0.9375em 0; }
+
+h3 {
   font-size: 1.5em;
   line-height: 2em;
   margin: 1em 0; }
 
-h3 {
-  font-size: 1.17em;
-  line-height: 1.28205em;
-  margin: 1.28205em 0; }
-
 h4 {
-  font-size: 1em;
-  line-height: 1.5em;
-  margin: 1.5em 0; }
+  font-size: 1.4em;
+  line-height: 2.14286em;
+  margin: 1.07143em 0; }
 
 h5 {
-  font-size: 0.83em;
-  line-height: 1.80723em;
-  margin: 1.80723em 0; }
+  font-size: 1.3em;
+  line-height: 2.30769em;
+  margin: 1.15385em 0; }
 
 h6 {
-  font-size: 0.67em;
-  line-height: 2.23881em;
-  margin: 2.23881em 0; }
+  font-size: 1.2em;
+  line-height: 1.25em;
+  margin: 1.25em 0; }
 
 /* Grouping content
    ========================================================================== */
@@ -570,13 +570,9 @@ main {
       color: #faca3d; }
   main .category {
     font-size: 160%;
-    color: #232223; }
+    color: #282828; }
     main .category:first-letter {
       font-size: 170%; }
-  main .title {
-    font-family: "Molengo", sans-serif;
-    font-size: 150%;
-    font-weight: bold; }
   main .summary {
     color: #daf1d0;
     font-style: italic;
@@ -589,10 +585,10 @@ main {
     line-height: 1.5;
     margin: 1em; }
     main .content blockquote {
-      border-left: 0.5em solid #BF5700;
+      border-left: 0.5em solid #CC9905;
       padding-left: 0.5em; }
     main .content code {
-      background-color: #232223;
+      background-color: #282828;
       font-family: "Share Tech Mono", sans-serif;
       padding: 0.1em 0.2em; }
     main .content img {
@@ -605,25 +601,25 @@ main {
       -moz-box-shadow: 5px 5px 10px #232223;
       -webkit-box-shadow: 5px 5px 10px #232223;
       box-shadow: 5px 5px 5px #232223;
-      background-color: #232223;
+      background-color: #282828;
       font-family: "Share Tech Mono", sans-serif;
       font-size: 95%; }
   main .highlight {
-    background-color: #232223;
+    background-color: #282828;
     padding-left: 0.6em; }
   main .info {
     font-size: 70%;
     text-align: right; }
     main .info .tag {
-      background-color: #FFAD68;
-      color: #333638;
+      background-color: #CC9905;
+      color: #404040;
       margin-right: 0.3em;
       padding: 0px 5px 1px 5px; }
     main .info .date {
-      color: #FFAD68; }
+      color: #CC9905; }
   main .more {
     text-align: right; }
   main .pagination .disabled {
-    text-decoration: line-through; }
+    color: rgba(187, 229, 169, 0.3); }
 
 /*# sourceMappingURL=style.css.map */

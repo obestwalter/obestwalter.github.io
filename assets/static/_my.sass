@@ -8,7 +8,7 @@
 html
   background: $mineShaft
 body
-  font-family: 'Arvo', serif
+  font-family: $textFont
 a
   text-decoration: none
 hr
@@ -59,27 +59,23 @@ ul
 main
   $bg: $tundora
   $fg: $celadon
-  $link: $buddhaGold
+  $hl: $buddhaGold
   background: $bg
   color: $fg
   a
-    color: $link
+    color: $hl
     &:hover
-      color: hover($bg, $link)
+      color: hover($bg, $hl)
   .category
     font-size: 160%
-    color: $thunder
+    color: $mineShaft
     &:first-letter
       font-size: 170%
-  .title
-    font-family: 'Molengo', sans-serif
-    font-size: 150%
-    font-weight: bold
   .summary
     &:first-letter
       font-size: 170%
       font-weight: bold
-    color: lighten($celadon, 10%)
+    color: lighten($fg, 10%)
     font-style: italic
     margin: 0 2em
   .content
@@ -87,37 +83,37 @@ main
     line-height: 1.5
     margin: 1em
     blockquote
-      border-left: 0.5em solid $roseOfSharon
+      border-left: 0.5em solid $buddhaGold
       padding-left: 0.5em
     code
-      background-color: $thunder
-      font-family: "Share Tech Mono", sans-serif
+      background-color: $mineShaft
+      font-family: $codeFont
       padding: 0.1em 0.2em
     img
       +raise
     pre
       +raise
-      background-color: $thunder
-      font-family: "Share Tech Mono", sans-serif
+      background-color: $mineShaft
+      font-family: $codeFont
       font-size: 95%
   .highlight
-    background-color: $thunder
+    background-color: $mineShaft
     padding-left: 0.6em
   .info
     font-size: 70%
     text-align: right
     .tag
-      background-color: $koromiko
-      color: $outerSpace
+      background-color: $hl
+      color: $bg
       margin-right: 0.3em
       padding: 0px 5px 1px 5px
     .date
-      color: $koromiko
+      color: $hl
   .more
     text-align: right
   .pagination
     .disabled
-      text-decoration: line-through
+      color: fade_out($fg, 0.7)
 
 
 //footer
