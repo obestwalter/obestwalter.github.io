@@ -27,7 +27,7 @@ def main():
         lektor_dev=False,
         browse=True,
         prune=True,
-        extra_flags=None,  # from plugins - e.g. webpack
+        extra_flags='sass',  # from plugins - e.g. webpack
         ui_lang=ctx.ui_lang,
     )
 
