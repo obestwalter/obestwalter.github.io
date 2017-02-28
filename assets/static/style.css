@@ -811,13 +811,14 @@ main {
     color: rgba(187, 229, 169, 0.3); }
 
 footer {
+  background: #BF5700;
   text-align: right; }
   footer p {
-    color: #BF5700;
+    color: #FF6666;
     font-size: 70%; }
     footer p a {
-      color: #BF5700; }
+      color: #BBE5A9; }
       footer p a:hover {
-        color: #592900; }
+        color: #f9fdf7; }
 
 /*# sourceMappingURL=style.css.map */
