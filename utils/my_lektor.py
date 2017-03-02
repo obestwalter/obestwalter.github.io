@@ -21,9 +21,6 @@ class MyLektor(object):
         print(' * Project path: %s' % self.ctx.get_project().project_path)
         print(' * Output path: %s' % self.outputPath)
 
-    def run(self):
-        self.run_server()
-
     def run_server(self):
         run_server(
             ('0.0.0.0', 8080),
@@ -39,7 +36,8 @@ class MyLektor(object):
 
 
 def main():
-    MyLektor().run()
+    MyLektor().run_server()
+
 
 if __name__ == '__main__':
     main()
