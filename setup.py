@@ -8,7 +8,7 @@ setup(
     packages=['utils'],
     entry_points={
         'console_scripts': [
-            'serve = utils.my_lektor:serve',
+            'serve = utils.my_lektor:main',
             'draft = utils.workflow:draft',
             'publish = utils.workflow:publish',
             'deploy = utils.workflow:deploy',

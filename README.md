@@ -2,13 +2,11 @@
 
 ## Installation
 
-The officially recommended way is weird and the way lektor deals with plugins is extra weird. I work around that by working with a master checkout of lektor next to my website and with the plugins in my package folder.
+The officially recommended way is weird and the way lektor deals with plugins is extra weird. I work from a local lektor clone with my own little server wrapper. That makes it easily debuggable and I can always use the hot new shit.
 
-It does not support Python3 yet either so I do:
-
-    pyenv virtualenv 2.7.11 lektor
-    pip install -e ../lektor
-    pip install -e .
+    $ cd /path/to/here
+    $ pip install -r requirements.txt
+    $ serve
 
 ## Workflow
 
