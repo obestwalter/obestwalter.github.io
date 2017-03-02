@@ -1,11 +1,10 @@
-from __future__ import print_function
-
 import os
 import subprocess
 import sys
 from datetime import datetime
 from string import Template
 
+from lektor.reporter import reporter
 from lektor.utils import slugify
 
 HERE = os.path.dirname(__file__)
@@ -44,7 +43,8 @@ def publish():
 
 def deploy():
     if len(sys.argv) > 2 and sys.argv[2] == 'clean':
-        print(subprocess.check_output(['lektor',  'clean', '--yes']))
+        first = subprocess.check_output(['lektor',  'clean', '--yes'])
     else:
-        print(subprocess.check_output(['lektor', 'build']))
-    print(subprocess.check_output(['lektor', 'deploy']))
+        first = subprocess.check_output(['lektor', 'build'])
+    second = subprocess.check_output(['lektor', 'deploy'])
+    reporter.report_generic(first.decode() + '\n' + second.decode())

@@ -8,10 +8,12 @@ setup(
     packages=['utils'],
     entry_points={
         'console_scripts': [
+            'serve = utils.my_lektor:serve',
             'draft = utils.workflow:draft',
             'publish = utils.workflow:publish',
             'deploy = utils.workflow:deploy',
         ]
     },
+    classifiers=['Programming Language :: Python :: 3.6'],
     scripts=['transpile']
 )
