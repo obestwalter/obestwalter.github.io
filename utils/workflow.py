@@ -10,7 +10,7 @@ from lektor.utils import slugify
 HERE = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(HERE, '..')
 DRAFTS_PATH = os.path.join(PROJECT_PATH, 'drafts')
-CONTENT_PATH = os.path.join(PROJECT_PATH, 'content')
+ARTICLES_PATH = os.path.join(PROJECT_PATH, 'content', 'articles')
 
 
 def draft():
@@ -32,13 +32,14 @@ def publish():
     rep = dict(date=datetime.now().strftime('%Y-%m-%d'))
     content = Template(content).safe_substitute(rep)
     slug = os.path.splitext(os.path.basename(srcPath))[0]
-    containerPath = os.path.join(CONTENT_PATH, slug)
+    containerPath = os.path.join(ARTICLES_PATH, slug)
     assert not os.path.exists(containerPath), containerPath
     os.mkdir(containerPath)
-    dst = os.path.join(containerPath, 'contents.lr')
-    with open(dst, 'w') as f:
+    dstPath = os.path.join(containerPath, 'contents.lr')
+    with open(dstPath, 'w') as f:
         f.write(content)
     os.remove(srcPath)
+    subprocess.check_call(['git', 'add', dstPath])
 
 
 def deploy():
