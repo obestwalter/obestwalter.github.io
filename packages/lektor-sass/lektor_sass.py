@@ -6,8 +6,8 @@ from lektor.reporter import reporter
 
 
 class SassPlugin(Plugin):
-    name = u'lektor-sass'
-    description = u'Watch sass files and transpile them on changes.'
+    name = 'Lektor Sass'
+    description = 'Watch sass files and transpile them on changes.'
     rubyPathCmd = ["ruby", "-rubygems", "-e", "puts Gem.user_dir"]
 
     def __init__(self, *args, **kwargs):
