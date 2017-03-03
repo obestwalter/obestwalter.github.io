@@ -29,6 +29,9 @@ class Workflow:
     def serve(cls, host='0.0.0.0', port=8080, outputPath=outputPath,
               verbosity=0, dev=True, reinstall=False, browse=False, prune=True,
               flags=('sass',)):
+        """
+        :param verbosity: 0-4
+        """
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
         env = ctx.get_env()
@@ -37,7 +40,7 @@ class Workflow:
         run_server((host, port),
                    env,
                    outputPath,
-                   verbosity=verbosity,  # 0 -4
+                   verbosity=verbosity,
                    lektor_dev=dev,
                    browse=browse,
                    prune=prune,
@@ -85,5 +88,5 @@ class Workflow:
 def main():
     import fire
 
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     fire.Fire(Workflow)
