@@ -761,12 +761,17 @@ main {
     color: #282828; }
     main .category:first-letter {
       font-size: 170%; }
-  main .summary {
+  main .summary p {
     color: #daf1d0;
-    font-style: italic;
+    font-style: normal;
     margin: 0 2em; }
-    main .summary:first-letter {
-      font-size: 170%;
+    main .summary p:first-letter {
+      float: left;
+      font-size: 300%;
+      line-height: 0.5;
+      padding-top: 6px;
+      padding-right: 10px;
+      padding-left: 0px;
       font-weight: bold; }
   main .content {
     word-spacing: 0.2em;
