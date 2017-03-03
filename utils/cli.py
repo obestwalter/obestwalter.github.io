@@ -5,12 +5,13 @@ from datetime import datetime
 from io import BytesIO
 from string import Template
 
+from lektor.admin.modules import serve
 from lektor.cli import Context
 from lektor.devserver import run_server
 from lektor.utils import slugify
 
 # I don't use the editor - get rid of the button during development
-run_server.rewrite_html_for_editing = lambda fp, edit_url: BytesIO(fp.read())
+serve.rewrite_html_for_editing = lambda fp, edit_url: BytesIO(fp.read())
 
 HERE = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(HERE, '..')
