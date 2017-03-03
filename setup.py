@@ -6,14 +6,7 @@ setup(
     author='Oliver Bestwalter',
     url='http://oliver.bestwalter.de',
     packages=['utils'],
-    entry_points={
-        'console_scripts': [
-            'serve = utils.my_lektor:main',
-            'draft = utils.workflow:draft',
-            'publish = utils.workflow:publish',
-            'deploy = utils.workflow:deploy',
-        ]
-    },
+    entry_points={'console_scripts': ['ob = utils.cli:main']},
     classifiers=['Programming Language :: Python :: 3.6'],
     scripts=['transpile']
 )
