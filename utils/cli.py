@@ -1,15 +1,12 @@
+import logging
 import os
 import subprocess
-import sys
 from datetime import datetime
 from io import BytesIO
 from string import Template
 
-import fire
-
 from lektor.cli import Context
 from lektor.devserver import run_server
-from lektor.reporter import reporter
 from lektor.utils import slugify
 
 # I don't use the editor - get rid of the button during development
@@ -20,33 +17,35 @@ PROJECT_PATH = os.path.join(HERE, '..')
 DRAFTS_PATH = os.path.join(PROJECT_PATH, 'drafts')
 ARTICLES_PATH = os.path.join(PROJECT_PATH, 'content', 'articles')
 
+log = logging.getLogger(__name__)
 
-class CLI:
+
+class Workflow:
+    """blog creation, adaption, publishing workflow"""
+    here = os.path.dirname(__file__)
+    outputPath = os.path.join(here, '..', '..', 'website_build')
+
     @classmethod
-    def serve(cls):
-        here = os.path.dirname(__file__)
-        outputPath = os.path.join(here, '..', '..', 'website_build')
+    def serve(cls, host='0.0.0.0', port=8080, outputPath=outputPath,
+              verbosity=0, dev=True, reinstall=False, browse=False, prune=True,
+              flags=('sass',)):
         ctx = Context()
-        ctx.load_plugins()
+        ctx.load_plugins(reinstall=reinstall)
         env = ctx.get_env()
-        print(' * Project path: %s' % ctx.get_project().project_path)
-        print(' * Output path: %s' % outputPath)
-
-        run_server(
-            ('0.0.0.0', 8080),
-            env,
-            outputPath,
-            verbosity=0,  # 0 -4
-            lektor_dev=False,
-            browse=True,
-            prune=True,
-            extra_flags=['sass'],
-            ui_lang=ctx.ui_lang,
-        )
+        log.info('project path: %s' % ctx.get_project().project_path)
+        log.info('output path: %s' % outputPath)
+        run_server((host, port),
+                   env,
+                   outputPath,
+                   verbosity=verbosity,  # 0 -4
+                   lektor_dev=dev,
+                   browse=browse,
+                   prune=prune,
+                   extra_flags=flags,
+                   ui_lang=ctx.ui_lang)
 
     @classmethod
-    def draft(cls):
-        title = sys.argv[1]
+    def draft(cls, title):
         with open(os.path.join(HERE, 'article-blueprint.md')) as f:
             content = f.read()
         rep = dict(title=title)
@@ -57,8 +56,7 @@ class CLI:
             f.write(content)
 
     @classmethod
-    def publish(cls):
-        srcPath = sys.argv[1]
+    def publish(cls, srcPath):
         with open(srcPath) as f:
             content = f.read()
         rep = dict(date=datetime.now().strftime('%Y-%m-%d'))
@@ -69,19 +67,23 @@ class CLI:
         os.mkdir(containerPath)
         dstPath = os.path.join(containerPath, 'contents.lr')
         with open(dstPath, 'w') as f:
+            log.info("publishing %s:\n\n%s" % (slug, content))
             f.write(content)
         os.remove(srcPath)
-        subprocess.check_call(['git', 'add', dstPath])
+        log.info(subprocess.check_call(['git', 'add', dstPath]))
 
     @classmethod
-    def deploy(cls):
-        if len(sys.argv) > 2 and sys.argv[2] == 'clean':
+    def deploy(cls, clean=False):
+        if clean:
             first = subprocess.check_output(['lektor', 'clean', '--yes'])
         else:
             first = subprocess.check_output(['lektor', 'build'])
         second = subprocess.check_output(['lektor', 'deploy'])
-        reporter.report_generic(first.decode() + '\n' + second.decode())
+        log.info(first.decode() + '\n' + second.decode())
 
 
 def main():
-    fire.Fire(CLI)
+    import fire
+
+    logging.basicConfig(level=logging.DEBUG)
+    fire.Fire(Workflow)

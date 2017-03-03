@@ -1,28 +1,35 @@
+import logging
 import os
 import subprocess
+import time
 
 from lektor.pluginsystem import Plugin
-from lektor.reporter import reporter
+
+log = logging.getLogger(__name__)
 
 
 class SassPlugin(Plugin):
     name = 'Lektor Sass'
     description = 'Watch sass files and transpile them on changes.'
     rubyPathCmd = ["ruby", "-rubygems", "-e", "puts Gem.user_dir"]
+    sassSpec = 'assets/static:assets/static'
+    pgrepWatcher = ['pgrep', '-f', sassSpec]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.sassProcess = None
         rubyBin = subprocess.check_output(self.rubyPathCmd).decode().strip()
         self.sassPath = os.path.join(rubyBin, 'bin', 'sass')
-        reporter.report_generic('Sass path: %s' % self.sassPath)
+        log.info('Sass path: %s' % self.sassPath)
 
     def run_sass(self, watch=True):
-        args = [self.sassPath, '--no-cache']
-        if watch:
-            args.append('--watch')
-        args.append('assets/static')
-        return subprocess.Popen(args, cwd=self.env.root_path)
+        if self.sassPid:
+            log.info("already running - nothing to do (%s)" % (self.sassPid))
+            return
+
+        args = [self.sassPath, '--no-cache',
+                '--watch' if watch else '--update',
+                self.sassSpec]
+        subprocess.Popen(args, cwd=self.env.root_path)
 
     def is_enabled(self, extra_flags):
         return bool(extra_flags.get('sass'))
@@ -32,20 +39,32 @@ class SassPlugin(Plugin):
         if not self.is_enabled(flags):
             return
 
-        reporter.report_generic('Spawning sass watcher')
-        self.sassProcess = self.run_sass()
+        log.info('Spawning sass watcher')
+        self.run_sass()
 
     def on_server_stop(self, **_):
-        if self.sassProcess:
-            reporter.report_generic('Stopping sass watcher')
-            self.sassProcess.kill()
+        pid = self.sassPid
+        if pid:
+            subprocess.check_call(['kill', pid])
 
     def on_before_build_all(self, builder, **_):
         flags = getattr(
             builder, "extra_flags", getattr(builder, "build_flags", None))
-        if not self.is_enabled(flags) or self.sassProcess is not None:
+        if not self.is_enabled(flags) or self.sassPid:
             return
 
-        reporter.report_generic('Starting sass build')
-        self.run_sass(watch=False).wait()
-        reporter.report_generic('Sass build finished')
+        log.info('Starting sass build')
+        self.run_sass(watch=False)
+        while self.sassPid:
+            log.info("wait for sass build")
+            time.sleep(1)
+        log.info('Sass build finished')
+
+    @property
+    def sassPid(self):
+        try:
+            return subprocess.check_output(self.pgrepWatcher).decode().strip()
+
+        except subprocess.CalledProcessError as e:
+            if e.returncode == 1:
+                return

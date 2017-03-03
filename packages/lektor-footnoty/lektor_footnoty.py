@@ -1,5 +1,3 @@
-import re
-
 from lektor.pluginsystem import Plugin
 
 
@@ -20,24 +18,26 @@ class FootnotyMixin:
     """
     # TODO keep something here to remember the current footnote count?
 
-    # find a generic footnote marker and remember the number
-    REF_RE = re.compile(r'???')
-    # grab whole footnote section and split into single footnotes
-    NOTE_RE = re.compile(r'???')
+    # # find a generic footnote marker and remember the number
+    # REF_RE = re.compile(r'???')
+    # # grab whole footnote section and split into single footnotes
+    # NOTE_RE = re.compile(r'???')
 
     def paragraph(self, text):
-        refMatch = self.REF_RE.match(text)
-        # todo cache -> is only needed to be grabbed once per file
-        noteMatch = self.NOTE_RE.match(text)
-
-        # TODO this is still basically the old plugin
-        if refMatch is None:
-            return super().paragraph(text)
-        Number = len(ref.group(1))
-        return '<div class="admonition admonition-%s"><p>%s</p></div>' % (
-            CLASSES[Number],
-            text[ref.end():]
-        )
+        return super().paragraph(text)
+        #
+        # refMatch = self.REF_RE.match(text)
+        # # todo cache -> is only needed to be grabbed once per file
+        # noteMatch = self.NOTE_RE.match(text)
+        #
+        # # TODO this is still basically the old plugin
+        # if refMatch is None:
+        #     return super().paragraph(text)
+        # Number = len(ref.group(1))
+        # return '<div class="admonition admonition-%s"><p>%s</p></div>' % (
+        #     CLASSES[Number],
+        #     text[ref.end():]
+        # )
 
 
 class Footnoty(Plugin):
