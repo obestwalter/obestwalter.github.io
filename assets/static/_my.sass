@@ -1,8 +1,8 @@
-@import "fonts"
-@import "hover"
-//@import "media-queries"
-@import "mixins"
-@import "variables"
+@import fonts
+@import hover
+//@import media-queries
+@import mixins
+@import variables
 
 html
   background: $mineShaft
@@ -123,29 +123,21 @@ main
   .info
     font-size: 70%
     text-align: right
-    .tag
-      background-color: $hl
-      color: $bg
-      margin-right: 0.3em
-      padding: 0px 5px 1px 5px
-    .date
-      color: $hl
+  .tag
+    background-color: $hl
+    color: $bg
+    margin-right: 0.3em
+    padding: 0px 5px 1px 5px
+  .date
+    color: $hl
   .more
     text-align: right
   .pagination
     .disabled
       color: fade_out($fg, 0.7)
-  .admonition
-    border: $hl 1px solid
-    padding: 5px
-  .admonition-note
-    background: #4cae4c
-  .admonition-info
-    background: #3c763d
-  .admonition-tip
-    background: #2a99b6
-  .admonition-warning
-    background: #761c19
+  $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet)
+  @each $key, $value in $map
+    +admonition($key, $value)
 
 footer
   $bg: $roseOfSharon

@@ -2,26 +2,24 @@ import re
 
 from lektor.pluginsystem import Plugin
 
-_prefix_re = re.compile(r'^\s*(!{1,4})\s+')
 
-CLASSES = {
-    1: 'note',
-    2: 'info',
-    3: 'tip',
-    4: 'warning',
-}
+class AdmonitionMixin:
+    REGEX = re.compile(r'^\s*(!{1,4})\s+')
+    CLASSES = {
+        1: 'note',
+        2: 'info',
+        3: 'tip',
+        4: 'warning'}
 
-
-class AdmonitionMixin(object):
     def paragraph(self, text):
-        match = _prefix_re.match(text)
+        match = self.REGEX.match(text)
         if match is None:
             # noinspection PyUnresolvedReferences
-            return super(AdmonitionMixin, self).paragraph(text)
+            return super().paragraph(text)
+
         level = len(match.group(1))
-        return '<div class="admonition admonition-%s"><p>%s</p></div>' % (
-            CLASSES[level],
-            text[match.end():])
+        return '<div class="admonition-%s"><p>%s</p></div>' % (
+            self.CLASSES[level], text[match.end():])
 
 
 class MarkdownAdmonitionPlugin(Plugin):

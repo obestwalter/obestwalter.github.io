@@ -1,25 +1,39 @@
-{% macro render_info(a) %}
-    <div class="info">
+{% macro render_tags(a, class="tags") %}
         {% if a.tags is defined %}
             {% for tag in a.tags %}
                 <span class="tag">{{ tag }}</span>
             {% endfor %}
         {% endif %}
-        <span class="date" title="published: {{ a.crtime|dateformat }}">
-            [last update: {{ a.mtime|dateformat }}]
-        </span>
+{% endmacro %}
+
+{% macro render_date(a, class="date") %}
+    <span class="date" title="published: {{ a.crtime|dateformat }}">
+        [last update: {{ a.mtime|dateformat }}]
+    </span>
+{% endmacro %}
+
+{% macro render_info(a, class="info") %}
+    <div class="{{ class }}">
+        {{ render_tags(a) }}
+        {{ render_date(a) }}
     </div>
 {% endmacro %}
 
-{% macro render_article_summary(a) %}
-    <h1><a href="{{ a|url }}">{{ a.title }}</a></h1>
-    {{ render_info(a) }}
-    <div class="summary">
+{% macro render_summary(a, class="summary") %}
+    <div class="{{ class }}">
         {% if a.summary %}
             {{ a.summary }}
         {% else %}
             {{ a.content|excerpt }}
         {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro render_article_summary(a, class="summary") %}
+    <h1><a href="{{ a|url }}">{{ a.title }}</a></h1>
+    {{ render_info(a) }}
+    <div class="{{ summary }}">
+        {{ render_summary(a, class=class) }}
         <div class="more"><a href="{{ a|url }}">[read more]</a></div>
     </div>
     <hr>

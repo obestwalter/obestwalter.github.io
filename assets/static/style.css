@@ -821,28 +821,77 @@ main {
   main .info {
     font-size: 70%;
     text-align: right; }
-    main .info .tag {
-      background-color: #CC9905;
-      color: #404040;
-      margin-right: 0.3em;
-      padding: 0px 5px 1px 5px; }
-    main .info .date {
-      color: #CC9905; }
+  main .tag {
+    background-color: #CC9905;
+    color: #404040;
+    margin-right: 0.3em;
+    padding: 0px 5px 1px 5px; }
+  main .date {
+    color: #CC9905; }
   main .more {
     text-align: right; }
   main .pagination .disabled {
     color: rgba(187, 229, 169, 0.3); }
-  main .admonition {
-    border: #CC9905 1px solid;
-    padding: 5px; }
   main .admonition-note {
-    background: #4cae4c; }
+    background: #282828;
+    border: 1px solid #BBE5A9;
+    margin: 15px 0;
+    padding: 10px 15px;
+    padding-bottom: 0; }
+    main .admonition-note:before {
+      display: block;
+      margin: -10px -15px 10px;
+      padding: 10px 15px;
+      line-height: 1;
+      background: #CC9905;
+      content: "Note";
+      font-weight: 700;
+      font-size: 13px; }
   main .admonition-info {
-    background: #3c763d; }
+    background: #282828;
+    border: 1px solid #BBE5A9;
+    margin: 15px 0;
+    padding: 10px 15px;
+    padding-bottom: 0; }
+    main .admonition-info:before {
+      display: block;
+      margin: -10px -15px 10px;
+      padding: 10px 15px;
+      line-height: 1;
+      background: #BF5700;
+      content: "Info";
+      font-weight: 700;
+      font-size: 13px; }
   main .admonition-tip {
-    background: #2a99b6; }
+    background: #282828;
+    border: 1px solid #BBE5A9;
+    margin: 15px 0;
+    padding: 10px 15px;
+    padding-bottom: 0; }
+    main .admonition-tip:before {
+      display: block;
+      margin: -10px -15px 10px;
+      padding: 10px 15px;
+      line-height: 1;
+      background: #488A05;
+      content: "Tip";
+      font-weight: 700;
+      font-size: 13px; }
   main .admonition-warning {
-    background: #761c19; }
+    background: #282828;
+    border: 1px solid #BBE5A9;
+    margin: 15px 0;
+    padding: 10px 15px;
+    padding-bottom: 0; }
+    main .admonition-warning:before {
+      display: block;
+      margin: -10px -15px 10px;
+      padding: 10px 15px;
+      line-height: 1;
+      background: #FF6666;
+      content: "Warning";
+      font-weight: 700;
+      font-size: 13px; }
 
 footer {
   padding-top: 10px;

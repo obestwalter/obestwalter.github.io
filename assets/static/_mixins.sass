@@ -1,4 +1,7 @@
-@import "variables"
+@import variables
+
+@function capitalize($string)
+  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2)
 
 =raise($horizontal: 5px, $vertical: 5px, $blur: 10px, $color: $mineShaft)
   border: solid 1px $color
@@ -11,3 +14,20 @@
   padding-right: 10px
   padding-bottom: 10px
   padding-left: 10px
+
+=admonition($type, $bg, $fg: $celadon, $border: $celadon)
+  .admonition-#{$type}
+    background: $mineShaft
+    border: 1px solid $border
+    margin: 15px 0
+    padding: 10px 15px
+    padding-bottom: 0
+    &:before
+      display: block
+      margin: -10px -15px 10px
+      padding: 10px 15px
+      line-height: 1
+      background: $bg
+      content: "#{capitalize($type)}"
+      font-weight: 700
+      font-size: 13px
