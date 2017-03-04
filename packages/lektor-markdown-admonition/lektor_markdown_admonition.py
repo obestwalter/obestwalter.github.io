@@ -17,12 +17,12 @@ class AdmonitionMixin(object):
     def paragraph(self, text):
         match = _prefix_re.match(text)
         if match is None:
+            # noinspection PyUnresolvedReferences
             return super(AdmonitionMixin, self).paragraph(text)
         level = len(match.group(1))
         return '<div class="admonition admonition-%s"><p>%s</p></div>' % (
             CLASSES[level],
-            text[match.end():]
-        )
+            text[match.end():])
 
 
 class MarkdownAdmonitionPlugin(Plugin):
