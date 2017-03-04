@@ -54,7 +54,7 @@ horizontal ruler
 
 Escape these: \* \_ \` \& \[ \] \< \> \! \# \\ \" \' \. \- \( \) \{ \} \: \| \~
 
-```Python
+```python
  class Workflow:
     """blog creation, adaption, publishing workflow"""
     here = os.path.dirname(__file__)
