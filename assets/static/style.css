@@ -714,6 +714,21 @@ hr {
 ul {
   list-style-type: square; }
 
+table {
+  background: #282828;
+  padding: 1px;
+  border: 1px solid #282828; }
+
+th {
+  background: #404040;
+  padding: 3px;
+  border: 1px solid #BBE5A9; }
+
+td {
+  background: #404040;
+  padding: 3px;
+  border: 1px solid #BBE5A9; }
+
 header {
   padding-top: 10px;
   padding-right: 10px;
@@ -835,7 +850,7 @@ main {
   main .admonition-note {
     background: #282828;
     border: 1px solid #BBE5A9;
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 10px 15px;
     padding-bottom: 0; }
     main .admonition-note:before {
@@ -850,7 +865,7 @@ main {
   main .admonition-info {
     background: #282828;
     border: 1px solid #BBE5A9;
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 10px 15px;
     padding-bottom: 0; }
     main .admonition-info:before {
@@ -865,7 +880,7 @@ main {
   main .admonition-tip {
     background: #282828;
     border: 1px solid #BBE5A9;
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 10px 15px;
     padding-bottom: 0; }
     main .admonition-tip:before {
@@ -880,7 +895,7 @@ main {
   main .admonition-warning {
     background: #282828;
     border: 1px solid #BBE5A9;
-    margin: 15px 0;
+    margin: 10px 0;
     padding: 10px 15px;
     padding-bottom: 0; }
     main .admonition-warning:before {
