@@ -1,5 +1,7 @@
 # Lektor Tags Plugin
 
+Based on [ajdavis' plugin](https://github.com/ajdavis/lektor-tags)
+
 ## Introduction
 
 This plugin implements tagging for your site. For each of your tags, it builds a page displaying a list of items that have that tag. This can be used for standard tag-based blog navigation.
