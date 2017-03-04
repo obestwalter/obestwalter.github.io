@@ -22,8 +22,8 @@ class SassPlugin(Plugin):
         log.info('Sass path: %s' % self.sassPath)
 
     def run_sass(self, watch=True):
-        if self.sassPid:
-            log.info("already running - nothing to do (%s)" % (self.sassPid))
+        if self.sassProcesses:
+            log.info("runs at %s nothing to do" % (self.sassProcesses))
             return
 
         args = [self.sassPath, '--no-cache',
@@ -43,25 +43,26 @@ class SassPlugin(Plugin):
         self.run_sass()
 
     def on_server_stop(self, **_):
-        pids = self.sassPid
-        if pids:
-            subprocess.check_call(['kill'] + pids)
+        processes = self.sassProcesses
+        if processes:
+            for pid in processes:
+                subprocess.check_call(['kill', pid])
 
     def on_before_build_all(self, builder, **_):
         flags = getattr(
             builder, "extra_flags", getattr(builder, "build_flags", None))
-        if not self.is_enabled(flags) or self.sassPid:
+        if not self.is_enabled(flags) or self.sassProcesses:
             return
 
         log.info('Starting sass build')
         self.run_sass(watch=False)
-        while self.sassPid:
+        while self.sassProcesses:
             log.info("wait for sass build")
             time.sleep(1)
         log.info('Sass build finished')
 
     @property
-    def sassPid(self):
+    def sassProcesses(self):
         try:
             out = subprocess.check_output(self.pgrepWatcher).decode().strip()
             return out.split('\n')
