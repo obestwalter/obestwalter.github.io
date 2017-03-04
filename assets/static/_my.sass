@@ -62,7 +62,7 @@ main
   $darkBg: $mineShaft
   $bg: $tundora
   $fg: $celadon
-  $hl: $roseOfSharon
+  $hl: $buddhaGold
   background: $bg
   color: $fg
   a
@@ -74,6 +74,12 @@ main
     color: $darkBg
     &:first-letter
       font-size: 170%
+  .header-anchor
+    $darkenedFg: darken($fg, 48)
+    color: $darkenedFg
+    font-weight: normal
+    &:hover
+      color: hover($darkenedFg, $bg)
   .summary
     p
       &:first-letter
@@ -123,7 +129,17 @@ main
   .pagination
     .disabled
       color: fade_out($fg, 0.7)
-
+  .admonition
+    border: $hl 1px solid
+    padding: 5px
+  .admonition-note
+    background: #4cae4c
+  .admonition-info
+    background: #3c763d
+  .admonition-tip
+    background: #2a99b6
+  .admonition-warning
+    background: #761c19
 
 footer
   $bg: $roseOfSharon

@@ -753,14 +753,19 @@ main {
   background: #404040;
   color: #BBE5A9; }
   main a {
-    color: #BF5700; }
+    color: #CC9905; }
     main a:hover {
-      color: #ff8926; }
+      color: #faca3d; }
   main .category {
     font-size: 160%;
     color: #282828; }
     main .category:first-letter {
       font-size: 170%; }
+  main .header-anchor {
+    color: #3c7624;
+    font-weight: normal; }
+    main .header-anchor:hover {
+      color: #0d0d0d; }
   main .summary p {
     color: #daf1d0;
     font-style: normal;
@@ -778,7 +783,7 @@ main {
     line-height: 1.5;
     margin: 1em; }
     main .content blockquote {
-      border-left: 0.5em solid #BF5700;
+      border-left: 0.5em solid #CC9905;
       padding-left: 0.5em; }
     main .content code {
       background-color: #282828;
@@ -804,16 +809,27 @@ main {
     font-size: 70%;
     text-align: right; }
     main .info .tag {
-      background-color: #BF5700;
+      background-color: #CC9905;
       color: #404040;
       margin-right: 0.3em;
       padding: 0px 5px 1px 5px; }
     main .info .date {
-      color: #BF5700; }
+      color: #CC9905; }
   main .more {
     text-align: right; }
   main .pagination .disabled {
     color: rgba(187, 229, 169, 0.3); }
+  main .admonition {
+    border: #CC9905 1px solid;
+    padding: 5px; }
+  main .admonition-note {
+    background: #4cae4c; }
+  main .admonition-info {
+    background: #3c763d; }
+  main .admonition-tip {
+    background: #2a99b6; }
+  main .admonition-warning {
+    background: #761c19; }
 
 footer {
   background: #BF5700;
