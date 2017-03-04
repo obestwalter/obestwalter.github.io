@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import posixpath
 
 import pkg_resources
@@ -25,8 +24,8 @@ class TagPage(VirtualSourceObject):
 
     @property
     def items(self):
-        items_exp = Expression(self.pad.env, self.plugin.get_items_expression())
-        return items_exp.evaluate(self.pad, this=self, values={'tag': self.tag})
+        itemsExp = Expression(self.pad.env, self.plugin.get_items_expression())
+        return itemsExp.evaluate(self.pad, this=self, values={'tag': self.tag})
 
     @property
     def path(self):
@@ -63,13 +62,13 @@ class TagPageBuildProgram(BuildProgram):
 
 
 class TagsPlugin(Plugin):
-    name = u'blog-posts'
-    description = u'Lektor customization just for emptysqua.re.'
+    name = u'Lektor Tags'
+    description = u'add tagging stuff'
     generated = False
     url_map = {}
     reverse_url_map = {}
 
-    def on_setup_env(self, **extra):
+    def on_setup_env(self, **_):
         pkg_dir = pkg_resources.resource_filename('lektor_tags', 'templates')
         self.env.jinja_env.loader.searchpath.append(pkg_dir)
         self.env.add_build_program(TagPage, TagPageBuildProgram)
@@ -100,11 +99,10 @@ class TagsPlugin(Plugin):
                 return
 
             pad = source.pad
-            url_exp = FormatExpression(self.env, self.get_url_path_expression())
-
+            urlExp = FormatExpression(self.env, self.get_url_path_expression())
             for tag in self.get_all_tags(source):
                 page = TagPage(source, tag)
-                url_path = url_exp.evaluate(pad, this=page, values={'tag': tag})
+                url_path = urlExp.evaluate(pad, this=page, values={'tag': tag})
                 page.set_url_path(url_path)
                 yield page
 
@@ -126,7 +124,6 @@ class TagsPlugin(Plugin):
         if not p:
             raise RuntimeError('Set the "parent" option in %s'
                                % self.config_filename)
-
         return p
 
     def get_url_path_expression(self):
