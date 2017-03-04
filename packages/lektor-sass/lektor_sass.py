@@ -43,9 +43,9 @@ class SassPlugin(Plugin):
         self.run_sass()
 
     def on_server_stop(self, **_):
-        pid = self.sassPid
-        if pid:
-            subprocess.check_call(['kill', pid])
+        pids = self.sassPid
+        if pids:
+            subprocess.check_call(['kill'] + pids)
 
     def on_before_build_all(self, builder, **_):
         flags = getattr(
@@ -63,8 +63,8 @@ class SassPlugin(Plugin):
     @property
     def sassPid(self):
         try:
-            return subprocess.check_output(self.pgrepWatcher).decode().strip()
-
+            out = subprocess.check_output(self.pgrepWatcher).decode().strip()
+            return out.split('\n')
         except subprocess.CalledProcessError as e:
             if e.returncode == 1:
                 return

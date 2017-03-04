@@ -6,7 +6,7 @@ class MarkdownExcerptPlugin(Plugin):
     name = u'Markdown Excerpt'
     description = u'Adds filter for Markdown body excerpt.'
 
-    def on_setup_env(self, **extra):
+    def on_setup_env(self, **_):
         def excerpt(value, separator='\n\n'):
             excerpt_source = value.source.split(separator)[0]
 
