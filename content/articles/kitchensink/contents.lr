@@ -17,6 +17,8 @@ It was nt a dream. His room, a proper human room although a little too small, la
 ---
 content:
 
+**typogrify plugin** "nice quotes" & 'nice quotes' - - -> --
+
 Auto link: http://example.com | Explicit Link: [Example](http://example.com) | Mail Link: <me@example.com>
 
 <sup>sup inline HTML</sup> `$ inline code --help` *italic* **bold** ***bold italic***
@@ -47,7 +49,6 @@ Reference image: ![link][1].
 | :----------- | :----------: |
 | Row 1 Cell 1 | Row 1 Cell 2 |
 | Row 2 Cell 1 | Row 2 Cell 2 |
-[Table Caption]
 
 horizontal ruler
 * * *
@@ -72,21 +73,8 @@ Escape these: \* \_ \` \& \[ \] \< \> \! \# \\ \" \' \. \- \( \) \{ \} \: \| \~
         env = ctx.get_env()
         log.info('project path: %s' % ctx.get_project().project_path)
         log.info('output path: %s' % outputPath)
-        run_server((host, port),
-                   env,
-                   outputPath,
-                   verbosity=verbosity,
-                   lektor_dev=dev,
-                   browse=browse,
-                   prune=prune,
-                   extra_flags=flags,
-                   ui_lang=ctx.ui_lang)
+        run_server((host, port), extra_flags=flags, ui_lang=ctx.ui_lang)
 ```
-
-
-<div style="background: tomato">
-One morning, when Gregor woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought.
-</div>
 
 # Primary Header
 
@@ -129,4 +117,3 @@ Smart quotes 'this is a quote'
 Term 1
 :   Definition
 
-ss

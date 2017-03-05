@@ -1,5 +1,7 @@
+from markupsafe import Markup
 from typogrify.filters import typogrify
 
+from lektor.markdown import Markdown
 from lektor.pluginsystem import Plugin
 
 
@@ -8,8 +10,8 @@ class TypogrifyPlugin(Plugin):
     description = 'Add filter to jinja environment.'
 
     @staticmethod
-    def _typogrify(value):
-        return typogrify(str(value))
+    def _typogrify(markdown: Markdown):
+        return Markup(typogrify(str(markdown.html)))
 
     def on_setup_env(self, **_):
-        self.env.jinja_env.filters['typogrify'] = typogrify
+        self.env.jinja_env.filters['typogrify'] = self._typogrify

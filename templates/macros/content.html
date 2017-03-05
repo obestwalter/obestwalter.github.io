@@ -22,9 +22,9 @@
 {% macro render_summary(a, class="summary") %}
     <div class="{{ class }}">
         {% if a.summary %}
-            {{ a.summary }}
+            {{ a.summary|typogrify }}
         {% else %}
-            {{ a.content|excerpt }}
+            {{ a.content|excerpt|typogrify }}
         {% endif %}
     </div>
 {% endmacro %}
@@ -44,10 +44,10 @@
     {{ render_info(a) }}
     {% if a.summary %}
         <div class="summary">
-            {{ a.summary }}
+            {{ render_summary(a, class=class) }}
         </div>
     {% endif %}
     <div class="content">
-        {{ a.content }}
+        {{ a.content|typogrify }}
     </div>
 {% endmacro %}

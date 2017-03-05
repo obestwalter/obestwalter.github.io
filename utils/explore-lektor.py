@@ -16,8 +16,14 @@ def children(pad):
         print(c)
 
 
-if __name__ == '__main__':
+def explore_pad():
     _project = Project.discover()
     _env = _project.make_env()
     _pad = _env.new_pad()
     queries(_pad)
+
+
+if __name__ == '__main__':
+    from utils.cli import Workflow
+
+    Workflow.serve()
