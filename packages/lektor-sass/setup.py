@@ -6,9 +6,5 @@ setup(
     author=u'Oliver Bestwalter',
     license='MIT',
     py_modules=['lektor_sass'],
-    entry_points={
-        'lektor.plugins': [
-            'sass = lektor_sass:SassPlugin',
-        ]
-    }
+    entry_points={'lektor.plugins': ['sass = lektor_sass:SassPlugin']}
 )
