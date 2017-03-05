@@ -20,13 +20,11 @@
 {% endmacro %}
 
 {% macro render_summary(a, class="summary") %}
-    <div class="{{ class }}">
-        {% if a.summary %}
-            {{ a.summary|typogrify }}
-        {% else %}
-            {{ a.content|excerpt|typogrify }}
-        {% endif %}
-    </div>
+    {% if a.summary %}
+        <div class="{{ class }}">
+        {{ a.summary|typogrify }}
+        </div>
+    {% endif %}
 {% endmacro %}
 
 {% macro render_article_summary(a, class="summary") %}
@@ -40,7 +38,10 @@
 {% endmacro %}
 
 {% macro render_content(a) %}
-    <h1 id="{{ a._slug }}">{{ a.title }}</h1>
+    <h1 id="{{ a._slug }}">
+        {{ a.title }}
+        <a class="header-anchor" href="#{{ a._slug }}">&para;</a>
+    </h1>
     {{ render_info(a) }}
     {% if a.summary %}
         <div class="summary">

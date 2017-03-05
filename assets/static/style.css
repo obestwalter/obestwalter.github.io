@@ -546,8 +546,11 @@ template {
 .w {
   color: #002b36; }
 
-.mb, .mf, .mh, .mi, .mo, .sb, .sc, .sd, .s2 {
+.mb, .mf, .mh, .mi, .mo {
   color: #2aa198; }
+
+.sb, .sc, .sd, .s2 {
+  color: #859900; }
 
 .se {
   color: #cb4b16; }
@@ -695,6 +698,12 @@ main {
     color: #CC9905; }
     main a:hover {
       color: #faca3d; }
+  main .footnote-ref {
+    font-size: 82%; }
+    main .footnote-ref:before {
+      content: "*["; }
+    main .footnote-ref:after {
+      content: "]"; }
   main .category {
     font-size: 160%;
     color: #282828; }

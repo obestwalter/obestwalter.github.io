@@ -31,10 +31,10 @@ td
   border: 1px solid $celadon
 
 header
+  +container-padding
   $darkBg: $tundora
   $bg: $roseOfSharon
   $fg: $celadon
-  +container-padding
   background: $bg
   padding-bottom: 0
   padding-top: 0.5em
@@ -76,17 +76,23 @@ header
 
 
 main
+  +container-padding
   $darkBg: $mineShaft
   $bg: $tundora
   $fg: $celadon
   $hl: $buddhaGold
-  +container-padding
   background: $bg
   color: $fg
   a
     color: $hl
     &:hover
       color: hover($bg, $hl)
+  .footnote-ref
+    font-size: 82%
+    &:before
+      content: "*["
+    &:after
+      content: "]"
   .category
     font-size: 160%
     color: $darkBg
@@ -147,15 +153,13 @@ main
   .pagination
     .disabled
       color: fade_out($fg, 0.7)
-  $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet)
-  @each $key, $value in $map
-    +admonition($key, $value)
+  +admonitions
 
 footer
+  +container-padding
   $bg: $roseOfSharon
   $fg: $celadon
   $hl: $bittersweet
-  +container-padding
   background: $bg
   text-align: right
   p

@@ -12,3 +12,6 @@ summary:
 ---
 content:
 
+# $title
+
+Awesome thoughts ...

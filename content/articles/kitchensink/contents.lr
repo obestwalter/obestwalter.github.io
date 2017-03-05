@@ -1,3 +1,5 @@
+_discoverable: True
+---
 title: Kitchen Sink
 ---
 mtime: 2017-02-24
@@ -13,9 +15,30 @@ oss
 ---
 summary:
 
-It was nt a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - he was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.
+This article exists purely for using all Markdown features supported in this blog, either inbuilt ot added through plugins. Stuff that does not work yet properly is added for motivating future me to add this at some point.
+
 ---
 content:
+
+## Primary Header (first level only for title)
+
+His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as a footnote Reference[^1]. "What's happened to me?" he thought. "Nothing much" his brain answered.
+
+```python
+ class Workflow:
+    """blog creation, adaption, publishing workflow"""
+    outputPath = os.path.join(here, '..', '..', 'website_build')
+
+    @classmethod
+    def serve(cls, host='0.0.0.0', port=8080, outputPath=outputPath,
+              verbosity=0, dev=True, reinstall=False, browse=False, prune=True,
+              flags=('sass',)):
+        """ :param verbosity: 0-4 """
+        ctx = Context()
+        ctx.load_plugins(reinstall=reinstall)
+        log.info('project path: %s' % ctx.get_project().project_path)
+        run_server((host, port), extra_flags=flags, ui_lang=ctx.ui_lang)
+```
 
 **typogrify plugin** "nice quotes" & 'nice quotes' - - -> --
 
@@ -24,8 +47,6 @@ Auto link: http://example.com | Explicit Link: [Example](http://example.com) | M
 <sup>sup inline HTML</sup> `$ inline code --help` *italic* **bold** ***bold italic***
 Strike through: ~~strike through **strike through bold**
 *strike through italic* ***strike through bold italic***~~
-
-Footnote Reference[^1]
 
 ![My image](https://placehold.it/300x80)
 
@@ -55,44 +76,15 @@ horizontal ruler
 
 Escape these: \* \_ \` \& \[ \] \< \> \! \# \\ \" \' \. \- \( \) \{ \} \: \| \~
 
-```python
- class Workflow:
-    """blog creation, adaption, publishing workflow"""
-    here = os.path.dirname(__file__)
-    outputPath = os.path.join(here, '..', '..', 'website_build')
-
-    @classmethod
-    def serve(cls, host='0.0.0.0', port=8080, outputPath=outputPath,
-              verbosity=0, dev=True, reinstall=False, browse=False, prune=True,
-              flags=('sass',)):
-        """
-        :param verbosity: 0-4
-        """
-        ctx = Context()
-        ctx.load_plugins(reinstall=reinstall)
-        env = ctx.get_env()
-        log.info('project path: %s' % ctx.get_project().project_path)
-        log.info('output path: %s' % outputPath)
-        run_server((host, port), extra_flags=flags, ui_lang=ctx.ui_lang)
-```
-
-# Primary Header
-
-His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought.
-
-## Secondary Header
+### Secondary Header
 
 He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls.
 
-### Tertiary Header
+#### Tertiary Header
 
 His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - he was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather.
 
-#### Quarternial Header
-
-It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather.
-
-# Admonition Plugin
+## Admonition Plugin
 
 ! a note
 
@@ -102,17 +94,11 @@ It showed a lady fitted out with a fur hat and fur boa who sat upright, raising 
 
 !!!! a warning
 
-# DOES NOT WORK (YET)
+## DOES NOT WORK (YET)
 
 *[ABBR]: Abbreviated Text
 
-Bla is ABBR indeed!
-
-Should be: <abbr title="Abbreviated Text">ABBR</abbr>
-
-Smart Characters: ... -- --- a's b's
-
-Smart quotes 'this is a quote'
+Bla is ABBR indeed! Should be: <abbr title="Abbreviated Text">ABBR</abbr>
 
 Term 1
 :   Definition
