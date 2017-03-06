@@ -1,3 +1,174 @@
+@import variables
+@import mixins
+// @import media-queries
+@import fonts
 @import normalize
 @import pygments
-@import my
+@import hover
+
+html
+  background: $mineShaft
+body
+  font-family: $textFont
+  max-width: 800px
+  margin-left: auto
+  margin-right: auto
+a
+  text-decoration: none
+hr
+  border: 1px solid $roseOfSharon
+ul
+  list-style-type: square
+table
+  background: $mineShaft
+  padding: 1px
+  border: 1px solid $mineShaft
+th
+  background: $tundora
+  padding: 3px
+  border: 1px solid $celadon
+td
+  background: $tundora
+  padding: 3px
+  border: 1px solid $celadon
+
+header
+  +container-padding
+  $darkBg: $tundora
+  $bg: $roseOfSharon
+  $fg: $celadon
+  background: $bg
+  padding-bottom: 0
+  padding-top: 0.5em
+  a
+    color: $celadon
+    padding: 0 0.3em 0 0.3em
+    text-align: left
+    &:hover
+      color: hover($bg, $fg)
+  nav
+    line-height: 1em
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        display: inline
+        margin: 0 0.5em 0 0
+        padding: 0
+  .active
+    background: $darkBg
+    a
+      padding: 0.1em 0.4em
+      color: $fg
+      &:hover
+        color: hover($darkBg, $fg)
+  .site-name
+    font-size: 200%
+    font-weight: normal
+    margin: 0
+    padding: 0
+    text-align: right
+    a
+      margin: 0
+      padding: 0
+      color: $fg
+      &:hover
+        color: hover($bg, $fg)
+
+
+main
+  +container-padding
+  $darkBg: $mineShaft
+  $bg: $tundora
+  $fg: $celadon
+  $hl: $buddhaGold
+  background: $bg
+  color: $fg
+  a
+    color: $hl
+    &:hover
+      color: hover($bg, $hl)
+  .footnote-ref
+    font-size: 82%
+    &:before
+      content: "*["
+    &:after
+      content: "]"
+  .category
+    font-size: 160%
+    color: $darkBg
+    &:first-letter
+      font-size: 170%
+  .header-anchor
+    $darkenedFg: darken($fg, 48)
+    color: $darkenedFg
+    font-weight: normal
+    &:hover
+      color: hover($darkenedFg, $bg)
+  .summary
+    p
+      &:first-letter
+        float: left
+        font-size: 300%
+        line-height: 0.5
+        padding-top: 6px
+        padding-right: 10px
+        padding-left: 0px
+        font-weight: bold
+      color: lighten($fg, 10%)
+      font-style: normal
+      margin: 0 2em
+  .content
+    word-spacing: 0.2em
+    line-height: 1.5
+    margin: 1em
+    blockquote
+      border-left: 0.5em solid $hl
+      padding-left: 0.5em
+    code
+      background-color: $darkBg
+      font-family: $codeFont
+      padding: 0.1em 0.2em
+    img
+      +raise
+    pre
+      +raise
+      background-color: $darkBg
+      font-family: $codeFont
+      font-size: 95%
+  .highlight
+    background-color: $darkBg
+    padding-left: 0.6em
+  .info
+    font-size: 70%
+    text-align: right
+  .tag
+    background-color: $hl
+    color: $bg
+    margin-right: 0.3em
+    padding: 0px 5px 1px 5px
+  .date
+    color: $hl
+  .more
+    text-align: right
+  .pagination
+    .disabled
+      color: fade_out($fg, 0.7)
+  +admonitions
+
+footer
+  +container-padding
+  $bg: $roseOfSharon
+  $fg: $celadon
+  $hl: $bittersweet
+  background: $bg
+  text-align: right
+  p
+    color: $bittersweet
+    font-size: 70%
+    a
+      color: $fg
+      &:hover
+        color: hover($bg, $fg)
+
