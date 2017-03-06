@@ -25,6 +25,7 @@ class Workflow:
     """blog creation, adaption, publishing workflow"""
     here = os.path.dirname(__file__)
     outputPath = os.path.join(here, '..', '..', 'website_build')
+    myFlags = ['sass']
 
     @classmethod
     def serve(cls, host='0.0.0.0', port=8080, outputPath=outputPath,
@@ -33,6 +34,7 @@ class Workflow:
         """
         :param verbosity: 0-4
         """
+        assert all(f in cls.myFlags for f in flags), flags
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
         env = ctx.get_env()
