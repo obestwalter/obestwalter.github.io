@@ -1,18 +1,14 @@
 title: Easing testing and development with Vagrant
-
 ---
 crtime: 2017-03-02
-
 ---
 mtime: 2017-03-02
-
 ---
 tags:
 
 python
 tox-dev
 howto
-
 ---
 summary:
 
