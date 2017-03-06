@@ -38,10 +38,7 @@
 {% endmacro %}
 
 {% macro render_content(a) %}
-    <h1 id="{{ a._slug }}">
-        {{ a.title }}
-        <a class="header-anchor" href="#{{ a._slug }}">&para;</a>
-    </h1>
+    <h1 id="{{ a._slug }}"><a href="{{ a.url }}">{{ a.title }}</a></h1>
     {{ render_info(a) }}
     {% if a.summary %}
         <div class="summary">
