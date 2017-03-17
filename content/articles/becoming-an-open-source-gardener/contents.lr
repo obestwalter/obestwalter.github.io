@@ -17,14 +17,14 @@ In the summer of 2016 I took part in the first dedicated [Python testing sprint]
 
 I was interested in getting into tox and helped to prepare the next release by reviewing pull requests and going through the issues. I also did some [conceptual work](https://github.com/tox-dev/tox/blob/master/doc/drafts/extend-envs-and-packagebuilds.md) with [nicoddemus](https://github.com/nicoddemus) and [Stephan Obermann](https://www.linkedin.com/in/stephan-obermann-49346a125/).
 
-In my work on pytest I had the honour of [dropping the dot](https://twitter.com/davehunt82/status/756080181085872129) together with [Dave Hunt](http://davehunt.co.uk/) for the 3.0 release.
+In my work on pytest I had the honour of [dropping the dot](https://twitter.com/davehunt82/status/756080181085872129) together with [Dave Hunt](http://davehunt.co.uk/) for the 3.0 release. I also proposed a deprecation policy that has been implemented: https://rawgit.com/obestwalter/pytest-exit-strategy/master/#slide1
 
 After the sprint I did not have much spare time to get more involved, which bugged me, so I started to sound out the option of integrating this into my work at [Avira](https://avira.com). As pytest/tox/devpi is something we heavily rely on, I was able to secure the support of my team and management to spend 20% of my time on tox development starting in 2017.
 
 To get started I ...
 
 * joined the conversations on the [issue tracker](https://github.com/tox-dev/tox/issues) about problems and enhancements to develop an understanding about what is needed and how things can be improved
-* labelled all open issues
+* labelled all open issues (and am determined to [keep it that way](https://github.com/tox-dev/tox/issues?q=is%3Aopen+is%3Aissue+no%3Alabel))
 * identified invalid/fixed/duplicate issues (a third of ~180 issues were closed as a result)
 
 These and similar activities around open source projects where coined as [open source gardening](http://words.steveklabnik.com/how-to-be-an-open-source-gardener) by Steve Klabnik. I think they are just as important as contributing code to keep a project healthy and I will concentrate on this field of work for the time being.

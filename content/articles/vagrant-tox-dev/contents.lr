@@ -21,7 +21,7 @@ content:
 
 Vagrant is a command line wrapper around container and virtualization solutions like VirtualBox and Docker. It automates creation, networking, sharing and provisioning. This way you can bootstrap a working test/development environment with a simple `vagrant up` in the project directory. On invocation everything is set up and the project folder is mapped into the virtual machine (by default to `/vagrant` ond Linux and `C:\\vagrant` on Windows). You can hack on the project and test your changes inside vagrant without having to make changes to your host system.
 
-The setup for tox-dev contains two boxes - both based on VirtualBox. One is an [Arch Linux](https://www.archlinux.org/) with the interpreters being installed via [pyenv](https://github.com/yyuu/pyenv). The other one is a Windows2012R2 with a time limited evaluation license.
+The setup for tox-dev contains two boxes - both based on VirtualBox. One is an [Arch Linux](https://www.archlinux.org/) with the interpreters being installed via [pyenv](https://github.com/pyenv/pyenv). The other one is a Windows2012R2 with a time limited evaluation license.
 
 If you want to see exactly what is going on, have a look at the [`Vagrantfile`](**TODO**) in the root of the project. It's written in simple ruby with a little bash sprinkled in for provisioning.
 

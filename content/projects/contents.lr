@@ -10,7 +10,7 @@ content:
 
 * [tox](https://tox.readthedocs.io) - testing out of the box in Python.
 * [pytest](http://doc.pytest.org) - my favorite testing framework.
-* [pyenv-installer](https://github.com/yyuu/pyenv-installer) - the installer for the great [pyenv](https://github.com/yyuu/pyenv) tool.
+* [pyenv-installer](https://github.com/pyenv/pyenv-installer) - the installer for the great [pyenv](https://github.com/yyuu/pyenv) tool.
 
 ## ... I created to help me teach Python
 

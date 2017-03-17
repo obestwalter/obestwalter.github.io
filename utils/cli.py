@@ -79,6 +79,16 @@ class Workflow:
         log.info(subprocess.check_call(['git', 'add', dstPath]))
 
     @classmethod
+    def retract(cls, srcPath):
+        # TODO basically revert the above
+        slug = os.path.splitext(os.path.basename(srcPath))[0]
+        containerPath = os.path.join(ARTICLES_PATH, slug)
+        assert not os.path.exists(containerPath), containerPath
+        os.mkdir(containerPath)
+        dstPath = os.path.join(containerPath, 'contents.lr')
+        log.info(subprocess.check_call(['git', 'add', dstPath]))
+
+    @classmethod
     def deploy(cls, clean=False):
         if clean:
             first = subprocess.check_output(['lektor', 'clean', '--yes'])
