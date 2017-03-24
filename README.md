@@ -8,36 +8,11 @@ The officially recommended way is weird and the way lektor deals with plugins is
     $ pip install -r requirements.txt
     $ serve
 
-## Workflow
+## CLI helpers to do stuff
 
-### Create/publish/deploy content
+My minimalistic CLI to draft, publish, deploy, etc.
 
-Helpers for my evolving workflow.
-
-    draft [art] "My super article"
-
-creates a prepared Markdown file with all the necessary settings to work on.
-
-    publish drafts/my-super-article.md
-
-will make the necessary adjustments and publish it.
-
-    deploy [clean]
-
-will create a \[clean\] build and push it online.
-
-### Run local server
-
-
-Run `utils/serve.py` from inside PyCharm
-
-## Remarks
-
-### SASS
-
-`gem install sass`
-
-To watch and compile use `transpile` command that is installed with this project
+    $ ob
 
 ### Pygments bug
 
