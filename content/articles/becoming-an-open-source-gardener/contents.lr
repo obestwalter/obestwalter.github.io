@@ -15,7 +15,7 @@ content:
 
 In the summer of 2016 I took part in the first dedicated [Python testing sprint](http://blog.pytest.org/2016/pytest-development-sprint/) together with about 25 humans from all over the planet. We had a great time together with engaging discussions, technical talks, and lots of hacking.
 
-I was interested in getting into tox and helped to prepare the next release by reviewing pull requests and going through the issues. I also did some [conceptual work](https://github.com/tox-dev/tox/blob/master/doc/drafts/extend-envs-and-packagebuilds.md) with [nicoddemus](https://github.com/nicoddemus) and [Stephan Obermann](https://www.linkedin.com/in/stephan-obermann-49346a125/).
+I was interested in getting into [tox](https://tox.readthedocs.io) and helped to prepare the next release by reviewing pull requests and going through the issues. I also did some [conceptual work](https://github.com/tox-dev/tox/blob/master/doc/drafts/extend-envs-and-packagebuilds.md) with [nicoddemus](https://github.com/nicoddemus) and [Stephan Obermann](https://www.linkedin.com/in/stephan-obermann-49346a125/).
 
 In my work on pytest I had the honour of [dropping the dot](https://twitter.com/davehunt82/status/756080181085872129) together with [Dave Hunt](http://davehunt.co.uk/) for the 3.0 release. I also proposed and implemented a [deprecation policy](https://rawgit.com/obestwalter/pytest-exit-strategy/master/#slide1).
 
