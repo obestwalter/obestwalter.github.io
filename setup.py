@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='oliver.bestwalter.de',
-    version='0.0.1dev1',
+    version='2.0.0dev1',
     author='Oliver Bestwalter',
     url='http://oliver.bestwalter.de',
     packages=['utils'],
