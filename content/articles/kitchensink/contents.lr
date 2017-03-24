@@ -1,4 +1,5 @@
-_discoverable: True
+_discoverable: False
+
 ---
 title: Kitchen Sink
 ---

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-sass --no-cache --watch assets/static
