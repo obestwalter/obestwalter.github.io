@@ -82,7 +82,7 @@ class Workflow:
     def retract(cls, srcContainerPath):
         filePath = os.path.join(srcContainerPath, 'contents.lr')
         assert os.path.exists(srcContainerPath), srcContainerPath
-        slug = os.path.basename(os.path.dirname(srcContainerPath))
+        slug = os.path.basename(srcContainerPath)
         dstPath = os.path.join(DRAFTS_PATH, slug + '.md')
         os.rename(filePath, dstPath)
         os.rmdir(srcContainerPath)
