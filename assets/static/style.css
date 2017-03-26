@@ -697,8 +697,9 @@ main {
     main .footnote-ref:after {
       content: "]"; }
   main .category {
+    margin-top: 1em;
     font-size: 160%;
-    color: #282828; }
+    color: #BBE5A9; }
     main .category:first-letter {
       font-size: 170%; }
   main .header-anchor {
