@@ -757,7 +757,9 @@ main {
   main .date {
     color: #CC9905; }
   main .more {
-    text-align: right; }
+    font-size: 70%;
+    margin-top: 0.2em;
+    text-align: center; }
   main .pagination .disabled {
     color: rgba(187, 229, 169, 0.3); }
   main .admonition-note {
