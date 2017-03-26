@@ -29,23 +29,23 @@
 
 {% macro render_article_summary(a, class="summary") %}
     <h1><a href="{{ a|url }}">{{ a.title }}</a></h1>
-    {{ render_info(a) }}
     <div class="{{ summary }}">
         {{ render_summary(a, class=class) }}
-        <div class="more"><a href="{{ a|url }}">[read more]</a></div>
+        <div class="more"><a href="{{ a|url }}">[read article]</a></div>
     </div>
+    {{ render_info(a) }}
     <hr>
 {% endmacro %}
 
 {% macro render_content(a) %}
     <h1 id="{{ a._slug }}"><a href="{{ a.url }}">{{ a.title }}</a></h1>
-    {{ render_info(a) }}
-    {% if a.summary %}
-        <div class="summary">
-            {{ render_summary(a, class=class) }}
-        </div>
-    {% endif %}
+{#    {% if a.summary %}#}
+{#        <div class="summary">#}
+{#            {{ render_summary(a, class=class) }}#}
+{#        </div>#}
+{#    {% endif %}#}
     <div class="content">
         {{ a.content|typogrify }}
     </div>
+    {{ render_info(a) }}
 {% endmacro %}
