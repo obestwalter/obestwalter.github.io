@@ -1,4 +1,4 @@
-# [My personal homepage](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
+# [My personal website](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
 
 ## Installation
 
