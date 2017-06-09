@@ -18,3 +18,8 @@ content:
 * [Mau Mau](http://oliver.bestwalter.de/mau-mau) - a card game simulation. Complete project that can be used to learn about Python and it's ecosystem.
 * [Codecats CV](http://oliver.bestwalter.de/codecats-cv) - another project used for teaching "full stack" Python (with [Falk Heger](https://github.com/Falk92)).
 * [Python Exploration Toolkit](http://oliver.bestwalter.de/pet) - a chaotic collection of writings and learning tools waiting to be organized.
+
+## ... I created ... because why not?
+
+* [i3configger](https://github.com/obestwalter/i3configger) - a tool to make the configuration of the [i3wm tiling window manager](https://i3wm.org/) more malleable.
+* [devpi-cloud-test](https://github.com/obestwalter/devpi-cloud-test) - to use [Travis CI](https://travis-ci.org/) to test packages from [devpi](http://doc.devpi.net/).
