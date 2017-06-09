@@ -1,4 +1,4 @@
-# [My personal homepage](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
+# [My personal website](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
 
 ## Installation
 
@@ -6,7 +6,7 @@ The officially recommended way is weird and the way lektor deals with plugins is
 
     $ cd /path/to/here
     $ pip install -r requirements.txt
-    $ serve
+    $ ob serve
 
 ## CLI helpers to do stuff
 
