@@ -1,5 +1,4 @@
 -e /home/oliver/work/oliver.bestwalter.de/lektor
--e .
 
 fire
 typogrify

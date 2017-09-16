@@ -5,8 +5,8 @@
 The officially recommended way is weird and the way lektor deals with plugins is extra weird. I work from a local lektor clone with my own little server wrapper. That makes it easily debuggable and I can always use the hot new shit.
 
     $ cd /path/to/here
-    $ pip install -r requirements.txt
-    $ ob serve
+    $ pip install tox
+    $ tox -e dev
 
 ## CLI helpers to do stuff
 
