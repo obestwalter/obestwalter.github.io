@@ -7,8 +7,8 @@
 {% endmacro %}
 
 {% macro render_date(a, class="date") %}
-    <span class="date" title="published: {{ a.crtime|dateformat }}">
-        [last update: {{ a.mtime|dateformat }}]
+    <span class="date" title="published: {{ a.crtime }}">
+        [last update: {{ a.mtime }}]
     </span>
 {% endmacro %}
 
