@@ -1,5 +1,4 @@
 import logging
-import os
 import subprocess
 import time
 
@@ -17,8 +16,9 @@ class SassPlugin(Plugin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        rubyBin = subprocess.check_output(self.rubyPathCmd).decode().strip()
-        self.sassPath = os.path.join(rubyBin, 'bin', 'sass')
+        # rubyBin = subprocess.check_output(self.rubyPathCmd).decode().strip()
+        # self.sassPath = os.path.join(rubyBin, 'bin', 'sass')
+        self.sassPath = "/usr/bin/sass"
         log.info('Sass path: %s' % self.sassPath)
 
     def run_sass(self, watch=True):
