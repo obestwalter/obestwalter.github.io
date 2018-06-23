@@ -3,16 +3,23 @@ title: Hi, I am Oliver.
 ---
 content:
 
-# This is my own little home on the interwebs.
+# My own little home on the interwebs.
 
-* Born in Germany
+## Mini Bio
+
+* Born in Germany on Star Wars day in the year the last man landed on the moon
 * Used to make [music](https://soundcloud.com/oliver-bestwalter)
 * Then worked at a [factory](https://www.micronas.com/)
 * Then finally dared to study [Computer Science](https://www.reddit.com/r/AskReddit/comments/m32f7/gimme_your_bestworst_computer_science_jokes_oh)
 * Now software developer at [Avira](http://avira.com)
-* Love [Python](https://www.python.org/) - came for the language and stayed for the community
 
-# Contact
+## Python & I
+
+* I Love [Python](https://www.python.org/) - came for the language, stayed for the community
+* When I am not [programming with Python](/projects), I like to [talk about it](https://pyvideo.org/speaker/oliver-bestwalter.html)
+* I also like helping others to learn Python and [testing with Python](https://www.python-academy.com/courses/specialtopics/python_course_testing.html)
+
+## Get in touch
 
 * eMail: ["http://oliver.bestwalter.de"[7:].replace('.', '@', 1)](https://repl.it/Fp6b/0)
 * Twitter: [@obestwalter](https://twitter.com/obestwalter)
