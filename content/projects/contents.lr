@@ -26,3 +26,10 @@ content:
 
 * [i3configger](https://github.com/obestwalter/i3configger) - a tool to make the configuration of the [i3wm tiling window manager](https://i3wm.org/) more malleable
 * [devpi-cloud-test](https://github.com/obestwalter/devpi-cloud-test) - to use [Travis CI](https://travis-ci.org/) to test packages from [devpi](http://doc.devpi.net/)
+
+## Other stuff I did
+
+* running pytest/tox [sprints](https://wiki.python.org/moin/EuroPython2017/Sprints) and [help desks](https://ep2018.europython.eu/conference/p/oliver-bestwalter) at EuroPython
+* technical reviewer for Brian Okkens [Python Testing with pytest](https://pragprog.com/book/bopytest/python-testing-with-pytest)
+* speaker at [PyconDE](https://pyvideo.org/speaker/oliver-bestwalter.html)
+* [Python Software Verband](https://python-verband.org/) member and contributor
