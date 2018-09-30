@@ -37,7 +37,7 @@
 html {
   font-family: Arvo;
   /* 1 */
-  font-size: 100%;
+  font-size: 20px;
   line-height: 1.5em;
   /* 2 */
   -ms-text-size-adjust: 100%;
@@ -607,7 +607,7 @@ html {
 
 body {
   font-family: "Arvo", serif;
-  max-width: 800px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto; }
 
