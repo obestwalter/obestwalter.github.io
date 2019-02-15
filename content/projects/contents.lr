@@ -40,8 +40,8 @@ content:
 
 ### Show and tell
 
-* webinar:[automating Build, Test and Release Workflows with tox](https://www.youtube.com/watch?v=PrAyvH-tm8E) https://www.youtube.com/watch?v=PrAyvH-tm8E
-* [interview before the webinar](https://blog.jetbrains.com/pycharm/2018/12/interview-oliver-bestwalter-for-tox-webinar-next-week/)
+* webinar:[automating Build, Test and Release Workflows with tox](https://www.youtube.com/watch?v=PrAyvH-tm8E)
+* [interview with Paul Everitt before the webinar](https://blog.jetbrains.com/pycharm/2018/12/interview-oliver-bestwalter-for-tox-webinar-next-week/)
 * podcast about tox on [testandcode](https://testandcode.com/49)
 * "tox quo vadis?" - lightning talk (EuroPython 2018): [example code, link to video and other materials](https://gitlab.com/obestwalter/tox-lightning-talk)
 * lightning talk about the importance of companies supporting open source (EuroPython 2017): [video](https://youtu.be/avUcnPzHxB4?t=54m3s)
