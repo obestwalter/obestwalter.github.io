@@ -1,0 +1,63 @@
+title: Help! I am being forced to use tox!
+---
+mtime: 
+---
+crtime: 
+---
+tags:
+
+oss
+testing
+tox
+virtualenv
+automation
+---
+summary:
+
+intro from pure user view
+
+    * feedback
+    * matthias
+    * my team
+    * holger
+    * brian
+
+--
+content:
+
+The number of users of tox is growing but not all of them use it voluntarily or even know what the heck it does. 
+
+This is due to:
+
+* many popular projects use it and if you want to contribute you are advised to run the tests with tox before you open a PR (or it even happens automagically when you open a Pull request)
+* your team at work is using it and as part of onboarding they tell you: run tox to run the tests, etc.
+* Some tox zealot (e.g. me) tells you that you should automate all the things using tox
+
+tox might sound dangerous
+, but it has nothing to do with toxicity - it comes from "**T**esting **O**ut of the **Box**" like in: "to run our complete test suite all you need to do is run `tox`". This is the ideal and it works surprisingly well and many scenarios, but there is still a learning curve and when things do not work it might be hard to understand what is happening, when the user has no mental model whatsoever about what is going on, when you type the three magic letters in the project repository.
+
+Which command line switches do I have to know?
+
+* -av
+* -e
+* -vvv
+* --showconfig
+
+tox does not install interpreters
+
+tox sometimes has trouble finding interpreters
+
+tox is mainly a wrapper around other tools to ease automation
+
+tox has a growing number of power features that 80% of the users can safely ignore
+
+--devenv power feature warning?
+
+escalation - if something goes wrong:
+
+* try to understand where the error happens (which phase of tox) and try to debug the feature yourself, a lot can go wrong and very little usually has to do with tox itself during normal operations
+* if you really can't figure out what is going wrong
+    * ask the maintainer of the project containing your tox.ini
+    * ask the internet (stackoverflow if you can phrase the question in a way that you think someone with deeper knowledge of tox might be able to help)
+    * if you are really lost and don't even know what to ask exactly: 
+      tox issue tracker tox gitter

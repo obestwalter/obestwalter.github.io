@@ -1,0 +1,56 @@
+title: 3 dimensional testing
+---
+mtime: 
+---
+crtime: 
+---
+tags:
+
+testing
+philosophy
+---
+summary:
+
+* 3 sizes (micro, feature, vertical)
+* 3 speeds (fast, medium, slow) (or 2)
+* 3 stages to run on (dev, test, acc)
+* 3 setups (roles? types? kinds?) to run on (dev, CI, deployed)
+
+Sometimes you have less dimensions but in most cases I would say you don't need more
+some of them are ranges where we need to make informed decisions about arbitrary cut-off points (size, speed), some of them are distinct (stages, setups)
+
+feedback:
+    * matthias
+    * my team
+    * holger
+    * brian
+
+---
+content:
+
+scope:
+
+* automatic testing
+* kinds of tests that verify if you probably can release that as part of a continual release schedule (many small releases rather than, big releases that happen seldomly)
+
+examples:
+
+3^^4 combinations
+
+idea of entry points as indication what test it is:
+
+* tests a small surface area of the software from inside
+* tests how several parts of the system play together from the inside (this can even go up to subcutaneous tests, that test almost the whole path through the code)
+* tests that se same like the user (complete vertical slice, black box testing)
+
+acceptance tests:
+ 
+    * are composed of a subset of any of the three types anything that gives high level information
+    * might even be non Python tests (e.g. YAML) but think hard if it is worth the extra effort
+    * In the end the word "acceptance tests" as such makes no real sense because the whole test suite should be the acceptance test - if all tests run through and are green on the **acceptance** environment thenm the test is passed.
+
+In a later article:
+
+how to model those with pytest:
+
+* several levels work just like you'd expect (vertical needs to go through other tools then e.g. selenium, subprocess, but orchestration and result analysis still goes through pytest)
