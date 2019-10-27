@@ -11,9 +11,9 @@ from lektor.cli import Context
 from lektor.devserver import run_server
 from lektor.utils import slugify
 
-# I don't use the editor - get rid of the button during development
 from lebut.compile_notebooks import JupyterNbConvert
 
+# I don't use the editor - get rid of the button during development
 serve.rewrite_html_for_editing = lambda fp, edit_url: BytesIO(fp.read())
 
 
@@ -32,6 +32,7 @@ class Workflow:
     """blog creation, adaption, publishing workflow"""
 
     DRAFTMARKER = "__draft__"
+    CONTENST_FILE = "contents.lr"
     myFlags = ["sass"]
 
     @classmethod
@@ -57,6 +58,7 @@ class Workflow:
         outputPath = Path(outputPath)
         log.info(f"project: {ctx.get_project().project_path} | output: {outputPath}")
         cls.move_drafts(PATH.DRAFTS, PATH.CONTENT)
+        cls.compile_notebooks()
         try:
             run_server(
                 (host, port),
@@ -88,28 +90,35 @@ class Workflow:
         JupyterNbConvert().convert()
 
     @classmethod
-    def clean(cls):
-        out = subprocess.check_output(["lektor", "clean", "--yes"])
-        log.info(out.decode())
+    def build(cls):
+        cls.move_drafts(PATH.DRAFTS, PATH.CONTENT)
+        cls.compile_notebooks()
+        log.info(subprocess.check_output(["lektor", "build"]))
 
     @classmethod
     def deploy(cls):
         cls.move_drafts(PATH.CONTENT, PATH.DRAFTS)
+        cls.compile_notebooks()
         first = subprocess.check_output(["lektor", "build"])
         second = subprocess.check_output(["lektor", "deploy"])
         log.info(first.decode() + "\n" + second.decode())
 
     @classmethod
     def new(cls, title):
-        container = PATH.DRAFTS / slugify(title)
+        container = PATH.CONTENT / slugify(title)
         assert not container.exists(), container
         container.mkdir()
         (container / cls.DRAFTMARKER).write_text("")
-        content = (PATH.HERE / "content.lr").read_text()
+        content = (PATH.HERE / cls.CONTENST_FILE).read_text()
         content = Template(content).safe_substitute(
             dict(title=title, date=datetime.now().strftime("%Y-%m-%d"))
         )
-        (container / "contents.lr").write_text(content)
+        (container / cls.CONTENST_FILE).write_text(content)
+
+    @classmethod
+    def clean(cls):
+        log.info(subprocess.check_output(["lektor", "clean", "--yes"]))
+        cls.move_drafts(PATH.CONTENT, PATH.DRAFTS)
 
 
 def main():

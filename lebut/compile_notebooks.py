@@ -15,6 +15,7 @@ HERE = Path(__file__).parent
 CONTENT_PATH = HERE.parent / "content"
 CACHE_PATH = HERE / "cache.json"
 
+# TODO figure out the styling (exceptions and input/output cell differentiation (maybe just a different fence mode for output ... e.g. console and style that differently))
 
 # FIXME this approach does not work - figure out why.
 def _error_only_traceback_to_stderr(self, *args, **kwargs):
