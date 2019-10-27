@@ -20,9 +20,12 @@
     <h1>... turns out I am not really writing many articles.</h1>
     <p>I do stuff though, so maybe look at my <a href="projects">projects</a> for now?</p>
 
-    <hr>o
+    <hr>
 
     <div class="category">Articles</div>
+
+    <br>
+
     {% for post in site.query('/articles').order_by('-mtime') %}
         {{ render_article_summary(post) }}
     {% endfor %}

@@ -1,4 +1,0 @@
--e ../lektor
-
-fire
-typogrify

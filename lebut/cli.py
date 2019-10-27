@@ -1,3 +1,4 @@
+""" lebut - my little lektor workflow butler."""
 import logging
 import os
 import subprocess
@@ -11,6 +12,8 @@ from lektor.devserver import run_server
 from lektor.utils import slugify
 
 # I don't use the editor - get rid of the button during development
+from lebut.compile_notebooks import JupyterNbConvert
+
 serve.rewrite_html_for_editing = lambda fp, edit_url: BytesIO(fp.read())
 
 HERE = os.path.dirname(__file__)
@@ -51,41 +54,8 @@ class Workflow:
                    ui_lang=ctx.ui_lang)
 
     @classmethod
-    def draft(cls, title):
-        with open(os.path.join(HERE, 'article-blueprint.md')) as f:
-            content = f.read()
-        rep = dict(title=title)
-        content = Template(content).safe_substitute(rep)
-        dst = os.path.join(DRAFTS_PATH, '%s.md' % slugify(title))
-        assert not os.path.exists(dst), dst
-        with open(dst, 'w') as f:
-            f.write(content)
-
-    @classmethod
-    def publish(cls, srcPath):
-        with open(srcPath) as f:
-            content = f.read()
-        rep = dict(date=datetime.now().strftime('%Y-%m-%d'))
-        content = Template(content).safe_substitute(rep)
-        slug = os.path.splitext(os.path.basename(srcPath))[0]
-        containerPath = os.path.join(ARTICLES_PATH, slug)
-        assert not os.path.exists(containerPath), containerPath
-        os.mkdir(containerPath)
-        dstPath = os.path.join(containerPath, 'contents.lr')
-        with open(dstPath, 'w') as f:
-            log.info("publishing %s:\n\n%s" % (slug, content))
-            f.write(content)
-        os.remove(srcPath)
-        log.info(subprocess.check_call(['git', 'add', dstPath]))
-
-    @classmethod
-    def retract(cls, srcContainerPath):
-        filePath = os.path.join(srcContainerPath, 'contents.lr')
-        assert os.path.exists(srcContainerPath), srcContainerPath
-        slug = os.path.basename(srcContainerPath)
-        dstPath = os.path.join(DRAFTS_PATH, slug + '.md')
-        os.rename(filePath, dstPath)
-        os.rmdir(srcContainerPath)
+    def compile_notebooks(cls):
+        JupyterNbConvert().convert()
 
     @classmethod
     def deploy(cls, clean=False):
@@ -96,6 +66,43 @@ class Workflow:
         second = subprocess.check_output(['lektor', 'deploy'])
         log.info(first.decode() + '\n' + second.decode())
 
+    # never really used and probably broken and useless ...
+    # @classmethod
+    # def draft(cls, title):
+    #     with open(os.path.join(HERE, 'content.lr')) as f:
+    #         content = f.read()
+    #     rep = dict(title=title)
+    #     content = Template(content).safe_substitute(rep)
+    #     dst = os.path.join(DRAFTS_PATH, '%s.md' % slugify(title))
+    #     assert not os.path.exists(dst), dst
+    #     with open(dst, 'w') as f:
+    #         f.write(content)
+    #
+    # @classmethod
+    # def publish(cls, srcPath):
+    #     with open(srcPath) as f:
+    #         content = f.read()
+    #     rep = dict(date=datetime.now().strftime('%Y-%m-%d'))
+    #     content = Template(content).safe_substitute(rep)
+    #     slug = os.path.splitext(os.path.basename(srcPath))[0]
+    #     containerPath = os.path.join(ARTICLES_PATH, slug)
+    #     assert not os.path.exists(containerPath), containerPath
+    #     os.mkdir(containerPath)
+    #     dstPath = os.path.join(containerPath, 'contents.lr')
+    #     with open(dstPath, 'w') as f:
+    #         log.info("publishing %s:\n\n%s" % (slug, content))
+    #         f.write(content)
+    #     os.remove(srcPath)
+    #     log.info(subprocess.check_call(['git', 'add', dstPath]))
+    #
+    # @classmethod
+    # def retract(cls, srcContainerPath):
+    #     filePath = os.path.join(srcContainerPath, 'contents.lr')
+    #     assert os.path.exists(srcContainerPath), srcContainerPath
+    #     slug = os.path.basename(srcContainerPath)
+    #     dstPath = os.path.join(DRAFTS_PATH, slug + '.md')
+    #     os.rename(filePath, dstPath)
+    #     os.rmdir(srcContainerPath)
 
 def main():
     import fire

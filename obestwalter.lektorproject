@@ -1,5 +1,8 @@
+; todo add things (url, ...): https://www.getlektor.com/docs/project/file/
+
 [project]
 name = obestwalter
+
 
 [servers.production]
 target = ghpages://obestwalter/obestwalter.github.io

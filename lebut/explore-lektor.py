@@ -1,4 +1,4 @@
-""" for exploring lektor internally """
+"""Some little functions to help exploring lektor internals interactively."""
 from lektor.db import Query
 from lektor.project import Project
 
@@ -24,6 +24,6 @@ def explore_pad():
 
 
 if __name__ == '__main__':
-    from utils.cli import Workflow
+    from lebut.cli import Workflow
 
     Workflow.serve()

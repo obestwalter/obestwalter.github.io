@@ -1,0 +1,8 @@
+dist
+build
+*.pyc
+*.pyo
+*.egg-info
+*.swp
+
+cache.json
