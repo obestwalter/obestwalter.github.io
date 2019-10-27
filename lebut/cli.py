@@ -1,9 +1,9 @@
-""" lebut - my little lektor workflow butler."""
+""" lebut - my little lektor butler to make common activities less tedious."""
 import logging
-import os
 import subprocess
 from datetime import datetime
 from io import BytesIO
+from pathlib import Path
 from string import Template
 
 from lektor.admin.modules import serve
@@ -16,24 +16,37 @@ from lebut.compile_notebooks import JupyterNbConvert
 
 serve.rewrite_html_for_editing = lambda fp, edit_url: BytesIO(fp.read())
 
-HERE = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(HERE, '..')
-DRAFTS_PATH = os.path.join(PROJECT_PATH, 'drafts')
-ARTICLES_PATH = os.path.join(PROJECT_PATH, 'content', 'articles')
+
+class PATH:
+    HERE: Path = Path(__file__).parent
+    PROJECT: Path = HERE.parent
+    DRAFTS: Path = PROJECT / "drafts"
+    CONTENT: Path = PROJECT / "content" / "articles"
+    OUTPUT: Path = HERE.parent / "website_build"
+
 
 log = logging.getLogger(__name__)
 
 
 class Workflow:
     """blog creation, adaption, publishing workflow"""
-    here = os.path.dirname(__file__)
-    outputPath = os.path.join(here, '..', '..', 'website_build')
-    myFlags = ['sass']
+
+    DRAFTMARKER = "__draft__"
+    myFlags = ["sass"]
 
     @classmethod
-    def serve(cls, host='0.0.0.0', port=8080, outputPath=outputPath,
-              verbosity=0, dev=True, reinstall=False, browse=False, prune=True,
-              flags=('sass',)):
+    def serve(
+        cls,
+        host="0.0.0.0",
+        port=8080,
+        outputPath=PATH.OUTPUT,
+        verbosity=0,
+        dev=True,
+        reinstall=False,
+        browse=False,
+        prune=True,
+        flags=("sass",),
+    ):
         """
         :param verbosity: 0-4
         """
@@ -41,71 +54,72 @@ class Workflow:
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
         env = ctx.get_env()
-        log.info('project path: %s' % ctx.get_project().project_path)
-        log.info('output path: %s' % outputPath)
-        run_server((host, port),
-                   env,
-                   outputPath,
-                   verbosity=verbosity,
-                   lektor_dev=dev,
-                   browse=browse,
-                   prune=prune,
-                   extra_flags=flags,
-                   ui_lang=ctx.ui_lang)
+        outputPath = Path(outputPath)
+        log.info(f"project: {ctx.get_project().project_path} | output: {outputPath}")
+        cls.move_drafts(PATH.DRAFTS, PATH.CONTENT)
+        try:
+            run_server(
+                (host, port),
+                env,
+                outputPath,
+                verbosity=verbosity,
+                lektor_dev=dev,
+                browse=browse,
+                prune=prune,
+                extra_flags=flags,
+                ui_lang=ctx.ui_lang,
+            )
+        finally:
+            cls.move_drafts(PATH.CONTENT, PATH.DRAFTS)
+
+    @classmethod
+    def move_drafts(cls, src, dst):
+        for path in src.iterdir():
+            if not path.is_dir():
+                continue
+            if (path / cls.DRAFTMARKER).exists():
+                newPath = dst / path.name
+                assert not newPath.exists(), newPath
+                log.info(f"{path} -> {newPath}")
+                path.rename(newPath)
 
     @classmethod
     def compile_notebooks(cls):
         JupyterNbConvert().convert()
 
     @classmethod
-    def deploy(cls, clean=False):
-        if clean:
-            first = subprocess.check_output(['lektor', 'clean', '--yes'])
-        else:
-            first = subprocess.check_output(['lektor', 'build'])
-        second = subprocess.check_output(['lektor', 'deploy'])
-        log.info(first.decode() + '\n' + second.decode())
+    def clean(cls):
+        out = subprocess.check_output(["lektor", "clean", "--yes"])
+        log.info(out.decode())
 
-    # never really used and probably broken and useless ...
-    # @classmethod
-    # def draft(cls, title):
-    #     with open(os.path.join(HERE, 'content.lr')) as f:
-    #         content = f.read()
-    #     rep = dict(title=title)
-    #     content = Template(content).safe_substitute(rep)
-    #     dst = os.path.join(DRAFTS_PATH, '%s.md' % slugify(title))
-    #     assert not os.path.exists(dst), dst
-    #     with open(dst, 'w') as f:
-    #         f.write(content)
-    #
-    # @classmethod
-    # def publish(cls, srcPath):
-    #     with open(srcPath) as f:
-    #         content = f.read()
-    #     rep = dict(date=datetime.now().strftime('%Y-%m-%d'))
-    #     content = Template(content).safe_substitute(rep)
-    #     slug = os.path.splitext(os.path.basename(srcPath))[0]
-    #     containerPath = os.path.join(ARTICLES_PATH, slug)
-    #     assert not os.path.exists(containerPath), containerPath
-    #     os.mkdir(containerPath)
-    #     dstPath = os.path.join(containerPath, 'contents.lr')
-    #     with open(dstPath, 'w') as f:
-    #         log.info("publishing %s:\n\n%s" % (slug, content))
-    #         f.write(content)
-    #     os.remove(srcPath)
-    #     log.info(subprocess.check_call(['git', 'add', dstPath]))
-    #
-    # @classmethod
-    # def retract(cls, srcContainerPath):
-    #     filePath = os.path.join(srcContainerPath, 'contents.lr')
-    #     assert os.path.exists(srcContainerPath), srcContainerPath
-    #     slug = os.path.basename(srcContainerPath)
-    #     dstPath = os.path.join(DRAFTS_PATH, slug + '.md')
-    #     os.rename(filePath, dstPath)
-    #     os.rmdir(srcContainerPath)
+    @classmethod
+    def deploy(cls):
+        cls.move_drafts(PATH.CONTENT, PATH.DRAFTS)
+        first = subprocess.check_output(["lektor", "build"])
+        second = subprocess.check_output(["lektor", "deploy"])
+        log.info(first.decode() + "\n" + second.decode())
+
+    @classmethod
+    def new(cls, title):
+        container = PATH.DRAFTS / slugify(title)
+        assert not container.exists(), container
+        container.mkdir()
+        (container / cls.DRAFTMARKER).write_text("")
+        content = (PATH.HERE / "content.lr").read_text()
+        content = Template(content).safe_substitute(
+            dict(title=title, date=datetime.now().strftime("%Y-%m-%d"))
+        )
+        (container / "contents.lr").write_text(content)
+
 
 def main():
     import fire
 
     logging.basicConfig(level=logging.INFO)
     fire.Fire(Workflow)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG)
+    Workflow.move_drafts(PATH.DRAFTS, PATH.CONTENT)
+    Workflow.move_drafts(PATH.CONTENT, PATH.DRAFTS)
