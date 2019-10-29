@@ -31,6 +31,11 @@
 
 {% macro render_content(a) %}
     <h1 id="{{ a._slug }}"><a href="{{ a.url }}">{{ a.title }}</a></h1>
+    {% if a.summary %}
+        <div class="summary">
+            {{ a.summary|typogrify }}
+        </div>
+    {%  endif %}
     <div class="content">
         {{ a.content|typogrify }}
     </div>

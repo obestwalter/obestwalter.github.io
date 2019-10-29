@@ -2,18 +2,15 @@ import hashlib
 import json
 import logging
 import sys
-from pathlib import Path
 
 import nbconvert
 import nbformat
 from IPython.core import interactiveshell
 from nbconvert.preprocessors import ExecutePreprocessor
 
-log = logging.getLogger(__name__)
+from lebut import PATH
 
-HERE = Path(__file__).parent
-CONTENT_PATH = HERE.parent / "content"
-CACHE_PATH = HERE / "cache.json"
+log = logging.getLogger(__name__)
 
 # TODO figure out the styling (exceptions and input/output cell differentiation (maybe just a different fence mode for output ... e.g. console and style that differently))
 
@@ -29,13 +26,15 @@ REAL_TB_FUNC = interactiveshell.InteractiveShell.showtraceback
 class JupyterNbConvert:
     """Convert changed .ipynb to .lr files before lektor build starts."""
 
+    CACHE_PATH = PATH.HERE / "compile_notebooks_cache.json"
+
     def __init__(self):
-        assert CONTENT_PATH.exists(), CONTENT_PATH
+        assert PATH.ARTICLES.exists(), PATH.ARTICLES
         try:
-            self.cache = json.loads(CACHE_PATH.read_text())
+            self.cache = json.loads(self.CACHE_PATH.read_text())
         except FileNotFoundError:
             self.cache = {}
-            CACHE_PATH.write_text(json.dumps(self.cache))
+            self.CACHE_PATH.write_text(json.dumps(self.cache))
         self.ep = ExecutePreprocessor(timeout=600, kernel_name="python3")
         self.ep.allow_errors = True
 
@@ -44,33 +43,38 @@ class JupyterNbConvert:
         try:
             for path in [
                 p
-                for p in CONTENT_PATH.glob("**/*.ipynb")
+                for p in PATH.ARTICLES.glob("**/*.ipynb")
                 if ".ipynb_checkpoints" not in p.parts
             ]:
                 self.process_nb(path)
         finally:
-            CACHE_PATH.write_text(json.dumps(self.cache))
+            self.CACHE_PATH.write_text(json.dumps(self.cache))
             interactiveshell.InteractiveShell.showtraceback = REAL_TB_FUNC
 
     def process_nb(self, path):
         text = path.read_text()
-        oldHash = self.cache.get(str(path))
+        oldHash = self.cache.get(str(path.relative_to(PATH.ARTICLES)))
         newHash = hashlib.sha256(text.encode()).hexdigest()
         newPath = path.parent / "contents.lr"
         if newHash == oldHash and newPath.exists():
             log.info(f"[SKIP] {path} - did not change")
             return
 
-        self.cache[str(path)] = newHash
+        self.cache[str(path.relative_to(PATH.ARTICLES))] = newHash
         nb = nbformat.reads(text, as_version=4)
         self.ep.preprocess(nb, resources={"metadata": {"run_path": str(path.parent)}})
         output, _ = nbconvert.MarkdownExporter().from_notebook_node(nb)
-        log.info(f"writing to {newPath}:\n\n{output}\n\n")
+        # log.debug(f"writing to {newPath}:\n\n{output}\n\n")
         newPath.write_text(output)
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    if CACHE_PATH.exists():
-        CACHE_PATH.unlink()
-    JupyterNbConvert().convert()
+    from lebut.cli import Workflow
+    Workflow._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
+    try:
+        if JupyterNbConvert.CACHE_PATH.exists():
+            JupyterNbConvert.CACHE_PATH.unlink()
+        JupyterNbConvert().convert()
+    finally:
+        Workflow._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
