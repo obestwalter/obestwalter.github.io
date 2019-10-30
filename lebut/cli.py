@@ -1,5 +1,6 @@
 """ lebut - my little lektor butler to make common activities less tedious."""
 import logging
+import os
 import subprocess
 from datetime import datetime
 from io import BytesIO
@@ -33,7 +34,7 @@ class Workflow:
 
     DRAFT_MARKER = "__draft__"
     CONTENTS_FILE = "contents.lr"
-    myFlags = ["sass"]
+    MY_FLAGS = ["sass"]
 
     @classmethod
     def serve(
@@ -51,7 +52,8 @@ class Workflow:
         """
         :param verbosity: 0-4
         """
-        assert all(f in cls.myFlags for f in flags), flags
+        assert all(f in cls.MY_FLAGS for f in flags), flags
+        os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
         env = ctx.get_env()
@@ -129,5 +131,8 @@ class Workflow:
 if __name__ == "__main__":
     """Random ad hoc testing"""
     logging.basicConfig(level=logging.DEBUG)
-    Workflow._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
-    Workflow._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+    # Workflow._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
+    # Workflow._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+    Workflow.serve()
+
+

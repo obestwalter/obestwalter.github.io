@@ -20,6 +20,12 @@ The inbuilt pygments plugin has a bug (creates wrong class name 'highlight' inst
 
 Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -S <theme name> -f html > <file name>.css`
 
+### sass problems?
+
+When getting `LoadError: cannot load such file -- rb-fsevent` run:
+
+    gem install rb-fsevent
+
 ## Acknowledgements
 
 * created with [Lektor](https://getlektor.com)
