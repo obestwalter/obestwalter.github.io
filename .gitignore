@@ -1,3 +1,4 @@
+**/.sass-cache
 _resources/*
+lebut/*.json
 drafts
-lebut/compile_notebooks_cache.json
