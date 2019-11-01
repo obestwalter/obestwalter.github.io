@@ -92,18 +92,13 @@ main
       color: hover($bg, $hl)
   .footnote-ref
     font-size: 90%
-    &:before
-      content: "["
-    &:after
-      content: "]"
   .footnotes
     margin-top: 5%
     &:before
       content: "Footnotes"
-
   img
     +raise
-
+    text-align: center
   .category
     margin-top: 1em
     font-size: 160%
@@ -127,6 +122,14 @@ main
       color: darken($fg, 20%)
       font-style: normal
       margin: 0 15% 0 5%
+      padding: 0 0 1% 0
+      text-align: justify
+    img
+      margin: 1% 0 0% 2.5%
+      text-align: right
+      float: right
+      display: inline
+
   .content
     word-spacing: 0.2em
     line-height: 1.5

@@ -1,6 +1,6 @@
 from setuptools import setup
 
-name = "lektor-sass"
+name = "lektor-markdown-customize"
 module = name.replace("-", "_")
 
 setup(
@@ -9,5 +9,9 @@ setup(
     author="Oliver Bestwalter",
     license="MIT",
     py_modules=[module],
-    entry_points={"lektor.plugins": [f"{name.split('-')[-1]} = {module}:SassPlugin"]},
+    entry_points={
+        "lektor.plugins": [
+            f"{name.partition('-')[-1]} = {module}:MarkdownCustomizePlugin"
+        ]
+    },
 )

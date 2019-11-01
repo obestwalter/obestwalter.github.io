@@ -14,8 +14,9 @@
 
 =_admonition($type, $bg, $fg: $celadon, $border: $celadon)
   .admonition-#{$type}
+    +raise
     background: $mineShaft
-    border: 1px solid $border
+    border: 1px solid darken($border, 50%)
     margin: 10px 0
     padding: 10px 15px 0
     &:before
@@ -26,8 +27,8 @@
       font-size: 110%
       line-height: 1
       margin: -10px -15px 10px
-      padding: 1.5% 3%
-      text-align: right
+      padding: 0.8% 2%
+      text-align: center
 
 =admonitions
   $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet)

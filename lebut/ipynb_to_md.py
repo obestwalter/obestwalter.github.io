@@ -2,6 +2,8 @@ import hashlib
 import json
 import logging
 import os
+import sys
+
 from pathlib import Path
 
 import nbconvert
@@ -72,13 +74,15 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
 
     def preprocess(self, nb, resources=None, km=None):
         srcUrl = f"{URL.WEBSITE_ARTICLES}/{resources['fileRelPath']}"
+        version = f"{sys.version_info.major}.{sys.version_info.minor}"
         cell = nbformat.NotebookNode(
             {
                 "cell_type": "markdown",
                 "metadata": {},
                 "source": (
                     f"!!! This article is generated from a "
-                    f"[Jupyter notebook](https://jupyter.org/).\n"
+                    f"[Jupyter notebook](https://jupyter.org/) "
+                    f"running in a Python{version} kernel. "
                     f"You can [download it]({srcUrl}) and play with it."
                 ),
             }
@@ -125,7 +129,9 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
         magic = CodeMagics(shell=shell)
         arg_s = " ".join(content.split()[1:])
         magic.load(arg_s)
-        return shell.rl_next_input
+        code = shell.rl_next_input
+        shell.reset()   # avoid crashes due to thread pollution
+        return code
 
 
 if __name__ == "__main__":

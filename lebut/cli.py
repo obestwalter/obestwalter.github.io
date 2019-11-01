@@ -51,7 +51,7 @@ class Workflow:
         :param verbosity: 0-4
         """
         assert all(f in cls.MY_FLAGS for f in flags), flags
-        # os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
+        os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
         outputPath = Path(outputPath)
