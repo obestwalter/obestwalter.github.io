@@ -91,11 +91,19 @@ main
     &:hover
       color: hover($bg, $hl)
   .footnote-ref
-    font-size: 82%
+    font-size: 90%
     &:before
-      content: "*["
+      content: "["
     &:after
       content: "]"
+  .footnotes
+    margin-top: 5%
+    &:before
+      content: "Footnotes"
+
+  img
+    +raise
+
   .category
     margin-top: 1em
     font-size: 160%
@@ -114,13 +122,11 @@ main
         float: left
         font-size: 300%
         line-height: 0.5
-        padding-top: 6px
-        padding-right: 10px
-        padding-left: 0px
+        padding: 2% 1.5% 0 0
         font-weight: bold
-      color: lighten($fg, 10%)
+      color: darken($fg, 20%)
       font-style: normal
-      margin: 0 2em
+      margin: 0 15% 0 5%
   .content
     word-spacing: 0.2em
     line-height: 1.5
@@ -132,8 +138,6 @@ main
       background-color: $darkBg
       font-family: $codeFont
       padding: 0.1em 0.2em
-    img
-      +raise
     pre
       +raise
       background-color: $darkBg
@@ -176,4 +180,5 @@ footer
       &:hover
         color: hover($bg, $fg)
 
+// import media-queries last as they need to override things
 @import media-queries

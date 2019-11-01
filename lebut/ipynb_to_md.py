@@ -1,6 +1,7 @@
 import hashlib
 import json
 import logging
+from pathlib import Path
 
 import nbconvert
 import nbformat
@@ -79,23 +80,34 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
         super().preprocess(nb, resources=resources, km=km)
 
     def preprocess_cell(self, cell, resources, cell_index, store_history=True):
-        if cell.cell_type == "code":
-            _, outputs = self.run_cell(cell, cell_index, store_history)
-            newOutput = [f"\n\n```python\n{cell.source}\n```"]
-            for out in outputs:
-                if out.output_type == "execute_result":
-                    # TODO deal with other types as they come up
-                    data = out.data["text/plain"]
-                    newOutput.append(f"```text\n[result]\n{data}```")
-                elif out.output_type == "error":
-                    newOutput.append(f"```text\n[{out.ename}]\n{out.evalue}```")
-                elif out.output_type == "stream":
-                    newOutput.append(f"```text\n[{out.name}]\n{out.text}```")
-                else:
-                    raise Exception(f"dunno what to do with: {out}")
-            cell = nbformat.NotebookNode(
-                {"cell_type": "raw", "metadata": {}, "source": "\n".join(newOutput)}
-            )
+        if cell.cell_type != "code":
+            return cell, resources
+
+        assert isinstance(cell.source, str)
+        # poor mans %load magic implementation (is there a better/inbuilt way?)
+        t = cell.source.replace("# ", "")
+        if t.startswith("%load"):
+            filename = t.split()[1]
+            contents = Path(filename).read_text().strip()
+            cell.source = f"# %load {filename}\n{contents}"
+            return cell, resources
+
+        _, outputs = self.run_cell(cell, cell_index, store_history)
+        newOutput = [f"\n\n```python\n{cell.source}\n```"]
+        for out in outputs:
+            if out.output_type == "execute_result":
+                # TODO deal with other types as they come up
+                data = out.data["text/plain"]
+                newOutput.append(f"```text\n[result]\n{data}```")
+            elif out.output_type == "error":
+                newOutput.append(f"```text\n[{out.ename}]\n{out.evalue}```")
+            elif out.output_type == "stream":
+                newOutput.append(f"```text\n[{out.name}]\n{out.text}```")
+            else:
+                raise Exception(f"dunno what to do with: {out}")
+        cell = nbformat.NotebookNode(
+            {"cell_type": "raw", "metadata": {}, "source": "\n".join(newOutput)}
+        )
         return cell, resources
 
 

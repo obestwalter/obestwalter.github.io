@@ -1,0 +1,257 @@
+title: Python is made of star-stuff
+---
+crtime: 2019-10-27
+---
+mtime: 2019-10-27
+---
+tags:
+
+python
+fundamentals
+little-things
+---
+summary:
+
+[![hubble telescope picture of messier9 star cluster](hubble-messier9.jpg)](https://www.nasa.gov/mission_pages/hubble/science/messier9.html)
+
+Carl Sagan wrote in Cosmos that we are all made of "star-stuff". I think this is important to become aware of now and then. All of the elements that make life on earth possible were formed in a star at some point. It puts things into perspective if we can remember that life is a miracle in the sense that we fundamentally have no clue **how** all this is possible and **why** we run around on this rock hurtling through space. You ask yourself what this has to do with Python? Right - nothing, but obvioulsy the humans who create Python are made of star-stuff and I like to believe that their deep sense of wonder about the miracle of life has inspired them to put so darn many stars into its syntax. 
+
+---
+content:
+
+
+```python
+%load star-stuff.py
+```
+The innocent little **star** is a very versatile syntax element and operator. Let's have a look at all of its uses in Python.
+
+## Boring things first: `*` and `**` operators
+
+One of the first things a new Python disciple might learn is how to use Python as a calculator - `*` is the multiplication operator and `**` is used for exponentiation.
+
+
+```python
+2 * 2 * 2 * 2  # simple multiplication
+```
+```text
+[result]
+16```
+
+```python
+2 ** 4         # same using exponentiation
+```
+```text
+[result]
+16```
+
+```python
+"spam" * 3     # strings can be multiplied with ints
+```
+```text
+[result]
+'spamspamspam'```
+### Pack and unpack arguments
+
+
+```python
+def foo(*args, **kwargs):
+    bar(*args, **kwargs)
+
+def bar(a, b, c=None, d=None):
+    print(a, b ,c, d)
+    
+foo(*[1, 2], **dict(c=3, d=4))
+```
+```text
+[stdout]
+1 2 3 4
+```
+## Enforce the API of your function: keyword only arguments
+
+https://www.python.org/dev/peps/pep-3102/
+
+
+```python
+def foo(a, *, b=None, x=1):
+    print(a, b, x)
+          
+foo(1, 2)
+```
+```text
+[TypeError]
+foo() takes 1 positional argument but 2 were given```
+
+```python
+foo(b=2, a=1, x=3)
+```
+```text
+[stdout]
+1 2 3
+```
+
+
+### Elegant tuple unpacking (actually: sequence unpacking)
+
+
+```python
+for seq in ["egg", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {1: 'a', 2: 'b', 3: 'c'}]:
+    print(f"{seq} is {type(seq)}")
+    a, b, c = seq
+    print(f"a, b, c  -> {a} {b} {c}")
+    *a, b = seq
+    print(f"*a, b = seq -> {a} {b}")
+    a, *b = seq
+    print(f"a, *b = seq -> {a} {b}\n")
+```
+```text
+[stdout]
+egg is <class 'str'>
+a, b, c  -> e g g
+*a, b = seq -> ['e', 'g'] g
+a, *b = seq -> e ['g', 'g']
+
+[1, 2, 3] is <class 'list'>
+a, b, c  -> 1 2 3
+*a, b = seq -> [1, 2] 3
+a, *b = seq -> 1 [2, 3]
+
+(1, 2, 3) is <class 'tuple'>
+a, b, c  -> 1 2 3
+*a, b = seq -> [1, 2] 3
+a, *b = seq -> 1 [2, 3]
+
+{1, 2, 3} is <class 'set'>
+a, b, c  -> 1 2 3
+*a, b = seq -> [1, 2] 3
+a, *b = seq -> 1 [2, 3]
+
+{1: 'a', 2: 'b', 3: 'c'} is <class 'dict'>
+a, b, c  -> 1 2 3
+*a, b = seq -> [1, 2] 3
+a, *b = seq -> 1 [2, 3]
+
+```
+
+```python
+l = [1, 2, 3, 4]
+a, b, *c = l
+a, b, c
+
+### star stuff: merge stuff
+```
+```text
+[result]
+(1, 2, [3, 4])```
+
+```python
+a, b = [1, 2, 3], [4, 5, 6]
+```
+
+```python
+a, b
+```
+```text
+[result]
+([1, 2, 3], [4, 5, 6])```
+
+```python
+[*a, *b]
+```
+```text
+[result]
+[1, 2, 3, 4, 5, 6]```
+
+```python
+a, b = {1: 2, 2: 3, 3: 4}, {1: 4, 4: 5, 5: 6}
+a, b
+```
+```text
+[result]
+({1: 2, 2: 3, 3: 4}, {1: 4, 4: 5, 5: 6})```
+
+```python
+{**a, **b}
+```
+```text
+[result]
+{1: 4, 2: 3, 3: 4, 4: 5, 5: 6}```
+
+```python
+a, b = {1, 2 ,3}, {3, 4 ,5}
+```
+
+```python
+{*a, *b}  
+```
+```text
+[result]
+{1, 2, 3, 4, 5}```
+
+```python
+a | b  # this is the more "natural" approach for sets though (union)
+```
+```text
+[result]
+{1, 2, 3, 4, 5}```
+### star stuff: merge stuff (you can really mix and match)
+
+
+```python
+a =[1, 2 ,3]   # list
+b = {3, 4 ,5}  # set
+(*a, *b)       # create tuple
+```
+```text
+[result]
+(1, 2, 3, 3, 4, 5)```
+### star stuff: merge stuff: no nesting: last one wins
+
+
+```python
+a = {"a": 1, "foo": { "a": 1}}
+b = {"a": 1, "foo": { "b": 2, "c": 3}}
+
+```
+This will not merge the nested dict foo, but overwrite it:
+
+
+```python
+{**a, **b}
+```
+```text
+[result]
+{'a': 1, 'foo': {'b': 2, 'c': 3}}```
+## Import all the things
+
+The star is also involved in something that is usually an [antipattern](http://wiki.c2.com/?AntiPattern) and it looks like this:
+
+
+```python
+from sys import *
+```
+this is usually not a good idea because:
+
+* static code analysis tools can't warn you about unresolved references
+* it causes namespace pollution which might badly break your code (e.g. if a module you import all the names from redefines `open` or some other inbuilt)
+* you can't see easily from where a name was imported
+
+If a package (or module[^1]) is explicitly designed to be imported like this, this is usually documented and the authors defined the special module attribute   [`__all__`](https://docs.python.org/3/tutorial/modules.html?highlight=__all__#importing-from-a-package) that explicitly lists the names that should be imported when using `from <module or package> import *` 
+
+[^1]: I'm either not seeing it or the Python documentation is omitting that `__all__` also works for modules. It does though ... I tried it.
+
+## honorable mentions
+
+not quite as part of the syntax but ...
+
+* regex
+* glob
+
+## Did I forget something?
+
+Please let me know if I left out a valid usage of the star in Python.
+
+
+
+
+!!! This article is generated from a [Jupyter notebook](https://jupyter.org/).
+You can [download it](https://oliver.bestwalter.de/articles/python-is-made-of-star-stuff/python-is-made-of-star-stuff.ipynb) and play with it.

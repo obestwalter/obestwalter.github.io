@@ -4,12 +4,20 @@ cdate: $blubb
 ----
 content:
 
+```python
+# %load a-module.py
+import sys
+
+def foo():
+    print(sys)
+```
+
 
 ```python
 2 * 2 * 2 * 2  # single line code with single line output
 ```
 ```text
-[RESULT]
+[result]
 16```
 ### Pack and unpack arguments
 
@@ -24,7 +32,7 @@ def bar(a, b, c=None, d=None):
 foo(*[1, 2], **dict(c=3, d=4))
 ```
 ```text
-[STDOUT]
+[stdout]
 1 2 3 4
 ```
 
@@ -39,7 +47,7 @@ for seq in ["egg", [1, 2, 3], (1, 2, 3), {1, 2, 3}, {1: 'a', 2: 'b', 3: 'c'}]:
     print(f"a, *b = seq -> {a} {b}\n")
 ```
 ```text
-[STDOUT]
+[stdout]
 egg is <class 'str'>
 a, b, c  -> e g g
 *a, b = seq -> ['e', 'g'] g
@@ -76,30 +84,28 @@ b = {"a": 1, "foo": { "b": 2, "c": 3}}
 
 ```python
 raise SyntaxError("NO OTHER OUTPUT!")
-
 ```
 ```text
-[ERROR]
-SyntaxError: NO OTHER OUTPUT! (<string>)```
+[SyntaxError]
+NO OTHER OUTPUT! (<string>)```
 
 ```python
 print("Other output")
 raise ValueError("BOOM WITH OTHER OUTPUTS!")
-
 ```
 ```text
-[STDOUT]
+[stdout]
 Other output
 ```
 ```text
-[ERROR]
-ValueError: BOOM WITH OTHER OUTPUTS!```
+[ValueError]
+BOOM WITH OTHER OUTPUTS!```
 
 ```python
 {**a, **b}
 ```
 ```text
-[RESULT]
+[result]
 {'a': 1, 'foo': {'b': 2, 'c': 3}}```
 !!! This article is generated from a [Jupyter notebook](https://jupyter.org/).
 You can [download it](https://oliver.bestwalter.de/articles/tests/code.ipynb) and play with it.

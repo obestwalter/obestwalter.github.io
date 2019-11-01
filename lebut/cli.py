@@ -51,10 +51,9 @@ class Workflow:
         :param verbosity: 0-4
         """
         assert all(f in cls.MY_FLAGS for f in flags), flags
-        os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
+        # os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
-        env = ctx.get_env()
         outputPath = Path(outputPath)
         log.info(f"project: {ctx.get_project().project_path} | output: {outputPath}")
         cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
@@ -62,7 +61,7 @@ class Workflow:
         try:
             run_server(
                 (host, port),
-                env,
+                ctx.get_env(),
                 outputPath,
                 verbosity=verbosity,
                 lektor_dev=dev,

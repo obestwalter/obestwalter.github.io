@@ -1,8 +1,8 @@
 title: $title
 ---
-mtime: $date
----
 crtime: $date
+---
+mtime: $date
 ---
 tags:
 
