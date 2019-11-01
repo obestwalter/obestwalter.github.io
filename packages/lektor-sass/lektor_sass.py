@@ -10,15 +10,12 @@ log = logging.getLogger(__name__)
 class SassPlugin(Plugin):
     name = "Lektor Sass"
     description = "Watch sass files and transpile them on changes."
-    rubyPathCmd = ["ruby", "-rubygems", "-e", "puts Gem.user_dir"]
-    sassSpec = "assets/static:assets/static"
+    sassSpec = "_style/style.sass:assets/static/style.css"
     pgrepWatcher = ["pgrep", "-f", sassSpec]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # rubyBin = subprocess.check_output(self.rubyPathCmd).decode().strip()
-        # self.sassPath = os.path.join(rubyBin, 'bin', 'sass')
-        self.sassPath = "/usr/bin/sass"
+        self.sassPath = "sass"
         log.info(f"Sass path: {self.sassPath}")
 
     def run_sass(self, watch=True):
@@ -32,6 +29,7 @@ class SassPlugin(Plugin):
             "--watch" if watch else "--update",
             self.sassSpec,
         ]
+        log.info(f"spawn: %s", " ".join(args))
         subprocess.Popen(args, cwd=self.env.root_path)
 
     def is_enabled(self, extra_flags):
@@ -42,7 +40,6 @@ class SassPlugin(Plugin):
         if not self.is_enabled(flags):
             return
 
-        log.info("Spawning sass watcher")
         self.run_sass()
 
     def on_server_stop(self, **_):
@@ -51,20 +48,17 @@ class SassPlugin(Plugin):
             for pid in processes:
                 subprocess.check_call(["kill", pid])
 
-    # TODO if not having this causes pain, reactivate ut
-    #  This is just slowing down startup and I think not really necessary
-    # def on_before_build_all(self, builder, **_):
-    #     flags = getattr(
-    #         builder, "extra_flags", getattr(builder, "build_flags", None))
-    #     if not self.is_enabled(flags) or self.sassProcesses:
-    #         return
-    #
-    #     log.info('Starting sass build')
-    #     self.run_sass(watch=False)
-    #     while self.sassProcesses:
-    #         log.info("wait for sass build")
-    #         time.sleep(1)
-    #     log.info('Sass build finished')
+    def on_before_build_all(self, builder, **_):
+        flags = getattr(builder, "extra_flags", getattr(builder, "build_flags", None))
+        if not self.is_enabled(flags) or self.sassProcesses:
+            return
+
+        log.info("starting sass build")
+        self.run_sass(watch=False)
+        while self.sassProcesses:
+            log.info("wait for sass build")
+            time.sleep(0.5)
+        log.info("sass build finished")
 
     @property
     def sassProcesses(self):

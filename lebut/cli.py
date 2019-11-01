@@ -10,13 +10,13 @@ from typing import List
 
 import fire
 
-from lebut import PATH
+from lebut import PATH, NAME
 from lektor.admin.modules import serve
 from lektor.cli import Context
 from lektor.devserver import run_server
 from slugify import slugify
 
-from lebut.compile_notebooks import JupyterNbConvert
+from lebut import ipynb_to_md
 
 log = logging.getLogger(__name__)
 
@@ -32,8 +32,6 @@ def main():
 class Workflow:
     """blog creation, adaption, publishing workflow"""
 
-    DRAFT_MARKER = "__draft__"
-    CONTENTS_FILE = "contents.lr"
     MY_FLAGS = ["sass"]
 
     @classmethod
@@ -81,16 +79,16 @@ class Workflow:
         container = PATH.ARTICLES / slugify(title)
         assert not container.exists(), f"{container} already exists!"
         container.mkdir()
-        (container / cls.DRAFT_MARKER).write_text("")
-        content = (PATH.HERE / cls.CONTENTS_FILE).read_text()
+        (container / NAME.DRAFT).write_text("")
+        content = (PATH.HERE / NAME.CONTENTS).read_text()
         content = Template(content).safe_substitute(
             dict(title=title, date=datetime.now().strftime("%Y-%m-%d"))
         )
-        (container / cls.CONTENTS_FILE).write_text(content)
+        (container / NAME.CONTENTS).write_text(content)
 
     @classmethod
     def compile_notebooks(cls):
-        JupyterNbConvert().convert()
+        ipynb_to_md.process_all(PATH.ARTICLES)
 
     @classmethod
     def build(cls, clean=False):
@@ -118,7 +116,7 @@ class Workflow:
         for path in src.iterdir():
             if not path.is_dir():
                 continue
-            if (path / cls.DRAFT_MARKER).exists():
+            if (path / NAME.DRAFT).exists():
                 newPath = dst / path.name
                 assert not newPath.exists(), newPath
                 log.info(
@@ -130,9 +128,7 @@ class Workflow:
 
 if __name__ == "__main__":
     """Random ad hoc testing"""
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     # Workflow._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
     # Workflow._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
     Workflow.serve()
-
-

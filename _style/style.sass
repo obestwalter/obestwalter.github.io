@@ -1,18 +1,19 @@
-@import variables
-@import mixins
-@import media-queries
-@import fonts
 @import normalize
-@import pygments
+
+@import mixins
+@import fonts
 @import hover
+@import pygments
+@import shared-variables
 
 html
   background: $mineShaft
+  font-size: 150%
 body
   font-family: $textFont
-  max-width: 800px
-  margin-left: auto
-  margin-right: auto
+  //max-width: 800px
+  //margin-left: auto
+  //margin-right: auto
 a
   text-decoration: none
 hr
@@ -137,7 +138,7 @@ main
       +raise
       background-color: $darkBg
       font-family: $codeFont
-      font-size: 95%
+      font-size: 110%
   .highlight
     background-color: $darkBg
     padding-left: 0.6em
@@ -174,3 +175,5 @@ footer
       color: $fg
       &:hover
         color: hover($bg, $fg)
+
+@import media-queries

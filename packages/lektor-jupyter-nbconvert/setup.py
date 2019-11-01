@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name="lektor-jupyter-nbconvert",
     description="Add preliminary build step to convert .ipynb to .lr",
-    version="0.1dev1",
+    version="0.1.dev1",
     author="Oliver Bestwalter",
     author_email="oliver@bestwalter.de",
     url=(
