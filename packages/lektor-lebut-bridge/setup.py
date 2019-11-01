@@ -1,19 +1,22 @@
 from setuptools import setup
 
+name = "lektor-lebut-bridge"
+module = name.replace("-", "_")
+
 setup(
-    name="lektor-jupyter-nbconvert",
-    description="Add preliminary build step to convert .ipynb to .lr",
+    name=name,
+    description="Do site specific things as part of lektor build/dev.",
     version="0.1.dev1",
     author="Oliver Bestwalter",
     author_email="oliver@bestwalter.de",
     url=(
         "https://github.com/obestwalter/obestwalter.github.io/tree/lektor-sources/"
-        "packages/lektor-jupyter-nbconvert"
+        f"packages/{name}"
     ),
-    py_modules=["lektor_jupyter_nbconvert"],
+    py_modules=[module],
     entry_points={
         "lektor.plugins": [
-            "jupyter-nbconvert = lektor_jupyter_nbconvert:JupyterNbConvertPlugin"
+            f"{name.partition('-')[-1]} = {module}:LebutPlugin"
         ]
     },
     install_requires=["nbformat", "nbconvert"],

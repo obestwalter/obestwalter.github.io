@@ -1,17 +1,20 @@
 import hashlib
 import json
 import logging
+import os
 from pathlib import Path
 
 import nbconvert
 import nbformat
+from IPython import InteractiveShell
+from IPython.core.magics import CodeMagics
 from nbconvert.preprocessors import ExecutePreprocessor
 
 from lebut import PATH, NAME, URL
 
 log = logging.getLogger(__name__)
 
-_CACHE_PATH = PATH.HERE / "compile_notebooks_cache.json"
+_CACHE_PATH: Path = Path(__file__).with_suffix(".json")
 try:
     CACHE = json.loads(_CACHE_PATH.read_text())
 except FileNotFoundError:
@@ -44,17 +47,21 @@ def process(container, path, force=False):
 
 
 def convert(path):
-    log.info(f"convert to markdown: {path.name}")
+    filename = path.name
+    cwd = path.parent
+    log.info(f"convert to markdown: {filename}")
+    resources = {"fileRelPath": f"{cwd.name}/{filename}"}
     nb = nbformat.reads(path.read_text(), as_version=4)
-    preproc = ArticleExecutePreprocessor(timeout=600, kernel_name="python3")
-    preproc.preprocess(
-        nb,
-        resources={
-            "metadata": {"path": str(path.parent)},
-            "fileRelPath": f"{path.parent.name}/{path.name}",
-        },
-    )
-    return nbconvert.MarkdownExporter().from_notebook_node(nb)[0]
+    oldPath = os.getcwd()
+    try:
+        os.chdir(cwd)
+        preproc = ArticleExecutePreprocessor(
+            timeout=600, kernel_name="python3", resources=resources
+        )
+        preproc.preprocess(nb, resources=resources)
+    finally:
+        os.chdir(oldPath)
+    return nbconvert.MarkdownExporter().from_notebook_node(nb, resurces=resources)[0]
 
 
 class ArticleExecutePreprocessor(ExecutePreprocessor):
@@ -84,12 +91,9 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
             return cell, resources
 
         assert isinstance(cell.source, str)
-        # poor humans %load magic implementation (is there a better/inbuilt way?)
-        t = cell.source.replace("# ", "")
-        if t.startswith("%load"):
-            filename = t.split()[1]
-            contents = Path(filename).read_text().strip()
-            cell.source = f"# %load {filename}\n{contents}"
+        load_candidate = cell.source.replace("# ", "")
+        if load_candidate.startswith("%load"):
+            cell.source = self.apply_load_magic(load_candidate)
             return cell, resources
 
         _, outputs = self.run_cell(cell, cell_index, store_history)
@@ -110,12 +114,23 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
         )
         return cell, resources
 
+    def apply_load_magic(self, content):
+        """Apply the %load magic manually to extract code from a Python module.
+
+        Cell magic seems not to be applied automatically, so ... next best thing.
+
+        TODO is there a better/more automagic way as part of execution?
+        """
+        shell = InteractiveShell()
+        magic = CodeMagics(shell=shell)
+        arg_s = " ".join(content.split()[1:])
+        magic.load(arg_s)
+        return shell.rl_next_input
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     CACHE = {}
-    process_all(PATH.DRAFTS)
-    # process(
-    #     PATH.ARTICLES
-    #     / "python-is-made-of-star-stuff/python-is-made-of-star-stuff.ipynb"
-    # )
+    # process_all(PATH.DRAFTS)
+    p = PATH.ARTICLES / "python-is-made-of-star-stuff/python-is-made-of-star-stuff.ipynb"
+    process(p.parent, p)

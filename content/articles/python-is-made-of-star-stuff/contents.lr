@@ -21,11 +21,30 @@ content:
 
 
 ```python
-%load star-stuff.py
+# %load star-stuff.py
+from sys import *
+
+# def stars_everywhere(starsky, *, hutch="cool"):
+
+# **WARNING** in the interest of your mental health: try not to make sense of this!
+def star_wrapper(function, *, param=None):
+    def star_reporter(*args, **kwargs):
+        print(*args, **kwargs)
+        return function(*args, **kwargs)
+    return star_reporter
+
+    first, *rest = args
+    more = [*path[:3], *rest]
+    print(more)
+
+
+stars_everywhere("hutch", kw=1)
+
 ```
+
 The innocent little **star** is a very versatile syntax element and operator. Let's have a look at all of its uses in Python.
 
-## Boring things first: `*` and `**` operators
+## Simple things first: &#10033; and &#10033;&#10033; operators
 
 One of the first things a new Python disciple might learn is how to use Python as a calculator - `*` is the multiplication operator and `**` is used for exponentiation.
 

@@ -6,7 +6,7 @@ from lektor.pluginsystem import Plugin
 log = logging.getLogger(__name__)
 
 
-class JupyterNbConvertPlugin(Plugin):
+class LebutPlugin(Plugin):
     name = "Lektor Jupyter Nbconvert"
     description = "Convert changed .ipynb to .lr on server spawn."
 
@@ -28,5 +28,5 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
     lektor.pluginsystem.weakref = lambda x: x
-    jp = JupyterNbConvertPlugin(None, "some-id")
+    jp = LebutPlugin(None, "some-id")
     jp.on_server_spawn()

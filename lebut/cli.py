@@ -102,6 +102,10 @@ class Workflow:
 
     @classmethod
     def clean(cls):
+        try:
+            ipynb_to_md._CACHE_PATH.unlink()
+        except FileNotFoundError:
+            pass
         cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
         cls._run(["lektor", "clean", "--yes"])
 
@@ -130,4 +134,9 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # Workflow._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
     # Workflow._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
-    Workflow.serve()
+    olPath = os.getcwd()
+    try:
+        os.chdir(str(PATH.PROJECT))
+        Workflow.serve()
+    finally:
+        os.chdir(olPath)
