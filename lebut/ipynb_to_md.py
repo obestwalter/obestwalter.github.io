@@ -84,7 +84,7 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
             return cell, resources
 
         assert isinstance(cell.source, str)
-        # poor mans %load magic implementation (is there a better/inbuilt way?)
+        # poor humans %load magic implementation (is there a better/inbuilt way?)
         t = cell.source.replace("# ", "")
         if t.startswith("%load"):
             filename = t.split()[1]
