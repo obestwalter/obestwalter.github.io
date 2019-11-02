@@ -163,7 +163,7 @@ for iterable in [
     *a, b = iterable
     print(f"*a, b = iterable -> {a} {b}")
     a, *b = iterable
-    print(f"a, *b = iterable -> {a} {b}")
+    print(f"a, *b = iterable -> {a} {b}\n")
 ```
 ```text
 [stdout]
@@ -171,24 +171,29 @@ egg (<class 'str'>):
 a, b, c        -> e g g
 *a, b = iterable -> ['e', 'g'] g
 a, *b = iterable -> e ['g', 'g']
+
 [1, 2, 3] (<class 'list'>):
 a, b, c        -> 1 2 3
 *a, b = iterable -> [1, 2] 3
 a, *b = iterable -> 1 [2, 3]
+
 (1, 2, 3) (<class 'tuple'>):
 a, b, c        -> 1 2 3
 *a, b = iterable -> [1, 2] 3
 a, *b = iterable -> 1 [2, 3]
+
 {1, 2, 3} (<class 'set'>):
 a, b, c        -> 1 2 3
 *a, b = iterable -> [1, 2] 3
 a, *b = iterable -> 1 [2, 3]
+
 {1: 'a', 2: 'b', 3: 'c'} (<class 'dict'>):
 a, b, c        -> 1 2 3
 *a, b = iterable -> [1, 2] 3
 a, *b = iterable -> 1 [2, 3]
+
 ```
-### ... and in the other direction
+### There is also more to pack
 
 Pretty much analogous to how &#10033; and &#10033;&#10033; are used in function calls they can be used in literals to create new iterables or mappings:
 
