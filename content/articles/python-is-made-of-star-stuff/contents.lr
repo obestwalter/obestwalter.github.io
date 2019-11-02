@@ -67,7 +67,7 @@ One of the first things a new Python disciple might learn is how to use Python a
 ```text
 [result]
 'spamspamspam'```
-Although it is not even trying to make sense, the star-spangled code example further up actually works. If you look at the `wrapped` function, &#10033; is used as a boring old mathematical operator here: `first *= 2 ** elem` (which is using an [augmented assignment](https://docs.python.org/3/reference/simple_stmts.html#index-14) and is the the same as `first = first * 2 ** elem`). 
+Although it is not even trying to make sense, the star-spangled code example further up actually works. If you look at the `wrapped` function, &#10033; is used as a boring old mathematical operator here: `first *= 2 ** elem` (which is using an [augmented assignment](https://docs.python.org/3/reference/simple_stmts.html#index-14) and is the same as `first = first * 2 ** elem`). 
 
 If we run `wrappped`, we won't get a useful result but at least we see that the code executes:
 
