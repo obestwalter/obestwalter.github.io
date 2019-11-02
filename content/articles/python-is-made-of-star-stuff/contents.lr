@@ -48,12 +48,26 @@ One of the first things a new Python disciple might learn is how to use Python a
 
 
 ```python
-f"multiply: {2 * 2=} | exponify: {2 ** 4=} | spamify: {'spam' * 3=}"
+2 * 2
+```
+```text
+[result]
+4```
+
+```python
+2 ** 4
+```
+```text
+[result]
+16```
+
+```python
+'spam' * 3
 
 ```
 ```text
 [result]
-"multiply: 2 * 2=4 | exponify: 2 ** 4=16 | spamify: 'spam' * 3='spamspamspam'"```
+'spamspamspam'```
 Although it makes no sense, the star-spangled code example further up actually works. If you look at the `wrapped` function, &#10033; is used as a boring old mathematical operator: `first *= 2 ** elem` (which is the same as `first = first * 2 ** elem`).
 
 
@@ -84,7 +98,7 @@ With [Python3.0](https://docs.python.org/3.0/whatsnew/3.0.html#new-syntax) a new
 
 
 ```python
-@sparkle_appender(" XXX ")
+@sparkle_appender(" ❈❈❈ ")
 def badly_wrapped():
     pass
 ```
@@ -102,14 +116,14 @@ def passing_things_through_function(*args, **kwargs):
     the_actual_function(*args, **kwargs)
 
 def the_actual_function(a, b, c=None, d=None):
-    print(f"function was called normally: {a=}, {b=}, {c=}, {d=}")
+    print(f"passed arguments: {a=}, {b=}, {c=}, {d=}")
     
 passing_things_through_function(*[1, 2], **dict(c=3, d=4))
 ```
 ```text
 [stdout]
 passing through args=(1, 2) and kwargs={'c': 3, 'd': 4}
-function was called normally: a=1, b=2, c=3, d=4
+passed arguments: a=1, b=2, c=3, d=4
 ```
 A case where this is particularly useful is when creating decorators that are pretty generic in what they do (like the `sparkle_appender`). They just need to pass through whatever the decorated function needs to be called with.
 

@@ -1,41 +1,54 @@
-@import include-media
-
-$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px)
-/* Inclusive and exclusive operators for a finer control over the intervals */
-@include media(">phone", "<=tablet")
-  width: 50%
-
-
-/* Use ligatured operators if you fancy a slicker declaration */
-@include media("≥phone", "≤tablet")
-  line-height: 1.5
-
-
-//@media only screen and (min-device-width: 600px)
-//  html
-//    font-size: 120%
-//    max-width: 800px
+//@import include-media
 //
-//@media only screen and (min-device-width: 800px)
-//  html
-//    font-size: 150%
+//$breakpoints: (mini: 320px, small: 600px, medium: 768px, large: 1024px, grande: 1200px)
+//@include media("<medium")
+//  //html
+//  //  font-size: 120%
 //  header, main, footer
+//    width: 750px
 //    margin: 0 auto
 //    padding: 1em 1em
-//    max-width: 790px
 //
-//@media only screen and (min-device-width: 900px)
-//  html
-//    font-size: 150%
-//  header, main, footer
-//    margin: 0 auto
-//    padding: 1em 1em
-//    max-width: 890px
 //
-//@media only screen and (min-device-width: 1200px)
+///* Use ligatured operators if you fancy a slicker declaration */
+//@include media(">=medium", "<large")
 //  html
-//    font-size: 180%
-//  header, main, footer
-//    margin: 0 auto
-//    padding: 1em 1em
-//    max-width: 1100px
+//    //font-size: 120%
+//    max-width: 900px
+////  header, main, footer
+////    margin: 0 auto
+////    padding: 1em 1em
+////    max-width: 890px
+//
+///* Use ligatured operators if you fancy a slicker declaration */
+//@include media(">large", "<grande")
+//  html
+//    //font-size: 120%
+//    max-width: 1000px
+////  header, main, footer
+////    margin: 0 auto
+////    padding: 1em 1em
+////    max-width: 890px
+
+
+@media only screen and (min-device-width: 600px)
+  header, main, footer
+    margin: 0 auto
+    width: 750px
+
+@media only screen and (min-device-width: 800px)
+  header, main, footer
+    margin: 0 auto
+    width: 790px
+
+@media only screen and (min-device-width: 900px)
+  header, main, footer
+    margin: 0 auto
+    width: 880px
+
+@media only screen and (min-device-width: 1200px)
+  //html
+  //  font-size: 180%
+  header, main, footer
+    margin: 0 auto
+    width: 1100px
