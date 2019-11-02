@@ -29,7 +29,7 @@ We all know that we should use good names. This often makes it necessary to use 
 
 ! I personally prefer `lowerCasedCamelCase` for local names bound to data and `snake_case` for names bound to functions and I wasn't even technically violating the PEP-8 when doing that [until 2018](https://github.com/python/peps/pull/545). Now I am a self confessed PEP-8 outlaw in personal projects.
 
-## `_` - it needs a name, but I won't use it
+## simply `_`: it needs a name, but I won't use it
 
 Using a single underscore as the complete name can be seen as a crutch. In certain situations it might be necessary to assign a name due to the nature of the language, but we'd rather not give it a name (because we won't even be using it anyway).
 
@@ -118,7 +118,7 @@ print(f"{id(id_)=}")
 ```
 ```text
 [stdout]
-id(id_)=139849230985264
+id(id_)=140049929049552
 ```
 This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the `builtins`[^3] module is merged into the module. The objects can still be retrieved from `builtins` whenever necessary:
 
@@ -166,7 +166,7 @@ a.print_spam()
 ```
 ```text
 [stdout]
-self.__spam='SPAM', id(self)=139849178834640
+self.__spam='SPAM', id(self)=140049893684848
 ```
 Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although `a` and `self` are the exact same object (as can be seen from the printed id):
 
@@ -177,7 +177,7 @@ a.__spam
 ```
 ```text
 [stdout]
-id(a)=139849178834640
+id(a)=140049893684848
 ```
 ```text
 [AttributeError]
