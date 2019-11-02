@@ -1,0 +1,214 @@
+title: Something I really must underscore
+---
+ctime: 2019-11-02
+---
+mtime: 2019-11-02
+---
+tags:
+
+python
+fundamentals
+little-things
+---
+summary:
+
+[![wikipedia: underscore](wikipedia-crop-underscore.png)](https://en.wikipedia.org/wiki/Underscore)
+
+The history of the underscore goes back to mechanical typewriters as a way to combine them with text in order to ... **surprise** ... underscore text. I don't know whether it was due to inertia, backwards compatibility considerations, or the missing insight that underscoring text might work differently on computers, but whatever it was: the underscore made it into the original [US-ASCII](https://en.wikipedia.org/wiki/ASCII) character encoding standard in the 1960s and is here to stay. In Python it has also found many creative uses providing contextual information about a name.
+
+---
+content:
+
+`_` doesn't look like much, but as part of a name in Python it has a surprising amount of different meanings.
+
+## Make names more readable
+
+We all know that we should use good names. This often makes it necessary to use more than one word to describe the thing. `cheese grater` is arguably a good name for a thing but it consists of two words in english[^1]. Like most programming languages Python [tokenizes](https://docs.python.org/3/library/tokenize.html#module-tokenize) the source using white space, so for the sake of readability the system needs to be tricked into believing that the two words are one while still providing some kind of visual separation for the human reader. Born where the `CheeseGrater` or the `cheese_grater` - a.k.a. [CamelCase](https://en.wikipedia.org/wiki/Camel_case) and [snake_case](https://en.wikipedia.org/wiki/Snake_case).
+
+[^1]: We wouldn't have a problem like that if we used german names, where this would be a `käsehobel`. Especially in german law words like *Vermögenszuordnungszuständigkeitsübertragungsverordnung* are used unironically.
+
+! I personally prefer `lowerCasedCamelCase` for local names bound to data and `snake_case` for names bound to functions and I wasn't even technically violating the PEP-8 when doing that [until 2018](https://github.com/python/peps/pull/545). Now I am a self confessed PEP-8 outlaw in personal projects.
+
+## `_` - it needs a name, but I won't use it
+
+Using a single underscore as the complete name can be seen as a crutch. In certain situations it might be necessary to assign a name due to the nature of the language, but we'd rather not give it a name (because we won't even be using it anyway).
+
+### `_` as a parameter name
+
+Here we know that the function will always be called with three positional arguments but we don't need the second one:
+
+
+```python
+def spam(a, _, b):
+    return a + b
+
+spam(1, 2, 3)
+```
+```text
+[result]
+4```
+There are often more elegant ways to deal with this depending on context, but sometimes this is still the easiest way to clearly communicate this.  
+
+To take one example and offer some unasked advice we could think of a primitive home baked plugin system that simply calls the client function with positional arguments. This could be improved by always using keyword arguments like this:
+
+
+```python
+def spam(a, b, **_):
+    return a + b
+
+spam(c=10, a=2, b=3)
+```
+```text
+[result]
+5```
+This way the client function can collect whatever arrives in an unnamed catch-all dict also having more flexibility regarding future API changes.
+
+What might be even better though is if the plugin system inspects the client function and calls it only with the requested parameters making this particular underscore crutch completely unnecessary[^2].
+
+[^2]: Have a look at [pluggy](https://github.com/pytest-dev/pluggy) if you are interested in how this is accomplished.
+
+### `_` as a local name
+
+In the next example a tuple contains several items, but we are only interested in the first and the last one, so we collect whatever is in the middle and assign it to `_`:
+
+
+```python
+left, *_, right = (0, 1, 2, 3, 4)
+left, right
+```
+```text
+[result]
+(0, 4)```
+Also not uncommon: needing to repeat something a certain number of times without needing the iteration variable:
+
+
+```python
+for _ in range(3):
+    print("hi", end="")
+```
+```text
+[stdout]
+hihihi```
+### the exception: `_` in an interactive shell
+
+There is one case where `_` can and should be used but is not manually assigned. 
+
+When you type `python` on the command line you enter the so-called [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop). The underscore grows a magic functionality here by always holding the result of the last evaluation.
+
+![using underscore in a REPL](repl.png)
+
+!!! The [IPython](https://ipython.org/) interactive shell takes this a step further and provides the last three evaluation results in `_`, `__` and `___`.
+
+## `_` as prefix: this is private, please don't use it
+
+
+```python
+_private_name = "Please don't access me from outside"
+```
+This has also one practical implication when used together with the [star import](/articles/python-is-made-of-star-stuff/#import-all-the-things): names that start with an underscore, are not imported in that case.
+
+## `_` as postfix: avoid shadowing of names
+
+Names in Python can be freely reassigned. This is handy, but also a source of confusion and bugs. For that reason, static code analyzers warn you when you reassign the name of an inbuilt (e.g. `id`) or a name already defined in an outer scope. If I am determined to use such a name, I simply add an underscore like `id_` - which means: I know that this is shadowing an already defined name, but I still want to use it, so I mangle it just enough to be different. I am not sure how common this practice is, but I am pretty sure I didn't come up with it myself.
+
+
+```python
+id_ = 123456
+print(f"{id(id_)=}")
+```
+```text
+[stdout]
+id(id_)=139849230985264
+```
+This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the `builtins`[^3] module is merged into the module. The objects can still be retrieved from `builtins` whenever necessary:
+
+[^3]: While we are talking about `builtins` in the context of underscores: the `__builtins__` attribute is already available in the module namespace but it is not recommended to use it directly as it is a [CPython implementation detail](https://docs.python.org/3/reference/executionmodel.html#builtins-and-restricted-execution)
+
+
+```python
+print = 2
+try:
+    print("This won't work!")
+except TypeError:
+    from builtins import print as real_print
+
+    real_print("Told you so ...")
+```
+```text
+[stdout]
+Told you so ...
+```
+
+```python
+    
+print = real_print
+print("Now all is fine again.")
+```
+```text
+[stdout]
+Now all is fine again.
+```
+
+
+## `__` as prefix of an object attribute: mangle the name
+
+In pairs the underscore turns from being an informal crutch to something that is part of Pythons execution model. If an object attribute starts with a double underscore (a.k.a. `dunder`), interesting things start to happen:
+
+
+```python
+class A:
+    __spam = "SPAM"
+    def print_spam(self):
+        print(f"{self.__spam=}, {id(self)=}")
+        
+a = A()
+a.print_spam()
+```
+```text
+[stdout]
+self.__spam='SPAM', id(self)=139849178834640
+```
+Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although `a` and `self` are the exact same object (as can be seen from the printed id):
+
+
+```python
+print(f"{id(a)=}")
+a.__spam
+```
+```text
+[stdout]
+id(a)=139849178834640
+```
+```text
+[AttributeError]
+'A' object has no attribute '__spam'```
+To access the original attribute, I have to know the secret name mangling formula which simplified is `_<class name><attribute name>`:
+
+
+```python
+a._A__spam
+```
+```text
+[result]
+'SPAM'```
+The [Python docs](https://docs.python.org/3/tutorial/classes.html#private-variables) have this to say about it:
+
+> Since there is a valid use-case for class-private members (namely to avoid name clashes of names with names defined by subclasses), there is limited support for such a mechanism, called name mangling. Any identifier of the form `__spam` (at least two leading underscores, at most one trailing underscore) is textually replaced with `_classname__spam`, where classname is the current class name with leading underscore(s) stripped. This mangling is done without regard to the syntactic position of the identifier, as long as it occurs within the definition of a class.
+>
+> Name mangling is helpful for letting subclasses override methods without breaking intraclass method calls.
+
+## `__magic__`: part of the language mechanics
+
+When something starts and ends with a double underscore things get really serious. [Special methods](https://docs.python.org/3/reference/datamodel.html#special-method-names) and [special attributes](https://docs.python.org/3/reference/import.html#import-related-module-attributes) are everywhere and they are a big part of Pythons special sauce. 
+
+It starts with simple module attributes that reveal information about state and internals (e.g. `__name__` and `__file__`) and ends with protocols that can be used to hook into the language mechanics like e.g. creating a context manager by implementing [`__enter__` and `__exit__`](https://docs.python.org/3/reference/datamodel.html#with-statement-context-managers) on an object.
+
+I won't go into more details here as this would far exceed the scope of this innocent little article about the underscore, but I'll leave a warning here:
+
+!!!! This kind of naming scheme should be regarded as strictly Python internal. You usually don't want to use this for names in your own programs (there are exception to that rule though as usual[^4]).
+
+Enough underscores for today, I would say. If you know of other conventions and uses of the underscore, please [let me know](/about/#get-in-touch).
+
+[^4]: see e.g. pytest using `__tracebackhide__` as a function local name in order to instruct pytest to [hide a function from a traceback](https://docs.pytest.org/en/latest/example/simple.html#writing-well-integrated-assertion-helpers)
+
+!!! This article is generated from a [Jupyter notebook](https://jupyter.org/) running in a Python 3.8 kernel. You can [download it](https://oliver.bestwalter.de/articles/something-i-really-must-underscore/something-i-really-must-underscore.ipynb) and play with it.
