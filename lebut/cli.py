@@ -1,22 +1,21 @@
 """ lebut - my little lektor butler to make common activities less tedious."""
 import logging
 import os
+import shutil
 import subprocess
 from datetime import datetime
 from io import BytesIO
-from pathlib import Path
 from string import Template
 from typing import List
 
 import fire
+from slugify import slugify
 
 from lebut import PATH, NAME
+from lebut import ipynb_to_md
 from lektor.admin.modules import serve
 from lektor.cli import Context
 from lektor.devserver import run_server
-from slugify import slugify
-
-from lebut import ipynb_to_md
 
 log = logging.getLogger(__name__)
 
@@ -36,16 +35,15 @@ class Workflow:
 
     @classmethod
     def serve(
-        cls,
-        host="0.0.0.0",
-        port=8080,
-        outputPath=PATH.OUTPUT,
-        verbosity=0,
-        dev=True,
-        reinstall=False,
-        browse=False,
-        prune=True,
-        flags=("sass",),
+            cls,
+            host="0.0.0.0",
+            port=8080,
+            verbosity=0,
+            dev=True,
+            reinstall=False,
+            browse=False,
+            prune=True,
+            flags=("sass",),
     ):
         """
         :param verbosity: 0-4
@@ -54,15 +52,14 @@ class Workflow:
         os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
         ctx = Context()
         ctx.load_plugins(reinstall=reinstall)
-        outputPath = Path(outputPath)
-        log.info(f"project: {ctx.get_project().project_path} | output: {outputPath}")
+        log.info(f"project: {ctx.get_project().project_path} | output: {PATH.OUTPUT}")
         cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
         cls.compile_notebooks()
         try:
             run_server(
-                (host, port),
-                ctx.get_env(),
-                outputPath,
+                bindaddr=(host, port),
+                env=ctx.get_env(),
+                output_path=PATH.OUTPUT,
                 verbosity=verbosity,
                 lektor_dev=dev,
                 browse=browse,
@@ -90,24 +87,33 @@ class Workflow:
         ipynb_to_md.process_all(PATH.ARTICLES)
 
     @classmethod
+    def clean(cls):
+        if ipynb_to_md._CACHE_PATH.exists():
+            ipynb_to_md._CACHE_PATH.unlink()
+
+        if PATH.OUTPUT.exists():
+            shutil.rmtree(PATH.OUTPUT)
+        cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+        cls._run(["lektor", "clean", "--yes"])
+
+    @classmethod
     def build(cls, clean=False):
         if clean:
             cls.clean()
         cls.compile_notebooks()
-        cls._run(["lektor", "build"])
+        cls._run(["lektor", "build", "--output-path", str(PATH.OUTPUT)])
 
     @classmethod
     def deploy(cls):
-        cls._run(["lektor", "deploy"])
+        cls.build()
+        cls._run(["lektor", "deploy", "--output-path", str(PATH.OUTPUT)])
 
     @classmethod
-    def clean(cls):
-        try:
-            ipynb_to_md._CACHE_PATH.unlink()
-        except FileNotFoundError:
-            pass
-        cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
-        cls._run(["lektor", "clean", "--yes"])
+    def html_tidy(cls):
+        # FIXME not used yet: atm generated html needs manual intervention.
+        for path in PATH.OUTPUT.glob("**/*.html"):
+            log.info(f"tidy up {path}")
+            cls._run(["tidy", "-q", "-utf8", "-o", str(path), str(path)])
 
     @classmethod
     def _run(cls, cmd: List[str]):
@@ -130,13 +136,11 @@ class Workflow:
 
 
 if __name__ == "__main__":
-    """Random ad hoc testing"""
+    # for debugging
     logging.basicConfig(level=logging.INFO)
-    # Workflow._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
-    # Workflow._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
-    olPath = os.getcwd()
+    oldPath = os.getcwd()
     try:
         os.chdir(str(PATH.PROJECT))
         Workflow.serve()
     finally:
-        os.chdir(olPath)
+        os.chdir(oldPath)

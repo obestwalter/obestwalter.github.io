@@ -2,17 +2,38 @@
 
 ## Installation
 
-The officially recommended way is weird and the way lektor deals with plugins is extra weird. I work from a local lektor clone with my own little server wrapper. That makes it easily debuggable and I can always use the hot new shit.
+The officially recommended way is weird and the way lektor deals with plugins is extra weird. I work from a local lektor clone with my own little server wrapper to be make it easier to debug and modify.
 
     $ cd /path/to/here
     $ pip install tox
     $ tox -e dev
 
-## CLI helpers to do stuff
+## task automation
 
-My minimalistic CLI to draft, publish, deploy, etc.
+All things worth doing are accessible via tox:
 
-    $ ob
+    $ tox -av
+    
+shows what's on offer
+
+## Acknowledgements
+
+* created with 
+    * [Lektor](https://getlektor.com)
+    * (some articles) [Jupyter notebooks](https://jupyter.org/)
+    * [old skool sass](https://sass-lang.com/documentation/syntax#the-indented-syntax)
+    * no javascript
+
+* served via [Github Pages](https://pages.github.com/)
+
+* helpful tools
+    * [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts) (TTF versions need to be downloaded extra from somewhere else though :()
+    * [name that color](http://chir.ag/projects/name-that-color)
+    * [interactive CSS tools](http://www.cssmatic.com)
+    * [color blender](http://meyerweb.com/eric/tools/color-blend)
+    * [pygments, pygmentize](http://pygments.org/)
+    
+## notes
 
 ### Pygments bug
 
@@ -25,17 +46,6 @@ Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -
 When getting `LoadError: cannot load such file -- rb-fsevent` run:
 
     gem install rb-fsevent
-
-## Acknowledgements
-
-* created with [Lektor](https://getlektor.com)
-* served via [Github Pages](https://pages.github.com/)
-* [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts) (TTF versions need to be downloaded extra from somewhere else though :()
-* [name that color](http://chir.ag/projects/name-that-color)
-* [interactive CSS tools](http://www.cssmatic.com)
-* [color blender](http://meyerweb.com/eric/tools/color-blend)
-* [pygments, pygmentize](http://pygments.org/)
-* [mkdocs](http://www.mkdocs.org) (not for this site but for documentation of my projects)
 
 ## Legalese
 
