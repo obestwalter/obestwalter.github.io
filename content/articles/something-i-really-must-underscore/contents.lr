@@ -97,7 +97,7 @@ When you type `python` on the command line you enter the so-called [REPL](https:
 
 ![using underscore in a REPL](repl.png)
 
-!!! The [IPython](https://ipython.org/) interactive shell takes this a step further and provides the last three evaluation results in `_`, `__` and `___`.
+!!! The [IPython](https://ipython.org/) interactive shell takes this two steps further - it provides the last three evaluation results in `_`, `__` and `___`.
 
 ## `_` as prefix: this is private, please don't use it
 
@@ -118,7 +118,7 @@ print(f"{id(id_)=}")
 ```
 ```text
 [stdout]
-id(id_)=140381337139088
+id(id_)=140281355160048
 ```
 This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the `builtins`[^3] module is merged into the module. The objects can still be retrieved from `builtins` whenever necessary:
 
@@ -166,7 +166,7 @@ a.print_spam()
 ```
 ```text
 [stdout]
-self.__spam='SPAM', id(self)=140381284992624
+self.__spam='SPAM', id(self)=140281303012928
 ```
 Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although `a` and `self` are the exact same object (as can be seen from the printed id):
 
@@ -177,7 +177,7 @@ a.__spam
 ```
 ```text
 [stdout]
-id(a)=140381284992624
+id(a)=140281303012928
 ```
 ```text
 [AttributeError]
@@ -205,10 +205,10 @@ It starts with simple module attributes that reveal information about state and 
 
 I won't go into more details here as this would far exceed the scope of this innocent little article about the underscore, but I'll leave a warning here:
 
-!!!! This kind of naming scheme should be regarded as strictly Python internal. You usually don't want to use this for names in your own programs (there are exception to that rule though as usual[^4]).
+!!!! This kind of naming scheme should be regarded as strictly Python internal. You usually don't want to use this for names in your own programs (there are exceptions to that rule though as usual[^4]).
 
 Enough underscores for today, I would say. If you know of other conventions and uses of the underscore, please [let me know](/about/#get-in-touch).
 
-[^4]: see e.g. pytest using `__tracebackhide__` as a function local name in order to instruct pytest to [hide a function from a traceback](https://docs.pytest.org/en/latest/example/simple.html#writing-well-integrated-assertion-helpers)
+[^4]: See e.g. pytest using `__tracebackhide__` as a function local name in order to instruct pytest to [hide a function from a traceback](https://docs.pytest.org/en/latest/example/simple.html#writing-well-integrated-assertion-helpers)
 
 !!! This article is generated from a [Jupyter notebook](https://jupyter.org/) running in a Python 3.8 kernel. You can [download it](https://oliver.bestwalter.de/articles/something-i-really-must-underscore/something-i-really-must-underscore.ipynb) and play with it.
