@@ -82,7 +82,7 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
                 "source": (
                     f"!!! This article is generated from a "
                     f"[Jupyter notebook](https://jupyter.org/) "
-                    f"running in a Python{version} kernel. "
+                    f"running in a Python {version} kernel. "
                     f"You can [download it]({srcUrl}) and play with it."
                 ),
             }
