@@ -1,7 +1,7 @@
 @import normalize
+@import fonts
 
 @import mixins
-@import fonts
 @import hover
 @import pygments
 @import shared-variables
@@ -12,8 +12,6 @@ html
 body
   font-family: $textFont
   min-width: 750px
-  //margin-left: auto
-  //margin-right: auto
 a
   text-decoration: none
 hr
@@ -32,6 +30,9 @@ td
   background: $tundora
   padding: 3px
   border: 1px solid $celadon
+
+header, main, footer
+  margin: 0 auto
 
 header
   +container-padding
@@ -170,13 +171,14 @@ main
 footer
   +container-padding
   $bg: $roseOfSharon
-  $fg: $celadon
+  $fg: $mineShaft
   $hl: $bittersweet
   background: $bg
   text-align: right
   p
-    color: $bittersweet
-    font-size: 80%
+    margin: 0
+    color: $hl
+    font-size: 75%
     a
       color: $fg
       &:hover
