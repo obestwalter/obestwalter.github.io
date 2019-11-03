@@ -22,6 +22,7 @@ try:
 except FileNotFoundError:
     CACHE = {}
 
+IPYTHON_SHELL = InteractiveShell()
 
 def process_all(container):
     try:
@@ -67,7 +68,7 @@ def convert(path):
 
 
 class ArticleExecutePreprocessor(ExecutePreprocessor):
-    """Do some massaging of the markdown code cell output to suit the blog.
+    """Massage the code cell outputs to suit the blog.
 
     I'm sure there are more elegant ways, but this works for me atm.
     """
@@ -75,22 +76,25 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
     def preprocess(self, nb, resources=None, km=None):
         srcUrl = f"{URL.WEBSITE_ARTICLES}/{resources['fileRelPath']}"
         version = f"{sys.version_info.major}.{sys.version_info.minor}"
+        source = (
+            f"!!! This article is generated from a "
+            f"[Jupyter notebook](https://jupyter.org/) "
+            f"running in a Python {version} kernel. "
+            f"You can [download it]({srcUrl}) and play with it."
+        )
         cell = nbformat.NotebookNode(
             {
                 "cell_type": "markdown",
                 "metadata": {},
-                "source": (
-                    f"!!! This article is generated from a "
-                    f"[Jupyter notebook](https://jupyter.org/) "
-                    f"running in a Python {version} kernel. "
-                    f"You can [download it]({srcUrl}) and play with it."
-                ),
+                "source": source,
             }
         )
         nb.cells.append(cell)
         super().preprocess(nb, resources=resources, km=km)
 
-    def preprocess_cell(self, cell, resources, cell_index, store_history=True):
+    def preprocess_cell(
+            self, cell, resources, cell_index, store_history=True
+    ):
         if cell.cell_type != "code":
             return cell, resources
 
@@ -100,43 +104,47 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
             cell.source = self.apply_load_magic(load_candidate)
             return cell, resources
 
-        _, outputs = self.run_cell(cell, cell_index, store_history)
-        newOutput = [f"\n\n```python\n{cell.source}\n```"]
-        for out in outputs:
-            if out.output_type == "execute_result":
+        _, outs = self.run_cell(cell, cell_index, store_history)
+        new = [f"\n\n```python\n{cell.source}\n```"]
+        for o in outs:
+            if o.output_type == "execute_result":
                 # TODO deal with other types as they come up
-                data = out.data["text/plain"]
-                newOutput.append(f"```text\n[result]\n{data}```")
-            elif out.output_type == "error":
-                newOutput.append(f"```text\n[{out.ename}]\n{out.evalue}```")
-            elif out.output_type == "stream":
-                newOutput.append(f"```text\n[{out.name}]\n{out.text}```")
+                data = o.data["text/plain"]
+                new.append(f"```text\n[result]\n{data}```")
+            elif o.output_type == "error":
+                new.append(f"```text\n[{o.ename}]\n{o.evalue}```")
+            elif o.output_type == "stream":
+                new.append(f"```text\n[{o.name}]\n{o.text}```")
             else:
-                raise Exception(f"dunno what to do with: {out}")
+                raise Exception(f"dunno what to do with: {o}")
         cell = nbformat.NotebookNode(
-            {"cell_type": "raw", "metadata": {}, "source": "\n".join(newOutput)}
+            {
+                "cell_type": "raw",
+                "metadata": {},
+                "source": "\n".join(new)
+            }
         )
         return cell, resources
 
     def apply_load_magic(self, content):
-        """Apply the %load magic manually to extract code from a Python module.
+        """Apply the %load magic manually.
 
-        Cell magic seems not to be applied automatically, so ... next best thing.
+        Cell magic is not automatically applied by
+        the preprocessor, so I do this directly here.
 
-        TODO is there a better/more automagic way as part of execution?
+        I'm sure this is horribly wrong, but it works well enough.
         """
-        shell = InteractiveShell()
-        magic = CodeMagics(shell=shell)
+        magic = CodeMagics(shell=IPYTHON_SHELL)
         arg_s = " ".join(content.split()[1:])
         magic.load(arg_s)
-        code = shell.rl_next_input
-        shell.reset()   # avoid crashes due to thread pollution
+        code = IPYTHON_SHELL.rl_next_input
         return code
 
 
 if __name__ == "__main__":
+    # quick and dirty ad-hoc testing
     logging.basicConfig(level=logging.INFO)
     CACHE = {}
     # process_all(PATH.DRAFTS)
-    p = PATH.ARTICLES / "python-is-made-of-star-stuff/python-is-made-of-star-stuff.ipynb"
+    p = PATH.HERE / "example-notebook.ipynb"
     process(p.parent, p)

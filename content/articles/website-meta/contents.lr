@@ -126,7 +126,7 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
     def apply_load_magic(self, content):
         """Apply the %load magic manually.
 
-        Cell magic is not automaticall applied by
+        Cell magic is not automatically applied by
         the preprocessor, so I do this directly here.
 
         I'm sure this is horribly wrong, but it works well enough.
@@ -139,9 +139,22 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
 
 ```
 
+The idea is to hook into the part of the conversion process, where the notebook is pre-processed before the actual conversion to markdown. 
+
+In my case the necessary pre-processing means: 
+
+* adding an extra cell that creates a box with info that the article was created from an Ipython notebook - this is done by adding a new notebook cell to the end of the notebook in `preprocess`
+* for each individual code cell: execute the code and display the output in a slightly different way than it is done by default - which is done in `pre_process_cell`
+* for each individual cell: if it contains a [`%load` magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load) - execute that magic manually (always - independent of the magic being commented out or not)
+
+
+The complete file is here: [ipynb_to_md](https://github.com/obestwalter/obestwalter.github.io/blob/970fad2a0ccb696ee2227f7fc19519d09202b0d5/lebut/ipynb_to_md.py)
+
 If I run this through nbconvert now, the generated markdown looks like this:
 
-[![example markdown improved](example-output-improved.png)]()
+[![example markdown improved](example-output-improved.png)](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/content/articles/website-meta/example-notebook-improved.md)
+
+That's more like it and I can tweak and extend it, whenever I need to.
 
 ## 3) A lektor plugin to generate articles from a Jupyter notebook
 
