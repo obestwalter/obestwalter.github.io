@@ -20,7 +20,9 @@ class LebutPlugin(Plugin):
     def on_before_build(self, source, **_):
         if source.path and "ipynb" in source.path:
             log.info(f"working with {source}")
-            ipynb_to_md.process(PATH.CONTENT, PATH.CONTENT / source.path[1:])
+            ipynb_to_md.process(
+                PATH.CONTENT, PATH.CONTENT / source.path[1:]
+            )
 
 
 if __name__ == "__main__":
