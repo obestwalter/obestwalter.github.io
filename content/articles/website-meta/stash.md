@@ -1,5 +1,10 @@
 ## first positive surprise: updating the build chain
 
+* website generation and git based deployment: [Lektor](https://www.getlektor.com)
+* free hosting under my own domain with ssl: [github pages](https://pages.github.com/)
+* writing "normal" articles: [markdown](https://www.markdownguide.org/)
+* writing code heavy articles in an interactive authoring environment: [Jupyter notebooks](https://jupyter-notebook.readthedocs.io/en/stable/) (with a build step to convert this into input for lektor)
+
 When creating this website about 3 years ago I used the [lektor development mode](https://github.com/lektor/lektor#want-to-develop-on-lektor) to be able to poke around in the code and write my own plugins, etc. This is fun, but also means that updating to a newer version might be more tedious especially when having dug around in some internals that you are not really supposed to touch. So I updated npm, pulled the newest changes from lektor and ran a build of my website to see if this bleeding edge approach still works for my site. To my surprise it did! Cudos to the Lektor developers :)
 
 I created this web site a few years ago with the idea to share what I write more publicly as I have learned a lot from what others wrote. This is also a good way to gently nudge myself into thinking things through a bit more thoroughly in order to be able to explain them better. 
