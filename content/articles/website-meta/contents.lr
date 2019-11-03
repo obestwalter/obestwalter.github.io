@@ -16,7 +16,7 @@ summary:
 
 ![a normal day in the office (keeping the lab equipment from exploding)](normal-day-at-the-office.gif)
 
-When I was hyping myself up to write the second article on my website after almost 3 years I naturally had a look how I can busy myself with everything else but writing the actual article (while still fooling myself into believing this is a necessary preparation for ... **just writing the darn article**. But I think the work in my website generation laboratory was worth the fuzz this time, as I quite enjoy the new workflow. I enjoy it so much, that I am actually publishing articles now. I now can write code sprinkled articles in a Jupyter notebook and have them rendered automatically into my lektor generated website using a bit of Python code hooked into lektors plugin system.
+When I was hyping myself up to write the second article on my website after almost 3 years I naturally had a look how I can busy myself with everything else but writing the actual article (while still fooling myself into believing this is a necessary preparation for ... **just writing the blimmin' article**. But I think the work in my website generation laboratory was worth the fuzz this time, as I quite enjoy the new workflow. I now can write code sprinkled articles in a Jupyter notebook and have them rendered automatically into my lektor generated website using a bit of Python code hooked into lektors plugin system.
 
 ---
 content:
@@ -25,23 +25,25 @@ It is a never ending story: every time I want to write an article to publish on 
 
 [^1]: Can anyone tell me from which film this gif is? I found it on [tenor](https://tenor.com/view/scientist-mad-scientist-experiment-lab-laboratory-gif-11957205) and would like to give proper credit
 
-## Ingredients
-
-### 1) A static website generator generator (sic!)
+### Prologue
 
 I played with a lot of blog engines over the years - while never really blogging anything. I mostly work in backend development, but there is something that fascinates me about web design and web development. It's one of these things I guess :). 
 
 I am particularly fond of static website generators that provide a workflow that is similar to developing software. I played with [pelican](https://blog.getpelican.com/), [jekyll](https://jekyllrb.com/), [hugo](https://gohugo.io/), [nikola](https://getnikola.com/), [flask](https://flask.palletsprojects.com/) + [frozen-flask](https://github.com/Frozen-Flask/Frozen-Flask) and the lot. As already mentioned: I even wrote my own [sphinx](https://www.sphinx-doc.org/) based generator ... while still never really blogging anything. 
 
-At the beginning of 2017 I made a deal with a colleague that I would finally write a blog article about the pytest development sprint and a bit about my involvement. It would have been boring though if I would have used the site I had already online (last incarnation was a simple [mkdocs](https://www.mkdocs.org/) driven [thing](https://github.com/obestwalter/obestwalter.github.io/blob/1.0.0/docs/index.md)). It would also have been boring to at least use one of the engines I already knew. Using something utterly profane like medium or wordpress was obviously completely out of the question! I mean, I could have just written the article then and be done with it. Who wants that? Right. Not me. So I started looking around for the next thing that could keep me from writing that article and I stumbled over [lektor](https://www.getlektor.com/). Now this was something that could keep me busy for a while as it is not simply a static website generator, but rather something that you can use to build a static website generator with - **a website generator generator**! Long story short: I set that up from scratch with a [simple sass style](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/_style/style.sass), wrote a [little plugin](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/packages/lektor-sass/lektor_sass.py) to integrate that into lektors development server, and finally actually wrote and [published that article](/articles/becoming-an-open-source-gardener/). Nobody ever made a deal with me again that forced me to write another article, so that was it. I had unlocked the *"i-have-a-blog-but-i-never-blog-achievement"* once again - only on a higher level. Until very recently.
+At the beginning of 2017 I made a deal with a colleague that I would finally write a blog article about the pytest development sprint and a bit about my involvement. It would have been boring though if I would have used the site I had already online (last incarnation was a simple [mkdocs](https://www.mkdocs.org/) driven [thing](https://github.com/obestwalter/obestwalter.github.io/blob/1.0.0/docs/index.md)). It would also have been boring to use one of the engines I already knew. Using something utterly profane like medium or wordpress was obviously completely out of the question! I mean, I could have just written the article then and be done with it. Who wants that? Right. Not me. So I started looking around for the next thing that could keep me from writing that article and I stumbled over [lektor](https://www.getlektor.com/). Now this was something that could keep me busy for a while as it is not simply a static website generator, but rather something that you can use to build a static website generator with - **a website generator generator**! Long story short: I set that up from scratch with a [simple sass style](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/_style/style.sass), wrote a [little plugin](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/packages/lektor-sass/lektor_sass.py) to integrate that into lektors development server, and finally actually wrote and [published that article](/articles/becoming-an-open-source-gardener/). Nobody ever made a deal with me again that forced me to write another article, so that was it. I had unlocked the *"i-have-a-blog-but-i-never-blog-achievement"* once again - only on a higher level. Until very recently.
 
 Because very recently I realized that I had produced a lot of material while trying to teach Python and test automation to all kinds of folks over the last years. I finally wanted to start sharing some of these materials on my website. As making strange deals seems to work with my contorted psyche, I made a deal with myself to publish at least one article a month for at least a year.
 
-This time I successfully resisted the temptation to start from scratch again and simply updated lektor and adjusted the existing setup to fit my new needs. The new needs arose from the fact that I work mostly in Jupyter Notebooks nowadays, when creating learning materials and I like it, so I want to write articles like that and have them integrate into my website. 
+This time I was determined to resist the temptation to start from scratch resolved to adjust the existing setup to fit my new needs. The new needs arose from the fact that I work mostly in Jupyter Notebooks nowadays, when creating learning materials and I like it, so I want to write articles like that and have them integrate into my website. 
 
-So the first ingredient stayed the same and is still lektor.
+## Lektor / Jupyter integration in 5 easy steps!
+
+### 1) Use a static website generator generator (sic!)
+
+Done. I didn't change the engine - still lektor (development install from master, because bleeding edge!)
  
-## 2) Jupyter notebooks
+## 2) Feed Lektor from a Jupyter notebook
 
 !!!! I was really determined this time to just make this work as quick and dirty as possible, so that I can do some actual writing. So this might be all horribly wrong, but it works well enough. As I am the only user I don't mind if things are a bit quirky as long as I understand what's going on.
 
@@ -51,11 +53,11 @@ Generating HTML from a notebook comes out of the box via `nbconvert`. But doing 
 
 Generating markdown from a notebook comes also out of the box via `nbconvert` - so if you take a notebook that looks like this in the browser:
 
-[![example jupyter notebook](example-notebook.png)](https://github.com/obestwalter/obestwalter.github.io/blob/eb32a76af08aeb02f9498dea219f3a595abe4ae0/content/articles/website-meta/example-notebook.ipynb)
+[![example jupyter notebook](example-notebook.png)](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/content/articles/website-meta/example-notebook.ipynb)
 
 ... and convert it with `jupyter-nbconvert --to markdown example-notebook.ipynb`, out drops an `example-notebook-markdown.md` that contains this:
 
-[![example markdown output](example-output.png)](https://github.com/obestwalter/obestwalter.github.io/blob/eb32a76af08aeb02f9498dea219f3a595abe4ae0/content/articles/website-meta/example-notebook.md)
+[![example markdown output](example-output.png)](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/content/articles/website-meta/example-notebook.md)
 
 This is somehow already what I want, but I want the output to be marked properly and I don't want the whole traceback - just the name and message of the error is enough. So there is a little bit of massaging to be done. The question is: when should that happen? I could try to convert the generated output to my liking, but I'd rather poke a finger into my eye, so this has to happen, when I can still work with the data.
 
@@ -143,30 +145,30 @@ The idea is to hook into the part of the conversion process, where the notebook 
 
 In my case the necessary pre-processing means: 
 
-* adding an extra cell that creates a box with info that the article was created from an Ipython notebook - this is done by adding a new notebook cell to the end of the notebook in `preprocess`
-* for each individual code cell: execute the code and display the output in a slightly different way than it is done by default - which is done in `pre_process_cell`
-* for each individual cell: if it contains a [`%load` magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load) - execute that magic manually (always - independent of the magic being commented out or not)
+* Adding an extra cell that creates a box with a link to the notebook so the reader can download it and play with it if they like. This is done by adding a new notebook cell to the end of the notebook in `preprocess`.
+* For each individual code cell: execute the code and display the output in a slightly different way than it is done by default - which is done in `pre_process_cell`.
+* For each individual cell: if it contains a [`%load` magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load) - execute that magic manually (always - independent of the magic being commented out or not).
 
 
-The complete file is here: [ipynb_to_md](https://github.com/obestwalter/obestwalter.github.io/blob/b36fbff5ead6d2e28d6fa56007dfe7a7fbcf6837/lebut/ipynb_to_md.py)
+The complete file is here: [ipynb_to_md](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/lebut/ipynb_to_md.py)
 
 If I run this through nbconvert now, the generated markdown looks like this:
 
-[![example markdown improved](example-output-improved.png)](https://github.com/obestwalter/obestwalter.github.io/blob/b36fbff5ead6d2e28d6fa56007dfe7a7fbcf6837/content/articles/website-meta/example-notebook-improved.md)
+[![example markdown improved](example-output-improved.png)](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/content/articles/website-meta/example-notebook-improved.md)
 
-That's more like it and I can tweak and extend it, whenever I need to.
+That's more like it and I can tweak and extend the conversion process, whenever I need to.
 
 ## 3) A lektor plugin to build changed `.ipynb` files
 
-If I would be a normal person that just wants to write an article for their website I would have stopped here, but that would have meant starting to write the article, so no way. Next logical step was to integrate this into a plugin that triggers the conversion when running the lektor development server.
+If I would be a normal person that just wants to write an article for their website I would have stopped here, but that would have meant starting to write the article, so no way. Next logical step was to integrate this into a plugin that triggers the conversion on file changes, when running the lektor development server.
 
-Writing a plugin for Lektor means that you have to create an installable package that implements the correct entry point for lektor to discover it. There is no simpler way and lektor does some really weird magic with these plugins, where I don't really understand why this is necessary, but I don't have a clue about lektor internals, so I guess it is necessary for something. I would prefer if lektor would provide the same level of convenience like e.g. pytest, where the entry level for writing a plugin means adding a [`conftest.py`](https://docs.pytest.org/en/5.2.2/writing_plugins.html) in your test folder and write some code there. You can still share plugins as installable packages, but that is strictly optional.
+Writing a plugin for Lektor means that you have to create an installable package that implements the correct entry point for lektor to discover it. There is no simpler way and lektor does some really weird magic with these plugins, where I don't really understand why this is necessary. I would prefer if lektor would provide the same level of convenience like e.g. pytest, where the entry level for writing a plugin means adding a [`conftest.py`](https://docs.pytest.org/en/5.2.2/writing_plugins.html) in your test folder and write some code. 
 
-Anyway - lektor does it that way and who am I to complain? Creating a "local" plugin for lektor means creating an installable package in the [`packages`](https://github.com/obestwalter/obestwalter.github.io/tree/eb32a76af08aeb02f9498dea219f3a595abe4ae0/packages) folder of the lektor project. All packages in there are automatically installed.
+Anyway - lektor does it that way and who am I to complain? Creating a "local" plugin for lektor means creating an installable package in the [`packages`](https://github.com/obestwalter/obestwalter.github.io/tree/d986b344ea4d55db017449aac3e5520574b99792/packages) folder of the lektor project. All packages in there are then automatically installed, when the development server or a build process spins up.
 
-Lektor has a few [events](https://www.getlektor.com/docs/api/plugins/events/) that you can hook into by implementing methods of the correct name in a class that inherits from `lektor.pluginsystem.Plugin`. `server-spawn` Is called once when the lektor server spins up to do things once during a build. I use this build all notebooks in case they have changed on startup. `before-build` is called on a per file level, when it was changed. I implemented my own little caching logic to prevent eternal build loops and I am pretty sure I am doing it wrong because I didn't even look into the details of the [build system](https://www.getlektor.com/docs/api/build/) but this was easy enough to implement and works well enough (keep in mind: all I am trying to do is to write a simple article for my website :)).
+Lektor has a few [events](https://www.getlektor.com/docs/api/plugins/events/) that you can hook into by implementing methods of the correct name in a class that inherits from `lektor.pluginsystem.Plugin`. `server-spawn` Is called once when the lektor server spins up to do things once during a build. I use this to build the changed notebooks on startup. `before-build` is called on a per-file level when they change. I implemented my own little caching logic to prevent eternal build loops and I am pretty sure I am doing it wrong because I didn't even look into the details of the [build system](https://www.getlektor.com/docs/api/build/) but this was easy enough to implement and works well enough (keep in mind: all I am trying to do is to write a simple article for my website :)).
 
-The conversion plugin is [here](https://github.com/obestwalter/obestwalter.github.io/blob/b36fbff5ead6d2e28d6fa56007dfe7a7fbcf6837/packages/lektor-lebut-bridge/) and the relevant code looks like this:
+The conversion plugin is [here](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/packages/lektor-lebut-bridge/) and the relevant code looks like this:
 
 
 ```python
@@ -210,7 +212,7 @@ if __name__ == "__main__":
 
 ## 4) [tox](https://tox.readthedocs.io/) based development and publishing workflow
 
-To cap it all off: if a project hasn't got a [`tox.ini`](https://github.com/obestwalter/obestwalter.github.io/blob/680a26023bd7d26baf023779c04be9b8f677b170/tox.ini) that wraps all important activities of the project into a neat package it doesn't feel like a real project:
+To cap it all off: if a project hasn't got a [`tox.ini`](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini) that wraps all important activities of the project into a neat package it doesn't feel like a real project:
 
 ```text
 $ tox -av
@@ -219,14 +221,14 @@ default environments:
 serve             -> run lektor devserver with some adjustments
 
 additional environments:
-dev               -> just create/update [...]website/.tox/dev
-debug             -> debugging with 3.8 is not quite there yet
+dev -> just create/update [...]website/.tox/dev
+debug -> debugging with 3.8 is not quite there yet
 compile-notebooks -> compile notebooks if they changed
-build             -> build the website at [...]website/../build
-build-serve       -> serve [...]website/../build at http://localhost:7777
-jupyter-serve     -> serve jupyter notebooks
-clean             -> tidy up to start from a clean slate
-deploy            -> build and push master (website build) to github
+build -> build the website at [...]website/../build
+build-serve -> serve [...]website/../build at http://localhost:7777
+jupyter-serve -> serve jupyter notebooks
+clean -> tidy up to start from a clean slate
+deploy -> build and push master (website build) to github
 ```
 
 ### 5) Profit
