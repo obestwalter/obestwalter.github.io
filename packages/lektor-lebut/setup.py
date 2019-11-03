@@ -1,12 +1,12 @@
 from setuptools import setup
 
-name = "lektor-lebut-bridge"
+name = "lektor-lebut"
 module = name.replace("-", "_")
 
 setup(
     name=name,
     description="Do site specific things as part of lektor build/dev.",
-    version="0.1.dev1",
+    version="0.2",
     author="Oliver Bestwalter",
     author_email="oliver@bestwalter.de",
     url=(

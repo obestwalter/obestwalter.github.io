@@ -47,9 +47,9 @@ Done. I didn't change the engine - still lektor (development install from master
 
 !!!! I was really determined this time to just make this work as quick and dirty as possible, so that I can do some actual writing. So this might be all horribly wrong, but it works well enough. As I am the only user I don't mind if things are a bit quirky as long as I understand what's going on.
 
-Lektor generates the website from markdown by default. It has a plugin system that could theoretically be used to generate them from something else entirely and that is the usual approach that I have seen in other Jupyter integrations. Here is a very sophisticated approach to get it working with Nikola for example: [Binder + Nikola + Jupyter + Github = Blogging resourceless](http://damianavila.github.io/blog/posts/binder-%2B-nikola-%2B-jupyter-%2B-github-blogging-resourceless.html). There is also an (abandoned?) plugin for lektor to [integrate Jupyter](https://github.com/baldwint/lektor-jupyter). 
+Lektor generates the website from markdown by default. It has a plugin system that could theoretically be used to generate them from something else entirely and that is the usual approach that I have seen in other Jupyter integrations. For Nikola there is a [theme with inbuilt Jupyter support](https://themes.getnikola.com/v7/zen-ipython/). Same for [pelican](https://github.com/danielfrg/pelican-ipynb). 
 
-Generating HTML from a notebook comes out of the box via `nbconvert`. But doing it that way, would mean that I have to teach [`nbconvert`](https://nbconvert.readthedocs.io/) to generate HTML that is compatible with the HTML that is created from the lektor-style markdown and re-implement all the extra functionality that comes for free when generating it through lektor. So, instead I chose to generate markdown from the Jupyter notebook. From lektors point of view nothing changes and I am able to keep everything the same on that level. I can also still write articles directly in lektors markdown without going through a notebook, if I choose to. So all I need is adding a pre-processing step that generates markdown from the notebook.
+For lektor there is only an [(abandoned?) plugin to](https://github.com/baldwint/lektor-jupyter) using `.ipynb` attachments that simply wrapping the html conversion of `nbconvert`.  This is possible as generating HTML from a notebook comes out of the box via `nbconvert`. But doing it that way, would mean that I have to teach [`nbconvert`](https://nbconvert.readthedocs.io/) to generate HTML that is compatible with the HTML that is created from the lektor-style markdown and re-implement all the extra functionality that comes for free when generating it through lektor. So, instead I chose to generate markdown from the Jupyter notebook. From lektors point of view nothing changes and I am able to keep everything the same on that level. I can also still write articles directly in lektors markdown without going through a notebook, if I choose to. So all I need is adding a pre-processing step that generates markdown from the notebook.
 
 Generating markdown from a notebook comes also out of the box via `nbconvert` - so if you take a notebook that looks like this in the browser:
 
@@ -172,15 +172,7 @@ The conversion plugin is [here](https://github.com/obestwalter/obestwalter.githu
 
 
 ```python
-# %load ../../../packages/lektor-lebut-bridge/lektor_lebut_bridge.py
-import logging
-
-from lebut import ipynb_to_md, PATH
-from lektor.pluginsystem import Plugin
-
-log = logging.getLogger(__name__)
-
-
+# %load -s LebutPlugin ../../../packages/lektor-lebut/lektor_lebut.py
 class LebutPlugin(Plugin):
     name = "Lektor Lebut"
     description = "Plugin for website specific activities"
@@ -198,15 +190,6 @@ class LebutPlugin(Plugin):
             ipynb_to_md.process(
                 PATH.CONTENT, PATH.CONTENT / source.path[1:]
             )
-
-
-if __name__ == "__main__":
-    import lektor.pluginsystem
-
-    logging.basicConfig(level=logging.DEBUG)
-    lektor.pluginsystem.weakref = lambda x: x
-    jp = LebutPlugin(None, "some-id")
-    jp.on_server_spawn()
 
 ```
 
