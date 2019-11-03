@@ -7,8 +7,8 @@ log = logging.getLogger(__name__)
 
 
 class LebutPlugin(Plugin):
-    name = "Lektor Jupyter Nbconvert"
-    description = "Convert changed .ipynb to .lr on server spawn."
+    name = "Lektor Lebut"
+    description = "Plugin for website specific activities"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
