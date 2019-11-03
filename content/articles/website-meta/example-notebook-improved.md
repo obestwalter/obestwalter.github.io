@@ -1,0 +1,36 @@
+This is a raw cell, it will stay unchanged.
+
+## This is a header in a markdown cell
+
+This is a paragraph in a markdown cell. It will be rendered and provides all 
+kinds of fancy things.
+
+
+```python
+# this is a code cell containing Python code - it can be executed
+# and the output will be shown in the notebook
+print("I the output of a code cell.")
+2 + 5  # The evaluated result on the last line, will also be shown
+```
+```text
+[stdout]
+I the output of a code cell.
+```
+```text
+[result]
+7```
+
+```python
+from pathlib import Path
+
+# this will throw an exception
+Path("idontexist").read_text()
+```
+```text
+[FileNotFoundError]
+[Errno 2] No such file or directory: 'idontexist'```
+
+!!! This article is generated from a [Jupyter notebook](https://jupyter.org/) 
+running in a Python 3.8 kernel. You can 
+[download it](https://oliver.bestwalter.de/articles/lebut/example-notebook.ipynb) 
+and play with it.
