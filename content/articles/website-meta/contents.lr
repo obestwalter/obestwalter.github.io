@@ -35,7 +35,7 @@ At the beginning of 2017 I made a deal with a colleague that I would finally wri
 
 Because very recently I realized that I had produced a lot of material while trying to teach Python and test automation to all kinds of folks over the last years. I finally wanted to start sharing some of these materials on my website. As making strange deals seems to work with my contorted psyche, I made a deal with myself to publish at least one article a month for at least a year.
 
-This time I was determined to resist the temptation to start from scratch resolved to adjust the existing setup to fit my new needs. The new needs arose from the fact that I work mostly in Jupyter Notebooks nowadays, when creating learning materials and I like it, so I want to write articles like that and have them integrate into my website. 
+This time I was determined to resist the temptation to start from scratch and resolved to adjust the existing setup to fit my new needs. The new needs arose from the fact that I work mostly in Jupyter Notebooks nowadays, when creating learning materials and I like it, so I want to write articles like that and have them integrate into my website. 
 
 ## Website generator / Jupyter integration in 5 easy steps!
 
@@ -47,7 +47,9 @@ Done. I didn't change the engine - still lektor (development install from master
 
 !!!! I was really determined this time to just make this work as quick and dirty as possible, so that I can do some actual writing. So this might be all horribly wrong, but it works well enough. As I am the only user I don't mind if things are a bit quirky as long as I understand what's going on.
 
-Lektor generates the website from markdown by default. It has a plugin system that could theoretically be used to generate them from something else entirely and that is the usual approach that I have seen in other Jupyter integrations. For Nikola there is a [theme with inbuilt Jupyter support](https://themes.getnikola.com/v7/zen-ipython/). Same for [pelican](https://github.com/danielfrg/pelican-ipynb). 
+Lektor generates the website from markdown by default[^2]. It has a plugin system that could theoretically be used to generate them from something else entirely and that is the usual approach that I have seen in other Jupyter integrations. For Nikola there is a [theme with inbuilt Jupyter support](https://themes.getnikola.com/v7/zen-ipython/). Same for [pelican](https://github.com/danielfrg/pelican-ipynb). 
+
+[^2]: [That's a lie, actually](https://www.getlektor.com/docs/content/). The file format is `.lr` and can contain pretty much anything - even a mix of formats, but I like markdown and had had already done some modifications to the parser (to render these footnotes differently for example (these footnotes are also specific to the [markdown parser](https://github.com/lepture/mistune) that lektor uses btw)), so I wanted to stick with it.   
 
 For lektor there is only an [(abandoned?) plugin to](https://github.com/baldwint/lektor-jupyter) using `.ipynb` attachments that simply wrapping the html conversion of `nbconvert`.  This is possible as generating HTML from a notebook comes out of the box via `nbconvert`. But doing it that way, would mean that I have to teach [`nbconvert`](https://nbconvert.readthedocs.io/) to generate HTML that is compatible with the HTML that is created from the lektor-style markdown and re-implement all the extra functionality that comes for free when generating it through lektor. So, instead I chose to generate markdown from the Jupyter notebook. From lektors point of view nothing changes and I am able to keep everything the same on that level. I can also still write articles directly in lektors markdown without going through a notebook, if I choose to. So all I need is adding a pre-processing step that generates markdown from the notebook.
 

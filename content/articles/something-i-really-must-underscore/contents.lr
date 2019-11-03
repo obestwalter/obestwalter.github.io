@@ -120,7 +120,7 @@ print(f"{id(id_)=}")
 ```
 ```text
 [stdout]
-id(id_)=140487444522928
+id(id_)=139753007950000
 ```
 This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the `builtins`[^3] module is merged into the module. The objects can still be retrieved from `builtins` whenever necessary:
 
@@ -168,7 +168,7 @@ a.print_spam()
 ```
 ```text
 [stdout]
-self.__spam='SPAM', id(self)=140487392368336
+self.__spam='SPAM', id(self)=139752955799056
 ```
 Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although `a` and `self` are the exact same object (as can be seen from the printed id):
 
@@ -179,7 +179,7 @@ a.__spam
 ```
 ```text
 [stdout]
-id(a)=140487392368336
+id(a)=139752955799056
 ```
 ```text
 [AttributeError]
