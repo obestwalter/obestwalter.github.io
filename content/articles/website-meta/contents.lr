@@ -197,8 +197,8 @@ class JupyterPreprocessPlugin(Plugin):
         )
 
     def on_before_build_all(self, **_):
-        global _already_build
-        _already_build = set()
+        global _already_built
+        _already_built = set()
 
     def on_before_build(self, source, **_):
         attachments = getattr(source, "attachments", None)
