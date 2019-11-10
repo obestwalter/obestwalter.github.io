@@ -1,0 +1,491 @@
+@font-face {
+  font-family: "Share Tech Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/share-tech-mono-v6-latin-regular.eot");
+  src: local("Share Tech Mono"), local("ShareTechMono-Regular"), url("fonts/share-tech-mono-v6-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/share-tech-mono-v6-latin-regular.woff2") format("woff2"), url("fonts/share-tech-mono-v6-latin-regular.woff") format("woff"), url("fonts/Share-TechMono.ttf") format("truetype"), url("fonts/share-tech-mono-v6-latin-regular.svg#ShareTechMono") format("svg"); }
+@font-face {
+  font-family: "Arvo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/arvo-v9-latin-regular.eot");
+  src: local("Arvo"), url("fonts/arvo-v9-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-regular.woff2") format("woff2"), url("fonts/arvo-v9-latin-regular.woff") format("woff"), url("fonts/Arvo-Regular.ttf") format("truetype"), url("fonts/arvo-v9-latin-regular.svg#Arvo") format("svg"); }
+@font-face {
+  font-family: "Arvo";
+  font-style: italic;
+  font-weight: 400;
+  src: url("fonts/arvo-v9-latin-italic.eot");
+  src: local("Arvo Italic"), local("Arvo-Italic"), url("fonts/arvo-v9-latin-italic.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-italic.woff2") format("woff2"), url("fonts/arvo-v9-latin-italic.woff") format("woff"), url("fonts/Arvo-Italic.ttf") format("truetype"), url("fonts/arvo-v9-latin-italic.svg#Arvo") format("svg"); }
+@font-face {
+  font-family: "Arvo";
+  font-style: normal;
+  font-weight: 700;
+  src: url("fonts/arvo-v9-latin-700.eot");
+  src: local("Arvo Bold"), local("Arvo-Bold"), url("fonts/arvo-v9-latin-700.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-700.woff2") format("woff2"), url("fonts/arvo-v9-latin-700.woff") format("woff"), url("fonts/Arvo-Bold.ttf") format("truetype"), url("fonts/arvo-v9-latin-700.svg#Arvo") format("svg"); }
+@font-face {
+  font-family: "Arvo";
+  font-style: italic;
+  font-weight: 700;
+  src: url("fonts/arvo-v9-latin-700italic.eot");
+  src: local("Arvo Bold Italic"), local("Arvo-BoldItalic"), url("fonts/arvo-v9-latin-700italic.eot?#iefix") format("embedded-opentype"), url("fonts/arvo-v9-latin-700italic.woff2") format("woff2"), url("fonts/arvo-v9-latin-700italic.woff") format("woff"), url("fonts/Arvo-BoldItalic.ttf") format("truetype"), url("fonts/arvo-v9-latin-700italic.svg#Arvo") format("svg"); }
+@font-face {
+  font-family: "Molengo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/molengo-v7-latin-regular.eot");
+  src: local("Molengo"), local("Molengo-Regular"), url("fonts/molengo-v7-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/molengo-v7-latin-regular.woff2") format("woff2"), url("fonts/molengo-v7-latin-regular.woff") format("woff"), url("fonts/Molengo-Regular.ttf") format("truetype"), url("fonts/molengo-v7-latin-regular.svg#Molengo") format("svg"); }
+.hll {
+  background-color: #002b36; }
+
+.c {
+  color: #586e75;
+  font-style: italic; }
+
+.err {
+  color: #dc322f; }
+
+.g {
+  color: #839496; }
+
+.k {
+  color: #859900; }
+
+.l {
+  color: #839496; }
+
+.n {
+  color: #93a1a1; }
+
+.o, .x, .p {
+  color: #839496; }
+
+.ch, .cm, .cp, .cpf, .c1, .cs {
+  color: #586e75;
+  font-style: italic; }
+
+.gd, .ge, .gr, .gh, .gi, .go, .gp, .gs, .gu, .gt {
+  color: #839496; }
+
+.kc, .kd {
+  color: #859900; }
+
+.kn, .kp {
+  color: #cb4b16; }
+
+.kr, .kt {
+  color: #859900; }
+
+.ld {
+  color: #839496; }
+
+.m, .s {
+  color: #2aa198; }
+
+.na {
+  color: #839496; }
+
+.nb, .nc {
+  color: #268bd2; }
+
+.no {
+  color: #b58900; }
+
+.nd, .ni, .ne {
+  color: #cb4b16; }
+
+.nf {
+  color: #268bd2; }
+
+.nl {
+  color: #839496; }
+
+.nn {
+  color: #b58900; }
+
+.nx {
+  color: #839496; }
+
+.py {
+  color: #268bd2; }
+
+.nt {
+  color: #859900; }
+
+.nv {
+  color: #cb4b16; }
+
+.ow {
+  color: #859900; }
+
+.w {
+  color: #002b36; }
+
+.mb, .mf, .mh, .mi, .mo {
+  color: #2aa198; }
+
+.sb, .sc, .sd, .s2 {
+  color: #859900; }
+
+.se {
+  color: #cb4b16; }
+
+.sh {
+  color: #2aa198; }
+
+.si {
+  color: #cb4b16; }
+
+.sx, .sr, .s1, .ss {
+  color: #859900; }
+
+.bp {
+  color: #268bd2;
+  font-weight: bold; }
+
+.vc, .vg, .vi {
+  color: #268bd2; }
+
+.il {
+  color: #2aa198; }
+
+html {
+  background: #282828;
+  font-size: 140%; }
+
+body {
+  font-family: "Molengo", sans-serif;
+  max-width: 90ch;
+  margin: 0 auto; }
+
+a {
+  text-decoration: none; }
+  a:active {
+    outline: 3px dashed #CC9905; }
+  a code {
+    text-decoration: underline; }
+
+hr {
+  margin: 1.5em 0 0 0;
+  border: 2px solid #282828; }
+
+p {
+  font-size: 1.15em;
+  line-height: 1.5em;
+  hyphens: auto;
+  text-align: justify;
+  margin: 1% 0 2% 0; }
+
+ul {
+  list-style-type: square; }
+
+table {
+  padding: 4px;
+  marging: 6px;
+  border: none; }
+  table th {
+    font-size: 1.15rem;
+    font-weight: bold; }
+  table td, table th {
+    background: #404040;
+    padding: 10px 20px;
+    border-bottom: 2px solid #282828; }
+
+header {
+  background: #BF5700;
+  line-height: 4rem;
+  padding: 2em 2em 0 0; }
+  header a {
+    color: #BBE5A9; }
+    header a:hover {
+      color: #f9fdf7; }
+    header a:hover {
+      color: #60bc39; }
+    header a:active {
+      color: #488d2b; }
+  header .site-name {
+    font-family: "Lakki Reddy", cursive;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: -5px;
+    margin: 0;
+    padding: 0;
+    text-align: right; }
+  header nav {
+    font-size: 1.3rem;
+    line-height: 1em; }
+    header nav a {
+      padding: 0.1em 0.4em; }
+    header nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+      header nav ul li {
+        display: inline;
+        margin: 0 0.5em 0 0;
+        padding: 0; }
+    header nav .active {
+      background: #404040; }
+      header nav .active a {
+        color: #BBE5A9; }
+        header nav .active a:hover {
+          color: #f9fdf7; }
+
+main {
+  background: #404040;
+  color: #BBE5A9;
+  line-height: 1.4em;
+  padding: 1em; }
+  main .category {
+    color: #BBE5A9;
+    font-family: "Share Tech Mono", sans-serif;
+    font-size: 170%;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    margin-top: 1em; }
+    main .category:first-letter {
+      font-size: 160%; }
+  main .title {
+    font-family: "Lakki Reddy", cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1em;
+    margin-top: 1em;
+    text-align: center; }
+  main h1 {
+    font-size: 2.2rem; }
+  main h2 {
+    font-size: 1.8rem; }
+  main h3 {
+    font-size: 1.5rem; }
+  main h4 {
+    font-size: 1.3rem; }
+  main h5 {
+    font-size: 1.2rem; }
+  main h6 {
+    font-size: 1rem; }
+  main h1, main h2, main h3, main h4, main h5, main h6 {
+    font-family: "Arvo", serif;
+    line-height: 1.1em;
+    margin: 0;
+    padding: 3% 0 0 0; }
+    main h1 .header-anchor, main h2 .header-anchor, main h3 .header-anchor, main h4 .header-anchor, main h5 .header-anchor, main h6 .header-anchor {
+      border: 2px solid #404040;
+      color: #000000;
+      font-size: 0.7em;
+      font-weight: normal; }
+      main h1 .header-anchor:hover, main h2 .header-anchor:hover, main h3 .header-anchor:hover, main h4 .header-anchor:hover, main h5 .header-anchor:hover, main h6 .header-anchor:hover {
+        border: 2px dashed #CC9905; }
+  main a {
+    color: #CC9905; }
+    main a:hover {
+      color: #faca3d; }
+  main img {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    text-align: center; }
+  main .summary p {
+    color: #7dcd5b;
+    font-style: normal;
+    margin: 2.5% 15% 2.5% 5%;
+    text-align: justify; }
+    main .summary p:first-letter {
+      float: left;
+      font-family: "Lakki Reddy", cursive;
+      font-weight: bold;
+      font-size: 3em;
+      line-height: 0.5;
+      padding: 1% 1% 0 0; }
+  main .summary img {
+    margin: 0 0 0 3%;
+    text-align: right;
+    float: right;
+    display: inline; }
+  main blockquote {
+    border-left: 0.5em solid #CC9905;
+    padding-left: 0.5em; }
+  main code {
+    background-color: #5a5a5a;
+    color: #9cd982;
+    font-family: "Share Tech Mono", sans-serif;
+    padding: 0 0.15em;
+    margin: 0 0.15em; }
+  main .highlight {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background-color: #282828;
+    overflow: hidden;
+    overflow-x: auto;
+    padding: 0 0 0 1%;
+    margin: 0 0 1.5% 0; }
+    main .highlight pre {
+      padding: 0;
+      margin: 0;
+      background-color: #282828;
+      font-family: "Share Tech Mono", sans-serif;
+      font-size: 100%; }
+  main .info {
+    font-size: 0.9rem;
+    text-align: right; }
+  main .tag {
+    font-size: 0.9rem;
+    background-color: #CC9905;
+    color: #404040;
+    margin-right: 0.3em;
+    padding: 0px 5px 1px 5px; }
+    main .tag:hover {
+      background-color: #BBE5A9; }
+    main .tag a {
+      color: #282828; }
+  main .date {
+    color: #CC9905; }
+  main .more {
+    font-size: 70%;
+    margin: 1% 0 0 7%;
+    text-align: left; }
+  main .pagination .disabled {
+    color: rgba(187, 229, 169, 0.3); }
+  main .footnote-ref {
+    font-size: 90%; }
+  main .footnotes {
+    border: #CC9905 2px dashed;
+    font-family: "Molengo", sans-serif;
+    padding: 1% 2%;
+    margin: 0 0 2% 0; }
+    main .footnotes:before {
+      content: "[Footnotes]";
+      color: #CC9905;
+      font-family: "Lakki Reddy", cursive;
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding: 2%;
+      margin: 0; }
+  main .admonition-note {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background: #282828;
+    border: 1px solid #488d2b;
+    margin: 10px 0;
+    padding: 10px 15px 0; }
+    main .admonition-note:before {
+      background: #CC9905;
+      content: "Note";
+      display: block;
+      font-weight: 700;
+      font-size: 110%;
+      line-height: 1;
+      margin: -10px -15px 10px;
+      padding: 0.8% 2%;
+      text-align: center; }
+    main .admonition-note code {
+      background-color: #424242;
+      color: #9cd982; }
+  main .admonition-info {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background: #282828;
+    border: 1px solid #488d2b;
+    margin: 10px 0;
+    padding: 10px 15px 0; }
+    main .admonition-info:before {
+      background: #BF5700;
+      content: "Info";
+      display: block;
+      font-weight: 700;
+      font-size: 110%;
+      line-height: 1;
+      margin: -10px -15px 10px;
+      padding: 0.8% 2%;
+      text-align: center; }
+    main .admonition-info code {
+      background-color: #424242;
+      color: #9cd982; }
+  main .admonition-tip {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background: #282828;
+    border: 1px solid #488d2b;
+    margin: 10px 0;
+    padding: 10px 15px 0; }
+    main .admonition-tip:before {
+      background: #488A05;
+      content: "Tip";
+      display: block;
+      font-weight: 700;
+      font-size: 110%;
+      line-height: 1;
+      margin: -10px -15px 10px;
+      padding: 0.8% 2%;
+      text-align: center; }
+    main .admonition-tip code {
+      background-color: #424242;
+      color: #9cd982; }
+  main .admonition-warning {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background: #282828;
+    border: 1px solid #488d2b;
+    margin: 10px 0;
+    padding: 10px 15px 0; }
+    main .admonition-warning:before {
+      background: #FF6666;
+      content: "Warning";
+      display: block;
+      font-weight: 700;
+      font-size: 110%;
+      line-height: 1;
+      margin: -10px -15px 10px;
+      padding: 0.8% 2%;
+      text-align: center; }
+    main .admonition-warning code {
+      background-color: #424242;
+      color: #9cd982; }
+
+footer {
+  background: #BF5700;
+  color: #BBE5A9;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 2% 3% 6% 3%; }
+  footer a {
+    font-weight: bold;
+    color: #BBE5A9; }
+    footer a:hover {
+      color: #ffcccc; }
+  footer .origin-hint {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background-color: #8c4000;
+    padding: 3%;
+    margin: 0;
+    text-align: center; }
+  footer .left {
+    width: 33%;
+    float: left;
+    display: inline;
+    text-align: left; }
+  footer .middle {
+    width: 33%;
+    float: left;
+    display: inline;
+    text-align: center; }
+  footer .right {
+    width: 33%;
+    float: right;
+    display: inline;
+    text-align: right; }
+
+/*# sourceMappingURL=style.css.map */

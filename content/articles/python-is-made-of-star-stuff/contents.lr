@@ -27,13 +27,17 @@ So, this is all about the innocent little **&#10033;** (star or asterisk) as a v
 
 from os import *
 
+
 def append(*, end=linesep):
     def _append(function):
         def star_reporter(*args, **kwargs):
             print(*args, **kwargs, end=end)
             return function(*args, **kwargs)
+
         return star_reporter
+
     return _append
+
 
 @append(end=" ❇❇❇" + linesep)
 def wrapped(stars, bars):
@@ -41,32 +45,39 @@ def wrapped(stars, bars):
     for elem in [*middle, last, *bars]:
         first *= 2 ** elem
     print(f"answer: {first} (don't know the question though)")
+
 ```
-## Simple things first: &#10033; and &#10033;&#10033; operators
+# Simple things first: &#10033; and &#10033;&#10033; operators
 
 One of the first things a new Python disciple might learn is how to use Python as a calculator - like in many other languages &#10033; is the multiplication operator and &#10033;&#10033; is used for exponentiation - e.g.:
 
 
 ```python
 2 * 2
+
 ```
 ```text
 [result]
-4```
+4
+```
 
 ```python
-2 ** 4 
+2 ** 4
+
 ```
 ```text
 [result]
-16```
+16
+```
 
 ```python
-'spam' * 3
+"spam" * 3
+
 ```
 ```text
 [result]
-'spamspamspam'```
+'spamspamspam'
+```
 Although it is not even trying to make sense, the star-spangled code example further up actually works. If you look at the `wrapped` function, &#10033; is used as a boring old mathematical operator here: `first *= 2 ** elem` (which is using an [augmented assignment](https://docs.python.org/3/reference/simple_stmts.html#index-14) and is the same as `first = first * 2 ** elem`). 
 
 If we run `wrappped`, we won't get a useful result but at least we see that the code executes:
@@ -74,13 +85,15 @@ If we run `wrappped`, we won't get a useful result but at least we see that the 
 
 ```python
 wrapped([1, 2, 3, 4], (23, 42))
+
 ```
 ```text
 [stdout]
 [1, 2, 3, 4] (23, 42) ❇❇❇
 answer: 18889465931478580854784 (don't know the question though)
+
 ```
-## Enforcing the API of a function
+# Enforcing the API of a function
 
 If your function needs 23 arguments, you have a big problem anyway but you can at least alleviate it a bit by making calls to that function more readable. Passing some or all arguments as keyword arguments usually helps. Problem is: the caller normally has the choice how to pass the arguments. You can even call a "keyword only" function like this:
 
@@ -89,11 +102,14 @@ If your function needs 23 arguments, you have a big problem anyway but you can a
 def kw_only_you_wish(spam=None, eggs=None, lobster=None):
     return spam + eggs * lobster
 
-kw_only_you_wish(2, 3 ,4)
+
+kw_only_you_wish(2, 3, 4)
+
 ```
 ```text
 [result]
-14```
+14
+```
 With [Python 3.0](https://docs.python.org/3.0/whatsnew/3.0.html#new-syntax) a new syntax was introduced to make enforcement of so called "keyword-only arguments" possible. This is used in the definition of the `append` function above. When using this, everything after the `[, ]*,` **has** to be passed as keyword argument or you get into trouble.
 
 Trying to decorate a function with `append` and not passing `end` as a keyword parameter results in a friendly `TypeError` exception: 
@@ -103,11 +119,13 @@ Trying to decorate a function with `append` and not passing `end` as a keyword p
 @append("❈❈❈")
 def badly_wrapped():
     pass
+
 ```
 ```text
 [TypeError]
-append() takes 0 positional arguments but 1 was given```
-### Pack and unpack arguments
+append() takes 0 positional arguments but 1 was given
+```
+# Pack and unpack arguments
 
 This goes back to at least [Python 2.0](https://docs.python.org/2.0/ref/function.html). In this case &#10033; and &#10033;&#10033; are syntax elements to be used as prefix, when [defining or calling functions](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments). The idea is usually that you want to pass through parameters to an underlying function without having to care about what or even how many they are. In this example we have a function that is just passing through arguments without needing to now anything about them:
 
@@ -117,19 +135,23 @@ def passing_things_through_function(*args, **kwargs):
     print(f"passing through {args=} and {kwargs=}")
     the_actual_function(*args, **kwargs)
 
+
 def the_actual_function(a, b, c=None, d=None):
     print(f"passed arguments: {a=}, {b=}, {c=}, {d=}")
-    
+
+
 passing_things_through_function(*[1, 2], **dict(c=3, d=4))
+
 ```
 ```text
 [stdout]
 passing through args=(1, 2) and kwargs={'c': 3, 'd': 4}
 passed arguments: a=1, b=2, c=3, d=4
+
 ```
 A case where this is particularly useful is when creating decorators that are not opinionated about the kind of function they decorate (like `append`). They just need to pass through whatever the decorated function needs to be called with.
 
-### There is even more to unpack
+# There is even more to unpack
 
 In pre Python3 days so-called tuple unpacking was already supported. Here is the classic example of swapping assignments between two names:
 
@@ -140,22 +162,24 @@ b = 2
 print(f"before: {a=}, {b=}")
 a, b = b, a
 print(f"after:  {a=}, {b=}")
+
 ```
 ```text
 [stdout]
 before: a=1, b=2
 after:  a=2, b=1
+
 ```
 [PEP 3132 - extended iterable unpacking](https://www.python.org/dev/peps/pep-3132/) brought the star into the "classic" tuple unpacking (which was never restricted to tuples but that name somehow stuck):
 
 
 ```python
 for iterable in [
-    "egg", 
-    [1, 2, 3], 
-    (1, 2, 3), 
-    {1, 2, 3}, 
-    {1: 'a', 2: 'b', 3: 'c'}
+    "egg",
+    [1, 2, 3],
+    (1, 2, 3),
+    {1, 2, 3},
+    {1: "a", 2: "b", 3: "c"},
 ]:
     print(f"{iterable} ({type(iterable)}):")
     a, b, c = iterable
@@ -164,6 +188,7 @@ for iterable in [
     print(f"*a, b = iterable -> {a} {b}")
     a, *b = iterable
     print(f"a, *b = iterable -> {a} {b}\n")
+
 ```
 ```text
 [stdout]
@@ -192,12 +217,13 @@ a, b, c        -> 1 2 3
 *a, b = iterable -> [1, 2] 3
 a, *b = iterable -> 1 [2, 3]
 
+
 ```
-### There is also more to pack
+# There is also more to pack
 
 Pretty much analogous to how &#10033; and &#10033;&#10033; are used in function calls they can be used in literals to create new iterables or mappings:
 
-This syntax to merge iterables was implemented via [PEP 448 (additional unpacking generalizations)](https://www.python.org/dev/peps/pep-0448/) in Python 3.5[^1]. 
+This syntax to merge iterables was implemented via [PEP 448 (additional unpacking generalizations)](https://www.python.org/dev/peps/pep-0448/) in Python 3.5.[^1] 
 
 [^1]: For the historically interested: discussion on the mailing list [part I](https://mail.python.org/pipermail/python-dev/2015-February/138078.html) and [part II](https://mail.python.org/pipermail/python-dev/2015-February/138564.html). 
 
@@ -205,62 +231,75 @@ This syntax to merge iterables was implemented via [PEP 448 (additional unpackin
 ```python
 a, b = [1, 2, 3], [4, 5, 6]
 [*a, *b]
+
 ```
 ```text
 [result]
-[1, 2, 3, 4, 5, 6]```
+[1, 2, 3, 4, 5, 6]
+```
 
 ```python
 a, b = {1: 2, 2: 3, 3: 4}, {1: 4, 4: 5, 5: 6}
 {**a, **b}
+
 ```
 ```text
 [result]
-{1: 4, 2: 3, 3: 4, 4: 5, 5: 6}```
+{1: 4, 2: 3, 3: 4, 4: 5, 5: 6}
+```
 
 ```python
-a, b = {1, 2 ,3}, {3, 4 ,5}
-{*a, *b}  
+a, b = {1, 2, 3}, {3, 4, 5}
+{*a, *b}
+
 ```
 ```text
 [result]
-{1, 2, 3, 4, 5}```
+{1, 2, 3, 4, 5}
+```
 This is the more "natural" approach for sets though (union):
 
 
 ```python
-a | b  
+a | b
+
 ```
 ```text
 [result]
-{1, 2, 3, 4, 5}```
+{1, 2, 3, 4, 5}
+```
 As the underlying functionality only cares about whether something is iterable, you can mix and match. This creates a tuple from a list and a set:
 
 
 ```python
-(*[1, 2 ,3], *{3, 4 ,5})
+(*[1, 2, 3], *{3, 4, 5})
+
 ```
 ```text
 [result]
-(1, 2, 3, 3, 4, 5)```
+(1, 2, 3, 3, 4, 5)
+```
 Be aware though that merging maps like this is not recursive. Later keys overwrite earlier ones. Here `foo` will contain the second dict after merging:
 
 
 ```python
-a = {"a": 1, "foo": { "a": 1}}
-b = {"a": 1, "foo": { "b": 2, "c": 3}}
+a = {"a": 1, "foo": {"a": 1}}
+b = {"a": 1, "foo": {"b": 2, "c": 3}}
 {**a, **b}
+
 ```
 ```text
 [result]
-{'a': 1, 'foo': {'b': 2, 'c': 3}}```
-## Import all the things
+{'a': 1, 'foo': {'b': 2, 'c': 3}}
+```
+# Import all the things
 
 The last star shines a bit dimly as this is usually an [antipattern](http://wiki.c2.com/?AntiPattern) and it looks like this:
 
 
 ```python
 from os import *
+
 ```
 this is usually not a good idea because:
 
@@ -268,8 +307,6 @@ this is usually not a good idea because:
 * it causes namespace pollution which might badly break your code (e.g. if a module you import all the names from shadows `open` or some other inbuilt)
 * you can't see easily from where a name was imported (like in the example above - where does `linesep` come from?)
 
-If a package (or module[^2]) is explicitly designed to be imported like this, this is usually documented and the authors defined the special module attribute   [`__all__`](https://docs.python.org/3/tutorial/modules.html?highlight=__all__#importing-from-a-package) that explicitly lists the names that should be imported when using `from <module or package> import *` 
+If a package (or module)[^2] is explicitly designed to be imported like this, this is usually documented and the authors defined the special module attribute   [`__all__`](https://docs.python.org/3/tutorial/modules.html?highlight=__all__#importing-from-a-package) that explicitly lists the names that should be imported when using `from <module or package> import *` 
 
 [^2]: I'm either not seeing it or the Python documentation is omitting that `__all__` also works for modules. It does though ... I tried it.
-
-!!! This article is generated from a [Jupyter notebook](https://jupyter.org/) running in a Python 3.8 kernel. You can [download it](https://oliver.bestwalter.de/articles/python-is-made-of-star-stuff/python-is-made-of-star-stuff.ipynb) and play with it.

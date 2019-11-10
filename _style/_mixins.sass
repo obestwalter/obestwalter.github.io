@@ -1,36 +1,39 @@
 @import shared-variables
 
 @function capitalize($string)
-  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2)
+    @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2)
 
 =raise($horizontal: 5px, $vertical: 5px, $blur: 10px, $color: $mineShaft)
-  border: solid 1px $color
-  -moz-box-shadow: $horizontal $vertical $blur $color
-  -webkit-box-shadow: $horizontal $vertical $blur $color
-  box-shadow: $horizontal $horizontal $vertical $color
-
-=container-padding
-  padding: 2%
+    border: solid 1px $color
+    -moz-box-shadow: $horizontal $vertical $blur $color
+    -webkit-box-shadow: $horizontal $vertical $blur $color
+    box-shadow: $horizontal $horizontal $vertical $color
 
 =_admonition($type, $bg, $fg: $celadon, $border: $celadon)
-  .admonition-#{$type}
-    +raise
-    background: $mineShaft
-    border: 1px solid darken($border, 50%)
-    margin: 10px 0
-    padding: 10px 15px 0
-    &:before
-      background: $bg
-      content: "#{capitalize($type)}"
-      display: block
-      font-weight: 700
-      font-size: 110%
-      line-height: 1
-      margin: -10px -15px 10px
-      padding: 0.8% 2%
-      text-align: center
+    .admonition-#{$type}
+        $mainBg: $mineShaft
+        +raise
+        background: $mainBg
+        border: 1px solid darken($border, 42)
+        margin: 10px 0
+        padding: 10px 15px 0
+
+        &:before
+            background: $bg
+            content: "#{capitalize($type)}"
+            display: block
+            font-weight: 700
+            font-size: 110%
+            line-height: 1
+            margin: -10px -15px 10px
+            padding: 0.8% 2%
+            text-align: center
+
+        code
+            background-color: lighten($mainBg, 10)
+            color: darken($fg, 10)
 
 =admonitions
-  $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet)
-  @each $key, $value in $map
-    +_admonition($key, $value)
+    $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet)
+    @each $key, $value in $map
+        +_admonition($key, $value)

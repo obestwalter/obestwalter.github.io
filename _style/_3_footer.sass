@@ -1,0 +1,42 @@
+@import shared-variables
+@import mixins
+@import hover
+
+footer
+    $bg: $roseOfSharon
+    $fg: $celadon
+    background: $bg
+    color: $fg
+    font-size: 1.1rem
+    margin: 0
+    padding: 2% 3% 6% 3%
+
+    a
+        font-weight: bold
+        color: $fg
+
+        &:hover
+            color: hover($bg, $bittersweet)
+
+    .origin-hint
+        +raise
+        background-color: darken($bg, 10)
+        padding: 3%
+        margin: 0
+        text-align: center
+    .left
+        width: 33%
+        float: left
+        display: inline
+        text-align: left
+    .middle
+        width: 33%
+        float: left
+        display: inline
+        text-align: center
+    .right
+        width: 33%
+        float: right
+        display: inline
+        text-align: right
+

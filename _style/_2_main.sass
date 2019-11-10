@@ -1,0 +1,168 @@
+@import shared-variables
+@import mixins
+@import hover
+
+main
+    $darkBg: $mineShaft
+    $bg: $tundora
+    $fg: $celadon
+    $hl: $buddhaGold
+    background: $bg
+    color: $fg
+    line-height: 1.4em
+    padding: 1em
+
+    .category
+        color: $celadon
+        font-family: $fontShareTech
+        font-size: 170%
+        font-weight: bold
+        letter-spacing: 0.15em
+        margin-top: 1em
+
+        &:first-letter
+            font-size: 160%
+
+    .title
+        font-family: $fontLakkiRed
+        font-size: 2.5rem
+        font-weight: bold
+        line-height: 1em
+        margin-top: 1em
+        text-align: center
+
+    h1
+        font-size: 2.2rem
+    h2
+        font-size: 1.8rem
+    h3
+        font-size: 1.5rem
+    h4
+        font-size: 1.3rem
+    h5
+        font-size: 1.2rem
+    h6
+        font-size: 1rem
+
+    h1, h2, h3, h4, h5, h6
+        font-family: $fontAro
+        line-height: 1.1em
+        margin: 0
+        padding: 3% 0 0 0
+
+        .header-anchor
+            border: 2px solid $bg
+            $darkenedFg: darken($fg, 48)
+            color: #000000
+            font-size: 0.7em
+            font-weight: normal
+
+            &:hover
+                border: 2px dashed $buddhaGold
+
+    a
+        color: $hl
+
+        &:hover
+            color: hover($bg, $hl)
+
+    img
+        +raise
+        text-align: center
+
+    .summary
+        p
+            &:first-letter
+                float: left
+                font-family: $fontLakkiRed
+                font-weight: bold
+                font-size: 3em
+                line-height: 0.5
+                padding: 1% 1% 0 0
+            color: darken($fg, 20%)
+            font-style: normal
+            margin: 2.5% 15% 2.5% 5%
+            text-align: justify
+
+        img
+            margin: 0 0 0 3%
+            text-align: right
+            float: right
+            display: inline
+
+    blockquote
+        border-left: 0.5em solid $hl
+        padding-left: 0.5em
+
+    code
+        background-color: lighten($bg, 10)
+        color: darken($fg, 10)
+        font-family: $fontShareTech
+        padding: 0 0.15em
+        margin: 0 0.15em
+
+    .highlight
+        +raise
+        background-color: $darkBg
+        overflow: hidden
+        overflow-x: auto
+        padding: 0 0 0 1%
+        margin: 0 0 1.5% 0
+
+        pre
+            padding: 0
+            margin: 0
+            background-color: $darkBg
+            font-family: $fontShareTech
+            font-size: 100%
+
+    .info
+        font-size: 0.9rem
+        text-align: right
+
+    .tag
+        font-size: 0.9rem
+        background-color: $hl
+        color: $bg
+        margin-right: 0.3em
+        padding: 0px 5px 1px 5px
+
+        &:hover
+            background-color: $celadon
+
+        a
+            color: $mineShaft
+
+    .date
+        color: $hl
+
+    .more
+        font-size: 70%
+        margin: 1% 0 0 7%
+        text-align: left
+
+    .pagination
+        .disabled
+            color: fade_out($fg, 0.7)
+
+    .footnote-ref
+        font-size: 90%
+
+    .footnotes
+        &:before
+            content: "[Footnotes]"
+            color: $buddhaGold
+            font-family: $fontLakkiRed
+            font-size: 1.3rem
+            font-weight: bold
+            padding: 2%
+            margin: 0
+
+        border: $buddhaGold 2px dashed
+        font-family: $fontMolengo
+        //font-size: 120%
+        padding: 1% 2%
+        margin: 0 0 2% 0
+        //margin: 5% 0 0 0
+
+    +admonitions

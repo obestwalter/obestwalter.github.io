@@ -1,43 +1,49 @@
-{% macro render_tags(a, class="tags") %}
-        {% if a.tags is defined %}
-            {% for tag in a.tags %}
-                <span class="tag">{{ tag }}</span>
-            {% endfor %}
-        {% endif %}
+{# p is type Page #}
+
+{% macro render_tags(p, class="tags") %}
+    {% if p.tags is defined %}
+        {% for t in p.tags -%}
+            <a href="{{ ('/articles/tag/' ~ t.lower())|url }}">
+                <span class="tag">{{ t }}</span>
+            </a>
+        {% endfor %}
+    {% endif %}
 {% endmacro %}
 
-{% macro render_date(a, class="date") %}
-    <span class="date" title="published: {{ a.crtime }}">
-        [last update: {{ a.mtime }}]
+{% macro render_date(p, class="date") %}
+    <span class="date" title="published: {{ p.crtime }}">
+        [last update: {{ p.mtime }}]
     </span>
 {% endmacro %}
 
-{% macro render_info(a, class="info") %}
+{% macro render_info(p, class="info") %}
     <div class="{{ class }}">
-        {{ render_tags(a) }}
-        {{ render_date(a) }}
+        {{ render_tags(p) }}
+        {{ render_date(p) }}
     </div>
 {% endmacro %}
 
-{% macro render_article_summary(a) %}
-    <h1><a href="{{ a|url }}">{{ a.title }}</a></h1>
+{% macro render_article_summary(p) %}
+    <div class="title"><a href="{{ p|url }}">{{ p.title }}</a></div>
     <div class="summary">
-        {{ a.summary|typogrify }}
-        <div class="more"><a href="{{ a|url }}">[read article]</a></div>
+        {{ p.summary|typogrify }}
+        <div class="more"><a href="{{ p|url }}">[read article]</a></div>
     </div>
-    {{ render_info(a) }}
+    {{ render_info(p) }}
     <hr>
 {% endmacro %}
 
-{% macro render_content(a) %}
-    <h1 id="{{ a._slug }}"><a href="{{ a.url }}">{{ a.title }}</a></h1>
-    {% if a.summary %}
+{% macro render_content(p) %}
+    <div id="{{ p._slug }}" class="title">
+        <a href="{{ p.url }}">{{ p.title }}</a>
+    </div>
+    {% if p.summary %}
         <div class="summary">
-            {{ a.summary|typogrify }}
+            {{ p.summary|typogrify }}
         </div>
     {%  endif %}
-    <div class="content">
-        {{ a.content|typogrify }}
-    </div>
-    {{ render_info(a) }}
+    {{ p.content|typogrify }}
+    {% if p.datamodel.name == "Article" %}
+        {{ render_info(p) }}
+    {% endif %}
 {% endmacro %}

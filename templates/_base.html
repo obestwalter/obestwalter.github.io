@@ -1,42 +1,60 @@
 <!doctype html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name=viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ '/static/style.css'|asseturl }}">
-    <title>{% block title %}{{ this.title }}{% endblock %} &mdash; obestwalter</title>
-</head>
-<body>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name=viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ '/static/normalize.css'|asseturl }}">
+        <link rel="stylesheet" href="{{ '/static/style.css'|asseturl }}">
+        {# FIXME download for self hosting? #}
+        <link href="https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap" rel="stylesheet">
+        <title>{% block title %}{{ this.title }}{% endblock %} &mdash; obestwalter</title>
+    </head>
+    <body>
 
-<header>
-    <div class="site-name"><a href="/">obestwalter</a></div>
-    <nav>
-        <ul>
-            <li{% if this._path == '/' %} class="active"{% endif %}>
-                <a href="{{ '/'|url }}">Home</a>
-            </li>
-            {% for id, item in bag('menu').items() %}
-                <li {% if this.is_child_of(item.path) %} class="active"{% endif %}>
-                    <a href="{{ item.path|url }}">{{ item.label }}</a>
+    <header>
+        <div class="site-name"><a href="/">obestwalter</a></div>
+        <nav>
+            <ul>
+                <li{% if this.path == '/' %} class="active"{% endif %}>
+                    <a href="{{ '/'|url }}">Home</a>
                 </li>
-            {% endfor %}
-        </ul>
-    </nav>
-</header>
+                {% for id, item in bag('menu').items() %}
+                    <li {% if this.is_child_of(item.path) %} class="active"{% endif %}>
+                        <a href="{{ item.path|url }}">{{ item.label }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    {% block body %}{% endblock %}
-</main>
+    <main>
+        {% block body %}{% endblock %}
+    </main>
 
-<footer>
-    <p>
-        <a rel="license"
-            href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-            &copy; Oliver Bestwalter (CC BY-NC-SA)
-        </a>
-        &nbsp;<em>||</em>&nbsp;
-        <a href="https://github.com/obestwalter/obestwalter.github.io">Source</a>
-    </p>
-</footer>
+    <footer>
+        <div class="origin-hint">
+        {% if this.path in JUPYTER_PREPROCESS.paths %}
+            generated from Jupyter notebook &mdash;
+            {% if JUPYTER_PREPROCESS.source_url is defined %}
+                <a href="{{ JUPYTER_PREPROCESS.source_url }}{{ this.path }}">
+                    view sources
+                </a>
+            {% else %}
+                <a href="{{ this.path }}">
+                    download notebook
+                </a>
+            {%  endif %}
+        {% elif "/tag/" not in this.url_path %}
+            <a href="{{ LEBUT.REPO.CONTENT }}{{ this.url_path -}}">view page sources</a>
+        {% else %}
+            <a href="{{ LEBUT.REPO.CONTENT }}">view website sources</a>
+        {% endif %}
+        </div>
+        <br>
+        <div class="left"><a href="{{ LEBUT.REPO.ISSUES }}">comment</a></div>
+        <div class="right"><a href="{{ LEBUT.REPO.LICENSE }}">&copy; Oliver Bestwalter</a></div>
+    </footer>
 
-</body>
+    </body>
+</html>

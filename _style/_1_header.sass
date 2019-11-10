@@ -1,0 +1,59 @@
+@import shared-variables
+@import mixins
+@import hover
+
+header
+    $darkBg: $tundora
+    $bg: $roseOfSharon
+    $fg: $celadon
+    background: $bg
+    line-height: 4rem
+    padding: 2em 2em 0 0
+
+    a
+        color: $fg
+
+        &:hover
+            color: hover($bg, $fg)
+
+        &:hover
+            color: darken($fg, 30)
+
+        &:active
+            color: darken($fg, 42)
+
+    .site-name
+        font-family: $fontLakkiRed
+        font-size: 4rem
+        font-weight: bold
+        letter-spacing: -5px
+        margin: 0
+        padding: 0
+        text-align: right
+
+    nav
+        font-size: 1.3rem
+        line-height: 1em
+
+        a
+            padding: 0.1em 0.4em
+
+        ul
+            margin: 0
+            padding: 0
+            list-style: none
+
+            li
+                display: inline
+                margin: 0 0.5em 0 0
+                padding: 0
+
+        .active
+            background: $darkBg
+
+            a
+                color: $fg
+
+                &:hover
+                    color: hover($darkBg, $fg)
+

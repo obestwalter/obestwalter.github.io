@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+{% from "macros/content.html" import render_article_summary %}
+
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+     <div class="category">Articles with tag '{{ this.tag }}'</div>
+    <ul>
+      {% for i in this.items %}
+      {{ render_article_summary(i) }}
+      {% else %}
+        <li><em>No articles with this tag.</em></li>
+      {% endfor %}
+    </ul>
+{% endblock %}

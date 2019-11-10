@@ -1,6 +1,26 @@
 # [My personal website](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
 
-## Installation
+## Clone this project with submodules
+
+3rd party packages in `packages` are [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so cloning this repo completely means:
+
+    $ git clone --recurse-submodules <url of this repo>
+
+add submodules later after normal clone:
+
+    $ git submodule update --init.
+    
+update submodules:
+
+    $ git submodule update --remote <repo name>
+
+add new plugin:
+
+    $ git submodule add <repo url>
+    $ git commit -am 'add <repo name>
+    $ git push origin master
+
+## Lektor development installation
 
 The officially recommended way is weird and the way lektor deals with plugins is extra weird. I work from a local lektor clone with my own little server wrapper to be make it easier to debug and modify.
 
@@ -46,6 +66,12 @@ Hint: list themes with `pygmentize -L` and generate css files with `pygmentize -
 When getting `LoadError: cannot load such file -- rb-fsevent` run:
 
     gem install rb-fsevent
+
+## css is a wondrous thing
+
+* https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align
+* https://font-display.glitch.me/
+* https://www.w3.org/Style/Examples/007/units.en.html
 
 ## Legalese
 

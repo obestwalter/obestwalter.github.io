@@ -1,74 +1,36 @@
-""" lebut - my little lektor butler to make common activities less tedious."""
+"""lebut - Lektor Butler. Lektor + customizations."""
 import logging
 import os
 import shutil
 import subprocess
+import sys
 from datetime import datetime
-from io import BytesIO
 from string import Template
 from typing import List
 
 import fire
 from slugify import slugify
 
-from lebut import PATH, NAME
-from lebut import ipynb_to_md
-from lektor.admin.modules import serve
-from lektor.cli import Context
-from lektor.devserver import run_server
+from lebut import lektor_monkeypatch, livereloader
+from lebut.config import NAME, PATH
+from lektor.cli import clean_cmd, build_cmd, deploy_cmd
 
 log = logging.getLogger(__name__)
-
-# I don't use the editor - get rid of the button during development
-serve.rewrite_html_for_editing = lambda fp, edit_url: BytesIO(fp.read())
+logging.basicConfig(level=logging.INFO)
+lektor_monkeypatch.patch_all()
 
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
-    fire.Fire(Workflow)
+    oldPath = os.getcwd()
+    try:
+        os.chdir(str(PATH.PROJECT))
+        fire.Fire(Workflow())
+    finally:
+        os.chdir(oldPath)
 
 
 class Workflow:
-    """blog creation, adaption, publishing workflow"""
-
-    MY_FLAGS = ["sass"]
-
-    @classmethod
-    def serve(
-            cls,
-            host="0.0.0.0",
-            port=8080,
-            verbosity=0,
-            dev=True,
-            reinstall=False,
-            browse=False,
-            prune=True,
-            flags=("sass",),
-    ):
-        """
-        :param verbosity: 0-4
-        """
-        assert all(f in cls.MY_FLAGS for f in flags), flags
-        os.environ["WERKZEUG_RUN_MAIN"] = "true"  # avoid webpack watch
-        ctx = Context()
-        ctx.load_plugins(reinstall=reinstall)
-        log.info(f"project: {ctx.get_project().project_path} | output: {PATH.OUTPUT}")
-        cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
-        cls.compile_notebooks()
-        try:
-            run_server(
-                bindaddr=(host, port),
-                env=ctx.get_env(),
-                output_path=PATH.OUTPUT,
-                verbosity=verbosity,
-                lektor_dev=dev,
-                browse=browse,
-                prune=prune,
-                extra_flags=flags,
-                ui_lang=ctx.ui_lang,
-            )
-        finally:
-            cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+    """Home baked log creation, adaption, publishing workflow"""
 
     @classmethod
     def new(cls, title: str):
@@ -83,37 +45,39 @@ class Workflow:
         (container / NAME.CONTENTS).write_text(content)
 
     @classmethod
-    def compile_notebooks(cls):
-        ipynb_to_md.process_all(PATH.ARTICLES)
-
-    @classmethod
     def clean(cls):
-        if ipynb_to_md._CACHE_PATH.exists():
-            ipynb_to_md._CACHE_PATH.unlink()
-
+        sys.argv = ["xxx", "-vvvv", "--yes", "--output-path", str(PATH.OUTPUT)]
+        clean_cmd()
         if PATH.OUTPUT.exists():
             shutil.rmtree(PATH.OUTPUT)
-        cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
-        cls._run(["lektor", "clean", "--yes"])
+
+    @classmethod
+    def serve(cls):
+        """let lektor rebuild but use livereload plugin, instead of inbuilt server."""
+        sys.argv = ["xxx", "--watch", "-vvvv", "--output-path", str(PATH.OUTPUT)]
+        # os.environ["LEKTOR_DEV"] = "1"
+        cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
+        try:
+            livereloader.LiveReloader().start()
+            build_cmd()
+        finally:
+            cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
 
     @classmethod
     def build(cls, clean=False):
         if clean:
-            cls.clean()
-        cls.compile_notebooks()
-        cls._run(["lektor", "build", "--output-path", str(PATH.OUTPUT)])
+            try:
+                cls.clean()
+            except SystemExit as e:
+                assert e.code == 0, e.code
+
+        sys.argv = ["xxx", "-vvvv", "--output-path", str(PATH.OUTPUT)]
+        build_cmd()
 
     @classmethod
     def deploy(cls):
-        cls.build()
-        cls._run(["lektor", "deploy", "--output-path", str(PATH.OUTPUT)])
-
-    @classmethod
-    def html_tidy(cls):
-        # FIXME not used yet: atm generated html needs manual intervention.
-        for path in PATH.OUTPUT.glob("**/*.html"):
-            log.info(f"tidy up {path}")
-            cls._run(["tidy", "-q", "-utf8", "-o", str(path), str(path)])
+        sys.argv = ["xxx", "--output-path", str(PATH.OUTPUT)]
+        deploy_cmd()
 
     @classmethod
     def _run(cls, cmd: List[str]):
@@ -136,11 +100,5 @@ class Workflow:
 
 
 if __name__ == "__main__":
-    # for debugging
-    logging.basicConfig(level=logging.INFO)
-    oldPath = os.getcwd()
-    try:
-        os.chdir(str(PATH.PROJECT))
-        Workflow.serve()
-    finally:
-        os.chdir(oldPath)
+    sys.argv = ["lebut", "serve"]
+    main()

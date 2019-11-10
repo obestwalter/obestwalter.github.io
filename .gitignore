@@ -2,3 +2,5 @@
 _resources/*
 lebut/*.json
 drafts
+node_modules
+tests/build

@@ -1,70 +1,70 @@
 // based on https://gist.github.com/graygilmore/8d5e2b2dbc620804f33b
 @function color-luminance($value)
-  @if $value <= 0.03928
-    @return $value / 12.92
-  @else
-    @return ($value + 0.055) / 1.055 * ($value + 0.055) / 1.055
+    @if $value <= 0.03928
+        @return $value / 12.92
+    @else
+        @return ($value + 0.055) / 1.055 * ($value + 0.055) / 1.055
 
 @function luminosity($color)
-  $r: color-luminance(red($color) / 255)
-  $g: color-luminance(green($color) / 255)
-  $b: color-luminance(blue($color) / 255)
-  @return 0.2126 * $r + 0.7152 * $g + 0.0722 * $b
+    $r: color-luminance(red($color) / 255)
+    $g: color-luminance(green($color) / 255)
+    $b: color-luminance(blue($color) / 255)
+    @return 0.2126 * $r + 0.7152 * $g + 0.0722 * $b
 
 @function contrast-ratio($c1, $c2)
-  $l1: luminosity($c1)
-  $l2: luminosity($c2)
-  @if $l2 > $l1
-    @return $l2 / $l1
-  @else
-    @return $l1 / $l2
+    $l1: luminosity($c1)
+    $l2: luminosity($c2)
+    @if $l2 > $l1
+        @return $l2 / $l1
+    @else
+        @return $l1 / $l2
 
 @function improved-contrast($old-contrast, $style, $background, $hover-color, $color)
-  $new-color: $color
-  $test-color: ""
-  @for $i from 15 to 25
-    @if $style == "darken"
-      $test-color: darken($color, $i)
-    @else
-      $test-color: lighten($color, $i)
-    $test-contrast: contrast-ratio($background, $test-color)
-    @if $test-contrast > $old-contrast
-      $new-contrast: $test-contrast
-      $hover-color: $test-color
-  @return $hover-color
+    $new-color: $color
+    $test-color: ""
+    @for $i from 15 to 25
+        @if $style == "darken"
+            $test-color: darken($color, $i)
+        @else
+            $test-color: lighten($color, $i)
+        $test-contrast: contrast-ratio($background, $test-color)
+        @if $test-contrast > $old-contrast
+            $new-contrast: $test-contrast
+            $hover-color: $test-color
+    @return $hover-color
 
 @function hover($background, $color)
-  $style: ""
-  $hover-color: ""
-  $color-lightness: abs(lightness($color))
-  $background-lightness: abs(lightness($background))
-  $contrast: abs(contrast-ratio($background, $color))
-  @if $color-lightness == 100
-    @if $background-lightness >= 90
-      $hover-color: darken($background, 15)
+    $style: ""
+    $hover-color: ""
+    $color-lightness: abs(lightness($color))
+    $background-lightness: abs(lightness($background))
+    $contrast: abs(contrast-ratio($background, $color))
+    @if $color-lightness == 100
+        @if $background-lightness >= 90
+            $hover-color: darken($background, 15)
+        @else
+            $hover-color: mix($color, $background, 80)
+    @else if $color-lightness == 0
+        @if $background-lightness < 10
+            $hover-color: lighten($background, 20)
+        @else
+            $hover-color: mix($color, $background, 60)
+    @else if $background-lightness < $color-lightness
+        $style: "lighten"
+        @if $color-lightness > 90
+            $hover-color: darken($color, 20)
+            $style: "darken"
+        @else
+            $hover-color: lighten($color, 20)
     @else
-      $hover-color: mix($color, $background, 80)
-  @else if $color-lightness == 0
-    @if $background-lightness < 10
-      $hover-color: lighten($background, 20)
-    @else
-      $hover-color: mix($color, $background, 60)
-  @else if $background-lightness < $color-lightness
-    $style: "lighten"
-    @if $color-lightness > 90
-      $hover-color: darken($color, 20)
-      $style: "darken"
-    @else
-      $hover-color: lighten($color, 20)
-  @else
-    $style: "darken"
-    @if $color-lightness < 15
-      $hover-color: lighten($color, 20)
-      $style: "lighten"
-    @else
-      $hover-color: darken($color, 20)
-    @if $color-lightness != 0 and $color-lightness != 100
-    $new-contrast: contrast-ratio($background, $hover-color)
-    @if $new-contrast < 8
-      $hover-color: improved-contrast($new-contrast, $style, $background, $hover-color, $color)
-  @return $hover-color
+        $style: "darken"
+        @if $color-lightness < 15
+            $hover-color: lighten($color, 20)
+            $style: "lighten"
+        @else
+            $hover-color: darken($color, 20)
+        @if $color-lightness != 0 and $color-lightness != 100
+        $new-contrast: contrast-ratio($background, $hover-color)
+        @if $new-contrast < 8
+            $hover-color: improved-contrast($new-contrast, $style, $background, $hover-color, $color)
+    @return $hover-color

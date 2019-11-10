@@ -3,22 +3,9 @@
 
 {% block title %}Home{% endblock %}
 {% block body %}
-    {% if this.tags %}
-        <div class="category">Tags</div>
-        <ul>
-            {% for t in this.tags -%}
-                <li>
-                    <a href="{{ ('/articles@tag/' ~ t.lower())|url }}">
-                        All posts tagged {{ t }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
     <div class="category">Hi, I am Oliver :)</div>
 
-    <br><br>
+    <br>
 
     <div class="summary">
         <img src="winter-is-coming.jpg" alt="Oliver covered in snow in winter">

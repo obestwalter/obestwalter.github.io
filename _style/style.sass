@@ -1,188 +1,63 @@
-// using indented style https://sass-lang.com/
-@import normalize
+// using indented SASS style (https://sass-lang.com/)
 @import fonts
-
-@import mixins
-@import hover
 @import pygments
+
 @import shared-variables
 
 html
-  background: $mineShaft
-  font-size: 150%
+    background: $mineShaft
+    font-size: 140%
+
 body
-  font-family: $textFont
-  min-width: 750px
+    font-family: $fontMolengo
+    // https://meyerweb.com/eric/thoughts/2018/06/28/what-is-the-css-ch-unit/
+    max-width: 90ch
+    margin: 0 auto
+
 a
-  text-decoration: none
-hr
-  border: 1px solid $roseOfSharon
-ul
-  list-style-type: square
-table
-  background: $mineShaft
-  padding: 1px
-  border: 1px solid $mineShaft
-th
-  background: $tundora
-  padding: 3px
-  border: 1px solid $celadon
-td
-  background: $tundora
-  padding: 3px
-  border: 1px solid $celadon
+    text-decoration: none
 
-header, main, footer
-  margin: 0 auto
+    &:active
+        outline: 3px dashed $buddhaGold
 
-header
-  +container-padding
-  $darkBg: $tundora
-  $bg: $roseOfSharon
-  $fg: $celadon
-  background: $bg
-  padding-bottom: 0
-  padding-top: 0.5em
-  a
-    color: $celadon
-    padding: 0 0.3em 0 0.3em
-    text-align: left
-    &:hover
-      color: hover($bg, $fg)
-  nav
-    line-height: 1em
-    ul
-      list-style: none
-      margin: 0
-      padding: 0
-      li
-        display: inline
-        margin: 0 0.5em 0 0
-        padding: 0
-  .active
-    background: $darkBg
-    a
-      padding: 0.1em 0.4em
-      color: $fg
-      &:hover
-        color: hover($darkBg, $fg)
-  .site-name
-    font-size: 200%
-    font-weight: normal
-    margin: 0
-    padding: 0
-    text-align: right
-    a
-      margin: 0
-      padding: 0
-      color: $fg
-      &:hover
-        color: hover($bg, $fg)
-
-main
-  +container-padding
-  $darkBg: $mineShaft
-  $bg: $tundora
-  $fg: $celadon
-  $hl: $buddhaGold
-  background: $bg
-  color: $fg
-  a
-    color: $hl
-    &:hover
-      color: hover($bg, $hl)
-  .footnote-ref
-    font-size: 90%
-  .footnotes
-    margin-top: 5%
-    &:before
-      content: "Footnotes"
-  img
-    +raise
-    text-align: center
-  .category
-    margin-top: 1em
-    font-size: 160%
-    color: $celadon
-    &:first-letter
-      font-size: 170%
-  .header-anchor
-    $darkenedFg: darken($fg, 48)
-    color: $darkenedFg
-    font-weight: normal
-    &:hover
-      color: hover($darkenedFg, $bg)
-  .summary
-    p
-      &:first-letter
-        float: left
-        font-size: 300%
-        line-height: 0.5
-        padding: 1% 1% 0 0
-        font-weight: bold
-      color: darken($fg, 20%)
-      font-style: normal
-      margin: 0 15% 0 5%
-      text-align: justify
-    img
-      margin: 0 0 0 3%
-      text-align: right
-      float: right
-      display: inline
-
-  .content
-    word-spacing: 0.2em
-    line-height: 1.5
-    margin: 1em
-    blockquote
-      border-left: 0.5em solid $hl
-      padding-left: 0.5em
     code
-      background-color: $darkBg
-      font-family: $codeFont
-      padding: 0.1em 0.2em
-    pre
-      +raise
-      background-color: $darkBg
-      font-family: $codeFont
-      font-size: 110%
-  .highlight
-    background-color: $darkBg
-    padding-left: 0.6em
-  .info
-    font-size: 70%
-    text-align: right
-  .tag
-    background-color: $hl
-    color: $bg
-    margin-right: 0.3em
-    padding: 0px 5px 1px 5px
-  .date
-    color: $hl
-  .more
-    font-size: 70%
-    margin: 1% 0 0 7%
-    text-align: left
-  .pagination
-    .disabled
-      color: fade_out($fg, 0.7)
-  +admonitions
+        text-decoration: underline
 
-footer
-  +container-padding
-  $bg: $roseOfSharon
-  $fg: $mineShaft
-  $hl: $bittersweet
-  background: $bg
-  text-align: right
-  p
-    margin: 0
-    color: $hl
-    font-size: 75%
-    a
-      color: $fg
-      &:hover
-        color: hover($bg, $fg)
+hr
+    margin: 1.5em 0 0 0
+    border: 2px solid $mineShaft
 
+p
+    font-size: 1.15em
+    line-height: 1.5em
+    // justified text with automatic hyphenation
+    // needs <html lang = "en"> to work properly
+    // If needed (e.g. different language), use: &shy;
+    hyphens: auto
+    text-align: justify
+    margin: 1% 0 2% 0
+
+ul
+    list-style-type: square
+
+table
+    padding: 4px
+    marging: 6px
+    border: none
+
+    th
+        font-size: 1.15rem
+        font-weight: bold
+
+    td, th
+        background: $tundora
+        padding: 10px 20px
+        border-bottom: 2px solid $mineShaft
+
+@import 1_header
+@import 2_main
+@import 3_footer
+
+// # FIXME remove if character based approach works
 // import media-queries last as they need to override things
-@import media-queries
+//@import media-queries
