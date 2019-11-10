@@ -161,10 +161,11 @@
 <p>The current incarnation adds a new build program that slightly modifies the attachment build behaviour for &#8220;notebook powered&#8221; pages to preprocess the notebook as part of the normal build process. Still not knowing much about Lektor this might be less wrong, but more importantly: it works reliably without needing extra caching, and is easier to understand in the context of a build. I also like it more, because this motivated me to look a bit into how Lektor works. Which was very&nbsp;interesting.</p>
 <p>These <a href="https://www.getlektor.com/docs/api/plugins/events/">events</a> are used in the&nbsp;plugin:</p>
 <ul>
-<li><code>setup-env</code> is used to prepare the system on startup. This is when config values of the plugin can be populated for later use by the templates and when specialized build programs can be&nbsp;added. </li>
+<li><code>setup-env</code> is used to prepare the system on startup. This is when config values of the plugin can be populated for later use by the templates and when specialized build programs can be&nbsp;added.</li>
 <li><code>before-build</code> is called for all sources before it is decided if a build of that source actually needs to happen, this is why it is not very useful to do any actual preprocessing there (that then might not be necessary and create a build loop as mentioned), but it can be used to provide more context for the build templates - in the case of <code>jupyter-preprocess</code>, whether the page that is about to be built is generated from a notebook or&nbsp;not.</li>
+<li><code>before-build-all</code> initializes an in-process cache to prevent duplicate builds if several artifact are updated at once (e.g. after a <code>lektor clean</code>) - there might be a better way to do all this via Lektors <a href="https://www.getlektor.com/docs/api/build/context/">dependency tracking on the context</a> but I didn&#8217;t have the chance yet to look into this closer - I also have a hunch that turning <code>contents.lr</code> into a build artifact itself like the plugin is doing it, breaks a lot of assumptions and needs some special handling&nbsp;anyway. </li>
 </ul>
-<p>This is what the main plugin code looks&nbsp;like:</p>
+<p>This is what the plugin class looks&nbsp;like:</p>
 <div class="highlight"><pre><span></span><span class="c1"># %load -s JupyterPreprocessPlugin ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
 <span class="k">class</span> <span class="nc">JupyterPreprocessPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Jupyter Notebook preprocessor&quot;</span>
@@ -187,6 +188,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">add_build_program</span><span class="p">(</span>
             <span class="n">Attachment</span><span class="p">,</span> <span class="n">NotebookAwareAttachmentBuildProgram</span>
         <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_before_build_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>  <span class="c1"># noqa</span>
+        <span class="k">global</span> <span class="n">_already_build</span>
+        <span class="n">_already_build</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">on_before_build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
         <span class="n">attachments</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;attachments&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
