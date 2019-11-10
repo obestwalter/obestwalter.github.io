@@ -189,9 +189,9 @@
             <span class="n">Attachment</span><span class="p">,</span> <span class="n">NotebookAwareAttachmentBuildProgram</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">on_before_build_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="k">global</span> <span class="n">_already_build</span>
-        <span class="n">_already_build</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">on_before_build_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">_already_built</span>
+        <span class="n">_already_built</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">on_before_build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
         <span class="n">attachments</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;attachments&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
@@ -250,7 +250,7 @@ test            -&gt; run tests for lebut
 
         
     <span class="date" title="published: 2019-11-03">
-        [last update: 2019-11-04]
+        [last update: 2019-11-10]
     </span>
 
     </div>
