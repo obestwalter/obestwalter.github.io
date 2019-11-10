@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/obestwalter
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://oliver.bestwalter.de
+  * I am obestwalter (https://keybase.io/obestwalter) on keybase.
+  * I have a public key ASCELPCfKZiDlcykIiM_9416jD-2zFVuWm_P0kt-yuW46wo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120842cf09f29988395cca422233ff78d7a8c3fb6cc556e5a6fcfd24b7ecae5b8eb0a",
+      "host": "keybase.io",
+      "kid": "0120842cf09f29988395cca422233ff78d7a8c3fb6cc556e5a6fcfd24b7ecae5b8eb0a",
+      "uid": "8e139359c9972aa7c2dd822c5fe40a19",
+      "username": "obestwalter"
+    },
+    "merkle_root": {
+      "ctime": 1505580873,
+      "hash": "3e10664d90631c75b158fce5878cedddb65ee4c72e83ce67a1f0e684535bf864e1e58dd6e4894603e61718556faa217cdbc17ec6ae83c391de446abf323517e8",
+      "hash_meta": "fa6de6cac417b99a68c94043c6a1902460c512b725395a280de7a260d4264a88",
+      "seqno": 1391562
+    },
+    "service": {
+      "hostname": "oliver.bestwalter.de",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.30"
+  },
+  "ctime": 1505580987,
+  "expire_in": 504576000,
+  "prev": "614dc7d7e0b8342f6852367528719b3a78d1aeed550cffcacd415842d10edbe4",
+  "seqno": 24,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEghCzwnymYg5XMpCIjP/eNeow/tsxVblpvz9JLfsrluOsKp3BheWxvYWTFA097ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwODQyY2YwOWYyOTk4ODM5NWNjYTQyMjIzM2ZmNzhkN2E4YzNmYjZjYzU1NmU1YTZmY2ZkMjRiN2VjYWU1YjhlYjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwODQyY2YwOWYyOTk4ODM5NWNjYTQyMjIzM2ZmNzhkN2E4YzNmYjZjYzU1NmU1YTZmY2ZkMjRiN2VjYWU1YjhlYjBhIiwidWlkIjoiOGUxMzkzNTljOTk3MmFhN2MyZGQ4MjJjNWZlNDBhMTkiLCJ1c2VybmFtZSI6Im9iZXN0d2FsdGVyIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTA1NTgwODczLCJoYXNoIjoiM2UxMDY2NGQ5MDYzMWM3NWIxNThmY2U1ODc4Y2VkZGRiNjVlZTRjNzJlODNjZTY3YTFmMGU2ODQ1MzViZjg2NGUxZTU4ZGQ2ZTQ4OTQ2MDNlNjE3MTg1NTZmYWEyMTdjZGJjMTdlYzZhZTgzYzM5MWRlNDQ2YWJmMzIzNTE3ZTgiLCJoYXNoX21ldGEiOiJmYTZkZTZjYWM0MTdiOTlhNjhjOTQwNDNjNmExOTAyNDYwYzUxMmI3MjUzOTVhMjgwZGU3YTI2MGQ0MjY0YTg4Iiwic2Vxbm8iOjEzOTE1NjJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoib2xpdmVyLmJlc3R3YWx0ZXIuZGUiLCJwcm90b2NvbCI6Imh0dHA6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjMwIn0sImN0aW1lIjoxNTA1NTgwOTg3LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwicHJldiI6IjYxNGRjN2Q3ZTBiODM0MmY2ODUyMzY3NTI4NzE5YjNhNzhkMWFlZWQ1NTBjZmZjYWNkNDE1ODQyZDEwZWRiZTQiLCJzZXFubyI6MjQsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RACz/8PQWYposr2v30cQa/oE1lFor5VuQwYaRPWSxdL4fi7vz7qfd19Q3GCXCdoVC2W94Xr8UxTPfKL/+F0xx1C6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIGq6jz3H07zdUDCv+xFRcZPE/WPu+mc1h+IZRzuxX6HWo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/obestwalter
+
+==================================================================

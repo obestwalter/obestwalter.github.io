@@ -1,5 +1,0 @@
-[project]
-name = blog
-
-[servers.production]
-target = ghpages://obestwalter/blog

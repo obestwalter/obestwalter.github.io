@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name=viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/normalize.css?h=7ffde343">
+        <link rel="stylesheet" href="/static/style.css?h=cf7699c7">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap" rel="stylesheet">
+        <title>Obligatory meta article about my website &mdash; obestwalter</title>
+    </head>
+    <body>
+
+    <header>
+        <div class="site-name"><a href="/">obestwalter</a></div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+                    <li  class="active">
+                        <a href="/articles/">Articles</a>
+                    </li>
+                
+                    <li >
+                        <a href="/projects/">Projects</a>
+                    </li>
+                
+                    <li >
+                        <a href="/about/">About</a>
+                    </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+
+
+
+
+
+
+
+
+
+
+    
+    <div id="website-meta" class="title">
+        <a href="">Obligatory meta article about my website</a>
+    </div>
+    
+        <div class="summary">
+            <p><img src="/articles/website-meta/normal-day-at-the-office.gif" alt="a normal day in the office (keeping the lab equipment from exploding)"></p>
+<p>When I was hyping myself up to write the second article on my website after almost 3 years I naturally had a look how I can busy myself with everything else but writing the actual article (while still fooling myself into believing this is a necessary preparation for &#8230; <strong>just writing the blimmin&#8217; article</strong>. But I think the work in my website generation laboratory was worth the fuzz this time, as I quite enjoy the new workflow. I now can write code sprinkled articles in a Jupyter notebook and have them rendered automatically into my lektor generated website using a bit of Python code hooked into lektors plugin&nbsp;system.</p>
+
+        </div>
+    
+    <p>It is a never ending story: every time I want to write an article to publish on my website, I change my blog engine instead. At some point I even created my own <a href="https://github.com/obestwalter/loslassa">static website generator</a>. All this fuzz just to avoid actually writing things to &#8230; you know &#8230; put on a website :). This might be excused by the fact that I really enjoy spending my leisure time tinkering with things aimlessly rather then actually producing something that might be useful, but I finally started seeing through my evil self-sabotage mechanisms and was determined to put a stop to it! So I did the natural thing: I went to my lab<sup class="footnote-ref" id="fnref-1"><a href="#fn-1">&thinsp;[1]</a></sup> and tinkered with the&nbsp;engine.</p>
+<h1 id="prologue">Prologue <a class="header-anchor" href="#prologue">&#128279;</a></h1><p>I played with a lot of blog engines over the years - while never really blogging anything. I mostly work in backend development, but there is something that fascinates me about web design and web development. It&#8217;s one of these things I guess&nbsp;:).</p>
+<p>I am particularly fond of static website generators that provide a workflow that is similar to developing software. I played with <a href="https://blog.getpelican.com/">pelican</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://gohugo.io/">hugo</a>, <a href="https://getnikola.com/">nikola</a>, <a href="https://flask.palletsprojects.com/">flask</a> + <a href="https://github.com/Frozen-Flask/Frozen-Flask">frozen-flask</a> and the lot. As already mentioned: I even wrote my own <a href="https://www.sphinx-doc.org/">sphinx</a> based generator &#8230; while still never really blogging&nbsp;anything.</p>
+<p>At the beginning of 2017 I made a deal with a colleague that I would finally write a blog article about the pytest development sprint and a bit about my involvement. It would have been boring though if I would have used the site I had already online (last incarnation was a simple <a href="https://www.mkdocs.org/">mkdocs</a> driven <a href="https://github.com/obestwalter/obestwalter.github.io/blob/1.0.0/docs/index.md">thing</a>). It would also have been boring to use one of the engines I already knew. Using something utterly profane like medium or wordpress was obviously completely out of the question! I mean, I could have just written the article then and be done with it. Who wants that? Right. Not me. So I started looking around for the next thing that could keep me from writing that article and I stumbled over <a href="https://www.getlektor.com/">lektor</a>. Now this was something that could keep me busy for a while as it is not simply a static website generator, but rather something that you can use to build a static website generator with - <strong>a website generator generator</strong>! Long story short: I set that up from scratch with a <a href="https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/_style/style.sass">simple sass style</a>, wrote a <a href="https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/packages/lektor-sass/lektor_sass.py">little plugin</a> to integrate that into lektors development server, and finally actually wrote and <a href="/articles/becoming-an-open-source-gardener/">published that article</a>. Nobody ever made a deal with me again that forced me to write another article, so that was it. I had unlocked the <em>&#8220;i-have-a-blog-but-i-never-blog-achievement&#8221;</em> once again - only on a higher level. Until very&nbsp;recently.</p>
+<p>Because very recently I realized that I had produced a lot of material while trying to teach Python and test automation to all kinds of folks over the last years. I finally wanted to start sharing some of these materials on my website. As making strange deals seems to work with my contorted psyche, I made a deal with myself to publish at least one article a month for at least a&nbsp;year.</p>
+<p>This time I was determined to resist the temptation to start from scratch and resolved to adjust the existing setup to fit my new needs. The new needs arose from the fact that I work mostly in Jupyter Notebooks nowadays, when creating learning materials and I like it, so I want to write articles like that and have them integrate into my&nbsp;website.</p>
+<h1 id="jupyterizing-lektor">Jupyterizing Lektor <a class="header-anchor" href="#jupyterizing-lektor">&#128279;</a></h1><p>If you don&#8217;t know Lektor at all yet, here is the minimum amount of knowledge necessary to follow this&nbsp;article:</p>
+<p>To build a page, Lektor takes a folder, a data model defined in an <code>.ini</code> and a Jinja2 template. The folder for the page needs at least a <code>contents.lr</code> file - a simple lektor specific text file format. This file contains data that fits the user defined data model. Usually this is some meta data about the content and the main content of the page formatted in&nbsp;markdown.</p>
+<p>Lektor is extensible via a plugin system that involves creating an <a href="https://www.getlektor.com/docs/cli/dev/new-plugin/">installable package</a> and implementing some methods in a class inheriting from <a href="https://www.getlektor.com/docs/api/plugins/plugin/"><code>lektor.pluginsystem.Plugin</code></a>. Methods in that plugin class will be called, when Lektor emits <a href="/articles/website-meta/[events](https://www.getlektor.com/docs/api/plugins/events/">events</a> in different phases of the build&nbsp;process.</p>
+<h2 id="did-someone-else-solve-my-problem-already?">Did someone else solve my problem already? <a class="header-anchor" href="#did-someone-else-solve-my-problem-already?">&#128279;</a></h2><p>To integrate Jupyter notebooks, there is already a <a href="https://github.com/baldwint/lektor-jupyter">plugin</a> that hasn&#8217;t been worked on for a while and is more of a prof of concept. It was a good starting point though to see what it does and to decide what I&nbsp;want:</p>
+<ul>
+<li>It is not cooperating with Lektor in the way that changes in the notebook file are not detected by the build system, making it necessary for the <code>contents.lr</code> file to be changed to trigger a new page build. I want this to work&nbsp;correctly.</li>
+<li>It renders <code>.ipynb</code> files directly to <span class="caps">HTML</span> using <a href="https://nbconvert.readthedocs.io/"><code>nbconvert</code></a> with the <code>basic</code> template.<sup class="footnote-ref" id="fnref-3"><a href="#fn-3">&thinsp;[2]</a></sup> I don&#8217;t want to struggle with <span class="caps">HTML</span> and <span class="caps">CSS</span> to make the rendered notebook fit the style of whatever theme the web page has. I also want all the markdown features available that Lektor and a whole range of plugins offer. I also want the style of the rendered notebook to automatically fit the rest of the web&nbsp;page.</li>
+<li>The notebook is not executed before rendering it. I want to be able to do that. I also want to have the possibility to prevent specific cells from being&nbsp;executed.</li>
+<li>Which notebook should be used, can be chosen from the attachments in the <span class="caps">CMS</span> <span class="caps">UI</span>. This sounds nice at first, but makes it more complicated (and I don&#8217;t use the <span class="caps">UI</span> at all). I want this instead: if a page is &#8220;notebook driven&#8221; should be detected automatically via a file name convention (<code>notebook-file name without extension == page name</code>).</li>
+<li>The <a href="https://github.com/baldwint/lektor-jupyter/blob/8b8e9dae055e0f8be83cd1e2589c0d034c34e696/lektor_jupyter.py">code</a> uses the Python descriptor protocol and some involved caching logic, which both looks like advanced black magic to me and still does not play nicely with Lektor, so there might be potential for simplification. I think the main problem is, that the plugin is a slightly adjusted copy of the original <a href="https://github.com/lektor/lektor/blob/9840bf182539fddc9292e5e6f26cafdf8f2475c9/lektor/markdown.py"><code>Markdown</code> class</a> which is used to render markdown content in <code>contents.lr</code>, so I suspect that this is actually defeating the purpose instead of helping it. I want code that works and is easier to&nbsp;understand.</li>
+</ul>
+<h2 id="not-really-so-i-created-my-own">Not really, so I created my own <a class="header-anchor" href="#not-really-so-i-created-my-own">&#128279;</a></h2><p><a href="https://github.com/obestwalter/lektor-jupyter-preprocess/"><code>lektor-jupyter-preprocess</code></a> is a Lektor plugin that does the&nbsp;following:</p>
+<ul>
+<li>Automatically detect when a page is &#8220;notebook driven&#8221; via a fixed file name convention: if the page is called <code>my-page</code> and the page folder contains a <code>my-page.ipynb</code>, the <code>contents.lr</code> is generated from that notebook (e.g. see <a href="https://github.com/obestwalter/obestwalter.github.io/tree/60e6e19d88d77d8ee5ff61a167fc997320de7c7c/content/articles/website-meta">the page folder for this article</a>).</li>
+<li>Automatically trigger a rebuild when any file in the page folder&nbsp;changes.</li>
+<li>Execute the notebook before rendering it (unless the cell metadata contains <code>{"lektor-preprocess": {"prevent-execution": true}}</code>).</li>
+<li>Apply the <code>%load</code> cell magic before executing to update dependent code from other&nbsp;files. </li>
+<li>Render the notebook into <code>contents.lr</code>. The rendered notebook is markdown. Lektor can then treat this as if it was a hand written <code>contents.lr</code>.</li>
+</ul>
+<h2 id="some-details">Some details <a class="header-anchor" href="#some-details">&#128279;</a></h2><h3 id="generating-well-formed-markdown">Generating well formed markdown <a class="header-anchor" href="#generating-well-formed-markdown">&#128279;</a></h3><p>Generating markdown from a notebook comes out of the box via <code>nbconvert</code> - so if you take a notebook that looks like this in the&nbsp;browser:</p>
+<p><a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/content/articles/website-meta/example-notebook.ipynb"><img src="/articles/website-meta/example-notebook.png" alt="example jupyter notebook"></a></p>
+<p>&#8230; and convert it with <code>jupyter-nbconvert --to markdown example-notebook.ipynb</code>, out drops an <code>example-notebook-markdown.md</code> that contains&nbsp;this:</p>
+<p><a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/content/articles/website-meta/example-notebook.md"><img src="/articles/website-meta/example-output.png" alt="example markdown output"></a></p>
+<p>This is somehow already what I want, but I want the output to be marked properly and I don&#8217;t want the whole traceback - just the name and message of the error is enough. So there is a little bit of massaging to be done. The question is: when should that happen? I could try to massage the generated output to my liking, but I&#8217;d rather poke a finger into my eye, so this has to happen when I can still work with the&nbsp;data.</p>
+<p>Thanks to the friendly Jupyter Development Team, <code>nbconvert</code> is written in a way that it is not too hard to make this possible by inheriting from <a href="https://nbconvert.readthedocs.io/en/latest/api/preprocessors.html#nbconvert.preprocessors.ExecutePreprocessor"><code>ExecutePreprocessor</code></a>. This lets you hook into the execution of individual code cells and massage the contents there. So this is what I came up&nbsp;with:</p>
+<div class="highlight"><pre><span></span><span class="c1"># %load -s ArticleExecutePreprocessor ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
+<span class="k">class</span> <span class="nc">ArticleExecutePreprocessor</span><span class="p">(</span><span class="n">ExecutePreprocessor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply load magic and massage the markdown output.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">preprocess_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">cell_index</span><span class="p">,</span> <span class="n">store_history</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">!=</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
+
+        <span class="n">first_line</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">load_candidate</span> <span class="o">=</span> <span class="n">first_line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;# &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">load_candidate</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%lo</span><span class="s2">ad&quot;</span><span class="p">):</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_load_magic</span><span class="p">(</span><span class="n">load_candidate</span><span class="p">)</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">blackify</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="n">lp</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lektor-preprocess&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lp</span> <span class="ow">and</span> <span class="n">lp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;prevent-execution&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
+
+        <span class="n">outs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">cell_index</span><span class="p">,</span> <span class="n">store_history</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># TODO this could be a different language - read lang from notebook</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">```python</span><span class="se">\n</span><span class="s2">{cell.source}</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="p">]</span>
+        <span class="c1"># TODO make all of these configurable</span>
+        <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">outs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;execute_result&quot;</span><span class="p">:</span>
+                <span class="c1"># TODO pass everything else through as HTML directly</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;text/plain&quot;</span><span class="p">]</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;```text</span><span class="se">\n</span><span class="s2">[result]</span><span class="se">\n</span><span class="s2">{data}</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">o</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;```text</span><span class="se">\n</span><span class="s2">[{o.ename}]</span><span class="se">\n</span><span class="s2">{o.evalue}</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">o</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;stream&quot;</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;```text</span><span class="se">\n</span><span class="s2">[{o.name}]</span><span class="se">\n</span><span class="s2">{o.text}</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;dunno what to do with: {o}&quot;</span><span class="p">)</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">NotebookNode</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;cell_type&quot;</span><span class="p">:</span> <span class="s2">&quot;raw&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new</span><span class="p">)}</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">apply_load_magic</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply the %load magic manually.</span>
+
+<span class="sd">        Cell magic is not part of preprocessor.</span>
+
+<span class="sd">        Feels horribly wrong, but works well enough.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">magic</span> <span class="o">=</span> <span class="n">CodeMagics</span><span class="p">(</span><span class="n">shell</span><span class="o">=</span><span class="n">IPYTHON_SHELL</span><span class="p">)</span>
+        <span class="n">arg_s</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">magic</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">arg_s</span><span class="p">)</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">IPYTHON_SHELL</span><span class="o">.</span><span class="n">rl_next_input</span>
+        <span class="k">return</span> <span class="n">code</span>
+</pre></div>
+<p>The idea is to hook into the part of the conversion process, where the notebook is preprocessed before the actual conversion to&nbsp;markdown.</p>
+<p>In my case the necessary preprocessing&nbsp;means:</p>
+<ul>
+<li>For each individual code cell: <ul>
+<li>format the code with&nbsp;black</li>
+<li>if a code cell used the <code>%load</code> magic: apply it to load the&nbsp;code</li>
+<li>if a cell contains meta data to not execute it: do not execute it - only&nbsp;render</li>
+<li>execute the code and display the output in a slightly different way than it is done by default (<code>pre_process_cell</code>).</li>
+</ul>
+</li>
+<li>For each individual cell: if it contains a <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load"><code>%load</code> magic</a> - execute that magic manually (always - independent of the magic being commented out or&nbsp;not).</li>
+</ul>
+<p>The complete file is here: <a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/lebut/ipynb_to_md.py">ipynb_to_md</a></p>
+<p>If I run this through nbconvert now, the generated markdown looks like&nbsp;this:</p>
+<p><a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/content/articles/website-meta/example-notebook-improved.md"><img src="/articles/website-meta/example-output-improved.png" alt="example markdown improved"></a></p>
+<p>That&#8217;s more like it and I can tweak and extend the conversion process, whenever I need&nbsp;to.</p>
+<h2 id="3-integrate-into-lektor">3) Integrate into Lektor <a class="header-anchor" href="#3-integrate-into-lektor">&#128279;</a></h2><p>The <a href="https://github.com/obestwalter/obestwalter.github.io/blob/60e6e19d88d77d8ee5ff61a167fc997320de7c7c/packages/lektor-lebut/lektor_lebut.py">first incarnation</a> of this used the <a href="https://www.getlektor.com/docs/api/plugins/events/before-build/"><code>before-build</code></a> event that is called indiscriminately before a source is built. This caused an eternal build loop when generating the <code>contents.lr</code> from a notebook. I prevented this by adding caching to detect if the notebook had changed since the last build. This worked but was ugly. I had set out to only make this work, so I decided I was finished. The next weekend though I couldn&#8217;t help but having another&nbsp;look.</p>
+<p>The current incarnation adds a new build program that slightly modifies the attachment build behaviour for &#8220;notebook powered&#8221; pages to preprocess the notebook as part of the normal build process. Still not knowing much about Lektor this might be less wrong, but more importantly: it works reliably without needing extra caching, and is easier to understand in the context of a build. I also like it more, because this motivated me to look a bit into how Lektor works. Which was very&nbsp;interesting.</p>
+<p>These <a href="https://www.getlektor.com/docs/api/plugins/events/">events</a> are used in the&nbsp;plugin:</p>
+<ul>
+<li><code>setup-env</code> is used to prepare the system on startup. This is when config values of the plugin can be populated for later use by the templates and when specialized build programs can be&nbsp;added. </li>
+<li><code>before-build</code> is called for all sources before it is decided if a build of that source actually needs to happen, this is why it is not very useful to do any actual preprocessing there (that then might not be necessary and create a build loop as mentioned), but it can be used to provide more context for the build templates - in the case of <code>jupyter-preprocess</code>, whether the page that is about to be built is generated from a notebook or&nbsp;not.</li>
+</ul>
+<p>This is what the main plugin code looks&nbsp;like:</p>
+<div class="highlight"><pre><span></span><span class="c1"># %load -s JupyterPreprocessPlugin ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
+<span class="k">class</span> <span class="nc">JupyterPreprocessPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Jupyter Notebook preprocessor&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Execute and render a Jupyter notebook. Provide the result in contents.lr.&quot;</span>
+    <span class="n">_JUPYTER_PREPROCESS</span> <span class="o">=</span> <span class="s2">&quot;JUPYTER_PREPROCESS&quot;</span>
+
+    <span class="k">def</span> <span class="nf">on_setup_env</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&#39;Replace&#39; attachment build program by an enhanced version.</span>
+
+<span class="sd">        `get_build_program` finds this before the inbuilt, effectively shadowing it.</span>
+
+<span class="sd">        This makes the preprocessing a part of the build of the page, overwriting</span>
+<span class="sd">        contents.lr before it is processed, therefore preventing build loops.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_JUPYTER_PREPROCESS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source_url&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">add_build_program</span><span class="p">(</span>
+            <span class="n">Attachment</span><span class="p">,</span> <span class="n">NotebookAwareAttachmentBuildProgram</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_before_build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">attachments</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;attachments&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attachments</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">attachment</span> <span class="o">=</span> <span class="n">attachments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{Path(source.path).name}.ipynb&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attachment</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_JUPYTER_PREPROCESS</span><span class="p">][</span><span class="s2">&quot;paths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">.</span><span class="n">path</span>
+            <span class="p">)</span>
+</pre></div>
+<h2 id="4-[tox]-https://tox.readthedocs.io/-based-development-and-publishing-workflow">4) <a href="https://tox.readthedocs.io/">tox</a> based development and publishing workflow <a class="header-anchor" href="#4-[tox]-https://tox.readthedocs.io/-based-development-and-publishing-workflow">&#128279;</a></h2><p>To cap it all off: if a project hasn&#8217;t got a <a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini"><code>tox.ini</code></a> that wraps all important activities of the project into a neat package it doesn&#8217;t feel like a real&nbsp;project:</p>
+<div class="highlight"><pre><span></span>$ tox -av
+
+default environments:
+serve           -&gt; run custom wrapper around the lektor server
+
+additional environments:
+clean           -&gt; tidy up to start from a clean slate
+build           -&gt; build the website at ../build
+serve-build     -&gt; serve ../build at http://localhost:7777
+serve-notebooks -&gt; serve jupyter notebooks
+deploy          -&gt; build and push master (website build) to github
+test            -&gt; run tests for lebut
+</pre></div>
+<h2 id="5-profit">5) Profit <a class="header-anchor" href="#5-profit">&#128279;</a></h2><p>Now I have a reasonably pleasant workflow to turn my notebooks into website articles. I am pretty confident that I will be able to keep that deal with myself&nbsp;:).</p>
+<div class="footnotes">
+<ol><li id="fn-1"><p>Can anyone tell me from which film this gif is? I found it on <a href="https://tenor.com/view/scientist-mad-scientist-experiment-lab-laboratory-gif-11957205">tenor</a> and would like to give proper credit<a href="#fnref-1" class="footnote">&nbsp;[&#10548;]</a></p></li>
+<li id="fn-3"><p>This seems to be the the usual approach though, when looking at other blog engines. For Nikola there is a <a href="https://themes.getnikola.com/v7/zen-ipython/">theme with inbuilt Jupyter support</a>. Same for <a href="https://github.com/danielfrg/pelican-ipynb">pelican</a>.<a href="#fnref-3" class="footnote">&nbsp;[&#10548;]</a></p></li>
+</ol>
+</div>
+
+    
+        
+    <div class="info">
+        
+    
+        <a href="/articles/tag/meta">
+                <span class="tag">meta</span>
+            </a>
+        <a href="/articles/tag/python">
+                <span class="tag">python</span>
+            </a>
+        <a href="/articles/tag/lektor">
+                <span class="tag">lektor</span>
+            </a>
+        <a href="/articles/tag/jupyter">
+                <span class="tag">jupyter</span>
+            </a>
+        <a href="/articles/tag/diy">
+                <span class="tag">diy</span>
+            </a>
+        
+    
+
+        
+    <span class="date" title="published: 2019-11-03">
+        [last update: 2019-11-04]
+    </span>
+
+    </div>
+
+    
+
+
+    </main>
+
+    <footer>
+        <div class="origin-hint">
+        
+            generated from Jupyter notebook &mdash;
+            
+                <a href="https://github.com/obestwalter/obestwalter.github.io/tree/lektor-sources/content/articles/website-meta">
+                    view sources
+                </a>
+            
+        
+        </div>
+        <br>
+        <div class="left"><a href="https://gitlab.com/obestwalter/tmp_website_private/issues">comment</a></div>
+        <div class="right"><a href="https://gitlab.com/obestwalter/tmp_website_private/tree/lektor-sources/content/LICENSE">&copy; Oliver Bestwalter</a></div>
+    </footer>
+
+    </body>
+</html>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name=viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/normalize.css?h=7ffde343">
+        <link rel="stylesheet" href="/static/style.css?h=cf7699c7">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap" rel="stylesheet">
+        <title>Python is made of star-stuff &mdash; obestwalter</title>
+    </head>
+    <body>
+
+    <header>
+        <div class="site-name"><a href="/">obestwalter</a></div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+                    <li  class="active">
+                        <a href="/articles/">Articles</a>
+                    </li>
+                
+                    <li >
+                        <a href="/projects/">Projects</a>
+                    </li>
+                
+                    <li >
+                        <a href="/about/">About</a>
+                    </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+
+
+
+
+
+
+
+
+
+
+    
+    <div id="python-is-made-of-star-stuff" class="title">
+        <a href="">Python is made of star-stuff</a>
+    </div>
+    
+        <div class="summary">
+            <p><a href="https://www.nasa.gov/mission_pages/hubble/science/messier9.html"><img src="/articles/python-is-made-of-star-stuff/hubble-messier9.jpg" alt="hubble telescope picture of messier9 star cluster"></a></p>
+<p>Carl Sagan wrote in Cosmos that we are all made of &#8220;star-stuff&#8221;. The elements that make life on earth possible were formed in stars a long time ago. It puts things into perspective to remember that we still have no clue <strong>how</strong> the first life on earth came to be and <strong>why</strong> we run around on this rock hurtling through space, but at least we know that we are all made from stars :). You ask yourself what this has to do with Python? Right - nothing, but obvioulsy the humans involved in the development of Python are also made of star-stuff and I like to believe that their deep sense of wonder about the miracle of life has inspired them to put so darn many stars into its&nbsp;syntax.</p>
+
+        </div>
+    
+    <p>So, this is all about the innocent little <strong>&#10033;</strong> (star or asterisk) as a versatile syntax element in Python. Depending on the context, it fulfills quite a few different roles. Here is a piece of code that uses all of them (as far as I&nbsp;know).</p>
+<div class="highlight"><pre><span></span><span class="c1"># Yes. The code makes no sense. Thanks for pointing it out.</span>
+
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">linesep</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_append</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">star_reporter</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">star_reporter</span>
+
+    <span class="k">return</span> <span class="n">_append</span>
+
+
+<span class="nd">@append</span><span class="p">(</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; ❇❇❇&quot;</span> <span class="o">+</span> <span class="n">linesep</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="n">stars</span><span class="p">,</span> <span class="n">bars</span><span class="p">):</span>
+    <span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">middle</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">stars</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="p">[</span><span class="o">*</span><span class="n">middle</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="o">*</span><span class="n">bars</span><span class="p">]:</span>
+        <span class="n">first</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">elem</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;answer: {first} (don&#39;t know the question though)&quot;</span><span class="p">)</span>
+</pre></div>
+<h1 id="simple-things-first:-10033;-and-10033;-10033;-operators">Simple things first: &#10033; and &#10033;&#10033; operators <a class="header-anchor" href="#simple-things-first:-10033;-and-10033;-10033;-operators">&#128279;</a></h1><p>One of the first things a new Python disciple might learn is how to use Python as a calculator - like in many other languages &#10033; is the multiplication operator and &#10033;&#10033; is used for exponentiation -&nbsp;e.g.:</p>
+<div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+4
+</pre></div>
+<div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">**</span> <span class="mi">4</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+16
+</pre></div>
+<div class="highlight"><pre><span></span><span class="s2">&quot;spam&quot;</span> <span class="o">*</span> <span class="mi">3</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+&#39;spamspamspam&#39;
+</pre></div>
+<p>Although it is not even trying to make sense, the star-spangled code example further up actually works. If you look at the <code>wrapped</code> function, &#10033; is used as a boring old mathematical operator here: <code>first *= 2 ** elem</code> (which is using an <a href="https://docs.python.org/3/reference/simple_stmts.html#index-14">augmented assignment</a> and is the same as <code>first = first * 2 ** elem</code>).</p>
+<p>If we run <code>wrappped</code>, we won&#8217;t get a useful result but at least we see that the code&nbsp;executes:</p>
+<div class="highlight"><pre><span></span><span class="n">wrapped</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+[1, 2, 3, 4] (23, 42) ❇❇❇
+answer: 18889465931478580854784 (don&#39;t know the question though)
+</pre></div>
+<h1 id="enforcing-the-api-of-a-function">Enforcing the <span class="caps">API</span> of a function <a class="header-anchor" href="#enforcing-the-api-of-a-function">&#128279;</a></h1><p>If your function needs 23 arguments, you have a big problem anyway but you can at least alleviate it a bit by making calls to that function more readable. Passing some or all arguments as keyword arguments usually helps. Problem is: the caller normally has the choice how to pass the arguments. You can even call a &#8220;keyword only&#8221; function like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kw_only_you_wish</span><span class="p">(</span><span class="n">spam</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">eggs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">lobster</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">eggs</span> <span class="o">*</span> <span class="n">lobster</span>
+
+
+<span class="n">kw_only_you_wish</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+14
+</pre></div>
+<p>With <a href="https://docs.python.org/3.0/whatsnew/3.0.html#new-syntax">Python 3.0</a> a new syntax was introduced to make enforcement of so called &#8220;keyword-only arguments&#8221; possible. This is used in the definition of the <code>append</code> function above. When using this, everything after the <code>[, ]*,</code> <strong>has</strong> to be passed as keyword argument or you get into&nbsp;trouble.</p>
+<p>Trying to decorate a function with <code>append</code> and not passing <code>end</code> as a keyword parameter results in a friendly <code>TypeError</code> exception:</p>
+<div class="highlight"><pre><span></span><span class="nd">@append</span><span class="p">(</span><span class="s2">&quot;❈❈❈&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">badly_wrapped</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[TypeError]
+append() takes 0 positional arguments but 1 was given
+</pre></div>
+<h1 id="pack-and-unpack-arguments">Pack and unpack arguments <a class="header-anchor" href="#pack-and-unpack-arguments">&#128279;</a></h1><p>This goes back to at least <a href="https://docs.python.org/2.0/ref/function.html">Python 2.0</a>. In this case &#10033; and &#10033;&#10033; are syntax elements to be used as prefix, when <a href="https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments">defining or calling functions</a>. The idea is usually that you want to pass through parameters to an underlying function without having to care about what or even how many they are. In this example we have a function that is just passing through arguments without needing to now anything about&nbsp;them:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">passing_things_through_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;passing through {args=} and {kwargs=}&quot;</span><span class="p">)</span>
+    <span class="n">the_actual_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">the_actual_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;passed arguments: {a=}, {b=}, {c=}, {d=}&quot;</span><span class="p">)</span>
+
+
+<span class="n">passing_things_through_function</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+passing through args=(1, 2) and kwargs={&#39;c&#39;: 3, &#39;d&#39;: 4}
+passed arguments: a=1, b=2, c=3, d=4
+</pre></div>
+<p>A case where this is particularly useful is when creating decorators that are not opinionated about the kind of function they decorate (like <code>append</code>). They just need to pass through whatever the decorated function needs to be called&nbsp;with.</p>
+<h1 id="there-is-even-more-to-unpack">There is even more to unpack <a class="header-anchor" href="#there-is-even-more-to-unpack">&#128279;</a></h1><p>In pre Python3 days so-called tuple unpacking was already supported. Here is the classic example of swapping assignments between two&nbsp;names:</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;before: {a=}, {b=}&quot;</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;after:  {a=}, {b=}&quot;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+before: a=1, b=2
+after:  a=2, b=1
+</pre></div>
+<p><a href="https://www.python.org/dev/peps/pep-3132/"><span class="caps">PEP</span> 3132 - extended iterable unpacking</a> brought the star into the &#8220;classic&#8221; tuple unpacking (which was never restricted to tuples but that name somehow&nbsp;stuck):</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">iterable</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="s2">&quot;egg&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span>
+    <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span>
+<span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{iterable} ({type(iterable)}):&quot;</span><span class="p">)</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">iterable</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;a, b, c        -&gt; {a} {b} {c}&quot;</span><span class="p">)</span>
+    <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">iterable</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;*a, b = iterable -&gt; {a} {b}&quot;</span><span class="p">)</span>
+    <span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">iterable</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;a, *b = iterable -&gt; {a} {b}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+egg (&lt;class &#39;str&#39;&gt;):
+a, b, c        -&gt; e g g
+*a, b = iterable -&gt; [&#39;e&#39;, &#39;g&#39;] g
+a, *b = iterable -&gt; e [&#39;g&#39;, &#39;g&#39;]
+
+[1, 2, 3] (&lt;class &#39;list&#39;&gt;):
+a, b, c        -&gt; 1 2 3
+*a, b = iterable -&gt; [1, 2] 3
+a, *b = iterable -&gt; 1 [2, 3]
+
+(1, 2, 3) (&lt;class &#39;tuple&#39;&gt;):
+a, b, c        -&gt; 1 2 3
+*a, b = iterable -&gt; [1, 2] 3
+a, *b = iterable -&gt; 1 [2, 3]
+
+{1, 2, 3} (&lt;class &#39;set&#39;&gt;):
+a, b, c        -&gt; 1 2 3
+*a, b = iterable -&gt; [1, 2] 3
+a, *b = iterable -&gt; 1 [2, 3]
+
+{1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;} (&lt;class &#39;dict&#39;&gt;):
+a, b, c        -&gt; 1 2 3
+*a, b = iterable -&gt; [1, 2] 3
+a, *b = iterable -&gt; 1 [2, 3]
+</pre></div>
+<h1 id="there-is-also-more-to-pack">There is also more to pack <a class="header-anchor" href="#there-is-also-more-to-pack">&#128279;</a></h1><p>Pretty much analogous to how &#10033; and &#10033;&#10033; are used in function calls they can be used in literals to create new iterables or&nbsp;mappings:</p>
+<p>This syntax to merge iterables was implemented via <a href="https://www.python.org/dev/peps/pep-0448/"><span class="caps">PEP</span> 448 (additional unpacking generalizations)</a> in Python 3.5.<sup class="footnote-ref" id="fnref-1"><a href="#fn-1">&thinsp;[1]</a></sup></p>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="p">[</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">]</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+[1, 2, 3, 4, 5, 6]
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+<span class="p">{</span><span class="o">**</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+{1: 4, 2: 3, 3: 4, 4: 5, 5: 6}
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+{1, 2, 3, 4, 5}
+</pre></div>
+<p>This is the more &#8220;natural&#8221; approach for sets though&nbsp;(union):</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+{1, 2, 3, 4, 5}
+</pre></div>
+<p>As the underlying functionality only cares about whether something is iterable, you can mix and match. This creates a tuple from a list and a&nbsp;set:</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="o">*</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+(1, 2, 3, 3, 4, 5)
+</pre></div>
+<p>Be aware though that merging maps like this is not recursive. Later keys overwrite earlier ones. Here <code>foo</code> will contain the second dict after&nbsp;merging:</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}}</span>
+<span class="p">{</span><span class="o">**</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">b</span><span class="p">}</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+{&#39;a&#39;: 1, &#39;foo&#39;: {&#39;b&#39;: 2, &#39;c&#39;: 3}}
+</pre></div>
+<h1 id="import-all-the-things">Import all the things <a class="header-anchor" href="#import-all-the-things">&#128279;</a></h1><p>The last star shines a bit dimly as this is usually an <a href="http://wiki.c2.com/?AntiPattern">antipattern</a> and it looks like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+<p>this is usually not a good idea&nbsp;because:</p>
+<ul>
+<li>static code analysis tools can&#8217;t warn you about unresolved&nbsp;references</li>
+<li>it causes namespace pollution which might badly break your code (e.g. if a module you import all the names from shadows <code>open</code> or some other&nbsp;inbuilt)</li>
+<li>you can&#8217;t see easily from where a name was imported (like in the example above - where does <code>linesep</code> come&nbsp;from?)</li>
+</ul>
+<p>If a package (or module)<sup class="footnote-ref" id="fnref-2"><a href="#fn-2">&thinsp;[2]</a></sup> is explicitly designed to be imported like this, this is usually documented and the authors defined the special module attribute   <a href="https://docs.python.org/3/tutorial/modules.html?highlight=__all__#importing-from-a-package"><code>__all__</code></a> that explicitly lists the names that should be imported when using <code>from &lt;module or package&gt; import *</code></p>
+<div class="footnotes">
+<ol><li id="fn-1"><p>For the historically interested: discussion on the mailing list <a href="https://mail.python.org/pipermail/python-dev/2015-February/138078.html">part I</a> and <a href="https://mail.python.org/pipermail/python-dev/2015-February/138564.html">part <span class="caps">II</span></a>.<a href="#fnref-1" class="footnote">&nbsp;[&#10548;]</a></p></li>
+<li id="fn-2"><p>I&#8217;m either not seeing it or the Python documentation is omitting that <code>__all__</code> also works for modules. It does though &#8230; I tried it.<a href="#fnref-2" class="footnote">&nbsp;[&#10548;]</a></p></li>
+</ol>
+</div>
+
+    
+        
+    <div class="info">
+        
+    
+        <a href="/articles/tag/python">
+                <span class="tag">python</span>
+            </a>
+        <a href="/articles/tag/fundamentals">
+                <span class="tag">fundamentals</span>
+            </a>
+        <a href="/articles/tag/little-things">
+                <span class="tag">little-things</span>
+            </a>
+        
+    
+
+        
+    <span class="date" title="published: 2019-11-02">
+        [last update: 2019-11-03]
+    </span>
+
+    </div>
+
+    
+
+
+    </main>
+
+    <footer>
+        <div class="origin-hint">
+        
+            generated from Jupyter notebook &mdash;
+            
+                <a href="https://github.com/obestwalter/obestwalter.github.io/tree/lektor-sources/content/articles/python-is-made-of-star-stuff">
+                    view sources
+                </a>
+            
+        
+        </div>
+        <br>
+        <div class="left"><a href="https://gitlab.com/obestwalter/tmp_website_private/issues">comment</a></div>
+        <div class="right"><a href="https://gitlab.com/obestwalter/tmp_website_private/tree/lektor-sources/content/LICENSE">&copy; Oliver Bestwalter</a></div>
+    </footer>
+
+    </body>
+</html>

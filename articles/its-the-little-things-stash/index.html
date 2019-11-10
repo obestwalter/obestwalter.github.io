@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name=viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/normalize.css?h=7ffde343">
+        <link rel="stylesheet" href="/static/style.css?h=cf7699c7">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap" rel="stylesheet">
+        <title>It&#39;s the little things &mdash; obestwalter</title>
+    </head>
+    <body>
+
+    <header>
+        <div class="site-name"><a href="/">obestwalter</a></div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+                    <li  class="active">
+                        <a href="/articles/">Articles</a>
+                    </li>
+                
+                    <li >
+                        <a href="/projects/">Projects</a>
+                    </li>
+                
+                    <li >
+                        <a href="/about/">About</a>
+                    </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+
+
+
+
+
+
+
+
+
+
+    
+    <div id="its-the-little-things-stash" class="title">
+        <a href="">It&#39;s the little things</a>
+    </div>
+    
+    <h2 id="next-then-the-different-meanings-of-_"><span class="caps">NEXT</span> then the different meanings of <code>_</code> <a class="header-anchor" href="#next-then-the-different-meanings-of-_">&#128279;</a></h2><h2 id="something-i-really-must-underscore-...">Something I really must underscore &#8230; <a class="header-anchor" href="#something-i-really-must-underscore-...">&#128279;</a></h2><h3 id="_-single-underscore"><code>_</code> (single underscore) <a class="header-anchor" href="#_-single-underscore">&#128279;</a></h3><p>Doesn&#8217;t look like much, but has quite a few special&nbsp;meanings</p>
+<p>As the (complete) name: &#8220;I have to assign a name here, but won&#8217;t be using&nbsp;it&#8221;</p>
+<div class="highlight"><pre><span></span><span class="n">left</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">left</span><span class="p">,</span> <span class="n">right</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+(0, 2)
+</pre></div>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+hi
+hi
+hi
+</pre></div>
+<p>As prefix: &#8220;This is private, please don&#8217;t use&nbsp;it&#8221;</p>
+<div class="highlight"><pre><span></span><span class="n">_private_name</span> <span class="o">=</span> <span class="s2">&quot;Please don&#39;t access me from outside&quot;</span>
+</pre></div>
+<p>As postfix: &#8220;I would shadow something here , but really wan&#8217;t to name it that&nbsp;way.&#8221;</p>
+<div class="highlight"><pre><span></span><span class="n">dir_</span> <span class="o">=</span> <span class="s2">&quot;somedir&quot;</span>  <span class="c1">#  Don&#39;t overwrite builtin dir</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">dir_</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+&#39;__add__&#39;
+</pre></div>
+<h2 id="__-double-underscore-a.k.a.-dunder"><code>__</code> (double underscore (a.k.a. dunder)) <a class="header-anchor" href="#__-double-underscore-a.k.a.-dunder">&#128279;</a></h2><ul>
+<li>as prefix in a class method: &#8220;mangle the name, I might want to still use that, even if it&#8217;s&nbsp;overwritten&#8221;</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__mangled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+
+<span class="n">A</span><span class="o">.</span><span class="n">__mangled</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[AttributeError]
+type object &#39;A&#39; has no attribute &#39;__mangled&#39;
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">__mangled</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[AttributeError]
+&#39;A&#39; object has no attribute &#39;__mangled&#39;
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">_A__mangled</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+&lt;function __main__.A.__mangled(self)&gt;
+</pre></div>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__mangled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">_A__mangled</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+&lt;function __main__.A.__mangled(self)&gt;
+</pre></div>
+<h2 id="__...__-double-double-underscore"><code>__...__</code> (double double underscore) <a class="header-anchor" href="#__...__-double-double-underscore">&#128279;</a></h2><h3 id="a.k.a.-also-dunder-...-i-think">(a.k.a. also dunder &#8230; I think) <a class="header-anchor" href="#a.k.a.-also-dunder-...-i-think">&#128279;</a></h3><h3 id="[-i-am-very-special-maybe-even-magic-...-]-https://docs.python.org/3/reference/datamodel.html-special-method-names"><a href="https://docs.python.org/3/reference/datamodel.html#special-method-names"><span class="dquo">&#8220;</span>I am very special, maybe even magic &#8230;&#8221;</a> <a class="header-anchor" href="#[-i-am-very-special-maybe-even-magic-...-]-https://docs.python.org/3/reference/datamodel.html-special-method-names">&#128279;</a></h3><blockquote><p>A class can implement certain operations that are invoked by special syntax (such as arithmetic operations or subscripting and slicing) by defining methods with special names. This is Python’s approach to operator overloading, allowing classes to define their own behavior with respect to language&nbsp;operators.</p>
+</blockquote>
+<p>&#8212; <a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Python&nbsp;docs</a></p>
+<p>&#8230; They are defining &#8220;language operators&#8221; very broadly&nbsp;there</p>
+<h1 id="passing-arguments">Passing arguments <a class="header-anchor" href="#passing-arguments">&#128279;</a></h1><p>Independent order if using kwargs even for positional&nbsp;arguments</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">baz</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;foo: {foo}, args: {args}, baz: {baz}, kwargs: {kwargs}&quot;</span><span class="p">)</span>
+
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+foo: 1, args: (2, 3, 4), baz: None, kwargs: {}
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+foo: 2, args: (1, 3), baz: None, kwargs: {&#39;x&#39;: 5}
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="n">bar</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+foo: 1, args: (), baz: None, kwargs: {&#39;bar&#39;: 2}
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+foo: 2, args: (4,), baz: None, kwargs: {&#39;bar&#39;: 2}
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="n">bar</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">baz</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+foo: 1, args: (), baz: 3, kwargs: {&#39;bar&#39;: 2}
+</pre></div>
+<div class="highlight"><pre><span></span><span class="n">func</span><span class="p">(</span><span class="n">bar</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">foo</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">baz</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bam</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+foo: 1, args: (), baz: 3, kwargs: {&#39;bar&#39;: 2, &#39;bam&#39;: 4}
+</pre></div>
+<h2 id="arguments-are-passed-by-assignment">Arguments are passed by assignment <a class="header-anchor" href="#arguments-are-passed-by-assignment">&#128279;</a></h2><p>That is <strong>neither</strong> pass by value nor pass by&nbsp;reference</p>
+<p>&#8230; but closer to call by reference - except that you can&#8217;t pass a reference to a&nbsp;reference.</p>
+<p>In C++ you would call this <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3445.html">pass by const reference</a>, which means you can&#8217;t pass a pointer to a pointer (please correct me if I am wrong - C++ is not my string&nbsp;suite).</p>
+<h2 id="boolean-operations-return-the-object">Boolean operations return the object <a class="header-anchor" href="#boolean-operations-return-the-object">&#128279;</a></h2><p>(<strong>not</strong> a&nbsp;boolean)</p>
+<div class="highlight"><pre><span></span><span class="n">emtpy_list</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="n">non_empty_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;That&#39;s handy actually ...&quot;</span><span class="p">]</span>
+<span class="n">emtpy_list</span> <span class="ow">or</span> <span class="n">non_empty_list</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+[1, 2, &quot;That&#39;s handy actually ...&quot;]
+</pre></div>
+<h2 id="handy-in-assignments-of-function-arguments">Handy in assignments of function arguments <a class="header-anchor" href="#handy-in-assignments-of-function-arguments">&#128279;</a></h2><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">my_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">my_list</span> <span class="o">=</span> <span class="n">my_list</span> <span class="ow">or</span> <span class="p">[]</span>
+</pre></div>
+<p>(To avoid the mutable objects as default parameters&nbsp;gotcha)</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">my_list</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="n">my_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span> 
+
+<span class="n">foo</span><span class="p">(),</span> <span class="n">foo</span><span class="p">(),</span> <span class="n">foo</span><span class="p">(),</span><span class="n">foo</span><span class="p">()</span>
+</pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+[1]
+[1, 1]
+[1, 1, 1]
+[1, 1, 1, 1]
+</pre></div>
+<div class="highlight"><pre><span></span>[result]
+(None, None, None, None)
+</pre></div>
+<div class="admonition-tip"><p>This article is generated from a <a href="https://jupyter.org/">Jupyter notebook</a> running in a Python 3.8 kernel. You can <a href="https://oliver.bestwalter.de/articles/its-the-little-things-stash/its-the-little-things.ipynb">download it</a> and play with&nbsp;it.</p></div>
+    
+        
+    <div class="info">
+        
+    
+        <a href="/articles/tag/python">
+                <span class="tag">python</span>
+            </a>
+        <a href="/articles/tag/fundamentals">
+                <span class="tag">fundamentals</span>
+            </a>
+        
+    
+
+        
+    <span class="date" title="published: ">
+        [last update: ]
+    </span>
+
+    </div>
+
+    
+
+
+    </main>
+
+    <footer>
+        <div class="origin-hint">
+        
+            <a href="https://gitlab.com/obestwalter/tmp_website_private/tree/lektor-sources/content/articles/its-the-little-things-stash/">view page sources</a>
+        
+        </div>
+        <br>
+        <div class="left"><a href="https://gitlab.com/obestwalter/tmp_website_private/issues">comment</a></div>
+        <div class="right"><a href="https://gitlab.com/obestwalter/tmp_website_private/tree/lektor-sources/content/LICENSE">&copy; Oliver Bestwalter</a></div>
+    </footer>
+
+    </body>
+</html>
