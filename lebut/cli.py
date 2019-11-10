@@ -52,16 +52,18 @@ class Workflow:
             shutil.rmtree(PATH.OUTPUT)
 
     @classmethod
-    def serve(cls):
+    def serve(cls, drafts=False):
         """let lektor rebuild but use livereload plugin, instead of inbuilt server."""
         sys.argv = ["xxx", "--watch", "-vvvv", "--output-path", str(PATH.OUTPUT)]
         # os.environ["LEKTOR_DEV"] = "1"
-        cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
+        if drafts:
+            cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
         try:
             livereloader.LiveReloader().start()
             build_cmd()
         finally:
-            cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+            if drafts:
+                cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
 
     @classmethod
     def build(cls, clean=False):
