@@ -196,7 +196,7 @@ class JupyterPreprocessPlugin(Plugin):
             Attachment, NotebookAwareAttachmentBuildProgram
         )
 
-    def on_before_build_all(self, **_):  # noqa
+    def on_before_build_all(self, **_):
         global _already_build
         _already_build = set()
 

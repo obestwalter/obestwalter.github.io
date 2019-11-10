@@ -23,8 +23,7 @@ class URL:
 
 class _GH_REPO:
     URL = "https://github.com/obestwalter/obestwalter.github.io"
-    CONTENT = f"{URL}/lektor-sources/content"
-    ARTICLES = f"{CONTENT}/{NAME.ARTICLES}"
+    CONTENT = f"{URL}/tree/lektor-sources/content"
     ISSUES = f"{URL}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc"
     LICENSE = f"{CONTENT}/LICENSE"
 
@@ -33,7 +32,6 @@ class _GL_REPO:
     URL = "https://gitlab.com/obestwalter/tmp_website_private"
     SOURCE = f"{URL}/tree/lektor-sources"
     CONTENT = f"{SOURCE}/content"
-    ARTICLES = f"{CONTENT}/{NAME.ARTICLES}"
     ISSUES = f"{URL}/issues"
     LICENSE = f"{CONTENT}/LICENSE"
 
