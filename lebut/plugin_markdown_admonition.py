@@ -21,10 +21,11 @@ class AdmonitionRendererMixin:
     !!    -> <div class="admonition admonition-info">
     !!!   -> <div class="admonition admonition-tip">
     !!!!  -> <div class="admonition admonition-warning">
+    !!!!!  -> <div class="admonition admonition-tldr">
     """
 
-    REGEX = re.compile(r"^\s*(!{1,4})\s+")
-    CLASSES = {1: "note", 2: "info", 3: "tip", 4: "warning"}
+    REGEX = re.compile(r"^\s*(!{1,5})\s+")
+    CLASSES = {1: "note", 2: "info", 3: "tip", 4: "warning", 5: "TLDR"}
 
     def paragraph(self, text):
         match = self.REGEX.match(text)

@@ -1,6 +1,6 @@
 title: Obligatory meta article about my website
 ---
-mtime: 2019-11-10
+mtime: 2019-11-12
 ---
 crtime: 2019-11-03
 ---
@@ -50,12 +50,12 @@ Lektor is extensible via a plugin system that involves creating an [installable 
 To integrate Jupyter notebooks, there is already a [plugin](https://github.com/baldwint/lektor-jupyter) that hasn't been worked on for a while and is more of a prof of concept. It was a good starting point though to see what it does and to decide what I want:
 
 * It is not cooperating with Lektor in the way that changes in the notebook file are not detected by the build system, making it necessary for the `contents.lr` file to be changed to trigger a new page build. I want this to work correctly.
-* It renders `.ipynb` files directly to HTML using [`nbconvert`](https://nbconvert.readthedocs.io/) with the `basic` template.[^3] I don't want to struggle with HTML and CSS to make the rendered notebook fit the style of whatever theme the web page has. I also want all the markdown features available that Lektor and a whole range of plugins offer. I also want the style of the rendered notebook to automatically fit the rest of the web page.
+* It renders `.ipynb` files directly to HTML using [`nbconvert`](https://nbconvert.readthedocs.io/) with the `basic` template.[^2] I don't want to struggle with HTML and CSS to make the rendered notebook fit the style of whatever theme the web page has. I also want all the markdown features available that Lektor and a whole range of plugins offer. I also want the style of the rendered notebook to automatically fit the rest of the web page.
 * The notebook is not executed before rendering it. I want to be able to do that. I also want to have the possibility to prevent specific cells from being executed.
 * Which notebook should be used, can be chosen from the attachments in the CMS UI. This sounds nice at first, but makes it more complicated (and I don't use the UI at all). I want this instead: if a page is "notebook driven" should be detected automatically via a file name convention (`notebook-file name without extension == page name`).
 * The [code](https://github.com/baldwint/lektor-jupyter/blob/8b8e9dae055e0f8be83cd1e2589c0d034c34e696/lektor_jupyter.py) uses the Python descriptor protocol and some involved caching logic, which both looks like advanced black magic to me and still does not play nicely with Lektor, so there might be potential for simplification. I think the main problem is, that the plugin is a slightly adjusted copy of the original [`Markdown` class](https://github.com/lektor/lektor/blob/9840bf182539fddc9292e5e6f26cafdf8f2475c9/lektor/markdown.py) which is used to render markdown content in `contents.lr`, so I suspect that this is actually defeating the purpose instead of helping it. I want code that works and is easier to understand.
 
-[^3]: This seems to be the the usual approach though, when looking at other blog engines. For Nikola there is a [theme with inbuilt Jupyter support](https://themes.getnikola.com/v7/zen-ipython/). Same for [pelican](https://github.com/danielfrg/pelican-ipynb).
+[^2]: This seems to be the the usual approach though, when looking at other blog engines. For Nikola there is a [theme with inbuilt Jupyter support](https://themes.getnikola.com/v7/zen-ipython/). Same for [pelican](https://github.com/danielfrg/pelican-ipynb).
 
 ## Not really, so I created my own
 
@@ -63,11 +63,13 @@ To integrate Jupyter notebooks, there is already a [plugin](https://github.com/b
 
 * Automatically detect when a page is "notebook driven" via a fixed file name convention: if the page is called `my-page` and the page folder contains a `my-page.ipynb`, the `contents.lr` is generated from that notebook (e.g. see [the page folder for this article](https://github.com/obestwalter/obestwalter.github.io/tree/60e6e19d88d77d8ee5ff61a167fc997320de7c7c/content/articles/website-meta)).
 * Automatically trigger a rebuild when any file in the page folder changes.
-* Execute the notebook before rendering it (unless the cell metadata contains `{"lektor-preprocess": {"prevent-execution": true}}`).
+* Execute the notebook before rendering it (individual cells can be excluded via cell metadata).
 * Apply the `%load` cell magic before executing to update dependent code from other files. 
 * Render the notebook into `contents.lr`. The rendered notebook is markdown. Lektor can then treat this as if it was a hand written `contents.lr`.
 
-## Some details
+## How does it work?
+
+!!!!! <center>99%: existing ecosystem, 1% wrapping it to integrate it into Lektor.</center>
 
 ### Generating well formed markdown
 
@@ -116,7 +118,7 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
             elif o.output_type == "stream":
                 new.append(f"```text\n[{o.name}]\n{o.text}\n```")
             else:
-                raise Exception(f"dunno what to do with: {o}")
+                raise TypeError(f"{o.output_type=} unknown - {cell.source=}")
         cell = nbformat.NotebookNode(
             {"cell_type": "raw", "metadata": {}, "source": "\n".join(new)}
         )
@@ -138,18 +140,17 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
 
 ```
 
-The idea is to hook into the part of the conversion process, where the notebook is preprocessed before the actual conversion to markdown. 
+The idea is to hook into the part of the conversion process where the notebook is preprocessed before the actual conversion to markdown. 
 
 In my case the necessary preprocessing means: 
 
 * For each individual code cell: 
-    * format the code with black
-    * if a code cell used the `%load` magic: apply it to load the code
-    * if a cell contains meta data to not execute it: do not execute it - only render
-    * execute the code and display the output in a slightly different way than it is done by default (`pre_process_cell`).
-* For each individual cell: if it contains a [`%load` magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load) - execute that magic manually (always - independent of the magic being commented out or not).
+    * format the code with [black](https://black.readthedocs.io)
+    * if it contains a [`%load` magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load): execute it to load the code from the file into the cell (**always** - commented out or not)
+    * if it contains meta data to not execute it (`{"lektor-preprocess": {"prevent-execution": true}}`): do not execute it - only render
+    * execute the code and format the output in a slightly different way than it is done by default (`pre_process_cell`)
 
-The complete file is here: [ipynb_to_md](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/lebut/ipynb_to_md.py)
+The complete plugin code is in [lektor_jupyter_preprocess.py](https://github.com/obestwalter/lektor-jupyter-preprocess/blob/ccb68c65aafabd1bcc54d7503e888e7967652933/lektor_jupyter_preprocess.py)
 
 If I run this through nbconvert now, the generated markdown looks like this:
 
@@ -157,7 +158,7 @@ If I run this through nbconvert now, the generated markdown looks like this:
 
 That's more like it and I can tweak and extend the conversion process, whenever I need to.
 
-## 3) Integrate into Lektor
+### Lektor plugin
 
 The [first incarnation](https://github.com/obestwalter/obestwalter.github.io/blob/60e6e19d88d77d8ee5ff61a167fc997320de7c7c/packages/lektor-lebut/lektor_lebut.py) of this used the [`before-build`](https://www.getlektor.com/docs/api/plugins/events/before-build/) event that is called indiscriminately before a source is built. This caused an eternal build loop when generating the `contents.lr` from a notebook. I prevented this by adding caching to detect if the notebook had changed since the last build. This worked but was ugly. I had set out to only make this work, so I decided I was finished. The next weekend though I couldn't help but having another look. 
 
@@ -177,7 +178,7 @@ This is what the plugin class looks like:
 class JupyterPreprocessPlugin(Plugin):
     name = "Jupyter Notebook preprocessor"
     description = "Execute and render a Jupyter notebook. Provide the result in contents.lr."
-    _JUPYTER_PREPROCESS = "JUPYTER_PREPROCESS"
+    JUPYTER_PREPROCESS = "JUPYTER_PREPROCESS"
 
     def on_setup_env(self, **_):
         """'Replace' attachment build program by an enhanced version.
@@ -188,7 +189,7 @@ class JupyterPreprocessPlugin(Plugin):
         contents.lr before it is processed, therefore preventing build loops.
         """
         config = self.get_config()
-        self.env.jinja_env.globals[self._JUPYTER_PREPROCESS] = {
+        self.env.jinja_env.globals[self.JUPYTER_PREPROCESS] = {
             "source_url": config.get("source_url"),
             "paths": set(),
         }
@@ -197,8 +198,7 @@ class JupyterPreprocessPlugin(Plugin):
         )
 
     def on_before_build_all(self, **_):
-        global _already_built
-        _already_built = set()
+        _already_built.clear()
 
     def on_before_build(self, source, **_):
         attachments = getattr(source, "attachments", None)
@@ -207,15 +207,56 @@ class JupyterPreprocessPlugin(Plugin):
 
         attachment = attachments.get(f"{Path(source.path).name}.ipynb")
         if attachment:
-            self.env.jinja_env.globals[self._JUPYTER_PREPROCESS]["paths"].add(
+            self.env.jinja_env.globals[self.JUPYTER_PREPROCESS]["paths"].add(
                 source.path
             )
 
 ```
 
-## 4) [tox](https://tox.readthedocs.io/) based development and publishing workflow
+### If you want to try it in your Lektor project
 
-To cap it all off: if a project hasn't got a [`tox.ini`](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini) that wraps all important activities of the project into a neat package it doesn't feel like a real project:
+In the simplest case:
+* [install it]([README](https://github.com/obestwalter/lektor-jupyter-preprocess/blob/master/README.md#installation) into your Lektor project, create a new folder and in it a Jupyter notebook with the same stem - e.g. `<your project>/content/my-notebook-test-page/my-notebook-test-page.ipynb`
+* edit your notebook wherever you like while having `lektor serve` running
+* see how the page gets generated from the notebook
+
+! Keep in mind that the complete `contents.lr` gets rendered from the notebook, so you need to create the same structure like a normal `contents.lr` would look like (for my use case this is just right atm, but it would be not too hard to extend that in a way that the generated markdown does not clobber the file if it finds a special marker where to put the generated markdown inside the `contents.lr`).[^3]
+
+
+[^3]: there is already an [issue](https://github.com/obestwalter/lektor-jupyter-preprocess/issues/1) for that - I might actually do that soonish, because having raw cells in the notebook that contain Lektor data is kinda ugly.
+
+Additionally to generating the notebook the plugin injects the global variable `JUPYTER_PREPROCESS` into the jinja template which at the moment contains: 
+* the source link (if set in `configs/jupyter-preprocess.ini`) or a direct link to the jupyter notebook attachment
+* info about whether the page that is about to be rendered originated from a notebook (to link to the original for example (like you can see at the bottom of this page))
+
+!!! See this small [example project](https://github.com/obestwalter/lektor-jupyter-preprocess/tree/master/example-project) to see how it works in the simplest case
+
+Here is how a footer with a link could look like using that data:
+
+```html
+<footer>
+    {#  accessing information for lektor-jupyter-preprocess plugin #}
+    {% if this.path in JUPYTER_PREPROCESS.paths %}
+        <div>
+        Page generated from a Jupyter notebook &mdash;
+        {% if JUPYTER_PREPROCESS.source_url is defined %}
+            <a href="{{ JUPYTER_PREPROCESS.source_url }}/{{ this.path }}">
+                view sources
+            </a>
+        {% else %}
+            <a href="{{ this.path }}">
+                download notebook
+            </a>
+        {% endif %}
+        </div>
+        <br>
+    {% endif %}
+</footer>
+```
+
+### [tox](https://tox.readthedocs.io/) based development and publishing workflow
+
+To cap it all off: if a project hasn't got a [`tox.ini`](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini) that wraps all important activities of the project into a neat package it doesn't feel like a real project. So this is what `tox -av` tells me about the workflow of my Lektor project (in case I don't write another article for the next three years and I come back to it and have no idea how stuff works &#128521;):
 
 ```text
 $ tox -av
@@ -232,6 +273,6 @@ deploy          -> build and push master (website build) to github
 test            -> run tests for lebut
 ```
 
-## 5) Profit
+# Epilogue
 
 Now I have a reasonably pleasant workflow to turn my notebooks into website articles. I am pretty confident that I will be able to keep that deal with myself :).

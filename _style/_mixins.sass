@@ -34,6 +34,7 @@
             color: darken($fg, 10)
 
 =admonitions
-    $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet)
+    $map: (note: $buddhaGold, info: $roseOfSharon, tip: $limeade, warning: $bittersweet, TLDR: $roseOfSharon)
     @each $key, $value in $map
         +_admonition($key, $value)
+

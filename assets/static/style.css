@@ -234,7 +234,7 @@ main {
   background: #404040;
   color: #BBE5A9;
   line-height: 1.4em;
-  padding: 1em; }
+  padding: 1em 2em; }
   main .category {
     color: #BBE5A9;
     font-family: "Share Tech Mono", sans-serif;
@@ -246,21 +246,21 @@ main {
       font-size: 160%; }
   main .title {
     font-family: "Lakki Reddy", cursive;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: bold;
     line-height: 1em;
     margin-top: 1em;
     text-align: center; }
   main h1 {
-    font-size: 2.2rem; }
+    font-size: 2rem; }
   main h2 {
-    font-size: 1.8rem; }
+    font-size: 1.6rem; }
   main h3 {
-    font-size: 1.5rem; }
+    font-size: 1.4rem; }
   main h4 {
     font-size: 1.3rem; }
   main h5 {
-    font-size: 1.2rem; }
+    font-size: 1.1rem; }
   main h6 {
     font-size: 1rem; }
   main h1, main h2, main h3, main h4, main h5, main h6 {
@@ -449,6 +449,28 @@ main {
       padding: 0.8% 2%;
       text-align: center; }
     main .admonition-warning code {
+      background-color: #424242;
+      color: #9cd982; }
+  main .admonition-TLDR {
+    border: solid 1px #282828;
+    -moz-box-shadow: 5px 5px 10px #282828;
+    -webkit-box-shadow: 5px 5px 10px #282828;
+    box-shadow: 5px 5px 5px #282828;
+    background: #282828;
+    border: 1px solid #488d2b;
+    margin: 10px 0;
+    padding: 10px 15px 0; }
+    main .admonition-TLDR:before {
+      background: #BF5700;
+      content: "TLDR";
+      display: block;
+      font-weight: 700;
+      font-size: 110%;
+      line-height: 1;
+      margin: -10px -15px 10px;
+      padding: 0.8% 2%;
+      text-align: center; }
+    main .admonition-TLDR code {
       background-color: #424242;
       color: #9cd982; }
 
