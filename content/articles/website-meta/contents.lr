@@ -31,7 +31,7 @@ I played with a lot of blog engines over the years - while never really blogging
 
 I am particularly fond of static website generators that provide a workflow that is similar to developing software. I played with [pelican](https://blog.getpelican.com/), [jekyll](https://jekyllrb.com/), [hugo](https://gohugo.io/), [nikola](https://getnikola.com/), [flask](https://flask.palletsprojects.com/) + [frozen-flask](https://github.com/Frozen-Flask/Frozen-Flask) and the lot. As already mentioned: I even wrote my own [sphinx](https://www.sphinx-doc.org/) based generator ... while still never really blogging anything. 
 
-At the beginning of 2017 I made a deal with a colleague that I would finally write a blog article about the pytest development sprint and a bit about my involvement. It would have been boring though if I would have used the site I had already online (last incarnation was a simple [mkdocs](https://www.mkdocs.org/) driven [thing](https://github.com/obestwalter/obestwalter.github.io/blob/1.0.0/docs/index.md)). It would also have been boring to use one of the engines I already knew. Using something utterly profane like medium or wordpress was obviously completely out of the question! I mean, I could have just written the article then and be done with it. Who wants that? Right. Not me. So I started looking around for the next thing that could keep me from writing that article and I stumbled over [lektor](https://www.getlektor.com/). Now this was something that could keep me busy for a while as it is not simply a static website generator, but rather something that you can use to build a static website generator with - **a website generator generator**! Long story short: I set that up from scratch with a [simple sass style](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/_style/style.sass), wrote a [little plugin](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/packages/lektor-sass/lektor_sass.py) to integrate that into lektors development server, and finally actually wrote and [published that article](/articles/becoming-an-open-source-gardener/). Nobody ever made a deal with me again that forced me to write another article, so that was it. I had unlocked the *"i-have-a-blog-but-i-never-blog-achievement"* once again - only on a higher level. Until very recently.
+At the beginning of 2017 I made a deal with a colleague that I would finally write a blog article about the pytest development sprint and a bit about my involvement. It would have been boring though if I would have used the site I had already online (last incarnation was a simple [mkdocs](https://www.mkdocs.org/) driven [thing](https://github.com/obestwalter/obestwalter.github.io/blob/1.0.0/docs/index.md)). It would also have been boring to use one of the engines I already knew. Using something utterly profane like medium or wordpress was obviously completely out of the question! I mean, I could have just written the article then and be done with it. Who wants that? Right. Not me. So I started looking around for the next thing that could keep me from writing that article and I stumbled over [lektor](https://www.getlektor.com/). Now this was something that could keep me busy for a while as it is not simply a static website generator, but rather something that you can use to build a static website generator with - **a website generator generator**! Long story short: I set that up from scratch with a [simple sass style](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/_style/style.sass), wrote a [little plugin](https://github.com/obestwalter/obestwalter.github.io/blob/lektor-sources/packages/lektor-sass/lektor_sass.py) to integrate that into lektors development server, and finally actually wrote and [published that article](/articles/becoming-an-open-source-gardener/). Nobody ever made a deal with me again that forced me to write another article, so that was it. I had unlocked the *"i-have-a-blog-but-i-never-blog"*-achievement once again - only on a higher level. Until very recently.
 
 Because very recently I realized that I had produced a lot of material while trying to teach Python and test automation to all kinds of folks over the last years. I finally wanted to start sharing some of these materials on my website. As making strange deals seems to work with my contorted psyche, I made a deal with myself to publish at least one article a month for at least a year.
 
@@ -43,7 +43,7 @@ If you don't know Lektor at all yet, here is the minimum amount of knowledge nec
 
 To build a page, Lektor takes a folder, a data model defined in an `.ini` and a Jinja2 template. The folder for the page needs at least a `contents.lr` file - a simple lektor specific text file format. This file contains data that fits the user defined data model. Usually this is some meta data about the content and the main content of the page formatted in markdown.
 
-Lektor is extensible via a plugin system that involves creating an [installable package](https://www.getlektor.com/docs/cli/dev/new-plugin/) and implementing some methods in a class inheriting from [`lektor.pluginsystem.Plugin`](https://www.getlektor.com/docs/api/plugins/plugin/). Methods in that plugin class will be called, when Lektor emits [events]([events](https://www.getlektor.com/docs/api/plugins/events/) in different phases of the build process.
+Lektor is extensible via a plugin system that involves creating an [installable package](https://www.getlektor.com/docs/cli/dev/new-plugin/) and implementing some methods in a class inheriting from [`lektor.pluginsystem.Plugin`](https://www.getlektor.com/docs/api/plugins/plugin/). Methods in that plugin class will be called, when Lektor emits [events](https://www.getlektor.com/docs/api/plugins/events/) in different phases of the build process.
 
 ## Did someone else solve my problem already?
 
@@ -69,7 +69,7 @@ To integrate Jupyter notebooks, there is already a [plugin](https://github.com/b
 
 ## How does it work?
 
-!!!!! <center>99%: existing ecosystem, 1% wrapping it to integrate it into Lektor.</center>
+!!!!! 99.9%: existing ecosystem, 0.1% wrapping it to integrate it into Lektor.
 
 ### Generating well formed markdown
 
@@ -216,7 +216,7 @@ class JupyterPreprocessPlugin(Plugin):
 ### If you want to try it in your Lektor project
 
 In the simplest case:
-* [install it]([README](https://github.com/obestwalter/lektor-jupyter-preprocess/blob/master/README.md#installation) into your Lektor project, create a new folder and in it a Jupyter notebook with the same stem - e.g. `<your project>/content/my-notebook-test-page/my-notebook-test-page.ipynb`
+* [install it](https://github.com/obestwalter/lektor-jupyter-preprocess/blob/master/README.md#installation) into your Lektor project, create a new folder and in it a Jupyter notebook with the same stem - e.g. `<your project>/content/my-notebook-test-page/my-notebook-test-page.ipynb`
 * edit your notebook wherever you like while having `lektor serve` running
 * see how the page gets generated from the notebook
 
@@ -254,7 +254,7 @@ Here is how a footer with a link could look like using that data:
 </footer>
 ```
 
-### [tox](https://tox.readthedocs.io/) based development and publishing workflow
+### [tox](https://tox.readthedocs.io) based development and publishing workflow
 
 To cap it all off: if a project hasn't got a [`tox.ini`](https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini) that wraps all important activities of the project into a neat package it doesn't feel like a real project. So this is what `tox -av` tells me about the workflow of my Lektor project (in case I don't write another article for the next three years and I come back to it and have no idea how stuff works &#128521;):
 

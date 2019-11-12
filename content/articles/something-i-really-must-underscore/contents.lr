@@ -111,7 +111,7 @@ When you type `python` on the command line you enter the so-called [REPL](https:
 
 !!! The [IPython](https://ipython.org/) interactive shell takes this two steps further - it provides the last three evaluation results in `_`, `__` and `___`.
 
-## `_` as prefix: this is private, please don't use it
+# `_` as prefix: this is private, please don't use it
 
 
 ```python
@@ -120,7 +120,7 @@ _private_name = "Please don't access me from outside"
 ```
 This has also one practical implication when used together with the [star import](/articles/python-is-made-of-star-stuff/#import-all-the-things): names that start with an underscore, are not imported in that case.
 
-## `_` as postfix: avoid shadowing of names
+# `_` as postfix: avoid shadowing of names
 
 Names in Python can be freely reassigned. This is handy, but also a source of confusion and bugs. For that reason, static code analyzers warn you when you reassign the name of an inbuilt (e.g. `id`) or a name already defined in an outer scope. If I am determined to use such a name, I simply add an underscore like `id_` - which means: I know that this is shadowing an already defined name, but I still want to use it, so I mangle it just enough to be different. I am not sure how common this practice is, but I am pretty sure I didn't come up with it myself.
 
@@ -132,7 +132,7 @@ print(f"{id(id_)=}")
 ```
 ```text
 [stdout]
-id(id_)=139845667252368
+id(id_)=140357682686448
 
 ```
 This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the `builtins`[^3] module is merged into the module. The objects can still be retrieved from `builtins` whenever necessary:
@@ -166,7 +166,7 @@ print("Now all is fine again.")
 Now all is fine again.
 
 ```
-# `__` as prefix of an object attribute: mangle the name
+# `__` as attribute prefix: mangle the name
 
 In pairs the underscore turns from being an informal crutch to something that is part of Pythons execution model. If an object attribute starts with a double underscore (a.k.a. `dunder`), interesting things start to happen:
 
@@ -185,7 +185,7 @@ a.print_spam()
 ```
 ```text
 [stdout]
-self.__spam='SPAM', id(self)=139845615284176
+self.__spam='SPAM', id(self)=140357655687856
 
 ```
 Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although `a` and `self` are the exact same object (as can be seen from the printed id):
@@ -198,7 +198,7 @@ a.__spam
 ```
 ```text
 [stdout]
-id(a)=139845615284176
+id(a)=140357655687856
 
 ```
 ```text

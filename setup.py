@@ -10,6 +10,9 @@ setup(
         "livereload",
         "fire",
 
+        # FIXME for modified header anchor plugin
+        "python-slugify",
+
         # FIXME should be part of typogrify plugin
         "typogrify",
 
