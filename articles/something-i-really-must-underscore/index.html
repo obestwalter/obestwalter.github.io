@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name=viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/static/normalize.css?h=7ffde343">
-        <link rel="stylesheet" href="/static/style.css?h=cf7699c7">
+        <link rel="stylesheet" href="/static/style.css?h=35a44ed2">
         
         <link href="https://fonts.googleapis.com/css?family=Lakki+Reddy&display=swap" rel="stylesheet">
         <title>Something I really must underscore &mdash; obestwalter</title>
@@ -111,7 +111,7 @@ hihihi
 <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{id(id_)=}&quot;</span><span class="p">)</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-id(id_)=139710501365200
+id(id_)=139908649732528
 </pre></div>
 <p>This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the <code>builtins</code><sup class="footnote-ref" id="fnref-3"><a href="#fn-3">&thinsp;[3]</a></sup> module is merged into the module. The objects can still be retrieved from <code>builtins</code> whenever&nbsp;necessary:</p>
 <div class="highlight"><pre><span></span><span class="k">print</span> <span class="o">=</span> <span class="mi">2</span>
@@ -143,14 +143,14 @@ Now all is fine again.
 <span class="n">a</span><span class="o">.</span><span class="n">print_spam</span><span class="p">()</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-self.__spam=&#39;SPAM&#39;, id(self)=139710457525056
+self.__spam=&#39;SPAM&#39;, id(self)=139908631077984
 </pre></div>
 <p>Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although <code>a</code> and <code>self</code> are the exact same object (as can be seen from the printed&nbsp;id):</p>
 <div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{id(a)=}&quot;</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">__spam</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-id(a)=139710457525056
+id(a)=139908631077984
 </pre></div>
 <div class="highlight"><pre><span></span>[AttributeError]
 &#39;A&#39; object has no attribute &#39;__spam&#39;
