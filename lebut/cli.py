@@ -49,10 +49,10 @@ class Workflow:
     @classmethod
     def clean(cls):
         cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+        sys.argv = ["xxx", "-vvvv", "--yes"]
+        cls._dont_kill_me(clean_cmd)
         if PATH.OUTPUT.exists():
             shutil.rmtree(PATH.OUTPUT)
-        sys.argv = ["xxx", "-vvvv", "--yes"]
-        clean_cmd()  # exits
 
     @classmethod
     def serve(cls, drafts=False):
@@ -71,13 +71,9 @@ class Workflow:
     @classmethod
     def build(cls, clean=False):
         if clean:
-            try:
-                cls.clean()
-            except SystemExit as e:
-                assert e.code == 0, e.code
-
+            cls.clean()
         sys.argv = ["xxx", "-vvvv"]
-        build_cmd()
+        cls._dont_kill_me(build_cmd)
 
     @classmethod
     def deploy(cls):
@@ -105,7 +101,14 @@ class Workflow:
                 )
                 path.rename(newPath)
 
+    @classmethod
+    def _dont_kill_me(cls, function):
+        try:
+            function()
+        except SystemExit as e:
+            assert e.code == 0, e.code
+
 
 if __name__ == "__main__":
-    sys.argv = ["lebut", "clean"]
+    sys.argv = ["lebut", "deploy"]
     main()
