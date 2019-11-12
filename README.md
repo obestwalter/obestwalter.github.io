@@ -1,4 +1,6 @@
-# [My personal website](http://oliver.bestwalter.de) [(src)](https://github.com/obestwalter/obestwalter.github.io)
+# Sources for my personal website
+
+If you just want to read - this might look better: [https://oliver.bestwalter.de](https://oliver.bestwalter.de).
 
 ## Clone this project with submodules
 
