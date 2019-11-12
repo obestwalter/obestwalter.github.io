@@ -310,3 +310,7 @@ this is usually not a good idea because:
 If a package (or module)[^2] is explicitly designed to be imported like this, this is usually documented and the authors defined the special module attribute   [`__all__`](https://docs.python.org/3/tutorial/modules.html?highlight=__all__#importing-from-a-package) that explicitly lists the names that should be imported when using `from <module or package> import *` 
 
 [^2]: I'm either not seeing it or the Python documentation is omitting that `__all__` also works for modules. It does though ... I tried it.
+
+# &#x2605; &#x2605; &#x2605; The end &#x2605; &#x2605; &#x2605;
+
+That's all the stars I can think of for now. If you know any more: please [let me know](https://oliver.bestwalter.de/about/#get-in-touch).

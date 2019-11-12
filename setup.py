@@ -8,8 +8,6 @@ setup(
     packages=["lebut"],
     install_requires=[
         "livereload",
-        "black",
-        "python-slugify",
         "fire",
 
         # FIXME should be part of typogrify plugin

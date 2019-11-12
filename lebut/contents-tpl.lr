@@ -1,0 +1,17 @@
+_discoverable: False
+---
+title: $title
+---
+mtime: $date
+---
+crtime: $date
+---
+tags:
+
+---
+summary:
+
+---
+content:
+
+Awesome thoughts ...

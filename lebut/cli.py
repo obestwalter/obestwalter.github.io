@@ -9,7 +9,6 @@ from string import Template
 from typing import List
 
 import fire
-from slugify import slugify
 
 from lebut import lektor_monkeypatch, livereloader
 from lebut.config import NAME, PATH
@@ -18,6 +17,7 @@ from lektor.cli import clean_cmd, build_cmd, deploy_cmd
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 lektor_monkeypatch.patch_all()
+os.environ["LEKTOR_OUTPUT_PATH"] = str(PATH.OUTPUT)
 
 
 def main():
@@ -30,31 +30,34 @@ def main():
 
 
 class Workflow:
-    """Home baked log creation, adaption, publishing workflow"""
+    """Home baked blog create, dev, publish workflow"""
 
     @classmethod
-    def new(cls, title: str):
-        container = PATH.ARTICLES / slugify(title)
-        assert not container.exists(), f"{container} already exists!"
+    def new(cls, slug: str):
+        assert " " not in slug, f"expected wanted slug (rel url)"
+        assert not (PATH.DRAFTS / slug).exists(), "already in drafts"
+        container = PATH.ARTICLES / slug
         container.mkdir()
         (container / NAME.DRAFT).write_text("")
-        content = (PATH.HERE / NAME.CONTENTS).read_text()
+        content = (PATH.HERE / "contents-tpl.lr").read_text()
         content = Template(content).safe_substitute(
-            dict(title=title, date=datetime.now().strftime("%Y-%m-%d"))
+            dict(title=slug, date=datetime.now().strftime("%Y-%m-%d"))
         )
         (container / NAME.CONTENTS).write_text(content)
+        log.info("hint: to finish this up run tox -e serve --drafts")
 
     @classmethod
     def clean(cls):
-        sys.argv = ["xxx", "-vvvv", "--yes", "--output-path", str(PATH.OUTPUT)]
-        clean_cmd()
+        cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
         if PATH.OUTPUT.exists():
             shutil.rmtree(PATH.OUTPUT)
+        sys.argv = ["xxx", "-vvvv", "--yes"]
+        clean_cmd()  # exits
 
     @classmethod
     def serve(cls, drafts=False):
         """let lektor rebuild but use livereload plugin, instead of inbuilt server."""
-        sys.argv = ["xxx", "--watch", "-vvvv", "--output-path", str(PATH.OUTPUT)]
+        sys.argv = ["xxx", "--watch", "-vvvv"]
         # os.environ["LEKTOR_DEV"] = "1"
         if drafts:
             cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
@@ -73,12 +76,14 @@ class Workflow:
             except SystemExit as e:
                 assert e.code == 0, e.code
 
-        sys.argv = ["xxx", "-vvvv", "--output-path", str(PATH.OUTPUT)]
+        sys.argv = ["xxx", "-vvvv"]
         build_cmd()
 
     @classmethod
     def deploy(cls):
-        sys.argv = ["xxx", "--output-path", str(PATH.OUTPUT)]
+        cls._move_drafts(PATH.ARTICLES, PATH.DRAFTS)
+        cls.build(clean=True)
+        sys.argv = ["xxx"]
         deploy_cmd()
 
     @classmethod
@@ -102,5 +107,5 @@ class Workflow:
 
 
 if __name__ == "__main__":
-    sys.argv = ["lebut", "serve"]
+    sys.argv = ["lebut", "clean"]
     main()
