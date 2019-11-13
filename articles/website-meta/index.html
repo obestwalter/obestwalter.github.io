@@ -213,7 +213,7 @@
 <li>the source link (if set in <code>configs/jupyter-preprocess.ini</code>) or a direct link to the jupyter notebook&nbsp;attachment</li>
 <li>info about whether the page that is about to be rendered originated from a notebook (to link to the original for example (like you can see at the bottom of this&nbsp;page))</li>
 </ul>
-<div class="admonition-tip"><p>See this small <a href="https://github.com/obestwalter/lektor-jupyter-preprocess/tree/master/example-project">example project</a> to see how it works in the simplest&nbsp;case</p></div><p>Here is how a footer with a link could look like using that&nbsp;data:</p>
+<p>Here is how a footer with a link could look like using that&nbsp;data:</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
     {#  accessing information for lektor-jupyter-preprocess plugin #}
     {% if this.path in JUPYTER_PREPROCESS.paths %}
@@ -233,7 +233,7 @@
     {% endif %}
 <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
 </pre></div>
-<h3 id="tox-https-tox-readthedocs-io-based-development-and-publishing-workflow"><a href="https://tox.readthedocs.io">tox</a> based development and publishing workflow <a class="header-anchor" href="#tox-https-tox-readthedocs-io-based-development-and-publishing-workflow">&#128279;</a></h3><p>To cap it all off: if a project hasn&#8217;t got a <a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini"><code>tox.ini</code></a> that wraps all important activities of the project into a neat package it doesn&#8217;t feel like a real project. So this is what <code>tox -av</code> tells me about the workflow of my Lektor project (in case I don&#8217;t write another article for the next three years and I come back to it and have no idea how stuff works&nbsp;&#128521;):</p>
+<div class="admonition-tip"><p>See this small <a href="https://github.com/obestwalter/lektor-jupyter-preprocess/tree/master/example-project">example project</a> to see how it works in the simplest&nbsp;case</p></div><h3 id="tox-https-tox-readthedocs-io-based-development-and-publishing-workflow"><a href="https://tox.readthedocs.io">tox</a> based development and publishing workflow <a class="header-anchor" href="#tox-https-tox-readthedocs-io-based-development-and-publishing-workflow">&#128279;</a></h3><p>To cap it all off: if a project hasn&#8217;t got a <a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini"><code>tox.ini</code></a> that wraps all important activities of the project into a neat package it doesn&#8217;t feel like a real project. So this is what <code>tox -av</code> tells me about the workflow of my Lektor project (in case I don&#8217;t write another article for the next three years and I come back to it and have no idea how stuff works&nbsp;&#128521;):</p>
 <div class="highlight"><pre><span></span>$ tox -av
 
 default environments:
@@ -280,7 +280,7 @@ test            -&gt; run tests for lebut
 
         
     <span class="date" title="published: 2019-11-03">
-        [last update: 2019-11-12]
+        [last update: 2019-11-13]
     </span>
 
     </div>
