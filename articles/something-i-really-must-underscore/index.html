@@ -111,7 +111,7 @@ hihihi
 <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{id(id_)=}&quot;</span><span class="p">)</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-id(id_)=140357682686448
+id(id_)=140280537397232
 </pre></div>
 <p>This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the <code>builtins</code><sup class="footnote-ref" id="fnref-3"><a href="#fn-3">&thinsp;[3]</a></sup> module is merged into the module. The objects can still be retrieved from <code>builtins</code> whenever&nbsp;necessary:</p>
 <div class="highlight"><pre><span></span><span class="k">print</span> <span class="o">=</span> <span class="mi">2</span>
@@ -143,14 +143,14 @@ Now all is fine again.
 <span class="n">a</span><span class="o">.</span><span class="n">print_spam</span><span class="p">()</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-self.__spam=&#39;SPAM&#39;, id(self)=140357655687856
+self.__spam=&#39;SPAM&#39;, id(self)=140280485139072
 </pre></div>
 <p>Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although <code>a</code> and <code>self</code> are the exact same object (as can be seen from the printed&nbsp;id):</p>
 <div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{id(a)=}&quot;</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">__spam</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-id(a)=140357655687856
+id(a)=140280485139072
 </pre></div>
 <div class="highlight"><pre><span></span>[AttributeError]
 &#39;A&#39; object has no attribute &#39;__spam&#39;
@@ -182,13 +182,13 @@ id(a)=140357655687856
     <div class="info">
         
     
-        <a href="/articles/tag/python">
+        <a href="/articles/tag/python/">
                 <span class="tag">python</span>
             </a>
-        <a href="/articles/tag/fundamentals">
+        <a href="/articles/tag/fundamentals/">
                 <span class="tag">fundamentals</span>
             </a>
-        <a href="/articles/tag/little-things">
+        <a href="/articles/tag/little-things/">
                 <span class="tag">little-things</span>
             </a>
         
@@ -219,6 +219,24 @@ id(a)=140357655687856
         </div>
         <br>
         <div class="left"><a href="https://github.com/obestwalter/obestwalter.github.io/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">comment</a></div>
+
+        <div class="middle">
+            <span>
+                <a href="https://validator.w3.org/check/referer" rel="nofollow" >
+                    <img style="border:0;width:80px;height:15px"
+                        src="/static/valid_html5.png?h=d33ddf9d"
+                        alt="validate HTML5" />
+                </a>
+            </span>
+            <span>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">
+                    <img style="border:0;width:80px;height:15px"
+                        src="/static/valid_css3.png?h=1fe8f55c"
+                        alt="validate CSS3" />
+                </a>
+            </span>
+        </div>
+
         <div class="right"><a href="https://github.com/obestwalter/obestwalter.github.io/tree/lektor-sources/content/LICENSE">&copy; Oliver Bestwalter</a></div>
     </footer>
 
