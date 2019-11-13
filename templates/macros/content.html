@@ -3,7 +3,7 @@
 {% macro render_tags(p, class="tags") %}
     {% if p.tags is defined %}
         {% for t in p.tags -%}
-            <a href="{{ ('/articles/tag/' ~ t.lower())|url }}">
+            <a href="{{ ('/articles/tag/' ~ t.lower())|url + '/'}}">
                 <span class="tag">{{ t }}</span>
             </a>
         {% endfor %}

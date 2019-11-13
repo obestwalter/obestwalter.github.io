@@ -1,6 +1,6 @@
 title: Obligatory meta article about my website
 ---
-mtime: 2019-11-12
+mtime: 2019-11-13
 ---
 crtime: 2019-11-03
 ---
@@ -229,8 +229,6 @@ Additionally to generating the notebook the plugin injects the global variable `
 * the source link (if set in `configs/jupyter-preprocess.ini`) or a direct link to the jupyter notebook attachment
 * info about whether the page that is about to be rendered originated from a notebook (to link to the original for example (like you can see at the bottom of this page))
 
-!!! See this small [example project](https://github.com/obestwalter/lektor-jupyter-preprocess/tree/master/example-project) to see how it works in the simplest case
-
 Here is how a footer with a link could look like using that data:
 
 ```html
@@ -253,6 +251,8 @@ Here is how a footer with a link could look like using that data:
     {% endif %}
 </footer>
 ```
+
+!!! See this small [example project](https://github.com/obestwalter/lektor-jupyter-preprocess/tree/master/example-project) to see how it works in the simplest case
 
 ### [tox](https://tox.readthedocs.io) based development and publishing workflow
 
