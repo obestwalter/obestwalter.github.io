@@ -110,5 +110,5 @@ class Workflow:
 
 
 if __name__ == "__main__":
-    sys.argv = ["lebut", "deploy"]
+    sys.argv = ["lebut", "serve"]
     main()
