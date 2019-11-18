@@ -95,29 +95,29 @@ class ArticleExecutePreprocessor(ExecutePreprocessor):
         if cell.cell_type != "code":
             return cell, resources
 
-        cell = pre_exec(cell)
+        cell = pre_process(cell)
         cell_config = {
             **config,
             **self.nb.metadata.get(PLUGIN_KEY, {}),
             **cell.metadata.get(PLUGIN_KEY, {}),
         }
         log.debug("final config for cell is:\n%s", config)
-        if not cell_config["metadata.execute"]:
-            cell.outputs = []
-            return cell, resources
-
-        nodes = self.run_cell(cell, *args, **kwargs)[1]
         language = self.nb.metadata.kernelspec.language
-        cell = post_exec(language, nodes, cell, cell_config)
+        if config["metadata.blackify"] and language == "python":
+            cell.source = blackify(cell.source)
+        if cell_config["metadata.execute"]:
+            nodes = self.run_cell(cell, *args, **kwargs)[1]
+        else:
+            nodes = cell.outputs
+        cell = post_process(language, cell, nodes, cell_config)
         return cell, resources
 
 ```
 
-
 ```python
-# %load -s pre_exec ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py
-def pre_exec(cell):
-    """Do some things before potential execution of the cell."""
+# %load -s pre_process ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py
+def pre_process(cell):
+    """Apply magics and update cell level config overrides."""
     cell.source = cell.source.strip()
     if not cell.source:
         return cell
@@ -145,20 +145,24 @@ def pre_exec(cell):
                     **metadata_override,
                 }
         cell.source = apply_load_magic(load_candidate)
-
-    if config["metadata.blackify"]:
-        cell.source = blackify(cell.source)
     return cell
 
 ```
 
-
 ```python
-# %load -s post_exec ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py
-def post_exec(language, nodes, cell, cell_config) -> nbformat.NotebookNode:
-    """Construct what should written to the contents for this cell."""
+# %load -s post_process ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py
+def post_process(language, cell, nodes, cell_config) -> nbformat.NotebookNode:
+    """Construct what should be written to the contents for this cell.
+
+    This simply creates a new raw cell containing everything - not because it's the
+    best solution but the easiest for my use case.
+
+    TODO figure out a better way that also accommodates potential HTML/interactive
+     output better Modifies cell in-place (#4).
+    """
     out = [config["cell.source"].format(language=language, cell=cell)]
     for node in nodes:
+        assert isinstance(node, nbformat.NotebookNode)
         # https://nbformat.readthedocs.io/en/latest/format_description.html
         if node.output_type == "execute_result":
             out.append(config["node.execute_result"].format(node=node))
@@ -188,7 +192,6 @@ def post_exec(language, nodes, cell, cell_config) -> nbformat.NotebookNode:
     )
 
 ```
-
 This is how it is configurable at the moment:
 
 
@@ -223,16 +226,15 @@ See example-project/jupyter-preprocess.ini and tests/code.ipynb for examples
 """
 
 ```
-
 The idea is to hook into the part of the conversion process where the notebook is preprocessed before the actual conversion to markdown. 
 
 In my case the necessary preprocessing means: 
 
 * For each individual code cell: 
-    * format the code with [black](https://black.readthedocs.io)
+    * **(optional - on by default)** format the source code with [black](https://black.readthedocs.io)
     * if it contains a [`%load` magic](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load): execute it to load the code from the file into the cell (**always** - commented out or not)
-    * if it contains meta data to not execute it (`{"lektor-preprocess": {"prevent-execution": true}}`): do not execute it - only render
-    * execute the code and format the output in a slightly different way than it is done by default (`pre_process_cell`)
+    * **(optional - on by default)** execute the code
+    * **(configurable)** format the outputs
 
 The complete plugin code is in [lektor_jupyter_preprocess.py](https://github.com/obestwalter/lektor-jupyter-preprocess/blob/ccb68c65aafabd1bcc54d7503e888e7967652933/lektor_jupyter_preprocess.py)
 
@@ -293,7 +295,6 @@ class JupyterPreprocessPlugin(Plugin):
             self.env.jinja_env.globals[PLUGIN_KEY]["paths"].add(source.path)
 
 ```
-
 ### If you want to try it in your Lektor project
 
 In the simplest case:
