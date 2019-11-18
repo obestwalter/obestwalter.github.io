@@ -98,25 +98,26 @@
         <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">!=</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
 
-        <span class="n">cell</span> <span class="o">=</span> <span class="n">pre_exec</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">pre_process</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
         <span class="n">cell_config</span> <span class="o">=</span> <span class="p">{</span>
             <span class="o">**</span><span class="n">config</span><span class="p">,</span>
             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">nb</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PLUGIN_KEY</span><span class="p">,</span> <span class="p">{}),</span>
             <span class="o">**</span><span class="n">cell</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PLUGIN_KEY</span><span class="p">,</span> <span class="p">{}),</span>
         <span class="p">}</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;final config for cell is:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">cell_config</span><span class="p">[</span><span class="s2">&quot;metadata.execute&quot;</span><span class="p">]:</span>
-            <span class="n">cell</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
-
-        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">language</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nb</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">kernelspec</span><span class="o">.</span><span class="n">language</span>
-        <span class="n">cell</span> <span class="o">=</span> <span class="n">post_exec</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">cell_config</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;metadata.blackify&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">language</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+            <span class="n">cell</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">blackify</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cell_config</span><span class="p">[</span><span class="s2">&quot;metadata.execute&quot;</span><span class="p">]:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">outputs</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">post_process</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">cell_config</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
 </pre></div>
-<div class="highlight"><pre><span></span><span class="c1"># %load -s pre_exec ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
-<span class="k">def</span> <span class="nf">pre_exec</span><span class="p">(</span><span class="n">cell</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Do some things before potential execution of the cell.&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><span class="c1"># %load -s pre_process ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
+<span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="n">cell</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply magics and update cell level config overrides.&quot;&quot;&quot;</span>
     <span class="n">cell</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cell</span>
@@ -144,16 +145,21 @@
                     <span class="o">**</span><span class="n">metadata_override</span><span class="p">,</span>
                 <span class="p">}</span>
         <span class="n">cell</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">apply_load_magic</span><span class="p">(</span><span class="n">load_candidate</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;metadata.blackify&quot;</span><span class="p">]:</span>
-        <span class="n">cell</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">blackify</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cell</span>
 </pre></div>
-<div class="highlight"><pre><span></span><span class="c1"># %load -s post_exec ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
-<span class="k">def</span> <span class="nf">post_exec</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">cell_config</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">NotebookNode</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Construct what should written to the contents for this cell.&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><span class="c1"># %load -s post_process ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
+<span class="k">def</span> <span class="nf">post_process</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">cell_config</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">NotebookNode</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Construct what should be written to the contents for this cell.</span>
+
+<span class="sd">    This simply creates a new raw cell containing everything - not because it&#39;s the</span>
+<span class="sd">    best solution but the easiest for my use case.</span>
+
+<span class="sd">    TODO figure out a better way that also accommodates potential HTML/interactive</span>
+<span class="sd">     output better Modifies cell in-place (#4).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;cell.source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span> <span class="n">cell</span><span class="o">=</span><span class="n">cell</span><span class="p">)]</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">NotebookNode</span><span class="p">)</span>
         <span class="c1"># https://nbformat.readthedocs.io/en/latest/format_description.html</span>
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;execute_result&quot;</span><span class="p">:</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;node.execute_result&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">))</span>
@@ -216,10 +222,10 @@
 <p>In my case the necessary preprocessing&nbsp;means:</p>
 <ul>
 <li>For each individual code cell: <ul>
-<li>format the code with <a href="https://black.readthedocs.io">black</a></li>
+<li><strong>(optional - on by default)</strong> format the source code with <a href="https://black.readthedocs.io">black</a></li>
 <li>if it contains a <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load"><code>%load</code> magic</a>: execute it to load the code from the file into the cell (<strong>always</strong> - commented out or&nbsp;not)</li>
-<li>if it contains meta data to not execute it (<code>{"lektor-preprocess": {"prevent-execution": true}}</code>): do not execute it - only&nbsp;render</li>
-<li>execute the code and format the output in a slightly different way than it is done by default (<code>pre_process_cell</code>)</li>
+<li><strong>(optional - on by default)</strong> execute the&nbsp;code</li>
+<li><strong>(configurable)</strong> format the&nbsp;outputs</li>
 </ul>
 </li>
 </ul>
