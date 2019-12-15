@@ -315,22 +315,15 @@ Here is how a footer with a link could look like using that data:
 
 ```html
 <footer>
-    {#  accessing information for lektor-jupyter-preprocess plugin #}
+    <div class="origin-hint">
     {% if this.path in JUPYTER_PREPROCESS.paths %}
-        <div>
-        Page generated from a Jupyter notebook &mdash;
         {% if JUPYTER_PREPROCESS.url_source is defined %}
-            <a href="{{ JUPYTER_PREPROCESS.url_source }}/{{ this.path }}">
-                view sources
+            <a href="{{ JUPYTER_PREPROCESS.url_source }}{{ this.path }}">
+                generated from a Jupyter notebook &mdash; view sources
             </a>
-        {% else %}
-            <a href="{{ this.path }}">
-                download notebook
-            </a>
-        {% endif %}
-        </div>
-        <br>
+        {%  endif %}
     {% endif %}
+    </div>
 </footer>
 ```
 
