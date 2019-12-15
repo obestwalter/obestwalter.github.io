@@ -17,9 +17,19 @@ from lebut.config import PATH
 
 log = logging.getLogger(__name__)
 
+_original_reporter = lektor.reporter.CliReporter
+_original_initialize_plugins = lektor.pluginsystem.initialize_plugins
 
 def patch_all():
+    patch_reporter()
+    patch_initialize_plugins()
+
+
+def patch_reporter():
     lektor.reporter.CliReporter = CliReporterWithNotify
+
+
+def patch_initialize_plugins():
     lektor.pluginsystem.initialize_plugins = initialize_plugins_with_local_plugins
 
 
