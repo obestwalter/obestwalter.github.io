@@ -18,6 +18,7 @@ log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 lektor_monkeypatch.patch_all()
 os.environ["LEKTOR_OUTPUT_PATH"] = str(PATH.OUTPUT)
+PORT = "5000"
 
 
 def main():
@@ -62,7 +63,7 @@ class Workflow:
         if drafts:
             cls._move_drafts(PATH.DRAFTS, PATH.ARTICLES)
         try:
-            livereloader.LiveReloader().start()
+            livereloader.LiveReloader().start(PORT)
             build_cmd()
         finally:
             if drafts:

@@ -16,12 +16,12 @@ class LiveReloader:
             log.info("livereload is active")
             time.sleep(10)
 
-    def start(self):
+    def start(self, port):
         if self._is_alive:
             log.info(f"nothing to do - {self.cmd} is running")
             return
 
-        args = [self.cmd, "--host", "0.0.0.0", "--port", "8080", str(PATH.OUTPUT)]
+        args = [self.cmd, "--host", "0.0.0.0", "--port", port, str(PATH.OUTPUT)]
         log.info("spawn: %s", " ".join(args))
         subprocess.Popen(args)
         while not self._is_alive:
