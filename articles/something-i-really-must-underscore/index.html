@@ -105,16 +105,13 @@ hihihi
 <p><img src="/articles/something-i-really-must-underscore/repl.png" alt="using underscore in a REPL"></p>
 <div class="admonition-tip"><p>The <a href="https://ipython.org/">IPython</a> interactive shell takes this two steps further - it provides the last three evaluation results in <code>_</code>, <code>__</code> and <code>___</code>.</p></div><h1 id="as-prefix-this-is-private-please-don-t-use-it"><code>_</code> as prefix: this is private, please don&#8217;t use it <a class="header-anchor" href="#as-prefix-this-is-private-please-don-t-use-it">&#128279;</a></h1><div class="highlight"><pre><span></span><span class="n">_private_name</span> <span class="o">=</span> <span class="s2">&quot;Please don&#39;t access me from outside&quot;</span>
 </pre></div>
-<div class="highlight"><pre><span></span>[result]
-&quot;Please don&#39;t access me from outside&quot;
-</pre></div>
 <p>This has also one practical implication when used together with the <a href="/articles/python-is-made-of-star-stuff/#import-all-the-things">star import</a>: names that start with an underscore, are not imported in that&nbsp;case.</p>
 <h1 id="as-postfix-avoid-shadowing-of-names"><code>_</code> as postfix: avoid shadowing of names <a class="header-anchor" href="#as-postfix-avoid-shadowing-of-names">&#128279;</a></h1><p>Names in Python can be freely reassigned. This is handy, but also a source of confusion and bugs. For that reason, static code analyzers warn you when you reassign the name of an inbuilt (e.g. <code>id</code>) or a name already defined in an outer scope. If I am determined to use such a name, I simply add an underscore like <code>id_</code> - which means: I know that this is shadowing an already defined name, but I still want to use it, so I mangle it just enough to be different. I am not sure how common this practice is, but I am pretty sure I didn&#8217;t come up with it&nbsp;myself.</p>
 <div class="highlight"><pre><span></span><span class="n">id_</span> <span class="o">=</span> <span class="mi">123456</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{id(id_)=}&quot;</span><span class="p">)</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-id(id_)=140606897850000
+id(id_)=140177456527824
 </pre></div>
 <p>This is veering off the original topic a bit, but I just want to mention that whatever you do - the original object a builtin points to is never lost - just shadowed. When a module is initialized, the namespace of the <code>builtins</code><sup class="footnote-ref" id="fnref-3"><a href="#fn-3">&thinsp;[3]</a></sup> module is merged into the module. The objects can still be retrieved from <code>builtins</code> whenever&nbsp;necessary:</p>
 <div class="highlight"><pre><span></span><span class="nb">print</span> <span class="o">=</span> <span class="mi">2</span>
@@ -146,14 +143,14 @@ Now all is fine again.
 <span class="n">a</span><span class="o">.</span><span class="n">print_spam</span><span class="p">()</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-self.__spam=&#39;SPAM&#39;, id(self)=140606837558624
+self.__spam=&#39;SPAM&#39;, id(self)=140177404265280
 </pre></div>
 <p>Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although <code>a</code> and <code>self</code> are the exact same object (as can be seen from the printed&nbsp;id):</p>
 <div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{id(a)=}&quot;</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">__spam</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
-id(a)=140606837558624
+id(a)=140177404265280
 </pre></div>
 <div class="highlight"><pre><span></span>[AttributeError]
 &#39;A&#39; object has no attribute &#39;__spam&#39;

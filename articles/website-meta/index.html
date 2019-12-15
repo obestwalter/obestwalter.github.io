@@ -292,22 +292,15 @@
 </ul>
 <p>Here is how a footer with a link could look like using that&nbsp;data:</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
-    {#  accessing information for lektor-jupyter-preprocess plugin #}
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;origin-hint&quot;</span><span class="p">&gt;</span>
     {% if this.path in JUPYTER_PREPROCESS.paths %}
-        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-        Page generated from a Jupyter notebook <span class="ni">&amp;mdash;</span>
         {% if JUPYTER_PREPROCESS.url_source is defined %}
-            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ JUPYTER_PREPROCESS.url_source }}/{{ this.path }}&quot;</span><span class="p">&gt;</span>
-                view sources
+            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ JUPYTER_PREPROCESS.url_source }}{{ this.path }}&quot;</span><span class="p">&gt;</span>
+                generated from a Jupyter notebook <span class="ni">&amp;mdash;</span> view sources
             <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        {% else %}
-            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ this.path }}&quot;</span><span class="p">&gt;</span>
-                download notebook
-            <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        {% endif %}
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+        {%  endif %}
     {% endif %}
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
 </pre></div>
 <div class="admonition-tip"><p>See this small <a href="https://github.com/obestwalter/lektor-jupyter-preprocess/tree/master/example-project">example project</a> to see how it works in the simplest&nbsp;case</p></div><h3 id="tox-https-tox-readthedocs-io-based-development-and-publishing-workflow"><a href="https://tox.readthedocs.io">tox</a> based development and publishing workflow <a class="header-anchor" href="#tox-https-tox-readthedocs-io-based-development-and-publishing-workflow">&#128279;</a></h3><p>To cap it all off: if a project hasn&#8217;t got a <a href="https://github.com/obestwalter/obestwalter.github.io/blob/d986b344ea4d55db017449aac3e5520574b99792/tox.ini"><code>tox.ini</code></a> that wraps all important activities of the project into a neat package it doesn&#8217;t feel like a real project. So this is what <code>tox -av</code> tells me about the workflow of my Lektor project (in case I don&#8217;t write another article for the next three years and I come back to it and have no idea how stuff works&nbsp;&#128521;):</p>
