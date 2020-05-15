@@ -103,7 +103,7 @@
     <span class="sd">&quot;&quot;&quot;Apply load magic and massage the markdown output.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">preprocess_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">!=</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cell</span><span class="o">.</span><span class="n">cell_type</span> <span class="o">!=</span> <span class="s2">&quot;code&quot;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">cell</span><span class="p">,</span> <span class="n">resources</span>
 
         <span class="n">cell</span> <span class="o">=</span> <span class="n">pre_process</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
@@ -170,7 +170,6 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">NotebookNode</span><span class="p">)</span>
         <span class="c1"># https://nbformat.readthedocs.io/en/latest/format_description.html</span>
         <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;execute_result&quot;</span><span class="p">:</span>
-            <span class="c1"># TODO I guess this is where matplotlib graphs would also end up?</span>
             <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;node.execute_result&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">))</span>
         <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;stream&quot;</span><span class="p">:</span>
             <span class="c1"># TODO use tags/raises-exception like in pytest (not raising raises error)</span>
@@ -182,7 +181,6 @@
                 <span class="k">raise</span> <span class="n">ErrorsNotAllowed</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;raised but errors not allowed:</span><span class="se">\n</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
-
             <span class="k">if</span> <span class="n">cell_config</span><span class="p">[</span><span class="s2">&quot;metadata.full_traceback&quot;</span><span class="p">]:</span>
                 <span class="c1"># TODO handle ANSI terminal colors stuff</span>
                 <span class="c1">#  see if how jupyter does it is reusable</span>
@@ -200,8 +198,6 @@
 </pre></div>
 <p>This is how it is configurable at the&nbsp;moment:</p>
 <div class="highlight"><pre><span></span><span class="c1"># %load -r 23-50 ../../../packages/lektor-jupyter-preprocess/lektor_jupyter_preprocess.py</span>
-<span class="n">_already_built</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># hack: prevent duplicate builds after clean</span>
-
 <span class="n">PLUGIN_KEY</span> <span class="o">=</span> <span class="s2">&quot;JUPYTER_PREPROCESS&quot;</span>
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;url.source&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
@@ -228,6 +224,7 @@
 <span class="s2">* dict literal on second line in a cell using the %load magic</span>
 
 <span class="s2">See example-project/jupyter-preprocess.ini and tests/code.ipynb for examples</span>
+<span class="s2">&quot;&quot;&quot;</span>
 </pre></div>
 <p>The idea is to hook into the part of the conversion process where the notebook is preprocessed before the actual conversion to&nbsp;markdown.</p>
 <p>In my case the necessary preprocessing&nbsp;means:</p>
