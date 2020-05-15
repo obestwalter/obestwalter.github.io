@@ -150,6 +150,8 @@ append() takes 0 positional arguments but 1 was given
 passing through args=(1, 2) and kwargs={&#39;c&#39;: 3, &#39;d&#39;: 4}
 passed arguments: a=1, b=2, c=3, d=4
 </pre></div>
+<div class="highlight"><pre><span></span>[stdout]
+</pre></div>
 <p>A case where this is particularly useful is when creating decorators that are not opinionated about the kind of function they decorate (like <code>append</code>). They just need to pass through whatever the decorated function needs to be called&nbsp;with.</p>
 <h1 id="there-is-even-more-to-unpack">There is even more to unpack <a class="header-anchor" href="#there-is-even-more-to-unpack">&#128279;</a></h1><p>In pre Python3 days so-called tuple unpacking was already supported. Here is the classic example of swapping assignments between two&nbsp;names:</p>
 <div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
