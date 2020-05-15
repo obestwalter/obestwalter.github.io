@@ -25,6 +25,14 @@
                     </li>
                 
                     <li >
+                        <a href="/speaking/">Speaking</a>
+                    </li>
+                
+                    <li >
+                        <a href="/teaching/">Teaching</a>
+                    </li>
+                
+                    <li >
                         <a href="/projects/">Projects</a>
                     </li>
                 
@@ -108,7 +116,7 @@ hihihi
 <p>This has also one practical implication when used together with the <a href="/articles/python-is-made-of-star-stuff/#import-all-the-things">star import</a>: names that start with an underscore, are not imported in that&nbsp;case.</p>
 <h1 id="as-postfix-avoid-shadowing-of-names"><code>_</code> as postfix: avoid shadowing of names <a class="header-anchor" href="#as-postfix-avoid-shadowing-of-names">&#128279;</a></h1><p>Names in Python can be freely reassigned. This is handy, but also a source of confusion and bugs. For that reason, static code analyzers warn you when you reassign the name of an inbuilt (e.g. <code>id</code>) or a name already defined in an outer scope. If I am determined to use such a name, I simply add an underscore like <code>id_</code> - which means: I know that this is shadowing an already defined name, but I still want to use it, so I mangle it just enough to be different. I am not sure how common this practice is, but I am pretty sure I didn&#8217;t come up with it&nbsp;myself.</p>
 <div class="highlight"><pre><span></span><span class="n">id_</span> <span class="o">=</span> <span class="mi">123456</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{id(id_)=}&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">id</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]
 id(id_)=140177456527824
@@ -136,7 +144,7 @@ Now all is fine again.
     <span class="n">__spam</span> <span class="o">=</span> <span class="s2">&quot;SPAM&quot;</span>
 
     <span class="k">def</span> <span class="nf">print_spam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{self.__spam=}, {id(self)=}&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__spam</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
@@ -146,7 +154,7 @@ Now all is fine again.
 self.__spam=&#39;SPAM&#39;, id(self)=140177404265280
 </pre></div>
 <p>Up to this point there is nothing unusual about this. When I try to access the attribute from outside though, the behaviour is different as when accessed from inside the object although <code>a</code> and <code>self</code> are the exact same object (as can be seen from the printed&nbsp;id):</p>
-<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{id(a)=}&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">__spam</span>
 </pre></div>
 <div class="highlight"><pre><span></span>[stdout]

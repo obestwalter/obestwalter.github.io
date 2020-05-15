@@ -25,6 +25,14 @@
                     </li>
                 
                     <li >
+                        <a href="/speaking/">Speaking</a>
+                    </li>
+                
+                    <li >
+                        <a href="/teaching/">Teaching</a>
+                    </li>
+                
+                    <li >
                         <a href="/projects/">Projects</a>
                     </li>
                 
@@ -124,7 +132,7 @@
 
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
         <span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span>
-    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;bad source type: {type(cell.source)}&quot;</span>
+    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;bad source type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
     <span class="n">load_candidate</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;# &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="c1"># TODO apply other magics (e.g. %%capture)?</span>
@@ -138,7 +146,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">metadata_override</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">metadata_override</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[IGNORE] eval of &#39;</span><span class="si">{metadata_override}</span><span class="s2">&#39; failed&quot;</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[IGNORE] eval of &#39;</span><span class="si">{</span><span class="n">metadata_override</span><span class="si">}</span><span class="s2">&#39; failed&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metadata_override</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="n">cell</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="n">PLUGIN_KEY</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
                     <span class="o">**</span><span class="n">cell</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">PLUGIN_KEY</span><span class="p">,</span> <span class="p">{}),</span>
@@ -172,7 +180,7 @@
         <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">output_type</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">cell_config</span><span class="p">[</span><span class="s2">&quot;metadata.allow_errors&quot;</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="n">ErrorsNotAllowed</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;raised but errors not allowed:</span><span class="se">\n</span><span class="si">{node}</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;raised but errors not allowed:</span><span class="se">\n</span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
 
             <span class="k">if</span> <span class="n">cell_config</span><span class="p">[</span><span class="s2">&quot;metadata.full_traceback&quot;</span><span class="p">]:</span>
@@ -184,7 +192,7 @@
                 <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;node.exception&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">UnhandledOutputType</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;{node.output_type=} unknown - {cell.source=}&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">output_type</span><span class="si">=}</span><span class="s2"> unknown - </span><span class="si">{</span><span class="n">cell</span><span class="o">.</span><span class="n">source</span><span class="si">=}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
     <span class="k">return</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">NotebookNode</span><span class="p">(</span>
         <span class="p">{</span><span class="s2">&quot;cell_type&quot;</span><span class="p">:</span> <span class="s2">&quot;raw&quot;</span><span class="p">,</span> <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out</span><span class="p">)}</span>
@@ -215,9 +223,9 @@
 <span class="s2">It can be overridden in these ways (sorted by order of precedence - last one wins):</span>
 
 <span class="s2">* config values from configs/jupyter-preprocess.ini</span>
-<span class="s2">* dict at </span><span class="si">{PLUGIN_KEY}</span><span class="s2"> in notebook metadata</span>
-<span class="s2">* dict at </span><span class="si">{PLUGIN_KEY}</span><span class="s2"> in cell metadata</span>
-<span class="s2">* dict literal on second line in a cell using the </span><span class="si">%lo</span><span class="s2">ad magic</span>
+<span class="s2">* dict at </span><span class="si">{</span><span class="n">PLUGIN_KEY</span><span class="si">}</span><span class="s2"> in notebook metadata</span>
+<span class="s2">* dict at </span><span class="si">{</span><span class="n">PLUGIN_KEY</span><span class="si">}</span><span class="s2"> in cell metadata</span>
+<span class="s2">* dict literal on second line in a cell using the %load magic</span>
 
 <span class="s2">See example-project/jupyter-preprocess.ini and tests/code.ipynb for examples</span>
 </pre></div>
@@ -275,7 +283,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">attachments</span><span class="p">:</span>
             <span class="k">return</span>
 
-        <span class="n">attachment</span> <span class="o">=</span> <span class="n">attachments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{Path(source.path).name}.ipynb&quot;</span><span class="p">)</span>
+        <span class="n">attachment</span> <span class="o">=</span> <span class="n">attachments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Path</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.ipynb&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">attachment</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">jinja_env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="n">PLUGIN_KEY</span><span class="p">][</span><span class="s2">&quot;paths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 </pre></div>
