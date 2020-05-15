@@ -1,23 +1,37 @@
 title: Hi, I am Oliver.
 ---
-mtime: 2019-11-01
+mtime: 2020-05-11
 ---
 crtime: 2017-03-26
 ---
 content:
 
+![my first band!](jungs_vonne_fritten_ranch_1989_cropped.jpg)
+
+*(My first band! I'm the guy on the left at the front.)*
+
 * Born in Germany on Star Wars day in the year the last man landed on the moon
-* Used to compose and play [music](https://soundcloud.com/oliver-bestwalter)
-* Then worked at a [factory](https://www.micronas.com/)
-* Fell in love with Python in 2006
-* Although "not good at math" and "already too old" - studied [Computer Engineering](https://www.hs-emden-leer.de/)
-* Since 2011 software developer at [Avira](http://avira.com)
-* Since 2017 [open source gardener](/articles/becoming-an-open-source-gardener)
+* Loves all kinds of good and bad films and books and games and is a bit of an indoor enthusiast
+* Definitely more on the introverted side of the spectrum (but really likes humans as a concept)
+* 1970s - 2000: sang, played guitar, keyboards and bass in varying bands and music projects, starting when I was 7 in the children's rock choir [Rauch und Feuerschwalben](http://www.stephan-schelle.de/grobschnitt/images/presse/wp_6_11_82.htm)
+* Since the mid 1980s: Computering with all kinds of machines starting with a [Commodore 64](https://en.wikipedia.org/wiki/Commodore_64)
+* 2000 - 2007: [machine operator and quality assurance in a semi conductor factory](https://www.micronas.com/)
+* Since 2006: Python is a honking great idea -- let's do more of that! 
+* 2007-2011: although "not good at math" and "already too old" - studied [Computer Engineering](https://www.hs-emden-leer.de/)
+* Since 2011: Software Developer at [Avira](https://avira.com)
+* Since 2013: [occasional public speaker](/speaking/)
+* 2017 - 2019: [occasional open source gardener](/articles/becoming-an-open-source-gardener) (maybe I can pick that up again in the future)
+* Since 2017: [occasional Python coach](/teaching/)
 
 There is an [interview with me](https://www.blog.pythonlibrary.org/2018/09/10/pydev-of-the-week-oliver-bestwalter/) that goes into a bit more detail, if you're interested.
 
+<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1365252&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+
 ## Get in touch
 
-* eMail: ["http://oliver.bestwalter.de"[7:].replace('.', '@', 1)](https://repl.it/repls/FearlessIllustriousOrganization)
-* Twitter: [@obestwalter](https://twitter.com/obestwalter)
-* my [public gpg key](/pgp.txt) (also on [keybase.io](https://keybase.io/obestwalter))
+<!-- [fosstodon (mastodon)](https://fosstodon.org/@obestwalter) | [Test & Code Slack](https://testpodcast.slack.com/messages/C0WU4J9HU/) -->
+[Github](https://github.com/obestwalter) | [Gitlab](https://gitlab.com/obestwalter) | [Lobsters](https://lobste.rs/) | [Linkedin](https://de.linkedin.com/in/oliver-bestwalter-a8781a19) | [Twitter](https://twitter.com/obestwalter) | [Stack Overflow](https://stackoverflow.com/users/2626627/oliver-bestwalter) | [Xing](https://www.xing.com/profile/Oliver_Bestwalter)
+
+If you want to go old school, send a mail to ["http://oliver.bestwalter.de"[7:].replace('.', '@', 1)](https://repl.it/repls/FearlessIllustriousOrganization).
+
+If you want to share state secrets with me: here's my [my public gpg key](/pgp.txt)).

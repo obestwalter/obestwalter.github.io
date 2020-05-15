@@ -4,50 +4,30 @@ title: Projects
 
 content:
 
-## ... I help maintaining
+![my workspace and my favorite pair programming partner](flopsi-computer-resized.jpg)
 
-* [tox](https://tox.readthedocs.io) - a command line driven CI frontend and development task automation tool
+*(my (realistically messy) workspace and my favorite pair programming partner)*
 
-# ... I contribute(d) to
+## Some of my projects
 
-* [pytest](http://doc.pytest.org) - my favorite testing framework
+* [Codecats CV](http://oliver.bestwalter.de/codecats-cv) - project used for teaching "full stack" Python (with [Falk Heger](https://github.com/Falk92)).
+* [cookiecutter-tox-plugin](https://github.com/tox-dev/cookiecutter-tox-plugin) - cookiecutter to help you getting started writing your own tox plugins
+* [commodorificator](https://gitlab.com/obestwalter/commodorificator) - little teaching vehicle to showcase the Gitlab workflow and to introduce hypothesis
+* [devpi-cloud-test](https://github.com/obestwalter/devpi-cloud-test) - to use [Travis CI](https://travis-ci.org/) to test packages from [devpi](http://doc.devpi.net/) (not needed anymore since we moved to a different build process)
+* [i3config](https://github.com/obestwalter/i3config) - my i3 configuration (using i3configger)
+* [i3configger](https://github.com/obestwalter/i3configger) - a tool to make the configuration of the [i3wm tiling window manager](https://i3wm.org/) more malleable
+* [lektor-jupyter-preprocess](https://github.com/obestwalter/lektor-jupyter-preprocess) - used for the Jupyter notebook rendering on this page
+* [Mau Mau](http://oliver.bestwalter.de/mau-mau) - a complete project that can be used to learn about Python and it's ecosystem using a simple card game simulation as the teaching vehicle
+* [pycharm-setting](https://github.com/obestwalter/pycharm-settings) - my PyCharm settings, mainly shared to show keyboard centric use 
+* [tox-direct](https://github.com/obestwalter/tox-direct) - tox plugin to circumvent environment creation (used to help with transitioning project tests in containers)
+
+## projects I am or was involved in
+
+* [detox](https://github.com/tox-dev/detox) - distributed tox (inactive - is now part of tox)
 * [pluggy](https://pluggy.readthedocs.io/) - a minimalist production ready plugin system (powering pytest and tox)
 * [pyenv-installer](https://github.com/pyenv/pyenv-installer) - the installer for the great [pyenv](https://github.com/yyuu/pyenv) tool
-* [detox](https://github.com/tox-dev/detox) - distributed tox (inactive - is now part of tox)
+* [py3status-pewpew](https://github.com/obestwalter/py3status-pewpew) - experiment at EuroPython sprint 2019: integrate pewpew with the py3status bar
+* [pytest](http://doc.pytest.org) - my favorite testing framework
 * [SaltStack](https://github.com/saltstack/salt) - software to automate the management and configuration of any infrastructure or application at scale
-* ... and wherever else I see a way to make myself useful
-
-# ... I created to to learn and teach Python
-
-* [Mau Mau](http://oliver.bestwalter.de/mau-mau) - a complete project that can be used to learn about Python and it's ecosystem using a simple card game simulation as the teaching vehicle
-* [commodorificator](https://gitlab.com/obestwalter/commodorificator) - little teaching vehicle to showcase the Gitlab workflow and to introduce hypothesis
-* [Codecats CV](http://oliver.bestwalter.de/codecats-cv) - another project used for teaching "full stack" Python (with [Falk Heger](https://github.com/Falk92)).
-
-# ... I created ... because why not?
-
-* [i3configger](https://github.com/obestwalter/i3configger) - a tool to make the configuration of the [i3wm tiling window manager](https://i3wm.org/) more malleable
-* [cookiecutter-tox-plugin](https://github.com/tox-dev/cookiecutter-tox-plugin) - cookiecutter to help you getting started writing your own tox plugins
-* [devpi-cloud-test](https://github.com/obestwalter/devpi-cloud-test) - to use [Travis CI](https://travis-ci.org/) to test packages from [devpi](http://doc.devpi.net/) (not needed anymore since we moved to a different build process)
-
-# Other stuff
-
-## Collaborate
-
-* ran pytest/tox [sprints](https://wiki.python.org/moin/EuroPython2017/Sprints) and [help desks](https://ep2018.europython.eu/conference/p/oliver-bestwalter) at EuroPython
-* helped with the technical review for Brian Okkens [Python Testing with pytest](https://pragprog.com/book/bopytest/python-testing-with-pytest)
-* member of [Python Software Verband](https://python-verband.org/)
-* member of [Toolbox Bodensee](https://toolbox-bodensee.de/)
-
-## Show and tell
-
-* webinar:[automating Build, Test and Release Workflows with tox](https://www.youtube.com/watch?v=PrAyvH-tm8E)
-* [interview with Paul Everitt before the webinar](https://blog.jetbrains.com/pycharm/2018/12/interview-oliver-bestwalter-for-tox-webinar-next-week/)
-* podcast about tox on [testandcode](https://testandcode.com/49)
-* "tox quo vadis?" - lightning talk (EuroPython 2018): [example code, link to video and other materials](https://gitlab.com/obestwalter/tox-lightning-talk)
-* lightning talk about the importance of companies supporting open source (EuroPython 2017): [video](https://youtu.be/avUcnPzHxB4?t=54m3s)
-* (German) "Pythons Datenmodell - Ein Überblick" (PyconDE 2013): [video](https://pyvideo.org/pycon-de-2013/pythons-datenmodell-ein-uberblick.html)
-* (German) "Wo ist meine Pfadklasse? " (PyconDE 2013): [video](https://pyvideo.org/pycon-de-2013/wo-ist-meine-pfadklasse.html)
-
-## Help others (and myself) to learn
-
-Since late 2017, I occasionally visit other companies to give hands on trainings for Python usually with a focus on testing. If you would like to book me, please get in touch with [Python Academy](https://www.python-academy.de/).
+* [tox](https://tox.readthedocs.io) - a command line driven CI frontend and development task automation tool
+* [tox-conda](https://github.com/tox-dev/tox-conda) - a tox plugin to make it cooperate with the [conda](https://docs.conda.io/) tool
