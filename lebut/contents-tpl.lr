@@ -1,4 +1,4 @@
-_discoverable: False
+_discoverable: True
 ---
 title: $title
 ---
