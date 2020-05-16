@@ -8,6 +8,8 @@ content:
 
 *(my (realistically messy) workspace and my favorite pair programming partner)*
 
+When I am not writing software at [Avira](https://avira.com), I sometimes like to write software at home ... I know - I'm very versatile.
+
 ## Some of my projects
 
 * [Codecats CV](http://oliver.bestwalter.de/codecats-cv) - project used for teaching "full stack" Python (with [Falk Heger](https://github.com/Falk92)).
@@ -18,7 +20,7 @@ content:
 * [i3configger](https://github.com/obestwalter/i3configger) - a tool to make the configuration of the [i3wm tiling window manager](https://i3wm.org/) more malleable
 * [lektor-jupyter-preprocess](https://github.com/obestwalter/lektor-jupyter-preprocess) - used for the Jupyter notebook rendering on this page
 * [Mau Mau](http://oliver.bestwalter.de/mau-mau) - a complete project that can be used to learn about Python and it's ecosystem using a simple card game simulation as the teaching vehicle
-* [pycharm-setting](https://github.com/obestwalter/pycharm-settings) - my PyCharm settings, mainly shared to show keyboard centric use 
+* [pycharm-settings](https://github.com/obestwalter/pycharm-settings) - my PyCharm settings, mainly shared to show keyboard centric use 
 * [tox-direct](https://github.com/obestwalter/tox-direct) - tox plugin to circumvent environment creation (used to help with transitioning project tests in containers)
 
 ## projects I am or was involved in
