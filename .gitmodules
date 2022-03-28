@@ -1,6 +1,3 @@
-[submodule "packages/lektor-jupyter-preprocess"]
-	path = packages/lektor-jupyter-preprocess
-	url = git@github.com:obestwalter/lektor-jupyter-preprocess.git
 [submodule "packages/lektor-tags"]
 	path = packages/lektor-tags
 	url = git@github.com:nixjdm/lektor-tags.git
