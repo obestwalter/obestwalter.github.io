@@ -1,0 +1,7 @@
+=admonition($type, $bg)
+  .admonition-#{$type}
+    background: $bg
+
+$map: (info: 1, note: 2, tip: 3, warning: 4)
+@each $key, $value in $map
+  +admonition($key, $value)

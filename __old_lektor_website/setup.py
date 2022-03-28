@@ -17,11 +17,11 @@ setup(
         "typogrify",
 
         # FIXME should be part of notebook plugin
-        "jupyter",
-        "nbconvert",
-        "nbformat",
+        # "jupyter",
+        # "nbconvert",
+        # "nbformat",
         # atm editable version from master is installed in toxenv
-        # "lektor"
+        "lektor"
     ],
     extras_require={"test": ["pytest"]},
     entry_points={"console_scripts": ["lebut = lebut.cli:main"]},

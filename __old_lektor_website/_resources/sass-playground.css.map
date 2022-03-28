@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,gBAAoB;EAClB,UAAU,EAED,CAAC;;AAHZ,gBAAoB;EAClB,UAAU,EAEQ,CAAC;;AAHrB,eAAoB;EAClB,UAAU,EAEgB,CAAC;;AAH7B,mBAAoB;EAClB,UAAU,EAE4B,CAAC",
+"sources": ["sass-playground.sass"],
+"names": [],
+"file": "sass-playground.css"
+}
